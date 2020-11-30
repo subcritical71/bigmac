@@ -443,19 +443,18 @@ if [[ $version != *"11."* ]]
        			
                 chown -R 0:0 /System/Library/Extensions/
                 chmod -R 755 /System/Library/Extensions/
-                kmutil install --volume-root / --update-all --check-rebuild
+                kmutil install --volume-root / --update-all --check-rebuild --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root "$destVolume"
                 
                 n
                 printf "Rechecking System Kernel Extensions..."
-                kmutil install --volume-root / --update-all #--check-rebuild
-                 #--system-path /System/Library/KernelCollections/SystemKernelExtensions.kc --boot-path /System/Library/KernelCollections/BootKernelExtensions.kc
+                kmutil install --volume-root / --update-all --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root "$destVolume"
 
                 n
        			printf "Rechecking Library Kernel Extensions..."
                 
                 chown -R 0:0 /Library/Extensions/
                 chmod -R 755 /Library/Extensions/
-                kmutil install --volume-root / --check-rebuild
+                kmutil install --volume-root / --check-rebuild 
 
 
                 #if LibraryAppleSystemLibrary Exists (this created after a user logs in)
@@ -485,11 +484,11 @@ if [[ $version != *"11."* ]]
        			
         	    chown -R 0:0 "$destVolume"/System/Library/Extensions/
                 chmod -R 755 "$destVolume"/System/Library/Extensions/
-                kmutil install --volume-root "$destVolume" --update-all --check-rebuild
+                kmutil install --volume-root "$destVolume" --update-all --check-rebuild --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root "$destVolume"
                 
                 n
                 printf "Rechecking System Kernel Extensions..."
-                kmutil install --volume-root "$destVolume" --update-all #--check-rebuild
+                kmutil install --volume-root "$destVolume" --update-all --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root "$destVolume"
     
                 n
                 printf "Rechecking Library Kernel Extensions..."
