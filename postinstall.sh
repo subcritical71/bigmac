@@ -96,6 +96,8 @@ bootdisk=$(pwd)$boot
 appleHDA="AppleHDA.kext"
 ioATAFamily="IOATAFamily.kext"
 AppleStorageDrivers="AppleStorageDrivers.kext"
+IOUSBMassStorageClass="IOUSBMassStorageClass.kext"
+
 
 #SSE4.1 compatible plugin
 telemetry="com.apple.telemetry.plugin"
@@ -221,7 +223,6 @@ n;g;
 
 #cp "$bootdisk$bigsur$bootplist" "$(pwd)$systemconfig$bootplist"
 ditto -v "$bootdisk$bigsur$bootplist" "$destVolume$systemconfig$bootplist"
-echo "$destVolume$systemconfig$bootplist"
 chmod 755 "$destVolume$systemconfig$bootplist"
 chown 0:0 "$destVolume$systemconfig$bootplist"
 
@@ -230,7 +231,10 @@ chmod 755 "$destVolume$coreservices$platformsupport"
 chown 0:0 "$destVolume$coreservices$platformsupport"
 
 #Preboot work
+n
+printf "Loading preboot..."
 preboot=$( diskutil list $destVolume | grep Preboot | grep disk | awk '{ printf $7 }' )
+
 
 prebootlocation=$bigmac$ghost
 prebootid=""
@@ -242,25 +246,19 @@ restoremanifest="/restore/BuildManifest.plist"
 if [ $destVolume != "/" ]
     then
       printf "Testing Preboot mount..."
-      test=$(diskutil umount force "$preboot")
+      test=$(diskutil unmount force "$preboot")
       printf "Mounting Preboot Volume..."
       diskutil mount -mountPoint "$prebootlocation" "$preboot"
       sleep 1
       prebootid=$( diskutil info "$destVolume" | grep Group | awk '{ printf $4 }' )
       loc=$prebootlocation$prebootid$slash
-      #mount -uw $prebootlocation
 
-      #read ""
     else
       #Preboot Volumes are already mounted on Startup disks
       prebootlocation="/System/Volumes/Preboot/"
       prebootid=$( diskutil info / | grep Group | awk '{ printf $4 }' )
       loc=$prebootlocation$prebootid$slash
       echo $loc
-      #mount -uw $prebootlocation
-      #read ""
-     #echo $loc
-     #exit
 fi
 
 
@@ -273,6 +271,7 @@ fi
 
 sleep 1
 
+n
 ditto -v "$bootdisk$bigsur$bootplist" "$loc$systemconfig$bootplist"
 chmod 755 "$loc$systemconfig$bootplist"
 chown 0:0 "$loc$systemconfig$bootplist"
@@ -286,9 +285,10 @@ chmod 755 "$loc$coreservices$platformsupport"
 chown 0:0 "$loc$coreservices$platformsupport"
 
 #If it's not the startup disk unmount the Preboot volume
-if [ destVolume != "/" ]
+if [ "$destVolume" != "/" ]
     then
-        diskutil umount force "$preboot"
+        n
+        diskutil unmount force "$preboot"
 fi
 
 sleep 3
@@ -316,35 +316,6 @@ ditto -v "$rootbeer$HDMIAudio" "$destVolume$libKext$HDMIAudio"
 chown -R 0:0 "$destVolume$libKext$HDMIAudio"
 chmod -R 755 "$destVolume$libKext$HDMIAudio"
 
-
-## Don't quite have this working yet
-#
-#n
-#printf "LegacyUSBInjector"
-#n
-#rm -Rf "$libKext$LegacyUSBInjector"
-#sleep 0.1
-#ditto -v "$rootbeer$LegacyUSBInjector" "$destVolume$libKext$LegacyUSBInjector"
-#chown -R 0:0 "$destVolume$libKext$LegacyUSBInjector"
-#chmod -R 755 "$destVolume$libKext$LegacyUSBInjector"
-#
-
-## Don't quite have this working yet
-#
-n
-
-#printf "SXHCD USB 3.0 Driver"
-#n
-#rm -Rf "$libKext$SXHCD"
-#sleep 0.1
-#ditto -v "$rootbeer$" "$destVolume$libKext$SXHCD"
-#chown -R 0:0 "$destVolume$libKext$SXHCD"
-#chmod -R 755 "$destVolume$libKext$SXHCD"
-#
-
-
-
-
 n
 printf "SSE4.1 compatible Telemetry plugin"
 n
@@ -366,7 +337,7 @@ chmod -R 755 "$destVolume$kext$ioATAFamily"
 
 
 n
-printf "Apple Storage Drivers"
+printf "Apple Storage Drivers (Cat)"
 n
 rm -Rf "$destVolume$kext$AppleStorageDrivers"
 sleep 0.1
@@ -374,6 +345,14 @@ ditto -v "$source$AppleStorageDrivers" "$destVolume$kext$AppleStorageDrivers"
 chown -R 0:0 "$destVolume$kext$AppleStorageDrivers"
 chmod -R 755 "$destVolume$kext$AppleStorageDrivers"
 
+n
+printf "Apple Mass Storage Class (Cat)"
+n
+rm -Rf "$destVolume$kext$IOUSBMassStorageClass"
+sleep 0.1
+ditto -v "$source$IOUSBMassStorageClass" "$destVolume$kext$IOUSBMassStorageClass"
+chown -R 0:0 "$destVolume$kext$IOUSBMassStorageClass"
+chmod -R 755 "$destVolume$kext$IOUSBMassStorageClass"
 
 ##This also fixes USB Video crash bug in Quicktime Player.
 n
@@ -385,135 +364,29 @@ ditto -v "$source$appleHDA" "$destVolume$kext$appleHDA"
 chown -R 0:0 "$destVolume$kext$appleHDA"
 chmod -R 755 "$destVolume$kext$appleHDA"
 
-#n
-##printf "AppleNMI"
-#n
-#rm -Rf "$destVolume$kext$AppleNMI"
-#sleep 0.1
-#ditto -v "$source$AppleNMI" "$destVolume$kext$AppleNMI"
-#chown -R 0:0 "$destVolume$kext$AppleNMI"
-#chmod -R 755 "$destVolume$kext$AppleNMI"
+IOHIDFamily="IOHIDFamily.kext"
+IOUSBHostFamily="IOUSBHostFamily.kext"
+PlugIns="/Contents/PlugIns/"
+AppleUSBHostMergeProperties="AppleUSBHostMergeProperties.kext"
 
-#n
-#printf "ApplePlatformFamily"
-#n
-#rm -Rf "$destVolume$kext$ApplePlatformFamily"
-#sleep 0.1
-#ditto -v "$source$ApplePlatformFamily" "$destVolume$kext$ApplePlatformFamily"
-#chown -R 0:0 "$destVolume$kext$ApplePlatformFamily"
-#chmod -R 755 "$destVolume$kext$ApplePlatformFamily"
+n
+printf "USB 1.1 Support IOHIDFamily.kext | ASentientBot | JackLukem"
+n
+rm -Rf "$destVolume$kext$IOHIDFamily"
+sleep 0.1
+ditto -v "$source$IOHIDFamily" "$destVolume$kext$IOHIDFamily"
+chown -R 0:0 "$destVolume$kext$IOHIDFamily"
+chmod -R 755 "$destVolume$kext$IOHIDFamily"
 
-#n
-#printf "AppleNMI"
-#n
-#rm -Rf "$destVolume$kext$AppleNMI"
-#sleep 0.1
-#ditto -v "$source$AppleNMI" "$destVolume$kext$AppleNMI"
-#chown -R 0:0 "$destVolume$kext$AppleNMI"
-#chmod -R 755 "$destVolume$kext$AppleNMI"
+n
+printf "IOKit Apple USB Host Merge Properties | ASentientBot | Parrotgeek | JackLukem"
+n
+rm -Rf "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties"
+sleep 0.1
+ditto -v "$source$AppleUSBHostMergeProperties" "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties"
+chown -R 0:0 "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties"
+chmod -R 755 "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties"
 
-#n
-#printf "BSDKernel"
-#n
-#rm -Rf "$destVolume$kext$BSDKernel"
-#sleep 0.1
-#ditto -v "$source$BSDKernel" "$destVolume$kext$BSDKernel"
-#chown -R 0:0 "$destVolume$kext$BSDKernel"
-#chmod -R 755 "$destVolume$kext$BSDKernel"
-
-#n
-#printf "IOKit"
-#n
-#rm -Rf "$destVolume$kext$IOKit"
-#sleep 0.1
-#ditto -v "$source$IOKit" "$destVolume$kext$IOKit"
-#chown -R 0:0 "$destVolume$kext$IOKit"
-#chmod -R 755 "$destVolume$kext$IOKit"
-
-#n
-#printf "IOSystemManagement"
-#n
-#rm -Rf "$destVolume$kext$IOSystemManagement"
-#sleep 0.1
-#ditto -v "$source$IOSystemManagement" "$destVolume$kext$IOSystemManagement"
-#chown -R 0:0 "$destVolume$kext$IOSystemManagement"
-#chmod -R 755 "$destVolume$kext$IOSystemManagement"
-
-#n
-#printf "Kasan"
-#n
-#rm -Rf "$destVolume$kext$Kasan"
-#sleep 0.1
-#ditto -v "$source$Kasan" "$destVolume$kext$Kasan"
-#chown -R 0:0 "$destVolume$kext$Kasan"
-#chmod -R 755 "$destVolume$kext$Kasan"
-
-#n
-#printf "Libkern"
-#n
-#rm -Rf "$destVolume$kext$Libkern"
-#sleep 0.1
-#ditto -v "$source$Libkern" "$destVolume$kext$Libkern"
-#chown -R 0:0 "$destVolume$kext$Libkern"
-#chmod -R 755 "$destVolume$kext$Libkern"
-
-#n
-#printf "MACFramework"
-#n
-#rm -Rf "$destVolume$kext$MACFramework"
-#sleep 0.1
-#ditto -v "$source$MACFramework" "$destVolume$kext$MACFramework"
-#chown -R 0:0 "$destVolume$kext$MACFramework"
-#chmod -R 755 "$destVolume$kext$MACFramework"
-
-#n
-#printf "Mach"
-#n
-#rm -Rf "$destVolume$kext$Mach"
-#sleep 0.1
-#ditto -v "$source$Mach" "$destVolume$kext$Mach"
-#chown -R 0:0 "$destVolume$kext$Mach"
-#chmod -R 755 "$destVolume$kext$Mach"
-
-#n
-#printf "Private"
-#n
-#rm -Rf "$destVolume$kext$Private"
-#sleep 0.1
-#ditto -v "$source$Private" "$destVolume$kext$Private"
-#chown -R 0:0 "$destVolume$kext$Private"
-#chmod -R 755 "$destVolume$kext$Private"
-
-#n
-#printf "Unsupported"
-#n
-#rm -Rf "$destVolume$kext$Unsupported"
-#sleep 0.1
-#ditto -v "$source$Unsupported" "$destVolume$kext$Unsupported"
-#chown -R 0:0 "$destVolume$kext$Unsupported"
-#chmod -R 755 "$destVolume$kext$Unsupported"
-
-##This also fixes USB Video crash bug in Quicktime Player.
-#
-#printf "io Apple USB 2.0 ioUSBFamily"
-#n
-
-#rm -Rf "$destVolume$kext$ioUSBFamily"
-#sleep 0.1
-#ditto -v "$source$appleHDA" "$destVolume$kext$ioUSBFamily"
-#chown -R 0:0 "$destVolume$kext$ioUSBFamily"
-#chmod -R 755 "$destVolume$kext$ioUSBFamily"
-
-##This also fixes USB Video crash bug in Quicktime Player.
-#n
-#printf "io Apple USB 2.0 ioUSBHostFamily"
-#n
-
-#rm -Rf "$destVolume$kext$ioUSBHostFamily"
-#sleep 0.1
-#ditto -v "$source$appleHDA" "$destVolume$kext$ioUSBHostFamily"
-#chown -R 0:0 "$destVolume$kext$ioUSBHostFamily"
-#chmod -R 755 "$destVolume$kext$ioUSBHostFamily"
 
 bin="/📠/"
 vers="/sw_vers"
@@ -614,7 +487,7 @@ if [[ $version != *"11."* ]]
                 chmod -R 755 "$destVolume"/System/Library/Extensions/
                 kmutil install --volume-root "$destVolume" --update-all --check-rebuild
                 
-                nnm
+                n
                 printf "Rechecking System Kernel Extensions..."
                 kmutil install --volume-root "$destVolume" --update-all #--check-rebuild
     
@@ -633,9 +506,17 @@ if [[ $version != *"11."* ]]
                             then
                                 mkdir "$destVolume/Library/Apple/System/Library/PrelinkedKernels/"
                         fi
+                    n
+                    printf "Building Apple System Prelinked Kernel..."
+                    n
+                    
                     "$destVolume"/usr/bin/kmutil create -n boot --boot-path "$destVolume"/Library/Apple/System/Library/PrelinkedKernels/prelinkedkernel -f 'OSBundleRequired'=='Local-Root' --kernel /System/Library/Kernels/kernel --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root "$destVolume"
                 #else use System Library
                 else
+                
+                    n
+                    printf "Building System Prelinked Kernel..."
+                    n
                     "$destVolume"/usr/bin/kmutil create -n boot --boot-path "$destVolume"/System/Library/PrelinkedKernels/prelinkedkernel -f 'OSBundleRequired'=='Local-Root' --kernel /System/Library/Kernels/kernel --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root "$destVolume"
                 
                 fi
