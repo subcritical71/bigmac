@@ -136,6 +136,7 @@ dot="."
 suffix="System/Library/CoreServices"
 slash="/"
 startupdisk="/"
+space=" "
 #Display the Disk Menu, routine by StarPlayrX
 for sys in $systemsetup
 do
@@ -153,10 +154,14 @@ do
         else
             g;n;
             systemdisk=${systemdisk%"$slash"}
+            systemdisk=${systemdisk%"$space"}
+            
             printf "$counter$dot$space$systemdisk"
             systemdisks+=($systemdisk)
     fi
 done
+
+
 
 counter=$((counter+1)) #Sets up # Entry for the Startup Disk menu
 n;n;
@@ -175,12 +180,15 @@ if [ "$destVolume2" != "" ] && [ "$destVolume2" != "/" ]
  then
    mount -uw "$destVolume2"
    destVolume="$destVolume2"
+
  else
    destVolume2="/"
    destVolume="$destVolume2"
-
+  
    mount -uw /
 fi
+
+
 
 if [ ! -d "$destVolume2" ]
     then
@@ -188,6 +196,17 @@ if [ ! -d "$destVolume2" ]
     printf "Can't find the disk. Please pay attention! Exiting..."
     n
 fi
+
+if [ "$destVolume2" != "" ] && [ "$destVolume2" != "/" ]
+    then
+        #Doublecheck our disk paths
+        destVolume=${destVolume%"$slash"} #remove trailing slash
+        destVolume=${destVolume%"$space"} #remove trailing space
+fi
+
+
+
+#exit
 
 n;o;
 printf "————————————————–––––—————————————————"
@@ -245,8 +264,10 @@ restoremanifest="/restore/BuildManifest.plist"
 
 if [ $destVolume != "/" ]
     then
+      n
       printf "Testing Preboot mount..."
       test=$(diskutil unmount force "$preboot")
+      n
       printf "Mounting Preboot Volume..."
       diskutil mount -mountPoint "$prebootlocation" "$preboot"
       sleep 1
@@ -439,23 +460,21 @@ if [[ $version != *"11."* ]]
                 ##To do add variables not hard encoded string in commands but be careful, it is easy to write a Prelinked Kernel where to don't want it ( I know )
             	n
        			printf "Updating All Kernel Extensions..."
-
        			
                 chown -R 0:0 /System/Library/Extensions/
                 chmod -R 755 /System/Library/Extensions/
-                kmutil install --volume-root / --update-all --check-rebuild --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root "$destVolume"
+                kmutil install --volume-root / --update-all --check-rebuild --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root /
                 
                 n
                 printf "Rechecking System Kernel Extensions..."
-                kmutil install --volume-root / --update-all --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root "$destVolume"
+                kmutil install --volume-root / --update-all --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root /
 
                 n
        			printf "Rechecking Library Kernel Extensions..."
                 
                 chown -R 0:0 /Library/Extensions/
                 chmod -R 755 /Library/Extensions/
-                kmutil install --volume-root / --check-rebuild 
-
+                kmutil install --volume-root / --check-rebuild --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions
 
                 #if LibraryAppleSystemLibrary Exists (this created after a user logs in)
                 if [ -d "/Library/Apple/System/Library/" ]
@@ -464,14 +483,13 @@ if [[ $version != *"11."* ]]
                             then
                                 mkdir "/Library/Apple/System/Library/PrelinkedKernels/"
                         fi
-                    /usr/bin/kmutil create -n boot --boot-path /Library/Apple/System/Library/PrelinkedKernels/prelinkedkernel -f 'OSBundleRequired'=='Local-Root' --kernel /System/Library/Kernels/kernel --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root /
+                    /usr/bin/kmutil create -n boot --boot-path /Library/Apple/System/Library/PrelinkedKernels/prelinkedkernel -f 'OSBundleRequired'=='Local-Root' --kernel /System/Library/Kernels/kernel --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions
                 #else use System Library
                 else
-                    /usr/bin/kmutil create -n boot --boot-path /System/Library/PrelinkedKernels/prelinkedkernel -f 'OSBundleRequired'=='Local-Root' --kernel /System/Library/Kernels/kernel --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root /
+                    /usr/bin/kmutil create -n boot --boot-path /System/Library/PrelinkedKernels/prelinkedkernel -f 'OSBundleRequired'=='Local-Root' --kernel /System/Library/Kernels/kernel --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions
                 
                 fi
-            
-                
+    
                 n
                 
                 kcditto="kcditto"
@@ -484,18 +502,18 @@ if [[ $version != *"11."* ]]
        			
         	    chown -R 0:0 "$destVolume"/System/Library/Extensions/
                 chmod -R 755 "$destVolume"/System/Library/Extensions/
-                kmutil install --volume-root "$destVolume" --update-all --check-rebuild --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root "$destVolume"
+                "$destVolume"/usr/bin/kmutil install --update-all --check-rebuild --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Extensionspple/System/Library/Extensions  --volume-root "$destVolume"/
                 
                 n
                 printf "Rechecking System Kernel Extensions..."
-                kmutil install --volume-root "$destVolume" --update-all --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root "$destVolume"
+                "$destVolume"/usr/bin/kmutil install --update-all --repository /System/Library/Extensions --repository /Library/Extensions --repository "$destVolume"/System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions  --volume-root "$destVolume"/
     
                 n
                 printf "Rechecking Library Kernel Extensions..."
                 
                 chown -R 0:0 /Library/Extensions/
                 chmod -R 755 /Library/Extensions/
-                kmutil install --volume-root "$destVolume" --check-rebuild
+                "$destVolume"/usr/bin/kmutil install --check-rebuild --repository /System/Library/Extensions --repository /Library/Extensions --repository "$destVolume"/System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions  --volume-root "$destVolume"/
                 
                 #if Library/Apple/System/Library/ Exists (this created after a user logs in)
                 if [ -d "$destVolume/Library/Apple/System/Library/" ]
@@ -509,14 +527,14 @@ if [[ $version != *"11."* ]]
                     printf "Building Apple System Prelinked Kernel..."
                     n
                     
-                    "$destVolume"/usr/bin/kmutil create -n boot --boot-path "$destVolume"/Library/Apple/System/Library/PrelinkedKernels/prelinkedkernel -f 'OSBundleRequired'=='Local-Root' --kernel /System/Library/Kernels/kernel --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root "$destVolume"
+                    "$destVolume"/usr/bin/kmutil create -n boot --boot-path /Library/Apple/System/Library/PrelinkedKernels/prelinkedkernel -f 'OSBundleRequired'=='Local-Root' --kernel "$destVolume"/System/Library/Kernels/kernel --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root "$destVolume"/
                 #else use System Library
                 else
                 
                     n
                     printf "Building System Prelinked Kernel..."
                     n
-                    "$destVolume"/usr/bin/kmutil create -n boot --boot-path "$destVolume"/System/Library/PrelinkedKernels/prelinkedkernel -f 'OSBundleRequired'=='Local-Root' --kernel /System/Library/Kernels/kernel --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root "$destVolume"
+                    "$destVolume"/usr/bin/kmutil create -n boot --boot-path /System/Library/PrelinkedKernels/prelinkedkernel -f 'OSBundleRequired'=='Local-Root' --kernel /System/Library/Kernels/kernel --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root "$destVolume"/
                 
                 fi
                 
