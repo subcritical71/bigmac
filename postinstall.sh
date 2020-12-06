@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #  sudo ./postinstall.sh
-#  BigMac MacPro post install tool v11.0.1 build 0.1
+#  BigMac MacPro post install tool v2.0.9
 #  Created by StarPlayrX on 11.17.2020
 
 
@@ -45,16 +45,35 @@ g () {
     k
 }
 
+#forceLegacyWifi
+forceLegacy="0"
+
+#-legacy or -Legacy argument, forces Legacy WiFi
+if [[ "$1" == "-l"* ]] || [[ "$1" == "-L"* ]]
+  then
+    forceLegacy="1"
+    n;o
+    printf 'Force Legacy Wifi is ON...'
+    n
+    g
+    sleep 1
+  else
+    forceLegacy="0"
+    n;g
+    printf 'Auto detect WiFi Card is ON... Use -L argument to force Legacy WiFi.'
+    n
+    sleep 1
+fi
+
 
 bigmac="$(pwd)"
-echo $bigmac
 k
 n
 o
 printf "—————————————————————————————————————————————————————————————————"
 n
 g
-printf " StarPlayrX -> Big Mac Post Installation Tool for Mac Pros 1.0.3 "
+printf " StarPlayrX -> Big Mac Post Installation Tool for Mac Pros 2.0.9 "
 n
 o
 printf "—————————————————————————————————————————————————————————————————"
@@ -67,18 +86,23 @@ o
 printf "—————————————————————————————————————————————————————————————————"
 n
 g
-printf " 🍔  Apple HD Audio, SSE4.1 Telemetry, SuperDrive Support        "
+printf " 🍔  Apple HD Audio, SSE4.1 Telemetry, SuperDrive Support"
 n
-printf " 🧀  MouSSE 4.2 Emulator for AMD Radeon Video Drivers            "
+printf " 🧀  MouSSE 4.2 Emulator for AMD Radeon Video Drivers"
 n
-printf " 🍺  HDMI Audio, USB Map                        		         "
+printf " 🍺  HDMI Audio, USB Map, Legacy WiFi, Disable Bluetooth"
 n
-printf " 📸  Snapshot Removal Tool by StarPlayrX                         "
+printf " 🚁  Legacy WiFi, Bluetooth 2 Disabler prevents Kernel Panic"
+n
+printf " 🖱   USB 1.1. A Hub is recommended for USB 1 & 2 input devices"
+n
+printf " 📸  Snapshot Removal Tool by StarPlayrX"
 n
 o
 printf "—————————————————————————————————————————————————————————————————"
 n
 g
+
 destVolume="/"
 kexts="/🍔/"
 cheese="/🧀/"
@@ -97,16 +121,14 @@ appleHDA="AppleHDA.kext"
 ioATAFamily="IOATAFamily.kext"
 AppleStorageDrivers="AppleStorageDrivers.kext"
 IOUSBMassStorageClass="IOUSBMassStorageClass.kext"
-
+IOBluetoothFamily="IOBluetoothFamily.kext"
+IOBluetoothHIDDriver="IOBluetoothHIDDriver.kext"
 
 #SSE4.1 compatible plugin
 telemetry="com.apple.telemetry.plugin"
-
-#Third Party Kexts
-#LegacyUSBInjector="LegacyUSBInjector.kext"
-#SXHCD="SXHCD.kext"
 AAAMouSSE="AAAMouSSE.kext"
 HDMIAudio="HDMIAudio.kext"
+
 bootplist="com.apple.Boot.plist"
 
 n
@@ -136,7 +158,6 @@ dot="."
 suffix="System/Library/CoreServices"
 slash="/"
 startupdisk="/"
-space=" "
 #Display the Disk Menu, routine by StarPlayrX
 for sys in $systemsetup
 do
@@ -153,71 +174,54 @@ do
             systemdisks+=($systemdisk)
         else
             g;n;
-            systemdisk=${systemdisk%"$slash"}
             systemdisk=${systemdisk%"$space"}
-            
+            systemdisk=${systemdisk%"$slash"}
             printf "$counter$dot$space$systemdisk"
             systemdisks+=($systemdisk)
     fi
 done
 
-
-
 counter=$((counter+1)) #Sets up # Entry for the Startup Disk menu
 n;n;
-read -p " 🎯 Target | / = Startup Disk | System Disk # : " destVolume2
+read -p " 🎯 Target | / = Startup Disk | System Disk # : " destVolume
 
-if [ "$destVolume2" != "" ] && [ "$destVolume2" != "/" ] && [ -n "$destVolume2" ] && [ "$destVolume2" -eq "$destVolume2" ] 2>/dev/null
+if [ "$destVolume" != "" ] && [ "$destVolume" != "/" ] && [ -n "$destVolume" ] && [ "$destVolume" -eq "$destVolume" ] 2>/dev/null
     then
-        if  [[ $((destVolume2+0)) < counter ]]
+        if  [[ $((destVolume+0)) < counter ]]
             then
-            destVolume2=$((destVolume2-1))
-            destVolume2=${systemdisks[destVolume2]}
+            destVolume=$((destVolume-1))
+            destVolume=${systemdisks[destVolume]}
         fi
 fi
 
-if [ "$destVolume2" != "" ] && [ "$destVolume2" != "/" ]
+if [ "$destVolume" != "" ] && [ "$destVolume" != "/" ]
  then
-   mount -uw "$destVolume2"
-   destVolume="$destVolume2"
-
+   destVolume=${destVolume%"$space"}
+   mount -uw "$destVolume"
  else
-   destVolume2="/"
-   destVolume="$destVolume2"
-  
+   destVolume="/"
+   destVolume="$destVolume"
+
    mount -uw /
 fi
 
-
-
-if [ ! -d "$destVolume2" ]
+if [ ! -d "$destVolume" ]
     then
     n
     printf "Can't find the disk. Please pay attention! Exiting..."
     n
 fi
 
-if [ "$destVolume2" != "" ] && [ "$destVolume2" != "/" ]
-    then
-        #Doublecheck our disk paths
-        destVolume=${destVolume%"$slash"} #remove trailing slash
-        destVolume=${destVolume%"$space"} #remove trailing space
-fi
-
-
-
-#exit
-
 n;o;
-printf "————————————————–––––—————————————————"
+printf "—————————————————————————————————————————————————————————————————"
 n;
 g;
 printf " 🎯 Target ";o;printf "——>";g; printf " $destVolume"
 n;
 printf " 🍔 Source ";o;printf "——>";g; printf " $source"
 n;o;
-printf "————————————————–––––—————————————————"
-n;g;
+printf "—————————————————————————————————————————————————————————————————"
+n;n;g;
 read -p "Press RETURN to proceed:" proceed
 
 kext="/System/Library/Extensions/"
@@ -264,10 +268,8 @@ restoremanifest="/restore/BuildManifest.plist"
 
 if [ $destVolume != "/" ]
     then
-      n
       printf "Testing Preboot mount..."
       test=$(diskutil unmount force "$preboot")
-      n
       printf "Mounting Preboot Volume..."
       diskutil mount -mountPoint "$prebootlocation" "$preboot"
       sleep 1
@@ -314,13 +316,10 @@ fi
 
 sleep 3
 
-
-sleep 0.3
-
 cd $bigmac
 
 n
-printf "SSE 4.2 AMD Radeon Driver Emulator MouSSE"
+printf "SSE 4.2 Emulator MouSSE by Syncretic"
 n
 rm -Rf "$destVolume$libKext$AAAMouSSE"
 sleep 0.1
@@ -356,28 +355,39 @@ ditto -v "$source$ioATAFamily" "$destVolume$kext$ioATAFamily"
 chown -R 0:0 "$destVolume$kext$ioATAFamily"
 chmod -R 755 "$destVolume$kext$ioATAFamily"
 
+IO80211Family="IO80211Family.kext"
+corecapture="corecapture.kext"
+ContentsPlugIns="/Contents/PlugIns/"
 
-n
-printf "Apple Storage Drivers (Cat)"
-n
-rm -Rf "$destVolume$kext$AppleStorageDrivers"
-sleep 0.1
-ditto -v "$source$AppleStorageDrivers" "$destVolume$kext$AppleStorageDrivers"
-chown -R 0:0 "$destVolume$kext$AppleStorageDrivers"
-chmod -R 755 "$destVolume$kext$AppleStorageDrivers"
+#Read the Wireless Card and decide which driver to use
+wireless=$(ioreg -l | grep 802.11)
+wirelessNetAdapter=$(echo $wireless | awk '{ printf $11 }' )
 
+if [[ $wirelessNetAdapter == *"/ac"* ]] && [ $forceLegacy == "0" ]
+    then
+        n
+        printf '802.11ac Detected, using Stock WiFi Drivers.'
+        n
+elif [ forceLegacy == "1" ] || [[ $wirelessNetAdapter == *"/n"* ]] || [[ $wirelessNetAdapter == *"/g"* ]] || [[ $wirelessNetAdapter == *"/b"* ]] || [[ $wirelessNetAdapter == *"/a"* ]]
+    then
+        n
+        printf 'Installing 802.11 a/b/g/n compatible WiFi drivers'
+        n
+        rm -Rf "$destVolume$kext$IO80211Family"
+        sleep 0.1
+        ditto -v "$source$IO80211Family" "$destVolume$kext$IO80211Family"
+        chown -R 0:0 "$destVolume$kext$IO80211Family"
+        chmod -R 755 "$destVolume$kext$IO80211Family"
+        
+        rm -Rf "$destVolume$kext$corecapture"
+        sleep 0.1
+        ditto -v "$source$corecapture" "$destVolume$kext$corecapture"
+        chown -R 0:0 "$destVolume$kext$corecapture"
+        chmod -R 755 "$destVolume$kext$corecapture"
+fi
+    
 n
-printf "Apple Mass Storage Class (Cat)"
-n
-rm -Rf "$destVolume$kext$IOUSBMassStorageClass"
-sleep 0.1
-ditto -v "$source$IOUSBMassStorageClass" "$destVolume$kext$IOUSBMassStorageClass"
-chown -R 0:0 "$destVolume$kext$IOUSBMassStorageClass"
-chmod -R 755 "$destVolume$kext$IOUSBMassStorageClass"
-
-##This also fixes USB Video crash bug in Quicktime Player.
-n
-printf "Apple HDA"
+printf "Apple HDA | Builtin Audio + USB Webcam Support"
 n
 rm -Rf "$destVolume$kext$appleHDA"
 sleep 0.1
@@ -389,9 +399,22 @@ IOHIDFamily="IOHIDFamily.kext"
 IOUSBHostFamily="IOUSBHostFamily.kext"
 PlugIns="/Contents/PlugIns/"
 AppleUSBHostMergeProperties="AppleUSBHostMergeProperties.kext"
+Contents="/Contents/"
+Info="Info.plist"
+IOBluetoothFamily="IOBluetoothFamily.kext"
+AppleMCEReporterDisabler="AppleMCEReporterDisabler.kext"
 
 n
-printf "USB 1.1 Support IOHIDFamily.kext | ASentientBot | JackLukem"
+printf "Apple MCE Reporter Disabler by xlnc"
+n
+rm -Rf "$destVolume$kext$AppleMCEReporterDisabler"
+sleep 0.1
+ditto -v "$source$AppleMCEReporterDisabler" "$destVolume$kext$AppleMCEReporterDisabler"
+chown -R 0:0 "$destVolume$kext$AppleMCEReporterDisabler"
+chmod -R 755 "$destVolume$kext$AppleMCEReporterDisabler"
+
+n
+printf "USB 1.1 Support by ASentientBot"
 n
 rm -Rf "$destVolume$kext$IOHIDFamily"
 sleep 0.1
@@ -400,14 +423,12 @@ chown -R 0:0 "$destVolume$kext$IOHIDFamily"
 chmod -R 755 "$destVolume$kext$IOHIDFamily"
 
 n
-printf "IOKit Apple USB Host Merge Properties | ASentientBot | Parrotgeek | JackLukem"
+printf "Mac Pro 3,1 Bluetooth 2 Disabler, Bluetooth 4 Enabler by StarPlayrX"
 n
-rm -Rf "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties"
 sleep 0.1
-ditto -v "$source$AppleUSBHostMergeProperties" "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties"
-chown -R 0:0 "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties"
-chmod -R 755 "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties"
-
+ditto -v "$source$Info" "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties$Contents$Info"
+chown -R 0:0 "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties$Contents$Info"
+chmod -R 755 "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties$Contents$Info"
 
 bin="/📠/"
 vers="/sw_vers"
@@ -460,21 +481,26 @@ if [[ $version != *"11."* ]]
                 ##To do add variables not hard encoded string in commands but be careful, it is easy to write a Prelinked Kernel where to don't want it ( I know )
             	n
        			printf "Updating All Kernel Extensions..."
-       			
-                chown -R 0:0 /System/Library/Extensions/
-                chmod -R 755 /System/Library/Extensions/
-                kmutil install --volume-root / --update-all --check-rebuild --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root /
+
+                touch /Library/Apple/System/Library/Extensions/
+                touch /System/Library/Extensions/
+                touch /System/Library/DriverExtensions/
+                touch /Library/Extensions/
+                touch /Library/DriverExtensions/
+                
+                kmutil install --update-all --check-rebuild --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root /
+
+
                 
                 n
                 printf "Rechecking System Kernel Extensions..."
-                kmutil install --volume-root / --update-all --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root /
+                kmutil install --update-all --check-rebuild --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root /
 
                 n
        			printf "Rechecking Library Kernel Extensions..."
                 
-                chown -R 0:0 /Library/Extensions/
-                chmod -R 755 /Library/Extensions/
-                kmutil install --volume-root / --check-rebuild --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions
+                kmutil install --check-rebuild --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --volume-root /
+
 
                 #if LibraryAppleSystemLibrary Exists (this created after a user logs in)
                 if [ -d "/Library/Apple/System/Library/" ]
@@ -483,13 +509,14 @@ if [[ $version != *"11."* ]]
                             then
                                 mkdir "/Library/Apple/System/Library/PrelinkedKernels/"
                         fi
-                    /usr/bin/kmutil create -n boot --boot-path /Library/Apple/System/Library/PrelinkedKernels/prelinkedkernel -f 'OSBundleRequired'=='Local-Root' --kernel /System/Library/Kernels/kernel --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions
+                    /usr/bin/kmutil create -n boot --boot-path /Library/Apple/System/Library/PrelinkedKernels/prelinkedkernel -f 'OSBundleRequired'=='Local-Root' --kernel /System/Library/Kernels/kernel --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root /
                 #else use System Library
                 else
-                    /usr/bin/kmutil create -n boot --boot-path /System/Library/PrelinkedKernels/prelinkedkernel -f 'OSBundleRequired'=='Local-Root' --kernel /System/Library/Kernels/kernel --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions
+                    /usr/bin/kmutil create -n boot --boot-path /System/Library/PrelinkedKernels/prelinkedkernel -f 'OSBundleRequired'=='Local-Root' --kernel /System/Library/Kernels/kernel --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root /
                 
                 fi
-    
+            
+                
                 n
                 
                 kcditto="kcditto"
@@ -498,22 +525,23 @@ if [[ $version != *"11."* ]]
                 ##To do add variables not hard encoded string in commands but be careful, it is easy to write a Prelinked Kernel where to don't want it ( I know )
             	n
        			printf "Updating All Kernel Extensions..."
-       		
-       			
-        	    chown -R 0:0 "$destVolume"/System/Library/Extensions/
-                chmod -R 755 "$destVolume"/System/Library/Extensions/
-                "$destVolume"/usr/bin/kmutil install --update-all --check-rebuild --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Extensionspple/System/Library/Extensions  --volume-root "$destVolume"/
+   
+                touch "$destVolume"/Library/Apple/System/Library/Extensions/
+                touch "$destVolume"/System/Library/Extensions/
+                touch "$destVolume"/System/Library/DriverExtensions/
+                touch "$destVolume"/Library/Extensions/
+                touch "$destVolume"/Library/DriverExtensions/
+                
+                kmutil install --update-all --check-rebuild --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root "$destVolume"/
                 
                 n
                 printf "Rechecking System Kernel Extensions..."
-                "$destVolume"/usr/bin/kmutil install --update-all --repository /System/Library/Extensions --repository /Library/Extensions --repository "$destVolume"/System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions  --volume-root "$destVolume"/
+                kmutil install --update-all --check-rebuild --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root "$destVolume"/
     
                 n
                 printf "Rechecking Library Kernel Extensions..."
                 
-                chown -R 0:0 /Library/Extensions/
-                chmod -R 755 /Library/Extensions/
-                "$destVolume"/usr/bin/kmutil install --check-rebuild --repository /System/Library/Extensions --repository /Library/Extensions --repository "$destVolume"/System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions  --volume-root "$destVolume"/
+                kmutil install --volume-root "$destVolume" --check-rebuild --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root "$destVolume"/
                 
                 #if Library/Apple/System/Library/ Exists (this created after a user logs in)
                 if [ -d "$destVolume/Library/Apple/System/Library/" ]
@@ -527,7 +555,7 @@ if [[ $version != *"11."* ]]
                     printf "Building Apple System Prelinked Kernel..."
                     n
                     
-                    "$destVolume"/usr/bin/kmutil create -n boot --boot-path /Library/Apple/System/Library/PrelinkedKernels/prelinkedkernel -f 'OSBundleRequired'=='Local-Root' --kernel "$destVolume"/System/Library/Kernels/kernel --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root "$destVolume"/
+                    "$destVolume"/usr/bin/kmutil create -n boot --boot-path /Library/Apple/System/Library/PrelinkedKernels/prelinkedkernel -f 'OSBundleRequired'=='Local-Root' --kernel /System/Library/Kernels/kernel --repository /System/Library/Extensions --repository /Library/Extensions --repository /System/Library/DriverExtensions --repository /Library/DriverExtensions --repository /Library/Apple/System/Library/Extensions --volume-root "$destVolume"/
                 #else use System Library
                 else
                 
@@ -555,7 +583,7 @@ n
 for uuid in $snapshots
 do
     n
-    printf ' 📸 Attempting to delete snapshot => 's
+    printf ' 📸 Attempting to delete snapshot => '
     n
     printf ' '
     printf $uuid
@@ -569,20 +597,28 @@ done
 #bless --folder "$destVolume"/System/Library/CoreServices --bootefi --last-sealed-snapshot
 #bless --folder "$destVolume"/System/Library/CoreServices --bootefi --create-snapshot
 
-#New way to bless
+prefix="/Volumes/"
+one="1"
+two="2"
+three="3"
+four="4"
+
+label=${destVolume%"$one"}
+label=${label%"$two"}
+label=${label%"$three"}
+label=${label%"$four"}
+label=${label%"$space"}
+label=${label#"$prefix"}
+
+
 if [ "$destVolume" == "/" ]
     then
         n
-        systemsetup -setstartupdisk "/System/Library/CoreServices"
-        n
-        #test=$(sudo bless --verbose -i /Volumes/myBigMac | grep Preboot)
-        #echo "$test" | grep "Preboot Volumes"
+        sudo bless --folder /System/Library/CoreServices --mount /
+        #systemsetup -setstartupdisk "$destVolume"/ #Right now this is too unpredictable 
     else
-        n
-        systemsetup -setstartupdisk "$destVolume/System/Library/CoreServices"
-        n
-        #test=$(sudo bless --verbose -i /Volumes/myBigMac | grep Preboot)
-        #echo "$test" | grep "Preboot Volumes"
+        sudo bless --folder "$destVolume"/System/Library/CoreServices --mount "$destVolume" --label "$label" #Try to label the disk properly
+        #systemsetup -setstartupdisk "$destVolume"/ #Right now this is too unpredictable 
 fi
 
 
