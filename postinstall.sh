@@ -326,6 +326,7 @@ sleep 0.1
 ditto -v "$cheesey$AAAMouSSE" "$destVolume$libKext$AAAMouSSE"
 chown -R 0:0 "$destVolume$libKext$AAAMouSSE"
 chmod -R 755 "$destVolume$libKext$AAAMouSSE"
+touch "$destVolume$libKext$AAAMouSSE"
 
 n
 printf "HDMI Audio"
@@ -335,6 +336,7 @@ sleep 0.1
 ditto -v "$rootbeer$HDMIAudio" "$destVolume$libKext$HDMIAudio"
 chown -R 0:0 "$destVolume$libKext$HDMIAudio"
 chmod -R 755 "$destVolume$libKext$HDMIAudio"
+touch "$destVolume$libKext$HDMIAudio"
 
 n
 printf "SSE4.1 compatible Telemetry plugin"
@@ -345,7 +347,6 @@ ditto -v "$source$telemetry" "$destVolume$plugins$telemetry"
 chown -R 0:0 "$destVolume$plugins$telemetry"
 chmod -R 755 "$destVolume$plugins$telemetry"
 
-
 n
 printf "CD/DVD SuperDrive Intel PIIX ATA"
 n
@@ -354,6 +355,7 @@ sleep 0.1
 ditto -v "$source$ioATAFamily" "$destVolume$kext$ioATAFamily"
 chown -R 0:0 "$destVolume$kext$ioATAFamily"
 chmod -R 755 "$destVolume$kext$ioATAFamily"
+touch "$destVolume$kext$ioATAFamily"
 
 IO80211Family="IO80211Family.kext"
 corecapture="corecapture.kext"
@@ -394,6 +396,8 @@ sleep 0.1
 ditto -v "$source$appleHDA" "$destVolume$kext$appleHDA"
 chown -R 0:0 "$destVolume$kext$appleHDA"
 chmod -R 755 "$destVolume$kext$appleHDA"
+touch "$destVolume$kext$appleHDA"
+
 
 IOHIDFamily="IOHIDFamily.kext"
 IOUSBHostFamily="IOUSBHostFamily.kext"
@@ -412,6 +416,8 @@ sleep 0.1
 ditto -v "$source$AppleMCEReporterDisabler" "$destVolume$kext$AppleMCEReporterDisabler"
 chown -R 0:0 "$destVolume$kext$AppleMCEReporterDisabler"
 chmod -R 755 "$destVolume$kext$AppleMCEReporterDisabler"
+touch 755 "$destVolume$kext$AppleMCEReporterDisabler"
+
 
 n
 printf "USB 1.1 Support by ASentientBot"
@@ -421,14 +427,16 @@ sleep 0.1
 ditto -v "$source$IOHIDFamily" "$destVolume$kext$IOHIDFamily"
 chown -R 0:0 "$destVolume$kext$IOHIDFamily"
 chmod -R 755 "$destVolume$kext$IOHIDFamily"
+touch "$destVolume$kext$IOHIDFamily"
 
 n
 printf "Mac Pro 3,1 Bluetooth 2 Disabler, Bluetooth 4 Enabler by StarPlayrX"
 n
 sleep 0.1
 ditto -v "$source$Info" "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties$Contents$Info"
-chown -R 0:0 "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties$Contents$Info"
-chmod -R 755 "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties$Contents$Info"
+chown -R 0:0 "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties"
+chmod -R 755 "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties"
+touch "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties"
 
 bin="/📠/"
 vers="/sw_vers"
