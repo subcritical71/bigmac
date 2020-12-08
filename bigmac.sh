@@ -29,15 +29,15 @@ fi
 
 printf '\e[48;5;0m\e[K'
 printf '\e[K'
-printf "\n[38;5;172m—————————————————————————————–—————————————————————————————————————————————————"
+printf "\n\e[38;5;172m—————————————————————————————–—————————————————————————————————————————————————"
 printf '\e[K'
-printf "\n[38;5;112m🥤 Big Sur Downloader 🍟 Big Sur USB Installer 🍔 bigmac on separate partition"
+printf "\n\e[38;5;112m🥤 Big Sur Downloader 🍟 Big Sur USB Installer 🍔 bigmac on separate partition"
 printf '\e[K'
-printf "\n[38;5;172m—————————————————————————————–—————————————————————————————————————————————————"
+printf "\n\e[38;5;172m—————————————————————————————–—————————————————————————————————————————————————"
 printf '\e[K'
-printf "\r\n[38;5;112m"
+printf "\r\n\e[38;5;112m"
 printf '\e[K'
-printf "[38;5;112m"
+printf "\e[38;5;112m"
 printf '\e[K'
 printf '\n\e[K'
 printf '\e[K'
@@ -63,6 +63,8 @@ if [[ "$install" == *"y"* ]]
                     printf " Download Complete."
             fi
             
+            #http://swcdn.apple.com/content/downloads/35/61/001-77425-A_U0QWFSQBB6/3v38yvyhhg8zn9l7aj9nr4pqemhqhbvlq1/InstallAssistant.pkg
+            #http://swcdn.apple.com/content/downloads/19/41/001-83532-A_LN5NT1FB2Z/o4zodwe2nhyl7dh6cbuokn9deyfgsiqysn/InstallAssistant.pkg
         exit
         ##rm -Rf ~/Downloads/InstallAssistant.pkg
         curl http://swcdn.apple.com/content/downloads/50/49/001-79699-A_93OMDU5KFG/dkjnjkq9eax1n2wpf8rik5agns2z43ikqu/InstallAssistant.pkg -o ~/Downloads/InstallAssistant.pkg
@@ -70,7 +72,7 @@ if [[ "$install" == *"y"* ]]
         echo
         printf '\e[K'
         echo 'Installing the Install macOS Big Sur.app via InstallAssistant.pkg'
-        sudo installer -pkg ~/Downloads/InstallAssistant.pkg -target /
+        installer -pkg ~/Downloads/InstallAssistant.pkg -target /
 fi
     printf '\e[K'
     echo
@@ -82,20 +84,20 @@ read -p "🍦 Would you like to create a USB Installer, excluding thumb drives [
     printf '\e[K'
     #sudo wc $(which sudo) | awk '{printf $3}'
     
-    mark="12885257767"
-    printf 'Evalulating Base System checksum...'
-    checksum=$(stat "$(pwd)/💿/BaseSystem.dmg" | awk '{printf $2}')
-    if [ $checksum != $mark ]
-        then
-            echo "REDOWNLOAD"
-            rm -Rf $(pwd)/💿/BaseSystem.dmg
-            curl https://starplayrx.com/downloads/BaseSystem.dmg -o $(pwd)/💿/BaseSystem.dmg
-            else
-            printf " Download Complete."
-    fi
+   # mark="12885257767"
+   # printf 'Evalulating Base System checksum...'
+    #checksum=$(stat "$(pwd)/💿/BaseSystem.dmg" | awk '{printf $2}')
+    #if [ $checksum != $mark ]
+    #    then
+     #       echo "REDOWNLOAD"
+      #      rm -Rf $(pwd)/💿/BaseSystem.dmg
+      #      curl https://starplayrx.com/downloads/BaseSystem.dmg -o $(pwd)/💿/BaseSystem.dmg
+      #      else
+       #     printf " Download Complete."
+   # fi
 
   
-  exit
+  #exit
 while [ ! -d "/Applications/Install macOS Big Sur.app" ] && [[ "$create" == *"y"* ]]
 
 do
@@ -148,7 +150,7 @@ if [[ "$create" == *"y"* ]]
                 printf '\e[K'
                 echo
                 printf '\e[K'
-                sudo diskutil partitionDisk "$disk" GPT jhfs+ bigmac_"$disk$number" 1g jhfs+ installer_"$disk$number" 16g jhfs+ clone 0
+                diskutil partitionDisk "$disk" GPT jhfs+ bigmac_"$disk$number" 1g jhfs+ installer_"$disk$number" 16g jhfs+ clone 0
                 
                 echo
                 printf '\e[K'
@@ -159,7 +161,7 @@ if [[ "$create" == *"y"* ]]
                 
                 if [ -d /Volumes/bigmac_"$disk$number" ] && [ -d $bigmac ]
                     then
-                        sudo ditto -v $bigmac /Volumes/bigmac_"$disk$number"
+                        ditto -v $bigmac /Volumes/bigmac_"$disk$number"
                     else
                     echo "We can't find the destination or source disk for bigmac. Exiting"
                     exit 0
@@ -178,7 +180,7 @@ if [[ "$create" == *"y"* ]]
                 
                 printf '\e[K'
                 echo
-                sudo /Applications/'Install macOS Big Sur.app'/Contents/Resources/createinstallmedia --nointeraction --volume /Volumes/installer_"$disk$number"
+                /Applications/'Install macOS Big Sur.app'/Contents/Resources/createinstallmedia --nointeraction --volume /Volumes/installer_"$disk$number"
 
                 bootplist="com.apple.Boot.plist"
                 boot="/💾/"
@@ -197,7 +199,7 @@ if [[ "$create" == *"y"* ]]
                         echo "$systemconfig$bootplist"
                         printf '\e[K'
                         rm -Rf "$systemconfig$bootplist"
-                        sudo ditto -v "$bootdisk$base$bootplist" "$systemconfig$bootplist"
+                        ditto -v "$bootdisk$base$bootplist" "$systemconfig$bootplist"
                     else
                         printf '\e[K'
                         echo "$bootdisk$base$bootplist"

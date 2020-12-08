@@ -57,9 +57,10 @@ n
 g
 n
 
-whereissudo=$(which sudo)
-whereissudo=$(echo "$whereissudo" | sed 's/^.\{9\}//')
-if [[ "$whereissudo" == "sudo" ]]
+IsNotRecovery=$(csrutil disable 2>&1)
+Recovery="Recovery"
+
+if [[ "$IsNotRecovery" == *"$Recovery"* ]]
     then
         g
         printf " 🍟 Activating Hax Do No Seal - Enabling Mac OS Extended Journaled"
@@ -67,8 +68,6 @@ if [[ "$whereissudo" == "sudo" ]]
         g
         printf " 🍟 Activating Hax Do No Seal - Enabling JHGS+ and APFS"
 fi
-
-
 
 mount -uw /
 
@@ -171,31 +170,23 @@ printf "————————————————————————
 n
 g
 printf " 🪚 Loading Hax Do Not Seal into Memory by ASentientBot | BarryKN"
-n
 o
-printf "———————————————————————————————————————————————————————————————————"
 g
 n
-n
-printf "    "
 hax="/🍟/HaxDoNotSealNoAPFSROMCheck.dylib"
-echo $(pwd)$hax
+
 asentientbot=$(pwd)
 barrykn=$hax
-n
 
-if [[ "$whereissudo" != "sudo" ]]
+
+if [[ "$IsNotRecovery" == *"$Recovery"* ]]
     then
         sudo -u $SUDO_USER launchctl setenv DYLD_INSERT_LIBRARIES "$asentientbot$barrykn"
         o
-        n
         printf "———————————————————————————————————————————————————————————————————"
         n
         g
-        printf "   DO NOT REBOOT. Please run the 'Install macOS Big Sur.app' now!"
-        n
-        o
-        printf "———————————————————————————————————————————————————————————————————"
+        printf " 📀 DO NOT REBOOT. Please run the 'Install macOS Big Sur.app' now!"
     else
         launchctl setenv DYLD_INSERT_LIBRARIES "$asentientbot$barrykn"
         o
@@ -223,7 +214,7 @@ if [[ "$whereissudo" != "sudo" ]]
         g
         printf " Quit the Terminal and Select Install macOS Big Sur in the Window"
         n
-        printf " DO NOT REBOOT —> The preinstaller script runs in memory"
+        printf " 📀 DO NOT REBOOT. Please run the 'Install macOS Big Sur.app' now!"
         n
         o
         printf "———————————————————————————————————————————————————————————————————"
@@ -235,7 +226,7 @@ o
 printf "———————————————————————————————————————————————————————————————————"
 n
 g
-printf "💰 Please Support Big Mac via PayPal: https://tinyurl.com/y2dsjtq3"
+printf " 💰 Please Support Big Mac via PayPal https://tinyurl.com/y2dsjtq3"
 n
 o
 printf "———————————————————————————————————————————————————————————————————"
