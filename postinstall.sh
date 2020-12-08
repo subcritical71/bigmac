@@ -2,7 +2,7 @@
 
 #  sudo ./postinstall.sh
 #  BigMac MacPro post install tool v2.0.9
-#  Created by StarPlayrX on 11.17.2020
+#  Created by StarPlayrX on 12.08.2020
 
 
 #Auto Switch to the current directory
@@ -45,27 +45,6 @@ g () {
     k
 }
 
-#forceLegacyWifi
-forceLegacy="0"
-
-#-legacy or -Legacy argument, forces Legacy WiFi
-if [[ "$1" == "-l"* ]] || [[ "$1" == "-L"* ]]
-  then
-    forceLegacy="1"
-    n;o
-    printf 'Force Legacy Wifi is ON...'
-    n
-    g
-    sleep 1
-  else
-    forceLegacy="0"
-    n;g
-    printf 'Auto detect WiFi Card is ON... Use -L argument to force Legacy WiFi.'
-    n
-    sleep 1
-fi
-
-
 bigmac="$(pwd)"
 k
 n
@@ -79,6 +58,28 @@ o
 printf "—————————————————————————————————————————————————————————————————"
 n
 g
+
+
+#forceLegacyWifi
+forceLegacy="0"
+
+#-legacy or -Legacy argument, forces Legacy WiFi
+if [[ "$1" == "-l"* ]] || [[ "$1" == "-L"* ]]
+  then
+    forceLegacy="1"
+    n;o
+    printf 'Use Legacy Wifi is ON...'
+    n
+    g
+    sleep 1
+  else
+    forceLegacy="0"
+    n;g
+    printf ' Auto detect WiFi is ON. Use -L argument to force Legacy 802.11n'
+    n
+fi
+
+
 
 
 n
@@ -142,11 +143,11 @@ o
 printf "————————————————–––––————————————"
 n
 g
-systemsetup=""
-while [[ "$systemsetup" != *"System/Library/CoreServices"* ]]
-do
-    systemsetup=$(systemsetup -liststartupdisks)
-done
+#systemsetup=""
+#while [[ "$systemsetup" != *"System/Library/CoreServices"* ]]
+#do
+#    systemsetup=$(systemsetup -liststartupdisks)
+#done
 
 
 IFS=$'\n' #Breaks for in loops at line ending and ignores spaces
@@ -159,30 +160,65 @@ suffix="System/Library/CoreServices"
 slash="/"
 startupdisk="/"
 #Display the Disk Menu, routine by StarPlayrX
-for sys in $systemsetup
+#for sys in $systemsetup
+#do
+     
+#     counter=$((counter+1))
+#     long=$(echo $sys | awk '{ printf $0 }' )
+#     systemdisk=${long%"$suffix"}
+     
+#     if [[ "$systemdisk" != *"/Volumes"* ]]
+#        then
+#            g;n;
+#            systemdisk="/"
+#            printf "$counter$dot$space$systemdisk"
+#            systemdisks+=($systemdisk)
+#        else
+#            g;n;
+#            systemdisk=${systemdisk%"$space"}
+#            systemdisk=${systemdisk%"$slash"}
+#            printf "$counter$dot$space$systemdisk"
+#           systemdisks+=($systemdisk)
+#    fi
+#done
+
+IFS=$'\n'
+
+list=$(ls /Volumes 2>&1)
+match="The blessed volume in this APFS container is "
+apfsContainer="APFS container"
+volumesFolder="/Volumes/"
+counter=0
+startup="Startup"
+systemdisks+=($systemdisk)
+systemnames+=($systemnames)
+
+for i in $list
 do
-     
-     counter=$((counter+1))
-     long=$(echo $sys | awk '{ printf $0 }' )
-     systemdisk=${long%"$suffix"}
-     
-     if [[ "$systemdisk" != *"/Volumes"* ]]
+
+    if [[ $i != *'- Data' ]]
         then
-            g;n;
-            systemdisk="/"
-            printf "$counter$dot$space$systemdisk"
-            systemdisks+=($systemdisk)
-        else
-            g;n;
-            systemdisk=${systemdisk%"$space"}
-            systemdisk=${systemdisk%"$slash"}
-            printf "$counter$dot$space$systemdisk"
-            systemdisks+=($systemdisk)
+            item=$(bless -info "$volumesFolder$i" 2>&1 | grep "$apfsContainer" 2>&1)
+            if [[ "$item" == "$match\"$volumesFolder$i\"." ]]
+                then
+                 counter=$((counter+1))
+                 echo "$counter. $i"
+                 systemdisks+=("$volumesFolder$i")
+                 systemnames+=("$i")
+            elif [[ "$item" == "$match"\"/\"."" ]] && [[ "$i" != *"snapshot"* ]] && [[ "$i" != *"timemachine"* ]]
+                 then
+                 counter=$((counter+1))
+                 echo "$counter. $i ($startup)"
+                 systemdisks+=("/")
+                 systemnames+=("$i")
+            fi
     fi
+
 done
 
-counter=$((counter+1)) #Sets up # Entry for the Startup Disk menu
-n;n;
+#counter=$((counter+1)) #Sets up # Entry for the Startup Disk menu
+
+n;
 read -p " 🎯 Target | / = Startup Disk | System Disk # : " destVolume
 
 if [ "$destVolume" != "" ] && [ "$destVolume" != "/" ] && [ -n "$destVolume" ] && [ "$destVolume" -eq "$destVolume" ] 2>/dev/null
@@ -190,33 +226,43 @@ if [ "$destVolume" != "" ] && [ "$destVolume" != "/" ] && [ -n "$destVolume" ] &
         if  [[ $((destVolume+0)) < counter ]]
             then
             destVolume=$((destVolume-1))
+            label=${systemnames[destVolume]}
             destVolume=${systemdisks[destVolume]}
+
         fi
 fi
 
 if [ "$destVolume" != "" ] && [ "$destVolume" != "/" ]
  then
    destVolume=${destVolume%"$space"}
-   mount -uw "$destVolume"
  else
    destVolume="/"
    destVolume="$destVolume"
-
-   mount -uw /
 fi
 
 if [ ! -d "$destVolume" ]
     then
-    n
+    n;o;
     printf "Can't find the disk. Please pay attention! Exiting..."
-    n
+    n;n;
+    exit 0
 fi
+
+mount -uw "$destVolume"
 
 n;o;
 printf "—————————————————————————————————————————————————————————————————"
 n;
 g;
-printf " 🎯 Target ";o;printf "——>";g; printf " $destVolume"
+
+marker=$volumesFolder$label
+
+if [ "$label" == "" ]
+    then
+        marker="/"
+fi
+
+printf " 🎯 Target ";o;printf "——>";g; printf " $marker"
 n;
 printf " 🍔 Source ";o;printf "——>";g; printf " $source"
 n;o;
@@ -611,7 +657,7 @@ two="2"
 three="3"
 four="4"
 
-label=${destVolume%"$one"}
+label=${label%"$one"}
 label=${label%"$two"}
 label=${label%"$three"}
 label=${label%"$four"}
@@ -622,10 +668,12 @@ label=${label#"$prefix"}
 if [ "$destVolume" == "/" ]
     then
         n
-        sudo bless --folder /System/Library/CoreServices --mount /
+        #sudo bless --folder /System/Library/CoreServices --mount /
         #systemsetup -setstartupdisk "$destVolume"/ #Right now this is too unpredictable 
+        bless --folder /System/Library/CoreServices --bootefi --label "$label"
     else
-        sudo bless --folder "$destVolume"/System/Library/CoreServices --mount "$destVolume" --label "$label" #Try to label the disk properly
+        bless --folder "$destVolume"/System/Library/CoreServices --bootefi --label "$label"
+        #sudo bless --folder "$destVolume"/System/Library/CoreServices --mount "$destVolume" --label "$label" #Try to label the disk properly
         #systemsetup -setstartupdisk "$destVolume"/ #Right now this is too unpredictable 
 fi
 
