@@ -462,7 +462,7 @@ sleep 0.1
 ditto -v "$source$AppleMCEReporterDisabler" "$destVolume$kext$AppleMCEReporterDisabler"
 chown -R 0:0 "$destVolume$kext$AppleMCEReporterDisabler"
 chmod -R 755 "$destVolume$kext$AppleMCEReporterDisabler"
-touch 755 "$destVolume$kext$AppleMCEReporterDisabler"
+touch "$destVolume$kext$AppleMCEReporterDisabler"
 
 
 n
@@ -522,10 +522,13 @@ if [[ $version != *"11."* ]]
             then
                 chown -R 0:0 /System/Library/Extensions/
                 chmod -R 755 /System/Library/Extensions/
+                touch "$destVolume"/System/Library/Extensions/
                 kextcache -i /
             else
                 chown -R 0:0 "$destVolume"/System/Library/Extensions/
                 chmod -R 755 "$destVolume"/System/Library/Extensions/
+                touch "$destVolume"/System/Library/Extensions/
+
                 kextcache -i "$destVolume"
         fi
     else
@@ -670,9 +673,9 @@ if [ "$destVolume" == "/" ]
         n
         #sudo bless --folder /System/Library/CoreServices --mount /
         #systemsetup -setstartupdisk "$destVolume"/ #Right now this is too unpredictable 
-        bless --folder /System/Library/CoreServices --bootefi --label "$label"
+        bless --folder /System/Library/CoreServices --bootefi --label "$label" --mount / --setBoot
     else
-        bless --folder "$destVolume"/System/Library/CoreServices --bootefi --label "$label"
+        bless --folder "$destVolume"/System/Library/CoreServices --bootefi --label "$label" --mount "$destVolume" --setBoot
         #sudo bless --folder "$destVolume"/System/Library/CoreServices --mount "$destVolume" --label "$label" #Try to label the disk properly
         #systemsetup -setstartupdisk "$destVolume"/ #Right now this is too unpredictable 
 fi
