@@ -137,7 +137,7 @@ o
 printf "————————————————–––––————————————"
 n
 g
-printf " 💾 Select System Disk To Patch"
+printf " 💾 Evaluating... System Disks"
 n
 o
 printf "————————————————–––––————————————"
@@ -192,23 +192,34 @@ counter=0
 startup="Startup"
 systemdisks+=($systemdisk)
 systemnames+=($systemnames)
+comdot="com."
+snapshot="snapshot"
+timemachine="timemachine"
 
+n
 for i in $list
 do
 
     if [[ $i != *'- Data' ]]
         then
             item=$(bless -info "$volumesFolder$i" 2>&1 | grep "$apfsContainer" 2>&1)
-            if [[ "$item" == "$match\"$volumesFolder$i\"." ]]
+            
+            isEmpty=$(diskutil list "$i" 2>&1)
+            
+            if [[ "$item" == "$match\"$volumesFolder$i\"." ]] && [ isEmpty != '' ]
                 then
                  counter=$((counter+1))
-                 echo "$counter. $i"
+                
+                 printf "$counter. $i"
+                 n
                  systemdisks+=("$volumesFolder$i")
                  systemnames+=("$i")
-            elif [[ "$item" == "$match"\"/\"."" ]] && [[ "$i" != *"snapshot"* ]] && [[ "$i" != *"timemachine"* ]]
+            elif [ "$item" == "$match\"/\"." ] &&  [[ "$i" != *"$snapshot"* ]] && [[ "$i" != *"$timemachine"* ]]  && [[ "$i" != *"$comdot"* ]] && [ isEmpty != '' ]
                  then
                  counter=$((counter+1))
-                 echo "$counter. $i ($startup)"
+                
+                 printf "$counter. $i ($startup)"
+                 n
                  systemdisks+=("/")
                  systemnames+=("$i")
             fi
