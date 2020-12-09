@@ -3,7 +3,8 @@
 #  sudo ./postinstall.sh
 #  BigMac MacPro post install tool v2.0.9
 #  Created by StarPlayrX on 12.08.2020
-
+voice="Samantha"
+rate=25
 
 #Auto Switch to the current directory
 dir=$(dirname "$0")
@@ -52,14 +53,14 @@ o
 printf "—————————————————————————————————————————————————————————————————"
 n
 g
-printf " StarPlayrX -> Big Mac Post Installation Tool for Mac Pros 2.0.9 "
+printf "StarPlayrX | Welcome to Big Mac Two Post Installation Tool v2.0.9"
 n
 o
 printf "—————————————————————————————————————————————————————————————————"
 n
 g
 
-say "Welcome to Big Mac Two Post Installation Tool" --voice "Samantha" --rate 25
+say "Welcome to Big Mac Two Post Installation Tool" --voice "$voice" --rate "$rate"
  
 
 #forceLegacyWifi
@@ -131,15 +132,14 @@ IOBluetoothHIDDriver="IOBluetoothHIDDriver.kext"
 telemetry="com.apple.telemetry.plugin"
 AAAMouSSE="AAAMouSSE.kext"
 HDMIAudio="HDMIAudio.kext"
-
 bootplist="com.apple.Boot.plist"
-
+evaluatingSystemDisks="Evaluating... System Disks"
 n
 o
 printf "————————————————–––––————————————"
 n
 g
-printf " 💾 Evaluating... System Disks"
+printf " 💾 $evaluatingSystemDisks"
 n
 o
 printf "————————————————–––––————————————"
@@ -150,7 +150,7 @@ g
 #do
 #    systemsetup=$(systemsetup -liststartupdisks)
 #done
-say "Evaluating... System Disks" --voice "Samantha" --rate 25 &
+say "$evaluatingSystemDisks" --voice "$voice" --rate $rate &
 
 
 IFS=$'\n' #Breaks for in loops at line ending and ignores spaces
@@ -232,7 +232,7 @@ done
 
 #counter=$((counter+1)) #Sets up # Entry for the Startup Disk menu
 
-say "Please select a System Disk by it's number" --voice "Samantha" --rate 25 &
+say "Please select a System Disk by it's number" --voice "$voice" --rate $rate &
 
 n;
 read -p " 🎯 Target | Please select a System Disk # : " destVolume
@@ -261,7 +261,10 @@ fi
 if [ ! -d "$destVolume" ]
     then
     n;o;
-    printf "Can't find the disk. Please pay attention! Exiting..."
+    exiting="Can't find the disk. Please pay attention! Exiting..."
+    printf "$exiting"
+    say "$exiting" --voice "$voice" --rate $rate &
+
     n;n;
     exit 0
 fi
@@ -286,7 +289,20 @@ printf " 🍔 Source ";o;printf "——>";g; printf " $source"
 n;o;
 printf "—————————————————————————————————————————————————————————————————"
 n;n;g;
-read -p "Press RETURN to proceed:" proceed
+
+pro="Press the return key to proceed | or E to Exit : "
+say "$pro" --voice "$voice" --rate $rate &
+read -p "$pro" proceed
+
+if [[ $proceed == "e"* ]] ||  [[ $proceed == "E"* ]] || [[ $proceed == "q"* ]] || [[ $proceed == "Q"* ]]
+    then
+    n
+    wish="As you wish... exiting..."
+    printf "$wish"
+    n;n;
+    say "$wish" --voice "$voice" --rate $rate &
+    exit 0
+fi
 
 kext="/System/Library/Extensions/"
 libKext="/Library/Extensions/"
@@ -307,6 +323,7 @@ printf "Boot.plist installation"
 n;o;
 printf "————————————————–––––————————————"
 n;g;
+
 
 #cp "$bootdisk$bigsur$bootplist" "$(pwd)$systemconfig$bootplist"
 ditto -v "$bootdisk$bigsur$bootplist" "$destVolume$systemconfig$bootplist"
