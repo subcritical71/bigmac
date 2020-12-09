@@ -59,6 +59,8 @@ printf "————————————————————————
 n
 g
 
+say "Welcome to Big Mac Two Post Installation Tool" --voice "Samantha" --rate 25
+ 
 
 #forceLegacyWifi
 forceLegacy="0"
@@ -78,7 +80,6 @@ if [[ "$1" == "-l"* ]] || [[ "$1" == "-L"* ]]
     printf ' Auto detect WiFi is ON. Use -L argument to force Legacy 802.11n'
     n
 fi
-
 
 
 
@@ -103,6 +104,7 @@ o
 printf "—————————————————————————————————————————————————————————————————"
 n
 g
+
 
 destVolume="/"
 kexts="/🍔/"
@@ -148,6 +150,7 @@ g
 #do
 #    systemsetup=$(systemsetup -liststartupdisks)
 #done
+say "Evaluating... System Disks" --voice "Samantha" --rate 25 &
 
 
 IFS=$'\n' #Breaks for in loops at line ending and ignores spaces
@@ -229,8 +232,12 @@ done
 
 #counter=$((counter+1)) #Sets up # Entry for the Startup Disk menu
 
+say "Please select a System Disk by it's number" --voice "Samantha" --rate 25 &
+
 n;
-read -p " 🎯 Target | / = Startup Disk | System Disk # : " destVolume
+read -p " 🎯 Target | Please select a System Disk # : " destVolume
+
+
 
 if [ "$destVolume" != "" ] && [ "$destVolume" != "/" ] && [ -n "$destVolume" ] && [ "$destVolume" -eq "$destVolume" ] 2>/dev/null
     then
