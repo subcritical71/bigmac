@@ -250,12 +250,18 @@ if [ "$destVolume" != "" ] && [ "$destVolume" != "/" ] && [ -n "$destVolume" ] &
         fi
 fi
 
-if [ "$destVolume" != "" ] && [ "$destVolume" != "/" ]
+
+if [ "$destVolume" == "" ] || [ "$destVolume" == "/" ]
  then
-   destVolume=${destVolume%"$space"}
+     echo "LO"
+
+    destVolume="/"
+   echo "$destVolume"x
  else
-   destVolume="/"
-   destVolume="$destVolume"
+   prefix="/Volumes/"
+   label=${destVolume%"$space"}
+   label=${destVolume#"$prefix"}
+   destVolume=${destVolume%"$space"}
 fi
 
 if [ ! -d "$destVolume" ]
