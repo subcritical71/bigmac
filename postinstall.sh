@@ -10,13 +10,6 @@ rate=25
 dir=$(dirname "$0")
 cd "$dir"
 
-if [ "$EUID" -ne 0 ]
-  then
-    n
-    printf "Please run with sudo!"
-    n
-    exit 0
-fi
 
 #Black background
 k () {
@@ -45,6 +38,16 @@ g () {
     printf "\e[38;5;112m"
     k
 }
+
+if [ "$EUID" -ne 0 ]
+  then
+    n
+    printf "Please run with sudo!"
+    n;n;
+    exit 0
+fi
+
+
 
 bigmac="$(pwd)"
 k
@@ -112,6 +115,7 @@ kexts="/🍔/"
 cheese="/🧀/"
 beer="/🍺/"
 boot="/💾/"
+soft="/💿/"
 
 bigsur="bigsur/"
 
@@ -119,6 +123,7 @@ source=$(pwd)$kexts
 cheesey=$(pwd)$cheese
 rootbeer=$(pwd)$beer
 bootdisk=$(pwd)$boot
+soft=$(pwd)$soft
 
 #Apple Kexts
 appleHDA="AppleHDA.kext"
@@ -152,6 +157,7 @@ g
 #done
 say "$evaluatingSystemDisks" --voice "$voice" --rate $rate &
 
+sleep 1.5
 
 IFS=$'\n' #Breaks for in loops at line ending and ignores spaces
 
@@ -253,10 +259,7 @@ fi
 
 if [ "$destVolume" == "" ] || [ "$destVolume" == "/" ]
  then
-     echo "LO"
-
     destVolume="/"
-   echo "$destVolume"x
  else
    prefix="/Volumes/"
    label=${destVolume%"$space"}
@@ -404,6 +407,30 @@ fi
 sleep 3
 
 cd $bigmac
+
+n
+printf "Enabling Softare Update"
+n
+if [ ! -d "/usr/local/lib" ]
+    then
+        mkdir "/usr/local/lib"
+    fi
+    
+    
+n
+printf "SUVMMFaker Software Update by Czo"
+n
+suvm="SUVMMFaker.dylib"
+fake="/usr/local/lib/$suvm"
+swud="com.apple.softwareupdated.plist"
+eden="/System/Library/LaunchDaemons/$swud"
+
+ditto -v "$soft$suvm" "$destVolume$fake"
+chmod 755 "$destVolume$fake"
+chown 0:0 "$destVolume$fake"
+ditto -v "$soft$swud" "$destVolume$eden"
+chmod 755 "$destVolume$eden"
+chown 0:0 "$destVolume$eden"
 
 n
 printf "SSE 4.2 Emulator MouSSE by Syncretic"
