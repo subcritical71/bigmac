@@ -136,6 +136,7 @@ IOBluetoothHIDDriver="IOBluetoothHIDDriver.kext"
 #SSE4.1 compatible plugin
 telemetry="com.apple.telemetry.plugin"
 AAAMouSSE="AAAMouSSE.kext"
+telemetrap="telemetrap.kext"
 HDMIAudio="HDMIAudio.kext"
 bootplist="com.apple.Boot.plist"
 evaluatingSystemDisks="Evaluating... System Disks"
@@ -441,6 +442,16 @@ ditto -v "$cheesey$AAAMouSSE" "$destVolume$libKext$AAAMouSSE"
 chown -R 0:0 "$destVolume$libKext$AAAMouSSE"
 chmod -R 755 "$destVolume$libKext$AAAMouSSE"
 touch "$destVolume$libKext$AAAMouSSE"
+
+n
+printf "SSE 4.2 Telemetrap by Syncretic"
+n
+rm -Rf "$destVolume$libKext$telemetrap"
+sleep 0.1
+ditto -v "$cheesey$telemetrap" "$destVolume$libKext$telemetrap"
+chown -R 0:0 "$destVolume$libKext$telemetrap"
+chmod -R 755 "$destVolume$libKext$telemetrap"
+touch "$destVolume$libKext$telemetrap"
 
 n
 printf "HDMI Audio"
