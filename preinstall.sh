@@ -1,8 +1,8 @@
 #!/bin/sh
 
 #  sudo ./preinstall.sh
-#  BigMac MacPro pre-install tool v0.0.12
-#  Created by StarPlayrX on 10.17.2020
+#  BigMac MacPro pre-install tool v1.1
+#  Created by StarPlayrX on 12.14.2020
 
 #Auto Switch to the current directory
 dir=$(dirname "$0")

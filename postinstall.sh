@@ -1,8 +1,8 @@
 #!/bin/sh
 
 #  sudo ./postinstall.sh
-#  BigMac MacPro post install tool v2.0.9
-#  Created by StarPlayrX on 12.08.2020
+#  BigMac MacPro post install tool v1.1
+#  Created by StarPlayrX on 12.14.2020
 voice="Samantha"
 rate=25
 

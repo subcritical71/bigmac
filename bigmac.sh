@@ -1,8 +1,10 @@
 #!/bin/sh
 
 #  sudo ./preinstall.sh
-#  BigMac MacPro pre-install tool v0.0.12
-#  Created by StarPlayrX on 10.17.2020
+#  BigMac MacPro pre-install tool v1.1
+#  Created by StarPlayrX on 12.14.2020
+
+#To do put in color subroutines
 
 #AutoSwitch to current directory'
 dir=$(dirname "$0")
@@ -50,7 +52,7 @@ if [[ "$install" == *"y"* ]]
         echo
         printf '\e[K'
         
-            mark="12885258087"
+            mark="12886109321"
             printf 'Evalulating Base System checksum...'
             checksum=$(stat ~/Downloads/InstallAssistant.pkg | awk '{printf $2}')
             
@@ -64,7 +66,8 @@ if [[ "$install" == *"y"* ]]
                     echo 'Installing the Install macOS Big Sur.app via InstallAssistant.pkg'
                     installer -pkg ~/Downloads/InstallAssistant.pkg -target /
                 else
-                    printf " Download Complete."
+                    printf " Download Complete.\n"
+                    
             fi
             
     
@@ -77,22 +80,7 @@ read -p "🍦 Would you like to create a USB Installer, excluding thumb drives [
     printf '\e[K'
     echo
     printf '\e[K'
-    #sudo wc $(which sudo) | awk '{printf $3}'
     
-   # mark="12885257767"
-   # printf 'Evalulating Base System checksum...'
-    #checksum=$(stat "$(pwd)/💿/BaseSystem.dmg" | awk '{printf $2}')
-    #if [ $checksum != $mark ]
-    #    then
-     #       echo "REDOWNLOAD"
-      #      rm -Rf $(pwd)/💿/BaseSystem.dmg
-      #      curl https://starplayrx.com/downloads/BaseSystem.dmg -o $(pwd)/💿/BaseSystem.dmg
-      #      else
-       #     printf " Download Complete."
-   # fi
-
-  
-  #exit
 while [ ! -d "/Applications/Install macOS Big Sur.app" ] && [[ "$create" == *"y"* ]]
 
 do
@@ -131,13 +119,7 @@ if [[ "$create" == *"y"* ]]
                 number=$RANDOM
                 
                 disk="$disk"
-                
-                ##echo '🧻 Wiping clean the USB disk your missing toilet paper.'
-                ##printf '\e[K'
-                ##echo
-                ##printf '\e[K'
-                ##diskutil erasedisk jhfs+ bmo "$disk"
-                
+                            
                 echo
                 printf '\e[K'
                 
@@ -145,7 +127,7 @@ if [[ "$create" == *"y"* ]]
                 printf '\e[K'
                 echo
                 printf '\e[K'
-                diskutil partitionDisk "$disk" GPT jhfs+ bigmac_"$disk$number" 1g jhfs+ installer_"$disk$number" 16g jhfs+ clone 0
+                diskutil partitionDisk "$disk" GPT jhfs+ bigmac_"$disk$number" 1g jhfs+ installer_"$disk$number" 16g jhfs+ FreeSpace 0
                 
                 echo
                 printf '\e[K'
@@ -241,7 +223,7 @@ printf "[38;5;112m"
 printf '\e[K'
 echo
 printf '\e[K'
-echo "🍟 HappyMeal Partition has FREE SPACE on it!"
+echo "🍟 FreeSpace Partition has FREE SPACE on it! (Thank you Capt. Obvious.)"
 printf '\e[K'
 echo
 printf '\e[K'
