@@ -10,6 +10,16 @@ rate=25
 dir=$(dirname "$0")
 cd "$dir"
 
+IsNotRecovery=$(csrutil disable 2>&1)
+Recovery="Recovery"
+
+speak=false
+
+if [[ "$IsNotRecovery" == *"$Recovery"* ]]
+    then
+        speak=true
+fi
+
 
 #Black background
 k () {
@@ -63,9 +73,11 @@ printf "————————————————————————
 n
 g
 
-say "Welcome to Big Mac Two Post Installation Tool" --voice "$voice" --rate "$rate"
- 
-
+if [ $speak == true ]
+    then
+        say "Welcome to Big Mac Two Post Installation Tool" --voice "$voice" --rate "$rate"
+fi
+    
 #forceLegacyWifi
 forceLegacy="0"
 
@@ -156,7 +168,11 @@ g
 #do
 #    systemsetup=$(systemsetup -liststartupdisks)
 #done
-say "$evaluatingSystemDisks" --voice "$voice" --rate $rate &
+
+if [ $speak == true ]
+    then
+        say "$evaluatingSystemDisks" --voice "$voice" --rate $rate &
+fi
 
 sleep 1.5
 
@@ -239,7 +255,11 @@ done
 
 #counter=$((counter+1)) #Sets up # Entry for the Startup Disk menu
 
-say "Please select a System Disk by it's number" --voice "$voice" --rate $rate &
+if [ $speak == true ]
+    then
+        say "Please select a System Disk by it's number" --voice "$voice" --rate $rate &
+fi
+
 
 n;
 read -p " 🎯 Target | Please select a System Disk # : " destVolume
@@ -273,7 +293,11 @@ if [ ! -d "$destVolume" ]
     n;o;
     exiting="Can't find the disk. Please pay attention! Exiting..."
     printf "$exiting"
-    say "$exiting" --voice "$voice" --rate $rate &
+    
+    if [ $speak == true ]
+        then
+            say "$exiting" --voice "$voice" --rate $rate &
+    fi
 
     n;n;
     exit 0
@@ -301,7 +325,13 @@ printf "————————————————————————
 n;n;g;
 
 pro="Press the return key to proceed | or E to Exit : "
-say "$pro" --voice "$voice" --rate $rate &
+
+if [ $speak == true ]
+    then
+        say "$pro" --voice "$voice" --rate $rate &
+fi
+
+
 read -p "$pro" proceed
 
 if [[ $proceed == "e"* ]] ||  [[ $proceed == "E"* ]] || [[ $proceed == "q"* ]] || [[ $proceed == "Q"* ]]
@@ -310,7 +340,12 @@ if [[ $proceed == "e"* ]] ||  [[ $proceed == "E"* ]] || [[ $proceed == "q"* ]] |
     wish="As you wish... exiting..."
     printf "$wish"
     n;n;
-    say "$wish" --voice "$voice" --rate $rate &
+    
+    if [ $speak == true ]
+        then
+            say "$wish" --voice "$voice" --rate $rate &
+    fi
+
     exit 0
 fi
 
