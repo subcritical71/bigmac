@@ -41,7 +41,7 @@ printf "\e[38;5;112m"
 printf '\e[K'
 printf '\n\e[K'
 printf '\e[K'
-read -p "📦 Would you like to download Big Sur macOS 11.0.1 (20B29)? [y]: " install
+read -p "📦 Would you like to download Big Sur macOS 11.1 (20C69)? [y]: " install
 printf '\e[K'
 
 if [[ "$install" == *"y"* ]]
@@ -52,27 +52,22 @@ if [[ "$install" == *"y"* ]]
         
             mark="12885258087"
             printf 'Evalulating Base System checksum...'
-            checksum=$(stat ~/Downloads/InstallAssistant.pkg | awk '$2')
-            echo $checksum
+            checksum=$(stat ~/Downloads/InstallAssistant.pkg | awk '{printf $2}')
+            
             if [ $checksum != $mark ]
                 then
-                    echo "REDOWNLOAD"
-                    #rm -Rf $(pwd)/💿/BaseSystem.dmg
-                    #curl https://starplayrx.com/downloads/BaseSystem.dmg -o "$(pwd)/💿/BaseSystem.dmg"
-                    else
+                    rm -Rf ~/Downloads/InstallAssistant.pkg
+                    curl http://swcdn.apple.com/content/downloads/50/49/001-79699-A_93OMDU5KFG/dkjnjkq9eax1n2wpf8rik5agns2z43ikqu/InstallAssistant.pkg -o ~/Downloads/InstallAssistant.pkg
+                    printf '\e[K'
+                    echo
+                    printf '\e[K'
+                    echo 'Installing the Install macOS Big Sur.app via InstallAssistant.pkg'
+                    installer -pkg ~/Downloads/InstallAssistant.pkg -target /
+                else
                     printf " Download Complete."
             fi
             
-            #http://swcdn.apple.com/content/downloads/35/61/001-77425-A_U0QWFSQBB6/3v38yvyhhg8zn9l7aj9nr4pqemhqhbvlq1/InstallAssistant.pkg
-            #http://swcdn.apple.com/content/downloads/19/41/001-83532-A_LN5NT1FB2Z/o4zodwe2nhyl7dh6cbuokn9deyfgsiqysn/InstallAssistant.pkg
-        exit
-        ##rm -Rf ~/Downloads/InstallAssistant.pkg
-        curl http://swcdn.apple.com/content/downloads/50/49/001-79699-A_93OMDU5KFG/dkjnjkq9eax1n2wpf8rik5agns2z43ikqu/InstallAssistant.pkg -o ~/Downloads/InstallAssistant.pkg
-        printf '\e[K'
-        echo
-        printf '\e[K'
-        echo 'Installing the Install macOS Big Sur.app via InstallAssistant.pkg'
-        installer -pkg ~/Downloads/InstallAssistant.pkg -target /
+    
 fi
     printf '\e[K'
     echo
