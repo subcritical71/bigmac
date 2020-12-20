@@ -1,0 +1,11 @@
+#!/bin/sh
+#!/bin/bash
+# simple Bash Menu Script by jackluke
+
+printf "BigSurFixes beta by jackluke"
+
+printf "\n\n\n"
+
+echo "Welcome to the BigSurFixes beta"
+/System/Applications/Utilities/Terminal.app/Contents/MacOS/Terminal /Applications/smc.app/Contents/Resources/smc.command
+echo "Launching done, click Quit button and after reboot the customised Fan RPM speed should work also on BigSur"
