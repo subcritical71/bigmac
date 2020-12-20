@@ -24,10 +24,7 @@ extension ViewController : URLSessionDownloadDelegate {
                 self.gbLabel.stringValue = "\(a) GB/ \(b) GB"
                 self.progress.doubleValue = Double(percentage)
                 self.percentageLabel.stringValue = "\(p)%"
-                
-               
             }
-            
         }
     }
 

@@ -34,17 +34,11 @@ class ViewController: NSViewController, URLSessionDelegate {
     //MARK Phase 2 Downloader
     @IBAction func createInstallDisk(_ sender: Any) {
         //To Do add check
-         
+        
+        
         //export SUDO_ASKPASS=/usr/local/bin/ssh-askpass
-        let howmeDirURL = URL(fileURLWithPath: NSHomeDirectory())
+       // let howmeDirURL = URL(fileURLWithPath: NSHomeDirectory())
 
-        
-       // USER_HOME=$(eval echo ~${SUDO_USER})
-        
-        //
-        //let username = "starplayrx"
-        //let password = "star"
-        
         DispatchQueue.global(qos: .background).async {
             let a = runCommandReturnString(binary: "/usr/bin/osascript" , arguments: ["-e", "do shell script \"sudo installer -pkg ~/Downloads/InstallAssistant.pkg -target /\" user name \"\(userName)\" password \"\(passWord)\" with administrator privileges"])
              print(a)
@@ -53,7 +47,6 @@ class ViewController: NSViewController, URLSessionDelegate {
         if userName.isEmpty || passWord.isEmpty {
             
         }
-        performSegue(withIdentifier: "userNamePassWord", sender: self)
 
         //let a = runCommandReturnString(binary: "/usr/bin/sudo" , arguments: ["-A", "installer","-pkg", "~/Downloads/InstallAssistant.pkg", "-target", "/"])
        // print(a)
@@ -70,6 +63,17 @@ class ViewController: NSViewController, URLSessionDelegate {
     override func viewDidAppear() {
         super.viewDidAppear()
         view.window?.level = .floating
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            if NSUserName() != "root" && (passWord.isEmpty || userName.isEmpty) {
+                self.performSegue(withIdentifier: "userNamePassWord", sender: self)
+            }
+        }
+        
+    
+
+        
+        
     }
   
     override func viewDidLoad() {

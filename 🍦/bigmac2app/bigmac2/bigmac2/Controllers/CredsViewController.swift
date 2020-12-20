@@ -8,14 +8,17 @@
 import Foundation
 import AppKit
 
-class UserNamePassWord: NSViewController {
+class CredsViewController: NSViewController {
     
     @IBOutlet weak var passWordLabel: NSSecureTextField!
     @IBOutlet weak var userNameLabel: NSTextField!
+    @IBOutlet weak var progressBar: NSProgressIndicator!
     
     
     override func viewWillAppear() {
         super.viewDidAppear()
+        progressBar.isHidden = true
+        progressBar.startAnimation(self)
         if NSUserName() != "root" && !NSUserName().isEmpty {
             userNameLabel.stringValue = NSUserName()
         }
@@ -39,9 +42,41 @@ class UserNamePassWord: NSViewController {
     
     @IBAction func okButton(_ sender: Any) {
         saveNames()
-        dismiss(self)
-    }
+        progressBar.isHidden = false
+        DispatchQueue.main.async { [self] in
+            let a = runCommandReturnString(binary: "/usr/bin/osascript" , arguments: ["-e", "do shell script \"sudo echo /\" user name \"\(userName)\" password \"\(passWord)\" with administrator privileges"])
+            if a.contains("incorrect") {
+                passWordLabel.stringValue = ""
+                passWordLabel.shake(duration: 1)
+                progressBar.isHidden = true
+            } else {
+                progressBar.isHidden = true
+                dismiss(self)
+            }
+        }
     
+    }
 }
+
+extension NSView {
+    func shake(duration: CFTimeInterval) {
+        let translation = CAKeyframeAnimation(keyPath: "transform.translation.x");
+        translation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+        translation.values = [-5, 5, -5, 5, -3, 3, -2, 2, 0]
+
+        /*let rotation = CAKeyframeAnimation(keyPath: "transform.rotation.z")
+        rotation.values = [-5, 5, -5, 5, -3, 3, -2, 2, 0].map {
+            (degrees: Double) -> Double in
+            let radians: Double = (.pi * degrees) / 180.0
+            return radians
+        }*/
+
+        let shakeGroup: CAAnimationGroup = CAAnimationGroup()
+        shakeGroup.animations = [translation]
+        shakeGroup.duration = duration
+        self.layer?.add(shakeGroup, forKey: "shakeIt")
+    }
+}
+
 
 
