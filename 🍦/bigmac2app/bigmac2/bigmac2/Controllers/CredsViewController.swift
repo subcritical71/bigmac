@@ -14,7 +14,6 @@ class CredsViewController: NSViewController {
     @IBOutlet weak var userNameLabel: NSTextField!
     @IBOutlet weak var progressBar: NSProgressIndicator!
     
-    
     override func viewWillAppear() {
         super.viewDidAppear()
         progressBar.isHidden = true
@@ -24,7 +23,11 @@ class CredsViewController: NSViewController {
         }
     }
     
-    
+    override func viewWillDisappear() {
+        progressBar.isHidden = true
+        progressBar.stopAnimation(self)
+    }
+       
     func saveNames() {
         if !userNameLabel.stringValue.isEmpty {
             userName = userNameLabel.stringValue
@@ -46,9 +49,10 @@ class CredsViewController: NSViewController {
         DispatchQueue.main.async { [self] in
             let a = runCommandReturnString(binary: "/usr/bin/osascript" , arguments: ["-e", "do shell script \"sudo echo /\" user name \"\(userName)\" password \"\(passWord)\" with administrator privileges"])
             if a.contains("incorrect") {
-                passWordLabel.stringValue = ""
+                passWordLabel.resignFirstResponder()
                 passWordLabel.shake(duration: 1)
                 progressBar.isHidden = true
+                passWordLabel.stringValue = ""
             } else {
                 progressBar.isHidden = true
                 dismiss(self)
