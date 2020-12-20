@@ -12,6 +12,7 @@
 		2D1A32A7258D959E009DCDFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D1A32A6258D959E009DCDFD /* Assets.xcassets */; };
 		2D1A32AA258D959E009DCDFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D1A32A8258D959E009DCDFD /* Main.storyboard */; };
 		2D23BF64258EA04B0019BD90 /* CommandRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D23BF63258EA04B0019BD90 /* CommandRunner.swift */; };
+		2D538EFF259008870066D908 /* bigmac2.dmg in Resources */ = {isa = PBXBuildFile; fileRef = 2D538EFE259008870066D908 /* bigmac2.dmg */; };
 		2D7787EF258F0BC700305EC3 /* CredsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7787EE258F0BC700305EC3 /* CredsViewController.swift */; };
 		2D7787F2258F0CD500305EC3 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7787F1258F0CD500305EC3 /* Global.swift */; };
 		2D993A66258DCA79003A5553 /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D993A65258DCA79003A5553 /* FileDownloader.swift */; };
@@ -25,6 +26,7 @@
 		2D1A32A9258D959E009DCDFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2D1A32AB258D959E009DCDFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D23BF63258EA04B0019BD90 /* CommandRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandRunner.swift; sourceTree = "<group>"; };
+		2D538EFE259008870066D908 /* bigmac2.dmg */ = {isa = PBXFileReference; lastKnownFileType = file; path = bigmac2.dmg; sourceTree = "<group>"; };
 		2D7787EE258F0BC700305EC3 /* CredsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredsViewController.swift; sourceTree = "<group>"; };
 		2D7787F1258F0CD500305EC3 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		2D993A63258DC0AC003A5553 /* bigmac2.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = bigmac2.entitlements; sourceTree = "<group>"; };
@@ -45,6 +47,7 @@
 		2D1A3296258D959D009DCDFD = {
 			isa = PBXGroup;
 			children = (
+				2D538EFD259008730066D908 /* Data */,
 				2D1A32A1258D959D009DCDFD /* bigmac2 */,
 				2D1A32A0258D959D009DCDFD /* Products */,
 			);
@@ -69,6 +72,14 @@
 				2D993A63258DC0AC003A5553 /* bigmac2.entitlements */,
 			);
 			path = bigmac2;
+			sourceTree = "<group>";
+		};
+		2D538EFD259008730066D908 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				2D538EFE259008870066D908 /* bigmac2.dmg */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		2D7787F4258F1C8C00305EC3 /* Controllers */ = {
@@ -157,6 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D1A32A7258D959E009DCDFD /* Assets.xcassets in Resources */,
+				2D538EFF259008870066D908 /* bigmac2.dmg in Resources */,
 				2D1A32AA258D959E009DCDFD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

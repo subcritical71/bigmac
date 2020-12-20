@@ -21,8 +21,8 @@ extension ViewController : URLSessionDownloadDelegate {
             let b = round (Float(totalBytesExpectedToWrite) / 1000 / 1000 / 1000 * 100 ) / 100
             let p = round (percentage * 100) / 100
             DispatchQueue.main.async {
-                self.gbLabel.stringValue = "\(a) GB/ \(b) GB"
-                self.progress.doubleValue = Double(percentage)
+                self.gbLabel.stringValue = "\(a) GB / \(b) GB"
+                self.progressBarDownload.doubleValue = Double(percentage)
                 self.percentageLabel.stringValue = "\(p)%"
             }
         }

@@ -9,3 +9,4 @@ import Foundation
 
 var userName = ""
 var passWord = ""
+var installerVolume = "/Volumes/bigmac2"
