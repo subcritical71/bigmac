@@ -7,10 +7,12 @@
 
 import AppKit
 import Foundation
+//import AppleScriptObjC
 
 
 class ViewController: NSViewController, URLSessionDelegate {
-    
+
+   
     //Constants
     
     //get Home Folder
@@ -34,6 +36,8 @@ class ViewController: NSViewController, URLSessionDelegate {
         progressBarDownload.doubleValue = 0
         progressBarDownload.isIndeterminate = false
         downloadPkg()
+        
+    
     }
    
     //MARK Phase 2 Downloader
@@ -62,28 +66,27 @@ class ViewController: NSViewController, URLSessionDelegate {
                 }
             }
         }*/
-   
+        
+    
         if ( runner ) {
             DispatchQueue.global(qos: .background).async {
-                let appFolder = Bundle.main.resourceURL
-                let dmgPath = "\(appFolder!.path)/bigmac2.dmg"
+            
+
+                let mkdir = runCommandReturnString(binary: "/bin/mkdir" , arguments: ["/tmp/sharedsupport"])
                 
-             /*   _ = runCommandReturnString(binary: "/usr/bin/osascript" , arguments: ["-e", "do shell script \"mkdir /tmp/bm2a; printf '%s' 'F4D44526E1CFEA5DDF55004207B5A1044AAB8B13A5B6706A2CF12E9EF50CADAD' | hdiutil attach /Users/starplayrx/bigmac2_starter_sha256.dmg -mountpoint /tmp/bm2a -noverify -nobrowse  -stdinpass\""])*/
-                
-                
-                if ( runner ) {
-                    DispatchQueue.global(qos: .background).async {
-                        let asr  = runCommandReturnString(binary: "/usr/bin/osascript" , arguments: ["-e", "do shell script \"sudo asr -s \(dmgPath) -t \(installerVolume) -er -nov -nop\" user name \"\(userName)\" password \"\(passWord)\" with administrator privileges"])
-                        print(asr)
-                        DispatchQueue.main.async { [self] in
-                            
-                            if asr.contains("Restore completed successfully") {
-                                installerFuelGauge.doubleValue += 1
-                            }
-                        }
-                    }
+                let c = runCommandReturnString(binary: "/usr/bin/hdiutil" , arguments: ["mkdir /tmp/sharedsupport; hdiutil attach -mountpoint /tmp/sharedsupport /Applications/'Install macOS Big Sur.app'/Contents/SharedSupport/SharedSupport.dmg -noverify -noautoopen -noautofsck -nobrowse"])
+               
+                DispatchQueue.main.async { [self] in
+                    installerFuelGauge.doubleValue += 1
                 }
                 
+                let appFolder = Bundle.main.resourceURL
+                let dmgPath = "\(appFolder!.path)/bigmac2.dmg"
+                userName = "starplayrx"
+                passWord = "star"
+                let installBigSurToApplication = "do shell script \"sudo asr -s \(dmgPath) -t \(installerVolume) -er -nov -nop\" user name \"\(userName)\" password \"\(passWord)\" with administrator privileges"
+                
+                _ = performAppleScript(script: installBigSurToApplication)
                 
                 DispatchQueue.main.async { [self] in
                     installerFuelGauge.doubleValue += 1
@@ -99,11 +102,14 @@ class ViewController: NSViewController, URLSessionDelegate {
 
     }
     
+  
     override func viewWillAppear() {
         super.viewDidAppear()
         view.window?.title = "🍔 Big Mac 2.0"
         installerFuelGauge.doubleValue = 0
     }
+    
+    
   
     override func viewDidAppear() {
         super.viewDidAppear()

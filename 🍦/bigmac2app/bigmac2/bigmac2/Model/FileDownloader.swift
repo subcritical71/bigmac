@@ -8,7 +8,7 @@
 
 import Foundation
 import AppKit
-
+//import AppleScriptObjC
 
 extension ViewController : URLSessionDownloadDelegate {
     
@@ -27,6 +27,8 @@ extension ViewController : URLSessionDownloadDelegate {
             }
         }
     }
+    
+    
 
     
     func urlSession(_ session: URLSession,

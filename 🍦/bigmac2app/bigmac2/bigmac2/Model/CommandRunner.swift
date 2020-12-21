@@ -9,7 +9,7 @@
 
 import Foundation
 
-func runCommandReturnString(binary: String, arguments: [String]) -> String {
+func runCommandReturnString(binary: String, arguments: [String]) -> String? {
     
     let task = Process()
     task.launchPath = binary
@@ -21,8 +21,22 @@ func runCommandReturnString(binary: String, arguments: [String]) -> String {
     task.launch()
     task.waitUntilExit()
     let data = pipe.fileHandleForReading.readDataToEndOfFile()
-    let output =  String(data: data, encoding: String.Encoding.utf8)!
+    let output = String(data: data, encoding: String.Encoding.utf8)
     
     return output
     
+}
+
+func performAppleScript (script: String) -> (text: String?, error: NSDictionary?) {
+    
+    var text : String?
+    var error : NSDictionary?
+    
+    if let script = NSAppleScript(source: script) {
+        let result = script.executeAndReturnError(&error) as NSAppleEventDescriptor
+        text = result.stringValue
+    }
+    
+    return (text: text, error: error)
+
 }
