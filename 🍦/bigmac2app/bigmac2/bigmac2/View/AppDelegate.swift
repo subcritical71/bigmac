@@ -5,13 +5,7 @@
 //  Created by starplayrx on 12/18/20.
 //
 
-import Cocoa
-import AppleScriptObjC
-
-
-
-
-
+import AppKit
 
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
@@ -22,7 +16,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     
     
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
-        print("HELLO")
         if flag == false {
 
             for window in sender.windows {
@@ -42,8 +35,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
-        Bundle.main.loadAppleScriptObjectiveCScripts()
-
     }
 
     func applicationWillTerminate(_ aNotification: Notification) {

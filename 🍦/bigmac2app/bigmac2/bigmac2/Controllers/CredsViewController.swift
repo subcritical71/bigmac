@@ -46,7 +46,9 @@ class CredsViewController: NSViewController {
     @IBAction func okButton(_ sender: Any) {
         saveNames()
         progressBar.isHidden = false
-        DispatchQueue.main.async { [self] in
+        dismiss(self)
+
+       /* DispatchQueue.main.async { [self] in
             let a = runCommandReturnString(binary: "/usr/bin/osascript" , arguments: ["-e", "do shell script \"sudo echo /\" user name \"\(userName)\" password \"\(passWord)\" with administrator privileges"])
             if a.contains("incorrect") {
                 passWordLabel.resignFirstResponder()
@@ -57,7 +59,7 @@ class CredsViewController: NSViewController {
                 progressBar.isHidden = true
                 dismiss(self)
             }
-        }
+        }*/
     
     }
 }

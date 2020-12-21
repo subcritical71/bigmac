@@ -16,7 +16,7 @@ class ViewController: NSViewController, URLSessionDelegate {
     //Constants
     
     //get Home Folder
-    let homeFolder = NSString(string: "~/").expandingTildeInPath
+    let tempFolder = "/tmp"
     
     //MARK: Downloads Tab -- To Do should we use a TabView Controller
     @IBOutlet weak var progressBarDownload: NSProgressIndicator!
@@ -57,7 +57,7 @@ class ViewController: NSViewController, URLSessionDelegate {
             createInstallSpinner.startAnimation(sender)
         }
         
-        let appFolder = Bundle.main.resourceURL
+       // let appFolder = Bundle.main.resourceURL
         /*if ( runner ) {
             DispatchQueue.global(qos: .background).async {
                 _ = runCommandReturnString(binary: "/usr/bin/osascript" , arguments: ["-e", "do shell script \"sudo installer -pkg ~/Downloads/InstallAssistant.pkg -target /\" user name \"\(userName)\" password \"\(passWord)\" with administrator privileges"])
@@ -69,30 +69,47 @@ class ViewController: NSViewController, URLSessionDelegate {
         
     
         if ( runner ) {
+            
+            
             DispatchQueue.global(qos: .background).async {
             
+                _ = runCommandReturnString(binary: "/bin/mkdir" , arguments: ["/tmp/sharedsupport"])
 
-                let mkdir = runCommandReturnString(binary: "/bin/mkdir" , arguments: ["/tmp/sharedsupport"])
+                let test = runCommandReturnString(binary: "/usr/bin/hdiutil" , arguments: ["mount", "-mountPoint", "/tmp/sharedsupport", "/Applications/Install macOS Big Sur.app/Contents/SharedSupport/SharedSupport.dmg", "-noverify", "-noautoopen", "-noautofsck", "-nobrowse"])
+                print(test)
+                DispatchQueue.main.async { [self] in
+                    installerFuelGauge.doubleValue += 1
+                }
                 
-                let c = runCommandReturnString(binary: "/usr/bin/hdiutil" , arguments: ["mkdir /tmp/sharedsupport; hdiutil attach -mountpoint /tmp/sharedsupport /Applications/'Install macOS Big Sur.app'/Contents/SharedSupport/SharedSupport.dmg -noverify -noautoopen -noautofsck -nobrowse"])
+                _ = runCommandReturnString(binary: "/usr/bin/zip" , arguments: ["mkdir /tmp/sharedsupport/*.zip AssetData/Restore/BaseSystem.dmg > /tmp/bigmac2.dmg"])
                
                 DispatchQueue.main.async { [self] in
                     installerFuelGauge.doubleValue += 1
                 }
                 
+                
+            }
+            
+            DispatchQueue.global(qos: .background).async {
+
                 let appFolder = Bundle.main.resourceURL
                 let dmgPath = "\(appFolder!.path)/bigmac2.dmg"
-                userName = "starplayrx"
-                passWord = "star"
-                let installBigSurToApplication = "do shell script \"sudo asr -s \(dmgPath) -t \(installerVolume) -er -nov -nop\" user name \"\(userName)\" password \"\(passWord)\" with administrator privileges"
-                
-                _ = performAppleScript(script: installBigSurToApplication)
-                
-                DispatchQueue.main.async { [self] in
-                    installerFuelGauge.doubleValue += 1
+            
+                if rootMode {
+                    _ = runCommandReturnString(binary: "/usr/sbin/asr", arguments: ["asr -s \(dmgPath) -t \(installerVolume) -er -nov -nop"]) //do to ask for which volume
+                    
+                    DispatchQueue.main.async { [self] in
+                        installerFuelGauge.doubleValue += 1
+                    }
+                } else {
+                    let installBigSurToApplication = "do shell script \"sudo asr -s \(dmgPath) -t \(installerVolume) -er -nov -nop\" user name \"\(userName)\" password \"\(passWord)\" with administrator privileges"
+                    _ = performAppleScript(script: installBigSurToApplication)
+                    
+                    DispatchQueue.main.async { [self] in
+                        installerFuelGauge.doubleValue += 1
+                    }
                 }
-                
-                
+               
             }
         }
     
@@ -116,8 +133,20 @@ class ViewController: NSViewController, URLSessionDelegate {
         view.window?.level = .floating
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            
+            print(NSUserName())
             if NSUserName() != "root" && (passWord.isEmpty || userName.isEmpty) {
                 self.performSegue(withIdentifier: "userNamePassWord", sender: self)
+                let result =   performAppleScript(script: "return  \"HELLO TODD BOSS\"")
+                print(result.error)
+                print(result.text)
+
+            } else {
+                self.performSegue(withIdentifier: "userNamePassWord", sender: self)
+                let result = performAppleScript(script: "return \"HELLO TODD BOSS\"")
+                print(result.error)
+                print(result.text)
+
             }
         }
         
@@ -130,10 +159,11 @@ class ViewController: NSViewController, URLSessionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         progressBarDownload.doubleValue = 0 //set progressBar to 0 at star
-        
-        let howmeDirURL = URL(fileURLWithPath: NSHomeDirectory())
-
-        print(howmeDirURL)
+        if NSUserName() == "root" {
+            rootMode = true
+        } else {
+            rootMode = false
+        }
     }
     
     internal func download(urlString: String) {
@@ -146,7 +176,7 @@ class ViewController: NSViewController, URLSessionDelegate {
     
     func downloadPkg() {
         //Remove pre-existing file
-        _ = runCommandReturnString(binary: "/bin/rm", arguments: ["-Rf","\(homeFolder)/InstallAssistant.pkg"]) //Future check if it's complete and has right checksum
+        _ = runCommandReturnString(binary: "/bin/rm", arguments: ["-Rf","/tmp/InstallAssistant.pkg"]) //Future check if it's complete and has right checksum
    
         DispatchQueue.global(qos: .background).async {
             self.download(urlString: "http://swcdn.apple.com/content/downloads/00/55/001-86606-A_9SF1TL01U7/5duug9lar1gypwunjfl96dza0upa854qgg/InstallAssistant.pkg")
