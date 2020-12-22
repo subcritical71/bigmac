@@ -801,7 +801,7 @@
                                                     <levelIndicatorCell key="cell" alignment="left" doubleValue="7" maxValue="9" warningValue="6" criticalValue="3" numberOfMajorTickMarks="10" id="g8f-sV-Aat"/>
                                                 </levelIndicator>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="syK-06-F8B">
-                                                    <rect key="frame" x="15" y="168" width="94" height="16"/>
+                                                    <rect key="frame" x="15" y="169" width="94" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Support Media" id="Gx9-1s-nO6">
                                                         <font key="font" metaFont="system"/>

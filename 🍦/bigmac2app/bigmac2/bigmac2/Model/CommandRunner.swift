@@ -27,6 +27,7 @@ func runCommandReturnString(binary: String, arguments: [String]) -> String? {
     
 }
 
+/* May remove AppleScript, or keep if for non-root mode*/
 func performAppleScript (script: String) -> (text: String?, error: NSDictionary?) {
     
     var text : String?

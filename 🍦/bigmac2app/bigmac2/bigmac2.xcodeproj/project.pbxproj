@@ -16,6 +16,7 @@
 		2D7787EF258F0BC700305EC3 /* CredsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7787EE258F0BC700305EC3 /* CredsViewController.swift */; };
 		2D7787F2258F0CD500305EC3 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7787F1258F0CD500305EC3 /* Global.swift */; };
 		2D993A66258DCA79003A5553 /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D993A65258DCA79003A5553 /* FileDownloader.swift */; };
+		2DE42E3D25918F56005E10C6 /* CreateInstallDisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE42E3C25918F56005E10C6 /* CreateInstallDisk.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		2D7787F1258F0CD500305EC3 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		2D993A63258DC0AC003A5553 /* bigmac2.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = bigmac2.entitlements; sourceTree = "<group>"; };
 		2D993A65258DCA79003A5553 /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
+		2DE42E3C25918F56005E10C6 /* CreateInstallDisk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInstallDisk.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -106,6 +108,7 @@
 				2D993A65258DCA79003A5553 /* FileDownloader.swift */,
 				2D23BF63258EA04B0019BD90 /* CommandRunner.swift */,
 				2D7787F1258F0CD500305EC3 /* Global.swift */,
+				2DE42E3C25918F56005E10C6 /* CreateInstallDisk.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -183,6 +186,7 @@
 				2D993A66258DCA79003A5553 /* FileDownloader.swift in Sources */,
 				2D1A32A5258D959D009DCDFD /* ViewController.swift in Sources */,
 				2D7787F2258F0CD500305EC3 /* Global.swift in Sources */,
+				2DE42E3D25918F56005E10C6 /* CreateInstallDisk.swift in Sources */,
 				2D1A32A3258D959D009DCDFD /* AppDelegate.swift in Sources */,
 				2D23BF64258EA04B0019BD90 /* CommandRunner.swift in Sources */,
 				2D7787EF258F0BC700305EC3 /* CredsViewController.swift in Sources */,

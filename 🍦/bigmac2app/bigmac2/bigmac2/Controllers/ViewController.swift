@@ -7,17 +7,22 @@
 
 import AppKit
 import Foundation
-//import AppleScriptObjC
 
 
 class ViewController: NSViewController, URLSessionDelegate {
-
-   
-    //Constants
     
     //get Home Folder
     let tempFolder = "/tmp"
-    
+    var downloadProgress = Float(-1.0)
+    var sourcePath: String?
+    var targetPath: String?
+
+    var installerVolume = "/Volumes/bigmac2"
+    var timer: Timer?
+    let shared = "Shared/" //copy to shared directory
+
+    internal var running: Bool = false
+
     //MARK: Downloads Tab -- To Do should we use a TabView Controller
     @IBOutlet weak var progressBarDownload: NSProgressIndicator!
     @IBOutlet weak var buildLabel: NSTextField!
@@ -28,134 +33,18 @@ class ViewController: NSViewController, URLSessionDelegate {
     @IBOutlet weak var sharedSupportProgressBar: NSProgressIndicator!
     @IBOutlet weak var sharedSupportPercentage: NSTextField!
     @IBOutlet weak var sharedSupportGbLabel: NSTextField!
-    
-    internal var running: Bool = false
-    var currDownload: Float = -1.00
-    
+
     @IBAction func downloadMacOSAction(_ sender: Any) {
         progressBarDownload.doubleValue = 0
         progressBarDownload.isIndeterminate = false
-        downloadPkg()
-        
-    
+        CreateInstall().downloadPkg()
     }
-   
+
     //MARK Phase 2 Downloader
     @IBAction func createInstallDisk(_ sender: Any) {
-        //To Do add check
-        
-        installerFuelGauge.doubleValue = 0
-
-        //export SUDO_ASKPASS=/usr/local/bin/ssh-askpass
-       // let howmeDirURL = URL(fileURLWithPath: NSHomeDirectory())
-        
-        var runner = true
-        
-        if userName.isEmpty || passWord.isEmpty {
-            runner = false
-        } else {
-            createInstallSpinner.startAnimation(sender)
-        }
-        
-       // let appFolder = Bundle.main.resourceURL
-        /*if ( runner ) {
-            DispatchQueue.global(qos: .background).async {
-                _ = runCommandReturnString(binary: "/usr/bin/osascript" , arguments: ["-e", "do shell script \"sudo installer -pkg ~/Downloads/InstallAssistant.pkg -target /\" user name \"\(userName)\" password \"\(passWord)\" with administrator privileges"])
-                DispatchQueue.main.async { [self] in
-                    installerFuelGauge.doubleValue += 1
-                }
-            }
-        }*/
-        
-    
-        if ( runner ) {
-            
-            
-            DispatchQueue.global(qos: .background).async {
-            
-                _ = runCommandReturnString(binary: "/bin/mkdir" , arguments: ["/tmp/sharedsupport"])
-
-                let test = runCommandReturnString(binary: "/usr/bin/hdiutil" , arguments: ["mount", "-mountPoint", "/tmp/sharedsupport", "/Applications/Install macOS Big Sur.app/Contents/SharedSupport/SharedSupport.dmg", "-noverify", "-noautoopen", "-noautofsck", "-nobrowse"])
-                print(test)
-                DispatchQueue.main.async { [self] in
-                    installerFuelGauge.doubleValue += 1
-                }
-                
-                _ = runCommandReturnString(binary: "/usr/bin/zip" , arguments: ["mkdir /tmp/sharedsupport/*.zip AssetData/Restore/BaseSystem.dmg > /tmp/bigmac2.dmg"])
-               
-                DispatchQueue.main.async { [self] in
-                    installerFuelGauge.doubleValue += 1
-                }
-                
-                
-            }
-            
-            DispatchQueue.global(qos: .background).async {
-
-                let appFolder = Bundle.main.resourceURL
-                let dmgPath = "\(appFolder!.path)/bigmac2.dmg"
-            
-                if rootMode {
-                    _ = runCommandReturnString(binary: "/usr/sbin/asr", arguments: ["asr -s \(dmgPath) -t \(installerVolume) -er -nov -nop"]) //do to ask for which volume
-                    
-                    DispatchQueue.main.async { [self] in
-                        installerFuelGauge.doubleValue += 1
-                    }
-                } else {
-                    let installBigSurToApplication = "do shell script \"sudo asr -s \(dmgPath) -t \(installerVolume) -er -nov -nop\" user name \"\(userName)\" password \"\(passWord)\" with administrator privileges"
-                    _ = performAppleScript(script: installBigSurToApplication)
-                    
-                    DispatchQueue.main.async { [self] in
-                        installerFuelGauge.doubleValue += 1
-                    }
-                }
-               
-            }
-        }
-    
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [self] in
-            createInstallSpinner.stopAnimation(sender)
-        }
-
+        CreateInstall().disk()
     }
     
-  
-    override func viewWillAppear() {
-        super.viewDidAppear()
-        view.window?.title = "🍔 Big Mac 2.0"
-        installerFuelGauge.doubleValue = 0
-    }
-    
-    
-  
-    override func viewDidAppear() {
-        super.viewDidAppear()
-        view.window?.level = .floating
-        
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            
-            print(NSUserName())
-            if NSUserName() != "root" && (passWord.isEmpty || userName.isEmpty) {
-                self.performSegue(withIdentifier: "userNamePassWord", sender: self)
-                let result =   performAppleScript(script: "return  \"HELLO TODD BOSS\"")
-                print(result.error)
-                print(result.text)
-
-            } else {
-                self.performSegue(withIdentifier: "userNamePassWord", sender: self)
-                let result = performAppleScript(script: "return \"HELLO TODD BOSS\"")
-                print(result.error)
-                print(result.text)
-
-            }
-        }
-        
-    
-
-        
-        
-    }
-  
     override func viewDidLoad() {
         super.viewDidLoad()
         progressBarDownload.doubleValue = 0 //set progressBar to 0 at star
@@ -165,28 +54,25 @@ class ViewController: NSViewController, URLSessionDelegate {
             rootMode = false
         }
     }
-    
-    internal func download(urlString: String) {
-        let config = URLSessionConfiguration.default
-        let session = URLSession(configuration: config, delegate: self as URLSessionDelegate, delegateQueue: nil)
-        let url = NSURL(string: urlString)
-        let task = session.downloadTask(with: url! as URL)
-        task.resume()
+        
+    override func viewWillAppear() {
+        super.viewDidAppear()
+        view.window?.title = "🍔 Big Mac 2.0"
+        installerFuelGauge.doubleValue = 0
     }
     
-    func downloadPkg() {
-        //Remove pre-existing file
-        _ = runCommandReturnString(binary: "/bin/rm", arguments: ["-Rf","/tmp/InstallAssistant.pkg"]) //Future check if it's complete and has right checksum
-   
-        DispatchQueue.global(qos: .background).async {
-            self.download(urlString: "http://swcdn.apple.com/content/downloads/00/55/001-86606-A_9SF1TL01U7/5duug9lar1gypwunjfl96dza0upa854qgg/InstallAssistant.pkg")
+    
+    override func viewDidAppear() {
+        super.viewDidAppear()
+        view.window?.level = .floating
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+            
+            print(NSUserName())
+            if NSUserName() != "root" && (passWord.isEmpty || userName.isEmpty) {
+                self.performSegue(withIdentifier: "userNamePassWord", sender: self)
+                //let result =  performAppleScript(script: "return  \"HELLO TODD BOSS\"") //add permissions check
+            }
         }
     }
-    
 }
-
-
-
-
-
-
