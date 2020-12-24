@@ -1,0 +1,2 @@
+#!/bin/sh
+unzip -p -v /tmp/SharedSupport/com_apple_MobileAsset_MacSoftwareUpdate/*.zip AssetData/Restore/BaseSystem.dmg > /tmp/BaseSystemX12.dmg

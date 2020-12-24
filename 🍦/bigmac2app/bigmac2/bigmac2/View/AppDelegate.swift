@@ -10,11 +10,6 @@ import AppKit
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
     
-
-      
-    
-    
-    
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
         if flag == false {
 

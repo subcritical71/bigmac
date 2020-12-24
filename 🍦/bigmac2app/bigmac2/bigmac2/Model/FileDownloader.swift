@@ -21,7 +21,7 @@ extension ViewController : URLSessionDownloadDelegate {
             let a = round (Float(totalBytesWritten) / 1000 / 1000 / 10 ) / 100
             let b = round (Float(totalBytesExpectedToWrite) / 1000 / 1000 / 10 ) / 100
             
-            if ( a / b * 100 ).isNaN || ( a / b * 100 ).isInfinite { return }
+            if ( a / b ).isNaN || ( a / b ).isInfinite { return }
 
             let percentageDouble = Double ( a / b * 100 )
             

@@ -12,7 +12,13 @@ import Foundation
 func runCommandReturnString(binary: String, arguments: [String]) -> String? {
     
     let task = Process()
-    task.launchPath = binary
+    if #available(OSX 10.13, *) {
+        task.executableURL = URL(string: "file://" + binary)
+    } else {
+        // Fallback on earlier versions
+        task.launchPath = binary
+
+    }
     task.arguments = arguments
     
     let pipe = Pipe()
@@ -21,6 +27,7 @@ func runCommandReturnString(binary: String, arguments: [String]) -> String? {
     task.launch()
     task.waitUntilExit()
     let data = pipe.fileHandleForReading.readDataToEndOfFile()
+    print(data)
     let output = String(data: data, encoding: String.Encoding.utf8)
     
     return output

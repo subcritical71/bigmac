@@ -7,19 +7,23 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D02E032259453D500E8E1CF /* VolumeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D02E031259453D500E8E1CF /* VolumeInfo.swift */; };
+		2D02E03525945BD000E8E1CF /* EraseDisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D02E03425945BD000E8E1CF /* EraseDisk.swift */; };
 		2D1A32A3258D959D009DCDFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1A32A2258D959D009DCDFD /* AppDelegate.swift */; };
 		2D1A32A5258D959D009DCDFD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1A32A4258D959D009DCDFD /* ViewController.swift */; };
 		2D1A32A7258D959E009DCDFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D1A32A6258D959E009DCDFD /* Assets.xcassets */; };
 		2D1A32AA258D959E009DCDFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D1A32A8258D959E009DCDFD /* Main.storyboard */; };
 		2D23BF64258EA04B0019BD90 /* CommandRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D23BF63258EA04B0019BD90 /* CommandRunner.swift */; };
-		2D538EFF259008870066D908 /* bigmac2.dmg in Resources */ = {isa = PBXBuildFile; fileRef = 2D538EFE259008870066D908 /* bigmac2.dmg */; };
 		2D7787EF258F0BC700305EC3 /* CredsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7787EE258F0BC700305EC3 /* CredsViewController.swift */; };
 		2D7787F2258F0CD500305EC3 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7787F1258F0CD500305EC3 /* Global.swift */; };
 		2D993A66258DCA79003A5553 /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D993A65258DCA79003A5553 /* FileDownloader.swift */; };
 		2DE42E3D25918F56005E10C6 /* CreateInstallDisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE42E3C25918F56005E10C6 /* CreateInstallDisk.swift */; };
+		2DF9BAA5259420BF0023C6B0 /* bm2tmp0.dmg in Resources */ = {isa = PBXBuildFile; fileRef = 2DF9BAA4259420BF0023C6B0 /* bm2tmp0.dmg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2D02E031259453D500E8E1CF /* VolumeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeInfo.swift; sourceTree = "<group>"; };
+		2D02E03425945BD000E8E1CF /* EraseDisk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EraseDisk.swift; sourceTree = "<group>"; };
 		2D1A329F258D959D009DCDFD /* bigmac2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bigmac2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D1A32A2258D959D009DCDFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2D1A32A4258D959D009DCDFD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -27,12 +31,12 @@
 		2D1A32A9258D959E009DCDFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2D1A32AB258D959E009DCDFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D23BF63258EA04B0019BD90 /* CommandRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandRunner.swift; sourceTree = "<group>"; };
-		2D538EFE259008870066D908 /* bigmac2.dmg */ = {isa = PBXFileReference; lastKnownFileType = file; path = bigmac2.dmg; sourceTree = "<group>"; };
 		2D7787EE258F0BC700305EC3 /* CredsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredsViewController.swift; sourceTree = "<group>"; };
 		2D7787F1258F0CD500305EC3 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		2D993A63258DC0AC003A5553 /* bigmac2.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = bigmac2.entitlements; sourceTree = "<group>"; };
 		2D993A65258DCA79003A5553 /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
 		2DE42E3C25918F56005E10C6 /* CreateInstallDisk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInstallDisk.swift; sourceTree = "<group>"; };
+		2DF9BAA4259420BF0023C6B0 /* bm2tmp0.dmg */ = {isa = PBXFileReference; lastKnownFileType = file; path = bm2tmp0.dmg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,7 +83,7 @@
 		2D538EFD259008730066D908 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				2D538EFE259008870066D908 /* bigmac2.dmg */,
+				2DF9BAA4259420BF0023C6B0 /* bm2tmp0.dmg */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -87,6 +91,7 @@
 		2D7787F4258F1C8C00305EC3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2D02E03425945BD000E8E1CF /* EraseDisk.swift */,
 				2D1A32A4258D959D009DCDFD /* ViewController.swift */,
 				2D7787EE258F0BC700305EC3 /* CredsViewController.swift */,
 			);
@@ -105,10 +110,11 @@
 		2D7787F8258F1CDE00305EC3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2DE42E3C25918F56005E10C6 /* CreateInstallDisk.swift */,
+				2D02E031259453D500E8E1CF /* VolumeInfo.swift */,
 				2D993A65258DCA79003A5553 /* FileDownloader.swift */,
 				2D23BF63258EA04B0019BD90 /* CommandRunner.swift */,
 				2D7787F1258F0CD500305EC3 /* Global.swift */,
-				2DE42E3C25918F56005E10C6 /* CreateInstallDisk.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -129,6 +135,8 @@
 			dependencies = (
 			);
 			name = bigmac2;
+			packageProductDependencies = (
+			);
 			productName = bigmac2;
 			productReference = 2D1A329F258D959D009DCDFD /* bigmac2.app */;
 			productType = "com.apple.product-type.application";
@@ -156,6 +164,8 @@
 				Base,
 			);
 			mainGroup = 2D1A3296258D959D009DCDFD;
+			packageReferences = (
+			);
 			productRefGroup = 2D1A32A0258D959D009DCDFD /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -171,7 +181,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2D1A32A7258D959E009DCDFD /* Assets.xcassets in Resources */,
-				2D538EFF259008870066D908 /* bigmac2.dmg in Resources */,
+				2DF9BAA5259420BF0023C6B0 /* bm2tmp0.dmg in Resources */,
 				2D1A32AA258D959E009DCDFD /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -190,6 +200,8 @@
 				2D1A32A3258D959D009DCDFD /* AppDelegate.swift in Sources */,
 				2D23BF64258EA04B0019BD90 /* CommandRunner.swift in Sources */,
 				2D7787EF258F0BC700305EC3 /* CredsViewController.swift in Sources */,
+				2D02E032259453D500E8E1CF /* VolumeInfo.swift in Sources */,
+				2D02E03525945BD000E8E1CF /* EraseDisk.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,7 @@
 
 import AppKit
 import Foundation
+import ZIPFoundation
 
 
 class ViewController: NSViewController, URLSessionDelegate {
@@ -21,8 +22,12 @@ class ViewController: NSViewController, URLSessionDelegate {
     var timer: Timer?
     let shared = "Shared/" //copy to shared directory
 
+    var getEraseDisk : ()? = nil
+    var getCreateDisk : ()? = nil
+    
     internal var running: Bool = false
 
+    
     //MARK: Downloads Tab -- To Do should we use a TabView Controller
     @IBOutlet weak var progressBarDownload: NSProgressIndicator!
     @IBOutlet weak var buildLabel: NSTextField!
@@ -37,14 +42,28 @@ class ViewController: NSViewController, URLSessionDelegate {
     @IBAction func downloadMacOSAction(_ sender: Any) {
         progressBarDownload.doubleValue = 0
         progressBarDownload.isIndeterminate = false
-        CreateInstall().downloadPkg()
+        downloadPkg()
     }
 
     //MARK Phase 2 Downloader
     @IBAction func createInstallDisk(_ sender: Any) {
-        CreateInstall().disk()
+        self.performSegue(withIdentifier: "eraseDisk", sender: self)
+
+      //  disk(isBeta: false, sender: sender)
+    }
+
+    
+    @objc func gotEraseDisk(_ notification:Notification){
+        print(notification.object)
+        print("gotEraseDisk")
     }
     
+    @objc func gotCreateDisk(_ notification:Notification){
+        print("gotCreateDisk")
+
+    }
+    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         progressBarDownload.doubleValue = 0 //set progressBar to 0 at star
@@ -53,12 +72,21 @@ class ViewController: NSViewController, URLSessionDelegate {
         } else {
             rootMode = false
         }
+        
+        
+        getEraseDisk = NotificationCenter.default.addObserver(self, selector: #selector(gotEraseDisk), name: .gotEraseDisk, object: nil)
+        
+        getCreateDisk = NotificationCenter.default.addObserver(self, selector: #selector(gotCreateDisk), name: .gotCreateDisk, object: nil)
+      
+        
+        
     }
         
     override func viewWillAppear() {
         super.viewDidAppear()
         view.window?.title = "🍔 Big Mac 2.0"
         installerFuelGauge.doubleValue = 0
+        
     }
     
     

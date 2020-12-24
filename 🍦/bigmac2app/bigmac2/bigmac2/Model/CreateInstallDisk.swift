@@ -6,8 +6,9 @@
 //
 
 import Foundation
+import ZIPFoundation
 
-class CreateInstall : ViewController {
+extension ViewController {
     
     func downloadPkg() {
         //Remove pre-existing file
@@ -45,19 +46,22 @@ class CreateInstall : ViewController {
     }
     
     //MARK: Spinner Animation
-    internal func spinnerAnimation (start: Bool, hide: Bool) {
+    internal func spinnerAnimation (start: Bool, hide: Bool, sender: Any) {
         
-        if start {
-            createInstallSpinner.startAnimation(self)
-        } else {
-            createInstallSpinner.stopAnimation(self)
+        DispatchQueue.main.async { [self] in
+            if start {
+                createInstallSpinner.startAnimation(sender)
+            } else {
+                createInstallSpinner.stopAnimation(sender)
+            }
+            
+            if hide {
+                createInstallSpinner.isHidden = true
+            } else {
+                createInstallSpinner.isHidden = false
+            }
         }
-        
-        if hide {
-            createInstallSpinner.isHidden = true
-        } else {
-            createInstallSpinner.isHidden = false
-        }
+    
     }
     
     //MARK: Check for root user
@@ -67,7 +71,7 @@ class CreateInstall : ViewController {
     
     //MARK: Make Directory - To do use File Manager (For alot of these future tasks)
     internal func mkDir(bin: String = "/bin/mkdir", arg: String) -> String {
-        let result = runCommandReturnString(binary: bin , arguments: [string]) ?? ""
+        let result = runCommandReturnString(binary: bin , arguments: [arg]) ?? ""
         return result
     }
     
@@ -103,8 +107,8 @@ class CreateInstall : ViewController {
     }
     
     //MARK: Extract DMG from Zip file
-    func extractDMGfromZip(bin: String = "/usr/bin/zip", arg: [String] ) -> String {
-        let result = runCommandReturnString(binary: bin , arguments: arg) ?? ""
+    func extractDMGfromZip(bin: String = "/usr/bin/unzip", arg: [String] ) -> String {
+        let result = runCommandReturnString(binary: bin , arguments: arg) ?? "xxxx"
         return result
     }
     
@@ -123,7 +127,7 @@ class CreateInstall : ViewController {
     
     
     //MARK: Install Disk Setup
-    func disk(isBeta:Bool) {
+    func disk(isBeta:Bool, sender: Any) {
         
         let tmp = "tmp"
         let sharedsupport = "SharedSupport"
@@ -132,42 +136,51 @@ class CreateInstall : ViewController {
         let basesystem = "BaseSystem"
         let appFolder = Bundle.main.resourceURL
         let dmgPath = "\(appFolder!.path)/\(bigmac2).dmg"
-        
+        let macSoftwareUpdate = "com_apple_MobileAsset_MacSoftwareUpdate"
         var installBigSur = "Install macOS Big Sur.app"
-
+        let wildZip = "*.zip"
+        let restoreBaseSystem = "AssetData/Restore/\(basesystem).dmg"
+        
         if isBeta {
             installBigSur = "Install macOS Big Sur Beta.app"
         }
         
         DispatchQueue.global(qos: .background).async { [self] in
             incrementInstallGauge(resetGauge: true, incremment: false, setToFull: false)
-
+            spinnerAnimation(start: true, hide: false, sender: sender)
+            
             //MARK: make temp dir SharedSupport
-            _ = mkDir(arg: "/\(tmp)/\(sharedsupport)")
+            let mkdir = mkDir(arg: "/\(tmp)/\(sharedsupport)")
+           print(mkdir)
             
-            //MARK: mount disk image inside temp SharedSupport
-            let mountedDisk = mountDiskImage(arg: ["mount", "-mountPoint", "/\(tmp)/\(sharedsupport)", "/\(applications)/\(installBigSur)/Contents/\(sharedsupport)/\(sharedsupport).dmg", "-noverify", "-noautoopen", "-noautofsck", "-nobrowse"])
-            print(mountedDisk) //MARK: to do parse the data out
+        //MARK: mount disk idmage inside temp SharedSupport
+        let mountedDisk = mountDiskImage(arg: ["mount", "-mountPoint", "/\(tmp)/\(sharedsupport)", "/\(applications)/\(installBigSur)/Contents/\(sharedsupport)/\(sharedsupport).dmg", "-noverify", "-noautoopen", "-noautofsck", "-nobrowse"])
+            print(mountedDisk)
             
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+        
+            let extract = extractDMGfromZip(arg: ["-o", "/\(tmp)/\(tmp)/\(macSoftwareUpdate)/*.\(wildZip)", "\(restoreBaseSystem)", "-d", "/\(tmp)"])
+           print(extract)
+        incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
             
-            //MARK: Extract Base System from Zip file from Shared Support DMG
-            _ = extractDMGfromZip(arg: ["/\(tmp)/\(sharedsupport)/*.zip AssetData/Restore/\(basesystem).dmg > /\(tmp)/\(bigmac2).dmg"])
-  
+            
+          //  let fm = FileManager.default
+            
+            //fm.replaceItemAt(<#T##originalItemURL: URL##URL#>, withItemAt: <#T##URL#>, backupItemName: <#T##String?#>, options: <#T##FileManager.ItemReplacementOptions#>)
+           // let itemsToCopy = try! fm.contentsOfDirectory(atPath:  "/Volumes/macOS Base System")
+           // print(itemsToCopy)
+            
+//for i in itemsToCopy {
+              // try? fm.copyItem(atPath: "/Volumes/macOS Base System/\(i)", toPath: "/Volumes/bigmac2/\(i)")
+         
+           // try? fm.copyItem(atPath: "/Volumes/macOS Base System/", toPath: "/Volumes/bigmac2/")
+            
+         
+            
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
-
-            //MARK: Exec ASR Via Root (uses NSAppleScript if under user mode)
-            execViaRoot(isRootUser: rootMode, binStr: "/usr/sbin/asr", argStr: "-s \(dmgPath) -t \(installerVolume) -er -nov -nop", dmgPath: dmgPath)
-           
-            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+            spinnerAnimation(start: false, hide: true, sender: sender)
 
         }
-        
-        
-        //DispatchQueue.main.asyncAfter(deadline: .now() + 5) { [self] in
-        // createInstallSpinner.stopAnimation(sender)
-        //}
-        
     }
     
 }

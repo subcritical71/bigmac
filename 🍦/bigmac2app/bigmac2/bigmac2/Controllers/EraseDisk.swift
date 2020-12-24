@@ -1,0 +1,61 @@
+//
+//  EraseDisk.swift
+//  bigmac2
+//
+//  Created by starplayrx on 12/24/20.
+//
+
+import Foundation
+import AppKit
+
+
+class EraseDiskViewController : NSViewController {
+    
+    @IBOutlet weak var volumePopup: NSPopUpButton!
+    @IBOutlet weak var cancel: NSButton!
+    @IBOutlet weak var okButton: NSButton!
+    
+    var volumeArray = [myVolumeInfo]()
+    
+    func refresh() {
+        print("OK")
+        if let volArr = getVolumeInfo() {
+            volumePopup.removeAllItems()
+    
+            for i in volArr {
+                volumePopup.addItem(withTitle: i.name)
+            }
+            
+            volumeArray = volArr
+        }
+    }
+    
+    
+ 
+    override func viewDidLoad() {
+        refresh()
+    }
+    
+    @IBAction func cancelAction(_ sender: Any) {
+        dismiss(self)
+    }
+    
+    @IBAction func refreshDisks(_ sender: Any) {
+        refresh()
+    }
+    
+    @IBAction func eraseDisk(_ sender: Any) {
+        self.dismiss (self)
+        let int = Int(volumePopup.indexOfSelectedItem)
+        let selectedDisk = volumeArray[int]
+        NotificationCenter.default.post(name: .gotEraseDisk, object: selectedDisk)
+    }
+    
+    
+}
+
+
+
+
+    
+    
