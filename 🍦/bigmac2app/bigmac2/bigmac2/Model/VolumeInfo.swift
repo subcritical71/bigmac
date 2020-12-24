@@ -30,7 +30,7 @@ import Foundation
 
 func getVolumeInfo() -> [myVolumeInfo]? {
     
-    let URLResourceKeys : [URLResourceKey] = [.volumeNameKey, .volumeIsRemovableKey, .volumeIsBrowsableKey, .volumeIsLocalKey, .volumeIsReadOnlyKey, .volumeIsInternalKey, .volumeIsAutomountedKey, .volumeIsEjectableKey, .volumeUUIDStringKey, .isWritableKey, .volumeIdentifierKey, .volumeLocalizedFormatDescriptionKey, .volumeLocalizedNameKey, .volumeTotalCapacityKey]
+    let URLResourceKeys : [URLResourceKey] = [.volumeNameKey, .volumeIsRemovableKey, .volumeIsBrowsableKey, .volumeIsLocalKey, .volumeIsReadOnlyKey, .volumeIsInternalKey, .volumeIsAutomountedKey, .volumeIsEjectableKey, .volumeUUIDStringKey, .isWritableKey, .volumeIdentifierKey, .volumeLocalizedFormatDescriptionKey, .volumeLocalizedNameKey, .volumeTotalCapacityKey, .isHiddenKey]
 
     let volumes = FileManager.default.mountedVolumeURLs(includingResourceValuesForKeys: URLResourceKeys, options: [FileManager.VolumeEnumerationOptions.skipHiddenVolumes])
 

@@ -74,6 +74,12 @@ extension ViewController {
         return result
     }
     
+    //MARK: Make Rename Disk using diskutil
+    internal func renameDisk(bin: String = "/usr/sbin/diskutil", input: String, output: String) -> String {
+        let result = runCommandReturnString(binary: bin , arguments: ["rename", input, output]) ?? ""
+        return result
+    }
+    
     //MARK: Mount diskimage and parse disk#s#
     internal func mountDiskImage(bin: String = "/usr/bin/hdiutil", arg: [String]) -> String {
         
@@ -111,8 +117,8 @@ extension ViewController {
         return result
     }
     
-    //MARK: Installer disk Root Mode Function (if not root mode, then uses NSAppleScript to make the call)
-    func addVolume(binStr: String, argStr: String, dmgPath: String, targetDisk: String, erase: Bool) -> String {
+    //MARK: Add volume using ASR
+    func addVolume(binStr: String = "/usr/sbin/asr", dmgPath: String, targetDisk: String, erase: Bool) -> String {
         var eraseString = ""
       
         var args = ["--source", dmgPath, "--target", targetDisk, "-noverify", "-noprompt"]
@@ -122,7 +128,7 @@ extension ViewController {
             args.append(eraseString)
         }
         
-        let result = runCommandReturnString(binary: "/usr/sbin/asr", arguments: ["\(argStr)"]) ?? ""
+        let result = runCommandReturnString(binary: "/usr/sbin/asr", arguments: args) ?? ""
         return result
     }
     
@@ -132,6 +138,11 @@ extension ViewController {
         return result
     }
     
+    func mountVolume(bin: String = "/usr/sbin/diskutil", disk: String) -> String {
+        //diskutil mountDisk disk9
+        let result = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["mountDisk", disk]) ?? ""
+        return result
+    }
     
     //MARK: Install Disk Setup
     func disk(isBeta:Bool, diskInfo: myVolumeInfo) {
@@ -144,7 +155,7 @@ extension ViewController {
         let applications = "Applications"
         let basesystem = "BaseSystem"
         let appFolder = Bundle.main.resourceURL
-        let dmgPath = "\(appFolder!.path)/\(tempDiskImage).dmg"
+        let tempSystem = "\(appFolder!.path)/\(tempDiskImage).dmg"
         let macSoftwareUpdate = "com_apple_MobileAsset_MacSoftwareUpdate"
         var installBigSur = "Install macOS Big Sur.app"
         let wildZip = "*.zip"
@@ -161,7 +172,15 @@ extension ViewController {
             //MARK: Erase disk inplace using reformat
             let resultEraseDisk = eraseDisk(diskSlice: diskInfo.diskSlice)
             print(resultEraseDisk)
+            
+            //diskutil apfs list disk9 | grep "APFS Physical Store Disk" | awk '{printf $6}'
+            
+            //let getParentDisk = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: [, "list", diskInfo.disk, "|", "grep", "])
+            //MARK: Inc
+            //print(getParentDisk)
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+            
+            
             
             //MARK: make temp dir SharedSupport
             let mkdir = mkDir(arg: "/\(tmp)/\(sharedsupport)")
@@ -171,12 +190,54 @@ extension ViewController {
             let mountedDisk = mountDiskImage(arg: ["mount", "-mountPoint", "/\(tmp)/\(sharedsupport)", "/\(applications)/\(installBigSur)/Contents/\(sharedsupport)/\(sharedsupport).dmg", "-noverify", "-noautoopen", "-noautofsck", "-nobrowse"])
             print(mountedDisk)
             
+            //MARK: Inc
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
             
-            let extract = extractDMGfromZip(arg: ["-o", "/\(tmp)/\(tmp)/\(macSoftwareUpdate)/*.\(wildZip)", "\(restoreBaseSystem)", "-d", "/\(tmp)"])
+            //MARK: Zip Extraction (retain base system disk image from DMG)
+            let extract = extractDMGfromZip(arg: ["-o", "/\(tmp)/\(sharedsupport)/\(macSoftwareUpdate)/\(wildZip)", "\(restoreBaseSystem)", "-d", "/\(tmp)"])
             print(extract)
+            
+            //MARK: Inc
+            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+            let stubASR = addVolume(dmgPath: tempSystem, targetDisk: "/dev/r\(diskInfo.disk)", erase: true)
+            //
+            
+            print(stubASR)
+            
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
             
+            //MARK: Inc
+            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+            let diskToBless = addVolume(dmgPath: "/\(tmp)/\(restoreBaseSystem)", targetDisk: "/dev/r\(diskInfo.disk)", erase: false)
+            //
+            
+            print(diskToBless)
+            
+            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+
+            let mountVol1 = mountVolume(disk: diskInfo.disk)
+            print (mountVol1)
+            
+            let resultDiskBase1 = renameDisk(input: "macOS Base System", output: "bigmac2")
+            print(resultDiskBase1)
+            
+            //MARK: Inc
+            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+            let ARV = addVolume(dmgPath: "/\(tmp)/\(restoreBaseSystem)", targetDisk: "/dev/r\(diskInfo.disk)", erase: false)
+            //
+            
+            print(ARV)
+            
+            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+
+            let mountVol2 = mountVolume(disk: diskInfo.disk)
+            print (mountVol2)
+            
+            let resultDiskBase2 = renameDisk(input: "macOS Base System", output: "bigCheese")
+            
+            print(resultDiskBase2)
+           /* let mountedDisk = mountDiskImage(arg: ["mount", "-mountPoint", "/\(tmp)/\(sharedsupport)", "/\(applications)/\(installBigSur)/Contents/\(sharedsupport)/\(sharedsupport).dmg", "-noverify", "-noautoopen", "-noautofsck", "-nobrowse"])
+            print(mountedDisk)*/
             
             //  let fm = FileManager.default
             
