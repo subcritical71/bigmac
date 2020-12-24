@@ -23,7 +23,7 @@ class EraseDiskViewController : NSViewController {
             volumePopup.removeAllItems()
     
             for i in volArr {
-                volumePopup.addItem(withTitle: i.name)
+                volumePopup.addItem(withTitle: i.volumeName)
             }
             
             volumeArray = volArr
@@ -45,10 +45,13 @@ class EraseDiskViewController : NSViewController {
     }
     
     @IBAction func eraseDisk(_ sender: Any) {
-        self.dismiss (self)
+        dismiss(self)
+
+        //Send disk info
         let int = Int(volumePopup.indexOfSelectedItem)
         let selectedDisk = volumeArray[int]
         NotificationCenter.default.post(name: .gotEraseDisk, object: selectedDisk)
+
     }
     
     

@@ -7,7 +7,6 @@
 
 import AppKit
 import Foundation
-import ZIPFoundation
 
 
 class ViewController: NSViewController, URLSessionDelegate {
@@ -45,24 +44,21 @@ class ViewController: NSViewController, URLSessionDelegate {
         downloadPkg()
     }
 
-    //MARK Phase 2 Downloader
+    //MARK: Phase 1.0
     @IBAction func createInstallDisk(_ sender: Any) {
+        //Erase a Disk first
         self.performSegue(withIdentifier: "eraseDisk", sender: self)
-
-      //  disk(isBeta: false, sender: sender)
     }
 
-    
+    //MARK: Phase 1.1
     @objc func gotEraseDisk(_ notification:Notification){
-        print(notification.object)
-        print("gotEraseDisk")
+        //Got permission to erase a disk, proceed with disk workflow
+        disk(isBeta: false, diskInfo: notification.object as! myVolumeInfo)
     }
     
     @objc func gotCreateDisk(_ notification:Notification){
         print("gotCreateDisk")
-
     }
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -72,21 +68,15 @@ class ViewController: NSViewController, URLSessionDelegate {
         } else {
             rootMode = false
         }
-        
-        
+    
         getEraseDisk = NotificationCenter.default.addObserver(self, selector: #selector(gotEraseDisk), name: .gotEraseDisk, object: nil)
-        
         getCreateDisk = NotificationCenter.default.addObserver(self, selector: #selector(gotCreateDisk), name: .gotCreateDisk, object: nil)
-      
-        
-        
     }
         
     override func viewWillAppear() {
         super.viewDidAppear()
         view.window?.title = "🍔 Big Mac 2.0"
         installerFuelGauge.doubleValue = 0
-        
     }
     
     

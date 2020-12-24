@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import ZIPFoundation
 
 extension ViewController {
     
@@ -46,13 +45,13 @@ extension ViewController {
     }
     
     //MARK: Spinner Animation
-    internal func spinnerAnimation (start: Bool, hide: Bool, sender: Any) {
+    internal func spinnerAnimation (start: Bool, hide: Bool) {
         
         DispatchQueue.main.async { [self] in
             if start {
-                createInstallSpinner.startAnimation(sender)
+                createInstallSpinner.startAnimation(self)
             } else {
-                createInstallSpinner.stopAnimation(sender)
+                createInstallSpinner.stopAnimation(self)
             }
             
             if hide {
@@ -61,7 +60,7 @@ extension ViewController {
                 createInstallSpinner.isHidden = false
             }
         }
-    
+        
     }
     
     //MARK: Check for root user
@@ -108,34 +107,44 @@ extension ViewController {
     
     //MARK: Extract DMG from Zip file
     func extractDMGfromZip(bin: String = "/usr/bin/unzip", arg: [String] ) -> String {
-        let result = runCommandReturnString(binary: bin , arguments: arg) ?? "xxxx"
+        let result = runCommandReturnString(binary: bin , arguments: arg) ?? ""
         return result
     }
     
     //MARK: Installer disk Root Mode Function (if not root mode, then uses NSAppleScript to make the call)
-    func execViaRoot(isRootUser: Bool, binStr: String, argStr: String, dmgPath: String) -> String {
+    func addVolume(binStr: String, argStr: String, dmgPath: String, targetDisk: String, erase: Bool) -> String {
+        var eraseString = ""
+      
+        var args = ["--source", dmgPath, "--target", targetDisk, "-noverify", "-noprompt"]
         
-        if isRootUser {
-            let result = runCommandReturnString(binary: "/usr/sbin/asr", arguments: ["\(argStr)"]) ?? ""
-            return result
-        } else {
-            let installBigSurToApplication = "do shell script \"\(argStr)\" user name \"\(userName)\" password \"\(passWord)\" with administrator privileges"
-            let result = performAppleScript(script: installBigSurToApplication)
-            return result.text ?? ""
+        if erase {
+            eraseString = "--erase"
+            args.append(eraseString)
         }
+        
+        let result = runCommandReturnString(binary: "/usr/sbin/asr", arguments: ["\(argStr)"]) ?? ""
+        return result
+    }
+    
+    
+    func eraseDisk(bin: String = "/usr/sbin/diskutil", diskSlice: String ) -> String {
+        let result = runCommandReturnString(binary: bin, arguments: ["reformat", diskSlice]) ?? ""
+        return result
     }
     
     
     //MARK: Install Disk Setup
-    func disk(isBeta:Bool, sender: Any) {
+    func disk(isBeta:Bool, diskInfo: myVolumeInfo) {
         
         let tmp = "tmp"
         let sharedsupport = "SharedSupport"
         let bigmac2 = "bigmac2"
+        let tempDiskImage = "bm2tmp0"
+        
         let applications = "Applications"
         let basesystem = "BaseSystem"
         let appFolder = Bundle.main.resourceURL
-        let dmgPath = "\(appFolder!.path)/\(bigmac2).dmg"
+        let dmgPath = "\(appFolder!.path)/\(tempDiskImage).dmg"
         let macSoftwareUpdate = "com_apple_MobileAsset_MacSoftwareUpdate"
         var installBigSur = "Install macOS Big Sur.app"
         let wildZip = "*.zip"
@@ -147,39 +156,44 @@ extension ViewController {
         
         DispatchQueue.global(qos: .background).async { [self] in
             incrementInstallGauge(resetGauge: true, incremment: false, setToFull: false)
-            spinnerAnimation(start: true, hide: false, sender: sender)
+            spinnerAnimation(start: true, hide: false)
+            
+            //MARK: Erase disk inplace using reformat
+            let resultEraseDisk = eraseDisk(diskSlice: diskInfo.diskSlice)
+            print(resultEraseDisk)
+            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
             
             //MARK: make temp dir SharedSupport
             let mkdir = mkDir(arg: "/\(tmp)/\(sharedsupport)")
-           print(mkdir)
+            print(mkdir)
             
-        //MARK: mount disk idmage inside temp SharedSupport
-        let mountedDisk = mountDiskImage(arg: ["mount", "-mountPoint", "/\(tmp)/\(sharedsupport)", "/\(applications)/\(installBigSur)/Contents/\(sharedsupport)/\(sharedsupport).dmg", "-noverify", "-noautoopen", "-noautofsck", "-nobrowse"])
+            //MARK: mount disk idmage inside temp SharedSupport
+            let mountedDisk = mountDiskImage(arg: ["mount", "-mountPoint", "/\(tmp)/\(sharedsupport)", "/\(applications)/\(installBigSur)/Contents/\(sharedsupport)/\(sharedsupport).dmg", "-noverify", "-noautoopen", "-noautofsck", "-nobrowse"])
             print(mountedDisk)
             
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
-        
+            
             let extract = extractDMGfromZip(arg: ["-o", "/\(tmp)/\(tmp)/\(macSoftwareUpdate)/*.\(wildZip)", "\(restoreBaseSystem)", "-d", "/\(tmp)"])
-           print(extract)
-        incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+            print(extract)
+            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
             
             
-          //  let fm = FileManager.default
+            //  let fm = FileManager.default
             
             //fm.replaceItemAt(<#T##originalItemURL: URL##URL#>, withItemAt: <#T##URL#>, backupItemName: <#T##String?#>, options: <#T##FileManager.ItemReplacementOptions#>)
-           // let itemsToCopy = try! fm.contentsOfDirectory(atPath:  "/Volumes/macOS Base System")
-           // print(itemsToCopy)
+            // let itemsToCopy = try! fm.contentsOfDirectory(atPath:  "/Volumes/macOS Base System")
+            // print(itemsToCopy)
             
-//for i in itemsToCopy {
-              // try? fm.copyItem(atPath: "/Volumes/macOS Base System/\(i)", toPath: "/Volumes/bigmac2/\(i)")
-         
-           // try? fm.copyItem(atPath: "/Volumes/macOS Base System/", toPath: "/Volumes/bigmac2/")
+            //for i in itemsToCopy {
+            // try? fm.copyItem(atPath: "/Volumes/macOS Base System/\(i)", toPath: "/Volumes/bigmac2/\(i)")
             
-         
+            // try? fm.copyItem(atPath: "/Volumes/macOS Base System/", toPath: "/Volumes/bigmac2/")
+            
+            
             
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
-            spinnerAnimation(start: false, hide: true, sender: sender)
-
+            spinnerAnimation(start: false, hide: true)
+            
         }
     }
     

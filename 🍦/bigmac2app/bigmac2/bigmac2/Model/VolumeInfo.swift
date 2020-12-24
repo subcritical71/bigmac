@@ -7,9 +7,30 @@
 
 import Foundation
 
+
+/*
+ 
+ let fileURL = URL(fileURLWithPath: "/")
+ var error: Error? = nil
+ var results: [URLResourceKey : Any]? = nil
+ do {
+     results = try (fileURL as NSURL).resourceValues(forKeys: [.volumeTotalCapacityKey])
+ } catch {
+     print("Error retrieving resource keys: \(error.localizedDescription ?? "")\n\((error as NSError?)?.userInfo ?? [:])")
+     abort()
+ }
+ if let result = results?[URLResourceKey.volumeTotalCapacityKey] {
+     
+     let r = round (result as! Double / 1000 / 1000 / 10 ) / 100
+     print("Available capacity for important usage: \(r)")
+ }
+
+ 
+ */
+
 func getVolumeInfo() -> [myVolumeInfo]? {
     
-    let URLResourceKeys : [URLResourceKey] = [.volumeNameKey, .volumeIsRemovableKey, .volumeIsBrowsableKey, .volumeIsLocalKey, .volumeIsReadOnlyKey, .volumeIsInternalKey, .volumeIsAutomountedKey, .volumeIsEjectableKey, .volumeUUIDStringKey, .isWritableKey, .volumeIdentifierKey, .volumeLocalizedFormatDescriptionKey, .volumeLocalizedNameKey]
+    let URLResourceKeys : [URLResourceKey] = [.volumeNameKey, .volumeIsRemovableKey, .volumeIsBrowsableKey, .volumeIsLocalKey, .volumeIsReadOnlyKey, .volumeIsInternalKey, .volumeIsAutomountedKey, .volumeIsEjectableKey, .volumeUUIDStringKey, .isWritableKey, .volumeIdentifierKey, .volumeLocalizedFormatDescriptionKey, .volumeLocalizedNameKey, .volumeTotalCapacityKey]
 
     let volumes = FileManager.default.mountedVolumeURLs(includingResourceValuesForKeys: URLResourceKeys, options: [FileManager.VolumeEnumerationOptions.skipHiddenVolumes])
 
@@ -17,7 +38,6 @@ func getVolumeInfo() -> [myVolumeInfo]? {
         if let drive = volumes {
             
             var volArray = [myVolumeInfo]()
-            var volDict = [String:myVolumeInfo]()
             
             for disk in drive {
                 
@@ -25,31 +45,53 @@ func getVolumeInfo() -> [myVolumeInfo]? {
                 
                 if dp.contains("/Volumes/")  {
                     
-                    var newVolume : myVolumeInfo = (diskSlice: "", disk: "", name: "", path: "", uuid: "")
-                    
-                    if let disk = DADiskCreateFromVolumePath(kCFAllocatorDefault, session, disk as CFURL), let bsdName = DADiskGetBSDName(disk), let desc = DADiskCopyDescription(disk)  {
+                    var newVolume = myVolumeInfo(diskSlice: "", disk: "", displayName: "", volumeName: "", path: "", uuid: "", external: false, capacity: 0)
+
+                    if let disk = DADiskCreateFromVolumePath(kCFAllocatorDefault, session, disk as CFURL), let bsdName = DADiskGetBSDName(disk), let desc = DADiskCopyDescription(disk) {
                         
+                      
                         newVolume.diskSlice = String(cString : bsdName)
                         
                         let desc = NSDictionary(dictionary : desc)
-                        
-                        newVolume.disk = "disk\(desc["DAMediaBSDUnit"] ?? "")"
+                        newVolume.disk = "disk\(desc["DAMediaBSDUnit"] ?? "" )"
                     }
                     
                     
                     if let info = try? disk.resourceValues(forKeys: Set(URLResourceKeys)) {
                         
-                        newVolume.name = info.volumeName ?? ""
+                        newVolume.capacity = info.volumeTotalCapacity ?? 0
+                        newVolume.external = !(info.volumeIsInternal ?? true)
+                        newVolume.displayName = info.volumeName ?? ""
                         newVolume.uuid = info.volumeUUIDString ?? ""
                         newVolume.path = disk.path
-                        newVolume.name = newVolume.path.replacingOccurrences(of: "/Volumes/", with: "" )
+                        newVolume.volumeName = newVolume.path.replacingOccurrences(of: "/Volumes/", with: "" )
 
                     }
                     
+                    
+                    
                     volArray.append(newVolume)
-                    volDict[newVolume.name] = newVolume
                 }
             }
+            
+            volArray.sort { $0.capacity < $1.capacity}
+            
+            var externalArray = [myVolumeInfo]()
+            var internalArray = [myVolumeInfo]()
+            
+            //group by external (to do: try converting to dict group by, may not be any more performant)
+            for e in volArray {
+                if e.external {
+                    externalArray.append(e)
+                } else {
+                    internalArray.append(e)
+
+                }
+            }
+            
+            volArray = [myVolumeInfo]()
+            volArray.append(contentsOf: externalArray)
+            volArray.append(contentsOf: internalArray)
             return volArray
         }
     }
