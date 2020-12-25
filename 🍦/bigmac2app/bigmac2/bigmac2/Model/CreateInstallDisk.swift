@@ -230,11 +230,11 @@ extension ViewController {
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
             
             //MARK: Inc
-            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
-            let diskToBless = addVolume(dmgPath: "/\(tmp)/\(restoreBaseSystem)", targetDisk: "/dev/r\(diskInfo.disk)", erase: false, title: "Installing Base System")
+            //incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+            //let diskToBless = addVolume(dmgPath: "/\(tmp)/\(restoreBaseSystem)", targetDisk: "/dev/r\(diskInfo.disk)", erase: false, title: "Installing Base System")
             //
             
-            print(diskToBless)
+            //print(diskToBless)
             
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
 
@@ -245,12 +245,12 @@ extension ViewController {
             print(resultDiskBase1)
             
             //MARK: 2nd Base System may not be needed
-            //incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
-           // let ARV = addVolume(dmgPath: "/\(tmp)/\(restoreBaseSystem)", targetDisk: "/dev/r\(diskInfo.disk)", erase: false, title: "Installing Base System (2 / 2)")
+      //  incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+       // let ARV = addVolume(dmgPath: "/\(tmp)/\(restoreBaseSystem)", targetDisk: "/dev/r\(diskInfo.disk)", erase: false, title: "Installing Base System (2 / 2)")
             //
             
-            //print(ARV)
-            
+         //   print(ARV)
+        //
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
 
             let mountVol2 = mountVolume(disk: diskInfo.disk)
@@ -265,9 +265,23 @@ extension ViewController {
             print(mkdirBaseSystem)
             
             //MARK: mount disk idmage inside temp SharedSupport
-            let mountBaseImage = mountDiskImage(arg: ["mount", "-mountPoint", "/\(tmp)/\(basesystem)", "\(tmp)/\(restoreBaseSystem)", "-noverify", "-noautoopen", "-noautofsck", "-nobrowse"])
-            print(mountedDisk)
+            let mountBaseImage = mountDiskImage(arg: ["mount", "-mountPoint", "/\(tmp)/\(basesystem)", "/\(tmp)/\(restoreBaseSystem)", "-noverify", "-noautoopen", "-noautofsck", "-nobrowse", "-owners", "on"])
+            print(mountBaseImage)
+      
+
+            let volInfo = getVolumeInfo(includeHiddenVolumes: true)
             
+            let getDisks = volInfo?.filter { $0.disk == diskInfo.disk } as? [myVolumeInfo]
+            
+            let getPrebootVolume = getDisks?.filter { $0.volumeName == "Preboot" } as! [myVolumeInfo]
+            
+            let prebootSlice = getPrebootVolume.first?.diskSlice
+            
+            //MOunt Preboot
+            let eraseFullDisk = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", "\(getPrebootVolume)" ] )
+
+            
+            // et eraseFullDisk = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eraseDisk", "apfs", "\(diskInfo.volumeName)","\(parentDisk)" ] )
             
            /* let mountedDisk = mountDiskImage(arg: ["mount", "-mountPoint", "/\(tmp)/\(sharedsupport)", "/\(applications)/\(installBigSur)/Contents/\(sharedsupport)/\(sharedsupport).dmg", "-noverify", "-noautoopen", "-noautofsck", "-nobrowse"])
             print(mountedDisk)*/

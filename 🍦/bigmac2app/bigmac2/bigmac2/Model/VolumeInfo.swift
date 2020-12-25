@@ -28,11 +28,17 @@ import Foundation
  
  */
 
-func getVolumeInfo() -> [myVolumeInfo]? {
+func getVolumeInfo(includeHiddenVolumes: Bool) -> [myVolumeInfo]? {
     
     let URLResourceKeys : [URLResourceKey] = [.volumeNameKey, .volumeIsRemovableKey, .volumeIsBrowsableKey, .volumeIsLocalKey, .volumeIsReadOnlyKey, .volumeIsInternalKey, .volumeIsAutomountedKey, .volumeIsEjectableKey, .volumeUUIDStringKey, .isWritableKey, .volumeIdentifierKey, .volumeLocalizedFormatDescriptionKey, .volumeLocalizedNameKey, .volumeTotalCapacityKey, .isHiddenKey]
+    
+    var FileManagerOptions :  FileManager.VolumeEnumerationOptions  = FileManager.VolumeEnumerationOptions.skipHiddenVolumes
 
-    let volumes = FileManager.default.mountedVolumeURLs(includingResourceValuesForKeys: URLResourceKeys, options: [FileManager.VolumeEnumerationOptions.skipHiddenVolumes])
+    if includeHiddenVolumes {
+        FileManagerOptions = []
+    }
+
+    let volumes = FileManager.default.mountedVolumeURLs(includingResourceValuesForKeys: URLResourceKeys, options: FileManagerOptions)
 
     if let session = DASessionCreate(kCFAllocatorDefault)  {
         if let drive = volumes {

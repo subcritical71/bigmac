@@ -18,7 +18,7 @@ class EraseDiskViewController : NSViewController {
     var volumeArray = [myVolumeInfo]()
     
     func refresh() {
-        if let volArr = getVolumeInfo() {
+        if let volArr = getVolumeInfo(includeHiddenVolumes: false) {
             volumePopup.removeAllItems()
     
             for i in volArr {
