@@ -118,7 +118,7 @@ extension ViewController {
         var args = ["--source", dmgPath, "--target", targetDisk, "-noverify", "-noprompt", "--puppetstrings"]
         
         if erase {
-            eraseString = "--erase"
+            eraseString = "-erase"
             args.append(eraseString)
         }
         
@@ -191,16 +191,14 @@ extension ViewController {
             let parentDisk = getDisk()
             
             if parentDisk.contains("disk") {
-                
-            }
-            print(parentDisk)
-            
-            //MARK: Inc
-            //print(getParentDisk)
-                                                        
-            let eraseFullDisk = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eraseDisk", "apfs", "\(diskInfo.volumeName)","\(parentDisk)" ] )
+                                                                        
+                let eraseFullDisk = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eraseDisk", "apfs", "\(diskInfo.volumeName)","\(parentDisk)" ] )
 
-                                                        
+            } else {
+                let eraseFullDisk = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eraseDisk", "apfs", "\(diskInfo.volumeName)","\(diskInfo.disk)" ] )
+
+            }
+      
                                                         
                                                         
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
@@ -233,7 +231,7 @@ extension ViewController {
             
             //MARK: Inc
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
-            let diskToBless = addVolume(dmgPath: "/\(tmp)/\(restoreBaseSystem)", targetDisk: "/dev/r\(diskInfo.disk)", erase: false, title: "Installing Base System (1 / 2)")
+            let diskToBless = addVolume(dmgPath: "/\(tmp)/\(restoreBaseSystem)", targetDisk: "/dev/r\(diskInfo.disk)", erase: false, title: "Installing Base System")
             //
             
             print(diskToBless)
@@ -246,12 +244,12 @@ extension ViewController {
             let resultDiskBase1 = renameDisk(input: "macOS Base System", output: "bigmac2")
             print(resultDiskBase1)
             
-            //MARK: Inc
-            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
-            let ARV = addVolume(dmgPath: "/\(tmp)/\(restoreBaseSystem)", targetDisk: "/dev/r\(diskInfo.disk)", erase: false, title: "Installing Base System (2 / 2)")
+            //MARK: 2nd Base System may not be needed
+            //incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+           // let ARV = addVolume(dmgPath: "/\(tmp)/\(restoreBaseSystem)", targetDisk: "/dev/r\(diskInfo.disk)", erase: false, title: "Installing Base System (2 / 2)")
             //
             
-            print(ARV)
+            //print(ARV)
             
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
 
@@ -261,6 +259,16 @@ extension ViewController {
             let resultDiskBase2 = renameDisk(input: "macOS Base System", output: "bigCheese")
             
             print(resultDiskBase2)
+            
+            //MARK: make temp dir SharedSupport
+            let mkdirBaseSystem = mkDir(arg: "/\(tmp)/\(basesystem)")
+            print(mkdirBaseSystem)
+            
+            //MARK: mount disk idmage inside temp SharedSupport
+            let mountBaseImage = mountDiskImage(arg: ["mount", "-mountPoint", "/\(tmp)/\(basesystem)", "\(tmp)/\(restoreBaseSystem)", "-noverify", "-noautoopen", "-noautofsck", "-nobrowse"])
+            print(mountedDisk)
+            
+            
            /* let mountedDisk = mountDiskImage(arg: ["mount", "-mountPoint", "/\(tmp)/\(sharedsupport)", "/\(applications)/\(installBigSur)/Contents/\(sharedsupport)/\(sharedsupport).dmg", "-noverify", "-noautoopen", "-noautofsck", "-nobrowse"])
             print(mountedDisk)*/
             
