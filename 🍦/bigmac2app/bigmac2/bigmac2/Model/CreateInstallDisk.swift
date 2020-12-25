@@ -144,12 +144,18 @@ extension ViewController {
     func getVolumeInfoByDisk (filterVolumeName: String, disk: String) -> myVolumeInfo? {
         
         let volInfo = getVolumeInfo(includeHiddenVolumes: true)
-        let disks = volInfo?.filter { $0.disk == disk }
+            
+        if disk != "" {
+            let disks = volInfo?.filter { $0.disk == disk }
+            let d = disks?.filter { $0.volumeName == filterVolumeName }
+            return d?.first ?? nil
+        } else {
+            let d = volInfo?.filter { $0.volumeName == filterVolumeName }
+            return d?.first ?? nil
+        }
+  
         
-        print(disks)
-        let disk = disks?.filter { $0.volumeName == filterVolumeName }
-        
-        return disk?.first ?? nil
+        return nil
     }
     
     //MARK: Get APFS Physical Store Disk:
@@ -272,12 +278,12 @@ extension ViewController {
             
             //MARK: Install Base Systewm
             //incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
-            //let diskToBless = addVolume(dmgPath: "/\(tmp)/\(restoreBaseSystem)", targetDisk: "/dev/r\(diskInfo.disk)", erase: false, title: "Installing Base System")
+            let installBaseSystem = addVolume(dmgPath: "/\(tmp)/\(restoreBaseSystem)", targetDisk: "/dev/r\(diskInfo.disk)", erase: false, title: "Installing Base System")
             
             
-            //print(diskToBless)
+            print(installBaseSystem)
             
-            //incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
 
             let mountVol1 = mountVolume(disk: diskInfo.disk)
             print (mountVol1)
@@ -306,27 +312,31 @@ extension ViewController {
             print(mkdirBaseSystem)
             
             //MARK: mount disk idmage inside temp SharedSupport
-            let mountBaseImage = mountDiskImage(arg: ["mount", "-mountPoint", "/\(tmp)/\(basesystem)", "/\(tmp)/\(restoreBaseSystem)", "-noverify", "-noautoopen", "-noautofsck", "-owners", "on"])
+           // let mountBaseImage = mountDiskImage(arg: ["mount", "-mountPoint", "/\(tmp)/\(basesystem)", "/\(tmp)/\(restoreBaseSystem)", "-noverify", "-noautoopen", "-noautofsck", "-owners", "on"])
+            let mountBaseImage = mountDiskImage(arg: ["mount", "-mountPoint", "/\(tmp)/\(basesystem)", "/\(tmp)/\(restoreBaseSystem)", "-nobrowse", "-noautoopen", "-noverify"])
+
             print(mountBaseImage)
             
-            
+       
             var getPrebootDisk = ""
+            var fullDisk = ""
             
-            if let x = getVolumeInfo(includeHiddenVolumes: true) {
-                print(x)
+            let prebootBs = getVolumeInfoByDisk(filterVolumeName: "/private/tmp/prebootbs", disk: "")
+
+            print(prebootBs)
+            
                 
-                for i in x {
-                    if i.displayName == "macOS Base System" {
-                        
-                        if mountBaseImage.contains(i.diskSlice) {
-                            getPrebootDisk = "\(i.disk)s2"
-                            break;
-                        }
-                    }
-                }
-            }
-          
-   
+           /* sleep(3)
+            let prebootBsMount = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["umountDisk", "/\(fullDisk)"] )
+
+            print(prebootBsMount)
+            
+            sleep(3)
+
+            let prebootBsMountC = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["unmount", "/\(getPrebootDisk)"] )
+
+            print(prebootBsMountC)*/
+            
             /*let getPrebootBs = parseRawText(mountBaseImage)
             
             let getdisks = getPrebootBs.components(separatedBy: "\n")
@@ -348,8 +358,53 @@ extension ViewController {
             print(preBootBs)
             
             
-            let prebootBsMount = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", "-readOnly", "-nobrowse", "-mountPoint", "/\(tmp)/prebootbs", "/\(getPrebootDisk)"] )
-            print(prebootBsMount)
+            let prebootBsMountB = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", "-mountPoint", "/\(tmp)/prebootbs", "\(getPrebootDisk)"] )
+            
+            print(prebootBsMountB)
+            
+            
+            //MARK: make temp dir SharedSupport
+            let preBootDestDir = mkDir(arg: "/\(tmp)/prebootdest")
+            print(preBootDestDir)
+            
+            
+             let prebootDest = getVolumeInfoByDisk(filterVolumeName: "Preboot", disk: diskInfo.disk)
+            
+            print(prebootDest)
+            
+            let prebootDestMount = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", "-mountPoint", "/\(tmp)/prebootdest", "\(prebootDest!.diskSlice)"] )
+            
+            print(prebootDestMount)
+            
+            let fm = FileManager.default
+                        
+            let removefiles = runCommandReturnString(binary: "/bin/rm" , arguments: ["-Rf", "/\(tmp)/prebootdest/*"] )
+            print(removefiles)
+            
+
+            
+            
+            let itemsToCopy = try! fm.contentsOfDirectory(atPath:  "/\(tmp)/prebootbs/")
+            print(itemsToCopy)
+            
+            for i in itemsToCopy {
+                let x = try? fm.copyItem(atPath: "/\(tmp)/prebootbs/\(i)", toPath: "/\(tmp)/prebootdest/\(i)")
+                print(x)
+            }
+            
+            
+            
+            
+            
+            
+            
+            //fm.replaceItemAt(<#T##originalItemURL: URL##URL#>, withItemAt: <#T##URL#>, backupItemName: <#T##String?#>, options: <#T##FileManager.ItemReplacementOptions#>)
+            // let itemsToCopy = try! fm.contentsOfDirectory(atPath:  "/Volumes/macOS Base System")
+            // print(itemsToCopy)
+            
+           // let prebootBsMountB = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", "-mountPoint", "/\(tmp)/preBootDest", "\(getPrebootDisk)"] )
+            
+            
             
             // et eraseFullDisk = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eraseDisk", "apfs", "\(diskInfo.volumeName)","\(parentDisk)" ] )
             
