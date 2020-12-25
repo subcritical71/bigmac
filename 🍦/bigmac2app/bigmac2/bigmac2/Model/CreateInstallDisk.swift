@@ -317,11 +317,13 @@ extension ViewController {
 
             print(mountBaseImage)
             
-       
+            let rndStr = String(Int.random(in: 1000...9999))
+
+            
             var getPrebootDisk = ""
             var fullDisk = ""
             
-            let prebootBs = getVolumeInfoByDisk(filterVolumeName: "/private/tmp/prebootbs", disk: "")
+            let prebootBs = getVolumeInfoByDisk(filterVolumeName: "/private/tmp/prebootbs\(rndStr)", disk: "")
 
             print(prebootBs)
             
@@ -354,17 +356,18 @@ extension ViewController {
 
             
             //MARK: make temp dir SharedSupport
-            let preBootBs = mkDir(arg: "/\(tmp)/prebootbs")
+            let preBootBs = mkDir(arg: "/\(tmp)/prebootbs\(rndStr)")
             print(preBootBs)
             
             
-            let prebootBsMountB = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", "-mountPoint", "/\(tmp)/prebootbs", "\(getPrebootDisk)"] )
+            let prebootBsMountB = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", "-mountPoint", "/\(tmp)/prebootbs\(rndStr)", "\(getPrebootDisk)"] )
             
             print(prebootBsMountB)
             
             
+            
             //MARK: make temp dir SharedSupport
-            let preBootDestDir = mkDir(arg: "/\(tmp)/prebootdest")
+            let preBootDestDir = mkDir(arg: "/\(tmp)/prebootdest\(rndStr)")
             print(preBootDestDir)
             
             
@@ -372,31 +375,33 @@ extension ViewController {
             
             print(prebootDest)
             
-            let prebootDestMount = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", "-mountPoint", "/\(tmp)/prebootdest", "\(prebootDest!.diskSlice)"] )
+            let prebootDestMount = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", "-mountPoint", "/\(tmp)/prebootdest\(rndStr)", "\(prebootDest!.diskSlice)"] )
             
             print(prebootDestMount)
             
             let fm = FileManager.default
                         
-            let removefiles = runCommandReturnString(binary: "/bin/rm" , arguments: ["-Rf", "/\(tmp)/prebootdest/*"] )
+            let removefiles = runCommandReturnString(binary: "/bin/rm" , arguments: ["-Rf", "/\(tmp)/prebootdest\(rndStr)/*"] )
             print(removefiles)
             
 
             
-            
-            let itemsToCopy = try! fm.contentsOfDirectory(atPath:  "/\(tmp)/prebootbs/")
+            let bigmac2 = getVolumeInfoByDisk(filterVolumeName: "bigmac2", disk: diskInfo.disk)
+
+            let itemsToCopy = try! fm.contentsOfDirectory(atPath:  "/\(tmp)/prebootbs\(rndStr)/")
             print(itemsToCopy)
             
             for i in itemsToCopy {
-                let x = try? fm.copyItem(atPath: "/\(tmp)/prebootbs/\(i)", toPath: "/\(tmp)/prebootdest/\(i)")
+                let x = try? fm.copyItem(atPath: "/\(tmp)/prebootbs\(rndStr)/\(i)", toPath: "/\(tmp)/prebootdest\(rndStr)/\(i)")
+                try? fm.moveItem(atPath: "/\(tmp)/prebootdest\(rndStr)/\(i)", toPath: bigmac2!.uuid)
+
                 print(x)
             }
             
             
             
             
-            
-            
+
             
             //fm.replaceItemAt(<#T##originalItemURL: URL##URL#>, withItemAt: <#T##URL#>, backupItemName: <#T##String?#>, options: <#T##FileManager.ItemReplacementOptions#>)
             // let itemsToCopy = try! fm.contentsOfDirectory(atPath:  "/Volumes/macOS Base System")
