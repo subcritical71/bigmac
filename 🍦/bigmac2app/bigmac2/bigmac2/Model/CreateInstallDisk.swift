@@ -85,16 +85,15 @@ extension ViewController {
         
         var s = str
         
+        s = s.replacingOccurrences(of: "\t", with: " ")
+
         for _ in 1...3 {
             s = s.replacingOccurrences(of: "     ", with: " ")
+            s = s.replacingOccurrences(of: "    ", with: " ")
             s = s.replacingOccurrences(of: "   ", with: " ")
             s = s.replacingOccurrences(of: "  ", with: " ")
-            s = s.replacingOccurrences(of: " ", with: "")
-
         }
-        
-        
-        
+    
         return s
 
     }
@@ -142,16 +141,42 @@ extension ViewController {
     }
     
     //MARK: Get Disk Info by a single Disk with all volumes it contains, plus filtering specific disk and get its slice
-    func getVolumeInfoByDisk (filterVolumeName: String, directory: String, disk: String) -> (disks: [myVolumeInfo]?, disk: [myVolumeInfo]?, diskSlice: String?) {
+    func getVolumeInfoByDisk (filterVolumeName: String, disk: String) -> myVolumeInfo? {
         
         let volInfo = getVolumeInfo(includeHiddenVolumes: true)
-        let disks = volInfo?.filter { $0.disk == disk } as? [myVolumeInfo]
-        let disk = disks?.filter { $0.volumeName == filterVolumeName } as! [myVolumeInfo]
-        let diskSlice = disk.first?.diskSlice
+        let disks = volInfo?.filter { $0.disk == disk }
         
-        return (disks: disks, disk: disk, diskSlice: diskSlice)
+        print(disks)
+        let disk = disks?.filter { $0.volumeName == filterVolumeName }
         
+        return disk?.first ?? nil
     }
+    
+    //MARK: Get APFS Physical Store Disk:
+    func getApfsPhysicalStoreDisk(apfsDiskInfo: String ) -> String {
+        
+        let apfsStringData = parseRawText(apfsDiskInfo)
+        
+        let array = apfsStringData.components(separatedBy: "\n")
+        let ac = array.count
+
+        if ac >= 11 {
+            let array2 = array[10].components(separatedBy: " ")
+            let disk = array2.last
+            
+            let getWholeDisk = disk?.components(separatedBy: "s")
+            
+            var forgeDisk = ""
+            if let getDisk = getWholeDisk, getDisk.count >= 2, let di = Optional(getDisk[0]), let kNum = Optional(getDisk[1]) {
+                forgeDisk = "\(di)s\(kNum)"
+            }
+            
+            return forgeDisk
+        } else {
+            return ""
+        }
+    }
+    
     //MARK: Install Disk Setup
     func disk(isBeta:Bool, diskInfo: myVolumeInfo) {
         
@@ -176,47 +201,50 @@ extension ViewController {
         DispatchQueue.global(qos: .background).async { [self] in
             incrementInstallGauge(resetGauge: true, incremment: false, setToFull: false)
             spinnerAnimation(start: true, hide: false)
-            
+               
             //MARK: Erase disk inplace using reformat
-            let resultEraseDisk = eraseDisk(diskSlice: diskInfo.diskSlice)
-            print(resultEraseDisk)
+            let resultReformatDisk = eraseDisk(diskSlice: diskInfo.diskSlice)
             
-            //diskutil apfs list disk9 | grep "APFS Physical Store Disk" | awk '{printf $6}'
+            /*
+             
+             Started erase
+             Preparing to erase APFS Volume content
+             Checking mount state
+             Erasing APFS Volume disk5s1 by deleting and re-adding
+             Deleting APFS Volume from its APFS Container
+             Unmounting disk5s1
+             Erasing any xART session referenced by 9AF622B2-675E-43F6-BD33-B1A83BE66156
+             Deleting Volume
+             Removing any Preboot and Recovery Directories
+             Preparing to add APFS Volume to APFS Container disk5
+             Creating APFS Volume
+             Created new APFS Volume disk5s1
+             Setting mount state
+             Setting volume permissions
+             Finished erase
+             
+             */
             
-            let getParentDisk = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["apfs", "list", "\(diskInfo.disk)" ] )
-    
-            let apfsStringData = parseRawText(getParentDisk ?? "") //Simply removes alot of extra spaces
-            
-            let array = apfsStringData.components(separatedBy: "\n")
-            
-            func getDisk() -> String {
-                let ac = array.count
-
-                if ac >= 4 {
-                    let array2 = array[3].components(separatedBy: " ")
-                    let disk =  array2.last
-                    return disk ?? ""
+            let apfsFormat = resultReformatDisk.contains("Creating APFS Volume") && resultReformatDisk.contains("Finished erase") ? true : false
+        
+            //MARK: If reformat failed because it's not APFS then erase the whole disk
+            if !apfsFormat {
+                //diskutil apfs list disk9 | grep "APFS Physical Store Disk" | awk '{printf $6}'
+                let apfsDiskInfo = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["apfs", "list", "\(diskInfo.disk)" ]) ?? ""
+                let apfsPhysicalStoreDisk = getApfsPhysicalStoreDisk(apfsDiskInfo: apfsDiskInfo)
+                if apfsPhysicalStoreDisk.contains("disk") {
+                    let eraseFullDisk = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eraseDisk", "apfs", "\(diskInfo.volumeName)","\(apfsPhysicalStoreDisk)" ] )
+                    print(eraseFullDisk)
                 } else {
-                    return ""
+                    let eraseFullDisk = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eraseDisk", "apfs", "\(diskInfo.volumeName)","\(diskInfo.disk)" ] )
+                    print(eraseFullDisk)
                 }
-            }
-         
-            let parentDisk = getDisk()
-            
-            if parentDisk.contains("disk") {
-                                                                        
-                let eraseFullDisk = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eraseDisk", "apfs", "\(diskInfo.volumeName)","\(parentDisk)" ] )
-
             } else {
                 let eraseFullDisk = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eraseDisk", "apfs", "\(diskInfo.volumeName)","\(diskInfo.disk)" ] )
-
+                print(eraseFullDisk)
             }
-      
-                                                        
-                                                        
+             
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
-            
-            
             
             //MARK: make temp dir SharedSupport
             let mkdir = mkDir(arg: "/\(tmp)/\(sharedsupport)")
@@ -242,14 +270,14 @@ extension ViewController {
             
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
             
-            //MARK: Inc
+            //MARK: Install Base Systewm
             //incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
             //let diskToBless = addVolume(dmgPath: "/\(tmp)/\(restoreBaseSystem)", targetDisk: "/dev/r\(diskInfo.disk)", erase: false, title: "Installing Base System")
-            //
+            
             
             //print(diskToBless)
             
-            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+            //incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
 
             let mountVol1 = mountVolume(disk: diskInfo.disk)
             print (mountVol1)
@@ -258,12 +286,12 @@ extension ViewController {
             print(resultDiskBase1)
             
             //MARK: 2nd Base System may not be needed
-      //  incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+     // incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
        // let ARV = addVolume(dmgPath: "/\(tmp)/\(restoreBaseSystem)", targetDisk: "/dev/r\(diskInfo.disk)", erase: false, title: "Installing Base System (2 / 2)")
-            //
+       
             
          //   print(ARV)
-        //
+      
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
 
             let mountVol2 = mountVolume(disk: diskInfo.disk)
@@ -280,8 +308,25 @@ extension ViewController {
             //MARK: mount disk idmage inside temp SharedSupport
             let mountBaseImage = mountDiskImage(arg: ["mount", "-mountPoint", "/\(tmp)/\(basesystem)", "/\(tmp)/\(restoreBaseSystem)", "-noverify", "-noautoopen", "-noautofsck", "-owners", "on"])
             print(mountBaseImage)
-      
             
+            
+            var getPrebootDisk = ""
+            
+            if let x = getVolumeInfo(includeHiddenVolumes: true) {
+                print(x)
+                
+                for i in x {
+                    if i.displayName == "macOS Base System" {
+                        
+                        if mountBaseImage.contains(i.diskSlice) {
+                            getPrebootDisk = "\(i.disk)s2"
+                            break;
+                        }
+                    }
+                }
+            }
+          
+   
             /*let getPrebootBs = parseRawText(mountBaseImage)
             
             let getdisks = getPrebootBs.components(separatedBy: "\n")
@@ -298,9 +343,12 @@ extension ViewController {
             print(gDisk,gString)*/
 
             
-        
+            //MARK: make temp dir SharedSupport
+            let preBootBs = mkDir(arg: "/\(tmp)/prebootbs")
+            print(preBootBs)
             
-            let prebootBsMount = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", "-readOnly", "-nobrowse", "-mountPoint", "/tmp/prebootbs", "/dev/disk10s2"] )
+            
+            let prebootBsMount = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", "-readOnly", "-nobrowse", "-mountPoint", "/\(tmp)/prebootbs", "/\(getPrebootDisk)"] )
             print(prebootBsMount)
             
             // et eraseFullDisk = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eraseDisk", "apfs", "\(diskInfo.volumeName)","\(parentDisk)" ] )

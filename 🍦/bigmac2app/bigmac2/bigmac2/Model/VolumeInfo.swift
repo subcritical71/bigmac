@@ -63,7 +63,6 @@ func getVolumeInfo(includeHiddenVolumes: Bool) -> [myVolumeInfo]? {
                     
                     
                     if let info = try? disk.resourceValues(forKeys: Set(URLResourceKeys)) {
-                        
                         newVolume.capacity = info.volumeTotalCapacity ?? 0
                         newVolume.external = !(info.volumeIsInternal ?? true)
                         newVolume.displayName = info.volumeName ?? ""
@@ -71,7 +70,9 @@ func getVolumeInfo(includeHiddenVolumes: Bool) -> [myVolumeInfo]? {
                         newVolume.path = disk.path
                         newVolume.volumeName = newVolume.path.replacingOccurrences(of: "/Volumes/", with: "" )
                         
-                        if !newVolume.disk.isEmpty && !newVolume.diskSlice.isEmpty && !newVolume.volumeName.contains("VM") {
+                        if !newVolume.disk.isEmpty && !newVolume.diskSlice.isEmpty && !newVolume.volumeName.contains("VM") && info.volumeLocalizedFormatDescription == "APFS" {
+                            volArray.append(newVolume)
+                        } else if newVolume.displayName == "Preboot" && includeHiddenVolumes {
                             volArray.append(newVolume)
                         }
 

@@ -14,25 +14,34 @@ class EraseDiskViewController : NSViewController {
     @IBOutlet weak var volumePopup: NSPopUpButton!
     @IBOutlet weak var cancel: NSButton!
     @IBOutlet weak var okButton: NSButton!
+    @IBOutlet weak var eraseDiskEntry: NSTextField!
     
     var volumeArray = [myVolumeInfo]()
     
     func refresh() {
         if let volArr = getVolumeInfo(includeHiddenVolumes: false) {
             volumePopup.removeAllItems()
-    
-            for i in volArr {
-                volumePopup.addItem(withTitle: i.volumeName)
-            }
             
-            volumeArray = volArr
+            if volArr.count == 0 || volArr.isEmpty {
+                volumePopup.addItem(withTitle: "No volumes Found")
+                okButton.isEnabled = false
+            } else {
+                for i in volArr {
+                    volumePopup.addItem(withTitle: i.volumeName)
+                    okButton.isEnabled = true
+                }
+                
+                volumeArray = volArr
+            }
         }
     }
-    
     
  
     override func viewDidLoad() {
         refresh()
+        eraseDiskEntry.focusRingType = .none
+        volumePopup.focusRingType = .none
+
     }
     
     @IBAction func cancelAction(_ sender: Any) {
@@ -44,12 +53,17 @@ class EraseDiskViewController : NSViewController {
     }
     
     @IBAction func eraseDisk(_ sender: Any) {
-        dismiss(self)
-
-        //Send disk info
-        let int = Int(volumePopup.indexOfSelectedItem)
-        let selectedDisk = volumeArray[int]
-        NotificationCenter.default.post(name: .gotEraseDisk, object: selectedDisk)
+        
+        if eraseDiskEntry.stringValue == volumePopup.title {
+            dismiss(self)
+            //Send disk info
+            let int = Int(volumePopup.indexOfSelectedItem)
+            let selectedDisk = volumeArray[int]
+            NotificationCenter.default.post(name: .gotEraseDisk, object: selectedDisk)
+        } else {
+            eraseDiskEntry.shake(duration: 1)
+        }
+        
 
     }
     
@@ -57,7 +71,3 @@ class EraseDiskViewController : NSViewController {
 }
 
 
-
-
-    
-    

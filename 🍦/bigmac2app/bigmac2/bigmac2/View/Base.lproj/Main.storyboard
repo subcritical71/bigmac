@@ -866,11 +866,11 @@
             <objects>
                 <viewController id="QRq-n9-edl" customClass="EraseDiskViewController" customModule="bigmac2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="7iV-Ss-g9U">
-                        <rect key="frame" x="0.0" y="0.0" width="389" height="256"/>
+                        <rect key="frame" x="0.0" y="0.0" width="389" height="310"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YLa-Fe-QpG">
-                                <rect key="frame" x="85" y="181" width="219" height="25"/>
+                                <rect key="frame" x="42" y="235" width="271" height="25"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="SmS-IB-hcC" id="g2t-bW-5NR">
                                     <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -884,26 +884,17 @@
                                     </menu>
                                 </popUpButtonCell>
                             </popUpButton>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GcL-WW-7PE">
-                                <rect key="frame" x="18" y="220" width="353" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Select a Disk to Erase" id="Usw-Qh-ddF">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XOd-1U-4aU">
-                                <rect key="frame" x="18" y="134" width="353" height="15"/>
+                                <rect key="frame" x="18" y="205" width="353" height="15"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="There is no undo. Pressing ok will erase the entire drive." id="wHw-gg-UWT">
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="There is no undo. Clicking OK might erase the entire drive." id="wHw-gg-UWT">
                                     <font key="font" metaFont="cellTitle"/>
                                     <color key="textColor" name="systemOrangeColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="T7D-Sa-sub">
-                                <rect key="frame" x="18" y="110" width="353" height="16"/>
+                                <rect key="frame" x="18" y="175" width="353" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Minimum size is 32 GB" id="6ec-Y2-ui4">
                                     <font key="font" metaFont="system"/>
@@ -911,26 +902,8 @@
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="83e-xB-3lA">
-                                <rect key="frame" x="18" y="20" width="353" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="We are not responsible for any data loss using this tool." id="1wW-w1-NSH">
-                                    <font key="font" metaFont="cellTitle"/>
-                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uOu-FO-9B6">
-                                <rect key="frame" x="18" y="157" width="353" height="16"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Danger!" id="U1a-yY-63x">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                            </textField>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WgU-A4-doc">
-                                <rect key="frame" x="322" y="182.5" width="21.5" height="28"/>
+                                <rect key="frame" x="325" y="236.5" width="21.5" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRefreshTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="eZy-GZ-4ft">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -941,16 +914,16 @@
                                 </connections>
                             </button>
                             <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="W50-7V-a7j">
-                                <rect key="frame" x="18" y="44" width="353" height="16"/>
+                                <rect key="frame" x="18" y="19" width="353" height="16"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="It is recommened that your Erase using Disk Utility first." id="ZjW-9L-ZNG">
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="manually erase your disk using APFS, then press reload" id="ZjW-9L-ZNG">
                                     <font key="font" metaFont="cellTitle"/>
                                     <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wEO-oG-knz">
-                                <rect key="frame" x="81" y="68" width="132" height="32"/>
+                                <rect key="frame" x="72" y="72" width="148" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zU0-7H-ivR">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -964,7 +937,7 @@ DQ
                                 </connections>
                             </button>
                             <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="kgD-eO-Vqd">
-                                <rect key="frame" x="220" y="68" width="87" height="32"/>
+                                <rect key="frame" x="226" y="72" width="87" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="sAV-Q4-jAc">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -976,17 +949,54 @@ DQ
                                     <action selector="eraseDisk:" target="QRq-n9-edl" id="2gl-p6-kTX"/>
                                 </connections>
                             </button>
+                            <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="V15-K1-F6X">
+                                <rect key="frame" x="79" y="113" width="230" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" refusesFirstResponder="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" bezelStyle="round" id="1ex-pa-Cdu">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="HFR-xS-d2E">
+                                <rect key="frame" x="83" y="143" width="223" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" title="Verify the name of the disk to erase:" id="89n-de-Z29">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Gd8-mc-aTd">
+                                <rect key="frame" x="18" y="42" width="353" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="We recommend that you open Disk Utility and" id="qCh-qC-1Ve">
+                                    <font key="font" metaFont="cellTitle"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GcL-WW-7PE">
+                                <rect key="frame" x="18" y="274" width="353" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Select an APFS Volume or APFS Partition to Erase" id="Usw-Qh-ddF">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
                         </subviews>
                     </view>
                     <connections>
                         <outlet property="cancel" destination="wEO-oG-knz" id="wBz-MH-8rO"/>
+                        <outlet property="eraseDiskEntry" destination="V15-K1-F6X" id="yTj-zz-CAe"/>
                         <outlet property="okButton" destination="kgD-eO-Vqd" id="1gg-dg-QPQ"/>
                         <outlet property="volumePopup" destination="YLa-Fe-QpG" id="wnJ-FO-77C"/>
                     </connections>
                 </viewController>
                 <customObject id="NQ2-IZ-hIF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="688.5" y="596"/>
+            <point key="canvasLocation" x="663.5" y="450"/>
         </scene>
         <!--Creds View Controller-->
         <scene sceneID="59O-qf-fCR">
