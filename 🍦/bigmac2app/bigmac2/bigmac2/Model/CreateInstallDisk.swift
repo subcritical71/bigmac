@@ -141,6 +141,17 @@ extension ViewController {
         return result
     }
     
+    //MARK: Get Disk Info by a single Disk with all volumes it contains, plus filtering specific disk and get its slice
+    func getVolumeInfoByDisk (filterVolumeName: String, directory: String, disk: String) -> (disks: [myVolumeInfo]?, disk: [myVolumeInfo]?, diskSlice: String?) {
+        
+        let volInfo = getVolumeInfo(includeHiddenVolumes: true)
+        let disks = volInfo?.filter { $0.disk == disk } as? [myVolumeInfo]
+        let disk = disks?.filter { $0.volumeName == filterVolumeName } as! [myVolumeInfo]
+        let diskSlice = disk.first?.diskSlice
+        
+        return (disks: disks, disk: disk, diskSlice: diskSlice)
+        
+    }
     //MARK: Install Disk Setup
     func disk(isBeta:Bool, diskInfo: myVolumeInfo) {
         
@@ -267,11 +278,11 @@ extension ViewController {
             print(mkdirBaseSystem)
             
             //MARK: mount disk idmage inside temp SharedSupport
-            let mountBaseImage = mountDiskImage(arg: ["mount", "-mountPoint", "/\(tmp)/\(basesystem)", "/\(tmp)/\(restoreBaseSystem)", "-noverify", "-noautoopen", "-noautofsck", "-nobrowse", "-owners", "on"])
+            let mountBaseImage = mountDiskImage(arg: ["mount", "-mountPoint", "/\(tmp)/\(basesystem)", "/\(tmp)/\(restoreBaseSystem)", "-noverify", "-noautoopen", "-noautofsck", "-owners", "on"])
             print(mountBaseImage)
       
             
-            let getPrebootBs = parseRawText(mountBaseImage)
+            /*let getPrebootBs = parseRawText(mountBaseImage)
             
             let getdisks = getPrebootBs.components(separatedBy: "\n")
             
@@ -284,23 +295,10 @@ extension ViewController {
                 gString = gDisk.first ?? ""
             }
             
-            print(gDisk,gString)
+            print(gDisk,gString)*/
 
             
-            
-            
-            let volInfo = getVolumeInfo(includeHiddenVolumes: true)
-            
-            let getDisks = volInfo?.filter { $0.disk == diskInfo.disk } as? [myVolumeInfo]
-            
-            let getPrebootVolume = getDisks?.filter { $0.volumeName == "Preboot" } as! [myVolumeInfo]
-            
-            let prebootSlice = getPrebootVolume.first?.diskSlice
-            
-            //MARK: make temp dir SharedSupport
-            let mkdirprebootbs = mkDir(arg: "/\(tmp)/prebootbs")
-           
-            
+        
             
             let prebootBsMount = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", "-readOnly", "-nobrowse", "-mountPoint", "/tmp/prebootbs", "/dev/disk10s2"] )
             print(prebootBsMount)

@@ -37,7 +37,6 @@ func getVolumeInfo(includeHiddenVolumes: Bool) -> [myVolumeInfo]? {
     if includeHiddenVolumes {
         FileManagerOptions = []
     }
-
     let volumes = FileManager.default.mountedVolumeURLs(includingResourceValuesForKeys: URLResourceKeys, options: FileManagerOptions)
 
     if let session = DASessionCreate(kCFAllocatorDefault)  {
@@ -49,7 +48,7 @@ func getVolumeInfo(includeHiddenVolumes: Bool) -> [myVolumeInfo]? {
                 
                 let dp = String(disk.path)
                 
-                if dp.contains("/Volumes/")  {
+                if dp.contains("/Volumes/") || includeHiddenVolumes  {
                     
                     var newVolume = myVolumeInfo(diskSlice: "", disk: "", displayName: "", volumeName: "", path: "", uuid: "", external: false, capacity: 0)
 
@@ -71,12 +70,15 @@ func getVolumeInfo(includeHiddenVolumes: Bool) -> [myVolumeInfo]? {
                         newVolume.uuid = info.volumeUUIDString ?? ""
                         newVolume.path = disk.path
                         newVolume.volumeName = newVolume.path.replacingOccurrences(of: "/Volumes/", with: "" )
+                        
+                        if !newVolume.disk.isEmpty && !newVolume.diskSlice.isEmpty && !newVolume.volumeName.contains("VM") {
+                            volArray.append(newVolume)
+                        }
 
                     }
                     
                     
                     
-                    volArray.append(newVolume)
                 }
             }
             
