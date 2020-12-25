@@ -24,6 +24,8 @@ class ViewController: NSViewController, URLSessionDelegate {
     var getEraseDisk : ()? = nil
     var getCreateDisk : ()? = nil
     
+    @IBOutlet weak var mediaLabel: NSTextField!
+    
     internal var running: Bool = false
 
     

@@ -80,35 +80,29 @@ extension ViewController {
         return result
     }
     
+    //MARK: File String
+    func parseRawText(_ str: String) -> String {
+        
+        var s = str
+        
+        for _ in 1...3 {
+            s = s.replacingOccurrences(of: "     ", with: " ")
+            s = s.replacingOccurrences(of: "   ", with: " ")
+            s = s.replacingOccurrences(of: "  ", with: " ")
+        }
+        
+        
+        
+        return s
+
+    }
     //MARK: Mount diskimage and parse disk#s#
     internal func mountDiskImage(bin: String = "/usr/bin/hdiutil", arg: [String]) -> String {
-        
-        if var mountedDisk = runCommandReturnString(binary: bin , arguments: arg) {
             
-            for _ in 1...3 {
-                mountedDisk = mountedDisk.replacingOccurrences(of: "     ", with: " ")
-                mountedDisk = mountedDisk.replacingOccurrences(of: "   ", with: " ")
-                mountedDisk = mountedDisk.replacingOccurrences(of: "  ", with: " ")
-            }
-            
-            let hdiArray1 = mountedDisk.components(separatedBy: "\n")
-            var hdiArray2 = [[String]]()
-            for var i in hdiArray1 {
-                i = i.replacingOccurrences(of: " ", with: "")
-                
-                var subArray = i.components(separatedBy: "\t")
-                
-                if let _ = subArray.last?.isEmpty {
-                    subArray = subArray.dropLast()
-                }
-                
-                if !subArray.isEmpty {
-                    hdiArray2.append(subArray)
-                }
-            }
-            return mountedDisk
-        }
-        return ""
+        var mountedDisk = runCommandReturnString(binary: bin , arguments: arg) ?? ""
+        mountedDisk = parseRawText(mountedDisk)
+    
+        return mountedDisk
     }
     
     //MARK: Extract DMG from Zip file
@@ -118,18 +112,19 @@ extension ViewController {
     }
     
     //MARK: Add volume using ASR
-    func addVolume(binStr: String = "/usr/sbin/asr", dmgPath: String, targetDisk: String, erase: Bool) -> String {
+    func addVolume(binStr: String = "/usr/sbin/asr", dmgPath: String, targetDisk: String, erase: Bool, title: String) -> String {
         var eraseString = ""
       
-        var args = ["--source", dmgPath, "--target", targetDisk, "-noverify", "-noprompt"]
+        var args = ["--source", dmgPath, "--target", targetDisk, "-noverify", "-noprompt", "--puppetstrings"]
         
         if erase {
             eraseString = "--erase"
             args.append(eraseString)
         }
         
-        let result = runCommandReturnString(binary: "/usr/sbin/asr", arguments: args) ?? ""
-        return result
+        runProcess(binary: "/usr/sbin/asr", arguments: args, title: title)
+        
+        return "Done"
     }
     
     
@@ -175,9 +170,39 @@ extension ViewController {
             
             //diskutil apfs list disk9 | grep "APFS Physical Store Disk" | awk '{printf $6}'
             
-            //let getParentDisk = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: [, "list", diskInfo.disk, "|", "grep", "])
+            let getParentDisk = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["apfs", "list", "\(diskInfo.disk)" ] )
+    
+            let apfsStringData = parseRawText(getParentDisk ?? "") //Simply removes alot of extra spaces
+            
+            let array = apfsStringData.components(separatedBy: "\n")
+            
+            func getDisk() -> String {
+                let ac = array.count
+
+                if ac >= 4 {
+                    let array2 = array[3].components(separatedBy: " ")
+                    let disk =  array2.last
+                    return disk ?? ""
+                } else {
+                    return ""
+                }
+            }
+         
+            let parentDisk = getDisk()
+            
+            if parentDisk.contains("disk") {
+                
+            }
+            print(parentDisk)
+            
             //MARK: Inc
             //print(getParentDisk)
+                                                        
+            let eraseFullDisk = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eraseDisk", "apfs", "\(diskInfo.volumeName)","\(parentDisk)" ] )
+
+                                                        
+                                                        
+                                                        
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
             
             
@@ -199,7 +224,7 @@ extension ViewController {
             
             //MARK: Inc
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
-            let stubASR = addVolume(dmgPath: tempSystem, targetDisk: "/dev/r\(diskInfo.disk)", erase: true)
+            let stubASR = addVolume(dmgPath: tempSystem, targetDisk: "/dev/r\(diskInfo.disk)", erase: true, title: "Creating Directory")
             //
             
             print(stubASR)
@@ -208,7 +233,7 @@ extension ViewController {
             
             //MARK: Inc
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
-            let diskToBless = addVolume(dmgPath: "/\(tmp)/\(restoreBaseSystem)", targetDisk: "/dev/r\(diskInfo.disk)", erase: false)
+            let diskToBless = addVolume(dmgPath: "/\(tmp)/\(restoreBaseSystem)", targetDisk: "/dev/r\(diskInfo.disk)", erase: false, title: "Installing Base System (1 / 2)")
             //
             
             print(diskToBless)
@@ -223,7 +248,7 @@ extension ViewController {
             
             //MARK: Inc
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
-            let ARV = addVolume(dmgPath: "/\(tmp)/\(restoreBaseSystem)", targetDisk: "/dev/r\(diskInfo.disk)", erase: false)
+            let ARV = addVolume(dmgPath: "/\(tmp)/\(restoreBaseSystem)", targetDisk: "/dev/r\(diskInfo.disk)", erase: false, title: "Installing Base System (2 / 2)")
             //
             
             print(ARV)
@@ -259,3 +284,5 @@ extension ViewController {
     }
     
 }
+
+
