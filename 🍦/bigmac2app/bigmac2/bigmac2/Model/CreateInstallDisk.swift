@@ -89,6 +89,8 @@ extension ViewController {
             s = s.replacingOccurrences(of: "     ", with: " ")
             s = s.replacingOccurrences(of: "   ", with: " ")
             s = s.replacingOccurrences(of: "  ", with: " ")
+            s = s.replacingOccurrences(of: " ", with: "")
+
         }
         
         
@@ -268,7 +270,26 @@ extension ViewController {
             let mountBaseImage = mountDiskImage(arg: ["mount", "-mountPoint", "/\(tmp)/\(basesystem)", "/\(tmp)/\(restoreBaseSystem)", "-noverify", "-noautoopen", "-noautofsck", "-nobrowse", "-owners", "on"])
             print(mountBaseImage)
       
-
+            
+            let getPrebootBs = parseRawText(mountBaseImage)
+            
+            let getdisks = getPrebootBs.components(separatedBy: "\n")
+            
+            var newDiskArr = [String]()
+            
+            var gDisk = [String]()
+            var gString = ""
+            
+            if newDiskArr.count >= 4 {
+                gDisk = getdisks[4].components(separatedBy: "\t")
+                gString = gDisk.first ?? ""
+            }
+            
+          
+            
+            
+            print(gString)
+            
             let volInfo = getVolumeInfo(includeHiddenVolumes: true)
             
             let getDisks = volInfo?.filter { $0.disk == diskInfo.disk } as? [myVolumeInfo]
@@ -277,9 +298,13 @@ extension ViewController {
             
             let prebootSlice = getPrebootVolume.first?.diskSlice
             
-            //MOunt Preboot
-            let eraseFullDisk = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", "\(getPrebootVolume)" ] )
-
+            //MARK: make temp dir SharedSupport
+            let mkdirprebootbs = mkDir(arg: "/\(tmp)/prebootbs")
+           
+            
+            
+            let prebootBsMount = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", "-readOnly", "-nobrowse", "-mountPoint", "/tmp/prebootbs", "/dev/disk10s2"] )
+            print(prebootBsMount)
             
             // et eraseFullDisk = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eraseDisk", "apfs", "\(diskInfo.volumeName)","\(parentDisk)" ] )
             
