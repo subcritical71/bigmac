@@ -275,20 +275,19 @@ extension ViewController {
             
             let getdisks = getPrebootBs.components(separatedBy: "\n")
             
-            var newDiskArr = [String]()
             
             var gDisk = [String]()
             var gString = ""
             
-            if newDiskArr.count >= 4 {
+            if getdisks.count >= 4 {
                 gDisk = getdisks[4].components(separatedBy: "\t")
                 gString = gDisk.first ?? ""
             }
             
-          
+            print(gDisk,gString)
+
             
             
-            print(gString)
             
             let volInfo = getVolumeInfo(includeHiddenVolumes: true)
             
