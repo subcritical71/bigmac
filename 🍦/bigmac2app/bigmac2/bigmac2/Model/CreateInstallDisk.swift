@@ -44,6 +44,14 @@ extension ViewController {
         }
     }
     
+    //MARK: Increment Install Fuel Gauge
+    internal func setMediaLabel(_ message: String) {
+        
+        DispatchQueue.main.async { [self] in
+            mediaLabel.stringValue = message
+        }
+    }
+    
     //MARK: Spinner Animation
     internal func spinnerAnimation (start: Bool, hide: Bool) {
         
@@ -318,32 +326,46 @@ extension ViewController {
             
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
 
-            let bigmac2 = getVolumeInfoByDisk(filterVolumeName: "bigmac2", disk: diskInfo.disk)
-            
-            //MARK: Just did a bunch of prep work
-            let itemsToCopy = try! fm.contentsOfDirectory(atPath:  "/private/\(tmp)/prebootbs\(rndStr)/")
-            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+            if let bigmac2 = getVolumeInfoByDisk(filterVolumeName: "bigmac2", disk: diskInfo.disk) {
+                
+                let _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", bigmac2.diskSlice] )
+                
+                //MARK: Just did a bunch of prep work
+                if let itemsToCopy = try? fm.contentsOfDirectory(atPath:  "/private/\(tmp)/prebootbs\(rndStr)/") {
+                    for i in itemsToCopy {
+                        try? fm.copyItem(atPath: "/private/\(tmp)/prebootbs\(rndStr)/\(i)", toPath: "/Volumes/Preboot/\(i)")
+                        try? fm.moveItem(atPath: "/Volumes/Preboot/\(i)", toPath: "/Volumes/Preboot/\(bigmac2.uuid)")
 
-            for i in itemsToCopy {
-                print ( try? fm.copyItem(atPath: "/private/\(tmp)/prebootbs\(rndStr)/\(i)", toPath: "/Volumes/Preboot/\(i)") )
-                print ( try? fm.moveItem(atPath: "/Volumes/Preboot/\(i)", toPath: "/Volumes/Preboot/\(bigmac2!.uuid)") )
-
+                    }
+                }
+                
+                incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+                
+                _ = blessVolume(bless: bigmac2.volumeName)
+               
+              
             }
             
-            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
-
-            _ = blessVolume(bless: bigmac2!.volumeName)
             
-            let bm2tmp = getVolumeInfoByDisk(filterVolumeName: "bm2tmp0", disk: diskInfo.disk)
-            _ = removeApfsVolume(remove: bm2tmp!.volumeName)
+            if let bm2tmp = getVolumeInfoByDisk(filterVolumeName: "bm2tmp0", disk: diskInfo.disk), let bigmac2 = getVolumeInfoByDisk(filterVolumeName: "bigmac2", disk: diskInfo.disk)  {
+                
+                _ = removeApfsVolume(remove: bm2tmp.volumeName)
+                
+                setMediaLabel("Big Sur Installer App Transfer")
+                
+                incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+                
+                let _ = runCommandReturnString(binary: "/sbin/mount" , arguments: ["-uw", "/Volumes/\(bigmac2.volumeName)"])
+                let _ = mkDir(arg: "/Volumes/bigmac2/Install macOS Big Sur.app/Contents/SharedSupport/")
+                copyFile(atPath: "/Applications/Install macOS Big Sur.app/Contents/SharedSupport/SharedSupport.dmg", toPath: "/Volumes/bigmac2/Install macOS Big Sur.app/Contents/SharedSupport/SharedSupport.dmg")
+                
+                incrementInstallGauge(resetGauge: false, incremment: true, setToFull: true)
+                spinnerAnimation(start: false, hide: true)
+                
+            }
+       
             
-            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
-            
-
-            copyFile(atPath: "/Applications/Install macOS Big Sur.app/Contents/SharedSupport/SharedSupport.dmg", toPath: "/Volumes/bigmac2/Install macOS Big Sur.app/SharedSupport/SharedSupport.dmg")
-            
-            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: true)
-            spinnerAnimation(start: false, hide: true)
+      
 
 
             
