@@ -352,7 +352,7 @@ extension ViewController {
             }
             
             
-            if let bm2tmp = getVolumeInfoByDisk(filterVolumeName: "bm2tmp0", disk: diskInfo.disk), let bigmac2 = getVolumeInfoByDisk(filterVolumeName: "bigmac2", disk: diskInfo.disk)  {
+          /*  if let bm2tmp = getVolumeInfoByDisk(filterVolumeName: "bm2tmp0", disk: diskInfo.disk), let bigmac2 = getVolumeInfoByDisk(filterVolumeName: "bigmac2", disk: diskInfo.disk)  {
                 
                 _ = removeApfsVolume(remove: bm2tmp.volumeName)
                 
@@ -364,14 +364,14 @@ extension ViewController {
                 let _ = mkDir(arg: "/Volumes/bigmac2/Install macOS Big Sur.app/Contents/SharedSupport/")
                 copyFile(atPath: "/Applications/Install macOS Big Sur.app/Contents/SharedSupport/SharedSupport.dmg", toPath: "/Volumes/bigmac2/Install macOS Big Sur.app/Contents/SharedSupport/SharedSupport.dmg")
                 
-                incrementInstallGauge(resetGauge: false, incremment: true, setToFull: true)
-                spinnerAnimation(start: false, hide: true)
+               
                 
-            }
+            } */
        
             
       
-
+            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: true)
+            spinnerAnimation(start: false, hide: true)
 
             
         }

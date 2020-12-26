@@ -442,6 +442,9 @@ fi
 
 sleep 3
 
+<<COMMENT1
+
+
 cd $bigmac
 
 n
@@ -814,3 +817,5 @@ then
 else
     reboot
 fi
+
+COMMENT1
