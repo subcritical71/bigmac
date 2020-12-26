@@ -64,6 +64,15 @@ class ViewController: NSViewController, URLSessionDelegate {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        view.window?.titlebarAppearsTransparent = true
+        view.window?.styleMask.insert(NSWindow.StyleMask.fullSizeContentView)
+
+        view.wantsLayer = true
+        view.layer?.backgroundColor =  CGColor(red: 15 / 255, green: 15 / 255, blue: 15 / 255, alpha: 1.0)
+
+
+        
         progressBarDownload.doubleValue = 0 //set progressBar to 0 at star
         if NSUserName() == "root" {
             rootMode = true
@@ -77,7 +86,6 @@ class ViewController: NSViewController, URLSessionDelegate {
         
     override func viewWillAppear() {
         super.viewDidAppear()
-        view.window?.title = "🍔 Big Mac 2.0"
         installerFuelGauge.doubleValue = 0
     }
     
@@ -85,7 +93,8 @@ class ViewController: NSViewController, URLSessionDelegate {
     override func viewDidAppear() {
         super.viewDidAppear()
         view.window?.level = .floating
-        
+        view.window?.title = "🍔 Big Mac 2.0"
+
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
             
             print(NSUserName())

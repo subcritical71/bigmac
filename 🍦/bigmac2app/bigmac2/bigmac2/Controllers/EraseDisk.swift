@@ -38,6 +38,14 @@ class EraseDiskViewController : NSViewController {
     
  
     override func viewDidLoad() {
+        
+        view.window?.titlebarAppearsTransparent = true
+        view.window?.styleMask.insert(NSWindow.StyleMask.fullSizeContentView)
+
+        view.wantsLayer = true
+        view.layer?.backgroundColor =  CGColor(red: 15 / 255, green: 15 / 255, blue: 15 / 255, alpha: 1.0)
+        
+        
         refresh()
         eraseDiskEntry.focusRingType = .none
         volumePopup.focusRingType = .none

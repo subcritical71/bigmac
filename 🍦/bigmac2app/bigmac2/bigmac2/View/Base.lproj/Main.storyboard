@@ -685,15 +685,15 @@
         <scene sceneID="R2V-B0-nI4">
             <objects>
                 <windowController id="B8D-0N-5wS" sceneMemberID="viewController">
-                    <window key="window" title="Window" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" id="IQv-IB-iLA">
-                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES"/>
+                    <window key="window" title="Window" separatorStyle="none" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" id="IQv-IB-iLA">
+                        <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="138" y="543" width="552" height="359"/>
+                        <rect key="contentRect" x="173" y="792" width="552" height="416"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1415"/>
-                        <value key="minSize" type="size" width="552" height="359"/>
-                        <value key="maxSize" type="size" width="552" height="359"/>
-                        <value key="minFullScreenContentSize" type="size" width="552" height="359"/>
-                        <value key="maxFullScreenContentSize" type="size" width="552" height="359"/>
+                        <value key="minSize" type="size" width="552" height="416"/>
+                        <value key="maxSize" type="size" width="552" height="416"/>
+                        <value key="minFullScreenContentSize" type="size" width="552" height="416"/>
+                        <value key="maxFullScreenContentSize" type="size" width="552" height="416"/>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
                         </connections>
@@ -704,28 +704,28 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="74" y="250"/>
+            <point key="canvasLocation" x="74" y="249.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
             <objects>
                 <viewController id="XfG-lQ-9wD" customClass="ViewController" customModule="bigmac2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="552" height="359"/>
+                        <rect key="frame" x="0.0" y="0.0" width="552" height="416"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <tabView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9xa-nA-Rvh">
-                                <rect key="frame" x="13" y="12" width="526" height="353"/>
+                                <rect key="frame" x="13" y="9" width="526" height="380"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <font key="font" metaFont="system"/>
                                 <tabViewItems>
                                     <tabViewItem label="Downloads" identifier="" id="MtW-aC-1cy">
                                         <view key="view" id="ZDe-rF-C1B">
-                                            <rect key="frame" x="10" y="33" width="506" height="307"/>
+                                            <rect key="frame" x="10" y="33" width="506" height="334"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="EX5-vi-7vS">
-                                                    <rect key="frame" x="10" y="267" width="142" height="32"/>
+                                                    <rect key="frame" x="10" y="294" width="142" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="push" title="Download macOS" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="1Fk-DE-lDw">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -736,11 +736,11 @@
                                                     </connections>
                                                 </button>
                                                 <progressIndicator fixedFrame="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="5Lr-xQ-MWE">
-                                                    <rect key="frame" x="17" y="250" width="471" height="20"/>
+                                                    <rect key="frame" x="17" y="277" width="471" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </progressIndicator>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DFd-ov-bag">
-                                                    <rect key="frame" x="157" y="276" width="156" height="16"/>
+                                                    <rect key="frame" x="157" y="303" width="156" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Big Sur 11.1 20C69" id="igo-GL-nK5">
                                                         <font key="font" metaFont="system"/>
@@ -749,7 +749,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eLx-fH-b51">
-                                                    <rect key="frame" x="308" y="276" width="111" height="16"/>
+                                                    <rect key="frame" x="308" y="303" width="111" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="0GB / 12.2GB" id="P9g-Ib-XHX">
                                                         <font key="font" metaFont="system"/>
@@ -758,7 +758,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dB3-ZJ-LZi">
-                                                    <rect key="frame" x="432" y="276" width="58" height="16"/>
+                                                    <rect key="frame" x="432" y="303" width="58" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="0%" id="IzA-fe-qE7">
                                                         <font key="font" metaFont="system"/>
@@ -767,11 +767,11 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <progressIndicator fixedFrame="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="MkA-uU-q1I">
-                                                    <rect key="frame" x="17" y="143" width="471" height="20"/>
+                                                    <rect key="frame" x="17" y="170" width="471" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </progressIndicator>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xpg-5b-Ifl">
-                                                    <rect key="frame" x="308" y="169" width="111" height="16"/>
+                                                    <rect key="frame" x="308" y="196" width="111" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" id="dzS-pm-koT">
                                                         <font key="font" metaFont="system"/>
@@ -780,7 +780,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Pzk-Hz-C1B">
-                                                    <rect key="frame" x="432" y="169" width="58" height="16"/>
+                                                    <rect key="frame" x="432" y="196" width="58" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="0%" id="esc-dh-FAt">
                                                         <font key="font" metaFont="system"/>
@@ -789,7 +789,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="egX-nd-j8s">
-                                                    <rect key="frame" x="10" y="194" width="156" height="32"/>
+                                                    <rect key="frame" x="10" y="221" width="156" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="push" title="Create Installer Disk" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mvu-yA-Bkd">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -800,12 +800,12 @@
                                                     </connections>
                                                 </button>
                                                 <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qi3-pO-eUD">
-                                                    <rect key="frame" x="171" y="201" width="294" height="18"/>
+                                                    <rect key="frame" x="171" y="228" width="294" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <levelIndicatorCell key="cell" alignment="left" doubleValue="7" maxValue="9" warningValue="6" criticalValue="3" numberOfMajorTickMarks="10" id="g8f-sV-Aat"/>
                                                 </levelIndicator>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="syK-06-F8B">
-                                                    <rect key="frame" x="15" y="169" width="256" height="16"/>
+                                                    <rect key="frame" x="15" y="196" width="256" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Media" id="Gx9-1s-nO6">
                                                         <font key="font" metaFont="system"/>
@@ -814,7 +814,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <progressIndicator fixedFrame="YES" maxValue="100" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="nYg-kZ-fDy">
-                                                    <rect key="frame" x="473" y="203" width="16" height="16"/>
+                                                    <rect key="frame" x="473" y="230" width="16" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </progressIndicator>
                                             </subviews>
@@ -822,19 +822,19 @@
                                     </tabViewItem>
                                     <tabViewItem label="Preinstall" identifier="" id="5mC-sQ-iCM">
                                         <view key="view" id="8J3-ZG-jBj">
-                                            <rect key="frame" x="10" y="33" width="506" height="307"/>
+                                            <rect key="frame" x="10" y="33" width="506" height="334"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                     </tabViewItem>
                                     <tabViewItem label="Postinstall" identifier="" id="O2m-ec-BUk">
                                         <view key="view" id="zuj-wA-E8P">
-                                            <rect key="frame" x="10" y="33" width="506" height="307"/>
+                                            <rect key="frame" x="10" y="33" width="506" height="334"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                     </tabViewItem>
                                     <tabViewItem label="Clonetool" identifier="" id="QVi-mt-AWH">
                                         <view key="view" id="unS-Lc-L5V">
-                                            <rect key="frame" x="10" y="33" width="506" height="307"/>
+                                            <rect key="frame" x="10" y="33" width="506" height="334"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         </view>
                                     </tabViewItem>
@@ -859,7 +859,7 @@
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="74" y="756.5"/>
+            <point key="canvasLocation" x="74" y="785"/>
         </scene>
         <!--Erase Disk View Controller-->
         <scene sceneID="VUo-hP-nw9">
