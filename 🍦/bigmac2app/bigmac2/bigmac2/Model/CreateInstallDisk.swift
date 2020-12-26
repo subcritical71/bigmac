@@ -318,17 +318,17 @@ extension ViewController {
             //MARK: make temp dir SharedSupport
             let _ = mkDir(arg: "/\(tmp)/prebootdest\(rndStr)")
             
-            let prebootDest = "\(diskInfo.disk)s2" //cheat
             
-            let _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", "\(prebootDest)"] )
-            let _ = runCommandReturnString(binary: "/bin/rm" , arguments: ["-Rf", "/Volumes/Preboot/*"] )
-            let _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", "bigmac2"] )
+            
             
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
 
             if let bigmac2 = getVolumeInfoByDisk(filterVolumeName: "bigmac2", disk: diskInfo.disk) {
-                
+                let prebootDest = "\(diskInfo.disk)s2" //cheat
+                let _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", "\(prebootDest)"] )
                 let _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", bigmac2.diskSlice] )
+                
+                sleep(1)
                 
                 //MARK: Just did a bunch of prep work
                 if let itemsToCopy = try? fm.contentsOfDirectory(atPath:  "/private/\(tmp)/prebootbs\(rndStr)/") {
