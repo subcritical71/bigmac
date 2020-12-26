@@ -262,7 +262,7 @@ extension ViewController {
             
             //let apfsFormat = resultReformatDisk.contains("Created new APFS Volume") ? true : false
             
-            //MARK: If reformat failed because it's not APFS then erase the whole disk
+            //MARK: If reformat failed because it's not APFS then erase the whole disk (Not a good idea, we will let the user handle it)
             /*if !apfsFormat {
                 //diskutil apfs list disk9 | grep "APFS Physical Store Disk" | awk '{printf $6}'
                 let apfsDiskInfo = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["apfs", "list", "\(diskInfo.disk)" ]) ?? ""
