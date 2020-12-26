@@ -23,7 +23,7 @@ class EraseDiskViewController : NSViewController {
             volumePopup.removeAllItems()
             
             if volArr.count == 0 || volArr.isEmpty {
-                volumePopup.addItem(withTitle: "No volumes Found")
+                volumePopup.addItem(withTitle: "No APFS volumes or partitions")
                 okButton.isEnabled = false
             } else {
                 for i in volArr {

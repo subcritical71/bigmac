@@ -91,7 +91,7 @@ extension ViewController {
     
     //MARK: Make Rename Disk using diskutil
     internal func blessVolume(bin: String = "/usr/sbin/bless", bless: String) -> String {
-        let result = runCommandReturnString(binary: bin , arguments: ["--mount", bless]) ?? ""
+        let result = runCommandReturnString(binary: bin , arguments: ["--mount", "/Volumes/\(bless)"]) ?? ""
         return result
     }
     
@@ -301,6 +301,8 @@ extension ViewController {
             let getBaseSystemDisk = getVolumeInfoByDisk(filterVolumeName: "/private/\(tmp)/\(basesystem)\(rndStr)", disk: "")
             let getPrebootDisk = (getBaseSystemDisk!.disk + "s2")
             
+            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+
             //MARK: make temp dir SharedSupport
             let _ = mkDir(arg: "/\(tmp)/prebootbs\(rndStr)")
             let _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", "-mountPoint", "/private/\(tmp)/prebootbs\(rndStr)", "\(getPrebootDisk)"] )
@@ -308,33 +310,42 @@ extension ViewController {
             //MARK: make temp dir SharedSupport
             let _ = mkDir(arg: "/\(tmp)/prebootdest\(rndStr)")
             
-            let prebootDest = getVolumeInfoByDisk(filterVolumeName: "Preboot", disk: diskInfo.disk)
-            let _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", "\(prebootDest!.diskSlice)"] )
+            let prebootDest = "\(diskInfo.disk)s2" //cheat
+            
+            let _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", "\(prebootDest)"] )
             let _ = runCommandReturnString(binary: "/bin/rm" , arguments: ["-Rf", "/Volumes/Preboot/*"] )
-         
+            let _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", "bigmac2"] )
+            
+            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+
             let bigmac2 = getVolumeInfoByDisk(filterVolumeName: "bigmac2", disk: diskInfo.disk)
             
             //MARK: Just did a bunch of prep work
+            let itemsToCopy = try! fm.contentsOfDirectory(atPath:  "/private/\(tmp)/prebootbs\(rndStr)/")
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
 
-            
-            let itemsToCopy = try! fm.contentsOfDirectory(atPath:  "/private/\(tmp)/prebootbs\(rndStr)/")
-            
             for i in itemsToCopy {
-                try? fm.copyItem(atPath: "/private/\(tmp)/prebootbs\(rndStr)/\(i)", toPath: "/Volumes/Preboot/\(i)")
-                try? fm.moveItem(atPath: "/Volumes/Preboot/\(i)", toPath: "/Volumes/Preboot/\(bigmac2!.uuid)")
+                print ( try? fm.copyItem(atPath: "/private/\(tmp)/prebootbs\(rndStr)/\(i)", toPath: "/Volumes/Preboot/\(i)") )
+                print ( try? fm.moveItem(atPath: "/Volumes/Preboot/\(i)", toPath: "/Volumes/Preboot/\(bigmac2!.uuid)") )
 
             }
             
-            print(bigmac2!.volumeName)
-        
+            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+
             _ = blessVolume(bless: bigmac2!.volumeName)
             
             let bm2tmp = getVolumeInfoByDisk(filterVolumeName: "bm2tmp0", disk: diskInfo.disk)
             _ = removeApfsVolume(remove: bm2tmp!.volumeName)
             
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+            
+
+            copyFile(atPath: "/Applications/Install macOS Big Sur.app/Contents/SharedSupport/SharedSupport.dmg", toPath: "/Volumes/bigmac2/Install macOS Big Sur.app/SharedSupport/SharedSupport.dmg")
+            
+            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: true)
             spinnerAnimation(start: false, hide: true)
+
+
             
         }
     }
