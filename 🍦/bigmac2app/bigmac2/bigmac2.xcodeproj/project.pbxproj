@@ -24,7 +24,6 @@
 /* Begin PBXFileReference section */
 		2D02E031259453D500E8E1CF /* VolumeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeInfo.swift; sourceTree = "<group>"; };
 		2D02E03425945BD000E8E1CF /* EraseDisk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EraseDisk.swift; sourceTree = "<group>"; };
-		2D0A16482597040B003C5E85 /* Script.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; name = Script.sh; path = ../../../../../../../Script.sh; sourceTree = "<group>"; };
 		2D1A329F258D959D009DCDFD /* bigmac2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bigmac2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D1A32A2258D959D009DCDFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2D1A32A4258D959D009DCDFD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -112,7 +111,6 @@
 			isa = PBXGroup;
 			children = (
 				2DE42E3C25918F56005E10C6 /* CreateInstallDisk.swift */,
-				2D0A16482597040B003C5E85 /* Script.sh */,
 				2D02E031259453D500E8E1CF /* VolumeInfo.swift */,
 				2D993A65258DCA79003A5553 /* FileDownloader.swift */,
 				2D23BF63258EA04B0019BD90 /* CommandRunner.swift */,

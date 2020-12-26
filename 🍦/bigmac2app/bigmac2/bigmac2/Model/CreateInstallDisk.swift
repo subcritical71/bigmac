@@ -14,7 +14,7 @@ extension ViewController {
         _ = runCommandReturnString(binary: "/bin/rm", arguments: ["-Rf","/tmp/InstallAssistant.pkg"]) //Future check if it's complete and has right checksum
         
         DispatchQueue.global(qos: .background).async {
-            self.download(urlString: "https://starplayrx.com/downloads/bigmac/BaseSystem_offline.dmg")
+            self.download(urlString: "http://swcdn.apple.com/content/downloads/00/55/001-86606-A_9SF1TL01U7/5duug9lar1gypwunjfl96dza0upa854qgg/InstallAssistant.pkg")
         }
     }
     
@@ -209,6 +209,11 @@ extension ViewController {
     //MARK: Install Disk Setup
     func disk(isBeta:Bool, diskInfo: myVolumeInfo) {
         
+        _ = runCommandReturnString(binary: "/usr/sbin/installer" , arguments: ["-allowUntrusted", "-pkg", "/Users/Shared/InstallAssistant.pkg", "-target", "/" ]) ?? ""
+        
+
+        incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+
         let fm = FileManager.default
 
         let tmp = "tmp"
@@ -255,10 +260,10 @@ extension ViewController {
              
              */
             
-            let apfsFormat = resultReformatDisk.contains("Created new APFS Volume") ? true : false
+            //let apfsFormat = resultReformatDisk.contains("Created new APFS Volume") ? true : false
             
             //MARK: If reformat failed because it's not APFS then erase the whole disk
-            if !apfsFormat {
+            /*if !apfsFormat {
                 //diskutil apfs list disk9 | grep "APFS Physical Store Disk" | awk '{printf $6}'
                 let apfsDiskInfo = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["apfs", "list", "\(diskInfo.disk)" ]) ?? ""
                 let apfsPhysicalStoreDisk = getApfsPhysicalStoreDisk(apfsDiskInfo: apfsDiskInfo)
@@ -269,7 +274,7 @@ extension ViewController {
                 }
             } else {
                 let _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eraseDisk", "apfs", "\(diskInfo.volumeName)","\(diskInfo.disk)" ] )
-            }
+            }*/
              
             //MARK: Inc Format
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
