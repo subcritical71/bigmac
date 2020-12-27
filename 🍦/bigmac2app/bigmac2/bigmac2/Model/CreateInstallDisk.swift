@@ -211,7 +211,7 @@ extension ViewController {
         let binary = "/usr/sbin/diskutil"
         let unmount = "unmount"
         
-        let disks = ["Preboot","Recovery","macOS Base System","SharedSupport"]
+        let disks = ["Preboot","Recovery"]
         
         for disk in disks {
             _ = runCommandReturnString( binary: binary, arguments: [ unmount, disk ] ) ?? ""

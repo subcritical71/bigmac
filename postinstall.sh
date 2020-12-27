@@ -18,7 +18,7 @@ speak=false
 if [[ "$IsNotRecovery" == *"$Recovery"* ]]
     then
         speak=true
-fi
+fip
 
 
 #Black background
