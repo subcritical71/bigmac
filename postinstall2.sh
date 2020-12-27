@@ -579,24 +579,24 @@ chmod -R 755 "$destVolume$kext$AppleMCEReporterDisabler"
 touch "$destVolume$kext$AppleMCEReporterDisable"
 
 
-#n
-#printf "USB 1.1 Support by ASentientBot"
-#n
-#rm -Rf "$destVolume$kext$IOHIDFamily"
-#sleep 0.1
-#ditto -v "$source$IOHIDFamily" "$destVolume$kext$IOHIDFamily"
-#chown -R 0:0 "$destVolume$kext$IOHIDFamily"
-#chmod -R 755 "$destVolume$kext$IOHIDFamily"
-#touch "$destVolume$kext$IOHIDFamily"
+n
+printf "USB 1.1 Support by ASentientBot"
+n
+rm -Rf "$destVolume$kext$IOHIDFamily"
+sleep 0.1
+ditto -v "$source$IOHIDFamily" "$destVolume$kext$IOHIDFamily"
+chown -R 0:0 "$destVolume$kext$IOHIDFamily"
+chmod -R 755 "$destVolume$kext$IOHIDFamily"
+touch "$destVolume$kext$IOHIDFamily"
 
-#n
-#printf "Mac Pro 3,1 Bluetooth 2 Disabler, Bluetooth 4 Enabler by StarPlayrX"
-#n
-#sleep 0.1
-#ditto -v "$source$Info" #"$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties$Contents$Info"
-#chown -R 0:0 "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties"
-#chmod -R 755 "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties"
-#touch "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties"
+n
+printf "Mac Pro 3,1 Bluetooth 2 Disabler, Bluetooth 4 Enabler by StarPlayrX"
+n
+sleep 0.1
+ditto -v "$source$Info" "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties$Contents$Info"
+chown -R 0:0 "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties"
+chmod -R 755 "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties"
+touch "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties"
 
 bincd="/📠/"
 vers="/sw_vers"
