@@ -409,16 +409,12 @@ extension ViewController {
 
                 
                 
-           /* setMediaLabel("Big Sur Installer App Transfer")
+           setMediaLabel("Big Sur Installer App Transfer")
             
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
             
-            
-         
-
-            
             let _ = mkDir(arg: "/Volumes/bigmac2/Install macOS Big Sur.app/Contents/SharedSupport/")
-            copyFile(atPath: "/Applications/Install macOS Big Sur.app/Contents/SharedSupport/SharedSupport.dmg", toPath: "/Volumes/bigmac2/Install macOS Big Sur.app/Contents/SharedSupport/SharedSupport.dmg")*/
+            copyFile(atPath: "/Applications/Install macOS Big Sur.app/Contents/SharedSupport/SharedSupport.dmg", toPath: "/Volumes/bigmac2/Install macOS Big Sur.app/Contents/SharedSupport/SharedSupport.dmg")
             
             unmountDrives()
             

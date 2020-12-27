@@ -751,7 +751,7 @@
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eLx-fH-b51">
                                                     <rect key="frame" x="308" y="303" width="111" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" title="0GB / 12.2GB" id="P9g-Ib-XHX">
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" id="P9g-Ib-XHX">
                                                         <font key="font" metaFont="system"/>
                                                         <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
@@ -771,7 +771,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </progressIndicator>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Xpg-5b-Ifl">
-                                                    <rect key="frame" x="308" y="196" width="111" height="16"/>
+                                                    <rect key="frame" x="284" y="196" width="135" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" alignment="right" id="dzS-pm-koT">
                                                         <font key="font" metaFont="system"/>
