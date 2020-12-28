@@ -16,7 +16,22 @@ class ViewController: NSViewController, URLSessionDelegate {
     var downloadProgress = Float(-1.0)
     var sourcePath: String?
     var targetPath: String?
-
+    
+    let fm = FileManager.default
+    let tmp = "tmp"
+    let sharedsupport = "SharedSupport"
+    let bigmac2 = "bigmac2"
+    let tempDiskImage = "bm2tmp0"
+    
+    let applications = "Applications"
+    let basesystem = "BaseSystem"
+    let appFolder =  Bundle.main.resourceURL
+    let tempSystem = Bundle.main.resourceURL!.path + "/bm2tmp0.dmg"
+    let macSoftwareUpdate = "com_apple_MobileAsset_MacSoftwareUpdate"
+    var installBigSur = "Install macOS Big Sur.app"
+    let wildZip = "*.zip"
+    let restoreBaseSystem = "AssetData/Restore/BaseSystem.dmg"
+    
     var installerVolume = "/Volumes/bigmac2"
     var timer: Timer?
     let shared = "Shared/" //copy to shared directory

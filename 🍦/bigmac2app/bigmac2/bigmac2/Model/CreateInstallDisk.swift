@@ -109,23 +109,23 @@ extension ViewController {
         var s = str
         
         s = s.replacingOccurrences(of: "\t", with: " ")
-
+        
         for _ in 1...3 {
             s = s.replacingOccurrences(of: "     ", with: " ")
             s = s.replacingOccurrences(of: "    ", with: " ")
             s = s.replacingOccurrences(of: "   ", with: " ")
             s = s.replacingOccurrences(of: "  ", with: " ")
         }
-    
+        
         return s
-
+        
     }
     //MARK: Mount diskimage and parse disk#s#
     internal func mountDiskImage(bin: String = "/usr/bin/hdiutil", arg: [String]) -> String {
-            
+        
         var mountedDisk = runCommandReturnString(binary: bin , arguments: arg) ?? ""
         mountedDisk = parseRawText(mountedDisk)
-    
+        
         return mountedDisk
     }
     
@@ -138,8 +138,8 @@ extension ViewController {
     //MARK: Add volume using ASR
     func addVolume(binStr: String = "/usr/sbin/asr", dmgPath: String, targetDisk: String, erase: Bool, title: String) -> String {
         var eraseString = ""
-      
-        var args = ["--source", dmgPath, "--target", targetDisk, "-noverify", "-noprompt", "--puppetstrings"]
+        
+        var args = ["restore", "--source", dmgPath, "--target", targetDisk, "-noverify", "-noprompt", "--puppetstrings"]
         
         if erase {
             eraseString = "-erase"
@@ -167,7 +167,7 @@ extension ViewController {
     func getVolumeInfoByDisk (filterVolumeName: String, disk: String) -> myVolumeInfo? {
         
         let volInfo = getVolumeInfo(includeHiddenVolumes: true)
-            
+        
         if disk != "" {
             let disks = volInfo?.filter { $0.disk == disk }
             let d = disks?.filter { $0.volumeName == filterVolumeName }
@@ -176,9 +176,7 @@ extension ViewController {
             let d = volInfo?.filter { $0.volumeName == filterVolumeName }
             return d?.first ?? nil
         }
-  
         
-        return nil
     }
     
     //MARK: Get APFS Physical Store Disk:
@@ -188,7 +186,7 @@ extension ViewController {
         
         let array = apfsStringData.components(separatedBy: "\n")
         let ac = array.count
-
+        
         if ac >= 11 {
             let array2 = array[10].components(separatedBy: " ")
             let disk = array2.last
@@ -215,176 +213,120 @@ extension ViewController {
         
         for disk in disks {
             _ = runCommandReturnString( binary: binary, arguments: [ unmount, disk ] ) ?? ""
-
+            
         }
-  
+        
     }
     
-    //MARK: Install Disk Setup
-    func disk(isBeta:Bool, diskInfo: myVolumeInfo) {
-        
-        unmountDrives()
-        
+    //MARK: Task #0.5
+    func updateInstallerPkg(){
         _ = runCommandReturnString(binary: "/usr/sbin/installer" , arguments: ["-allowUntrusted", "-pkg", "/Users/Shared/InstallAssistant.pkg", "-target", "/" ]) ?? ""
         
-
-
         incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
-
-        let fm = FileManager.default
-
-        let tmp = "tmp"
-        let sharedsupport = "SharedSupport"
-        let bigmac2 = "bigmac2"
-        let tempDiskImage = "bm2tmp0"
+    }
+    //MARK: Task #1
+    func reformatSelectedApfsDisk(diskInfo: myVolumeInfo) {
+        //MARK: Erase disk inplace using reformat
+        _ = eraseDisk(diskSlice: diskInfo.diskSlice)
+        incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+    }
+    
+    //MARK: Task #2
+    func extractBaseSystem() {
+        //MARK: make temp dir SharedSupport
+        _ = mkDir(arg: "/\(tmp)/\(sharedsupport)")
         
-        let applications = "Applications"
-        let basesystem = "BaseSystem"
-        let appFolder = Bundle.main.resourceURL
-        let tempSystem = "\(appFolder!.path)/\(tempDiskImage).dmg"
-        let macSoftwareUpdate = "com_apple_MobileAsset_MacSoftwareUpdate"
-        var installBigSur = "Install macOS Big Sur.app"
-        let wildZip = "*.zip"
-        let restoreBaseSystem = "AssetData/Restore/\(basesystem).dmg"
+        //MARK: mount disk idmage inside temp SharedSupport
+        _ = mountDiskImage(arg: ["mount", "-mountPoint", "/\(tmp)/\(sharedsupport)", "/\(applications)/\(installBigSur)/Contents/\(sharedsupport)/\(sharedsupport).dmg", "-noverify", "-noautoopen", "-noautofsck", "-nobrowse"])
         
-        if isBeta {
-            installBigSur = "Install macOS Big Sur Beta.app"
+        //MARK: Zip Extraction (retain base system disk image from DMG)
+        _ = extractDMGfromZip(arg: ["-o", "/\(tmp)/\(sharedsupport)/\(macSoftwareUpdate)/\(wildZip)", "\(restoreBaseSystem)", "-d", "/\(tmp)"])
+        
+        //MARK: Mounted Shared Support DMG and Extracted DMG from zip
+        incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+        
+        _ = mountDiskImage(arg: ["unmount", "/\(tmp)/\(sharedsupport)", "-force"])
+        
+    }
+    
+    //MARK: Task #3
+    func createDirectory(diskInfo: myVolumeInfo, disk: String, rndStr: String) {
+        print(tempSystem)
+        print("/dev/r\(diskInfo.disk)")
+        
+        for i in 1...3 {
+            let result = addVolume(dmgPath: tempSystem, targetDisk: "/dev/r\(diskInfo.disk)", erase: true, title: "Creating Directory")
+            if result == "Done" { break }
+            sleep(2)
         }
         
-        DispatchQueue.global(qos: .background).async { [self] in
-            
-
-            
-            incrementInstallGauge(resetGauge: true, incremment: false, setToFull: false)
-            spinnerAnimation(start: true, hide: false)
-               
-            //MARK: Erase disk inplace using reformat
-            let resultReformatDisk = eraseDisk(diskSlice: diskInfo.diskSlice)
-            /*
-             
-             Started erase
-             Preparing to erase APFS Volume content
-             Checking mount state
-             Erasing APFS Volume disk5s1 by deleting and re-adding
-             Deleting APFS Volume from its APFS Container
-             Unmounting disk5s1
-             Erasing any xART session referenced by 9AF622B2-675E-43F6-BD33-B1A83BE66156
-             Deleting Volume
-             Removing any Preboot and Recovery Directories
-             Preparing to add APFS Volume to APFS Container disk5
-             Creating APFS Volume
-             Created new APFS Volume disk5s1
-             Setting mount state
-             Setting volume permissions
-             Finished erase
-             
-             */
-            
-            //let apfsFormat = resultReformatDisk.contains("Created new APFS Volume") ? true : false
-            
-            //MARK: If reformat failed because it's not APFS then erase the whole disk (Not a good idea, we will let the user handle it)
-            /*if !apfsFormat {
-                //diskutil apfs list disk9 | grep "APFS Physical Store Disk" | awk '{printf $6}'
-                let apfsDiskInfo = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["apfs", "list", "\(diskInfo.disk)" ]) ?? ""
-                let apfsPhysicalStoreDisk = getApfsPhysicalStoreDisk(apfsDiskInfo: apfsDiskInfo)
-                if apfsPhysicalStoreDisk.contains("disk") {
-                    let _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eraseDisk", "apfs", "\(diskInfo.volumeName)","\(apfsPhysicalStoreDisk)" ] )
-                } else {
-                    let _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eraseDisk", "apfs", "\(diskInfo.volumeName)","\(diskInfo.disk)" ] )
-                }
-            } else {
-                let _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eraseDisk", "apfs", "\(diskInfo.volumeName)","\(diskInfo.disk)" ] )
-            }*/
-             
-            //MARK: Inc Format
-            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
-            
-            //MARK: make temp dir SharedSupport
-            let _ = mkDir(arg: "/\(tmp)/\(sharedsupport)")
-            
-            //MARK: mount disk idmage inside temp SharedSupport
-            let _ = mountDiskImage(arg: ["mount", "-mountPoint", "/\(tmp)/\(sharedsupport)", "/\(applications)/\(installBigSur)/Contents/\(sharedsupport)/\(sharedsupport).dmg", "-noverify", "-noautoopen", "-noautofsck", "-nobrowse"])
-            
-            //MARK: Zip Extraction (retain base system disk image from DMG)
-            let _ = extractDMGfromZip(arg: ["-o", "/\(tmp)/\(sharedsupport)/\(macSoftwareUpdate)/\(wildZip)", "\(restoreBaseSystem)", "-d", "/\(tmp)"])
-            
-            //MARK: Mounted Shared Support DMG and Extracted DMG from zip
-            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
-            
-            let _ = addVolume(dmgPath: tempSystem, targetDisk: "/dev/r\(diskInfo.disk)", erase: true, title: "Creating Directory")
+        incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+        let _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", disk] )
+        sleep(2)
+        let _ = renameDisk(input: disk, output: "\(disk)_\(rndStr)")
+    }
+    
+    //MARK: Task #4
+    func installBaseSystem(diskInfo: myVolumeInfo, baseSys: String, bm2: String) {
+        //MARK: Install Base System
+        _ = addVolume(dmgPath: "/\(tmp)/\(restoreBaseSystem)", targetDisk: "/dev/r\(diskInfo.disk)", erase: false, title: "Installing Base System")
         
-            //MARK: Created Temp Directory
-            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+        _ = mountDiskImage(arg: ["unmount", "/\(tmp)/\(restoreBaseSystem)", "-force"])
+        
+        _ = mountVolume(disk: diskInfo.disk)
+        _ = renameDisk(input: baseSys, output: bm2)
+        
+        incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+    }
+    
+    //MARK: Task #5
+    func setupPreboot(diskInfo: myVolumeInfo, bm2: String, rndStr: String) {
+        let _ = mkDir(arg: "/\(tmp)/\(basesystem)\(rndStr)")
+        let _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["unmount", "/\(tmp)/\(restoreBaseSystem)"] )
+        let _ = mountDiskImage(arg: ["mount", "-mountPoint", "/\(tmp)/\(basesystem)\(rndStr)", "/\(tmp)/\(restoreBaseSystem)", "-nobrowse", "-noautoopen", "-noverify"])
+        
+        if let getBaseSystemDisk = getVolumeInfoByDisk(filterVolumeName: "/private/\(tmp)/\(basesystem)\(rndStr)", disk: "") {
+            let getPrebootDisk = (getBaseSystemDisk.disk + "s2")
             
-            //MARK: Install Base System
-            let _ = addVolume(dmgPath: "/\(tmp)/\(restoreBaseSystem)", targetDisk: "/dev/r\(diskInfo.disk)", erase: false, title: "Installing Base System")
+            _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["unmount", "\(getPrebootDisk)"] )
             
-            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
-
-            let _ = mountVolume(disk: diskInfo.disk)
-            let _ = renameDisk(input: "macOS Base System", output: "bigmac2")
-            let rndStr = String(Int.random(in: 1000...9999))
-
+            _ = mkDir(arg: "/\(tmp)/prebootbs\(rndStr)")
+            _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", "-mountPoint", "/private/\(tmp)/prebootbs\(rndStr)", "\(getPrebootDisk)"] )
             
-            //MARK: make temp dir SharedSupport
-            let _ = mkDir(arg: "/\(tmp)/\(basesystem)\(rndStr)")
-            let _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["unmount", "/\(tmp)/\(restoreBaseSystem)"] )
-
-            //MARK: mount disk idmage inside temp SharedSupport
-            
-
-            let _ = mountDiskImage(arg: ["mount", "-mountPoint", "/\(tmp)/\(basesystem)\(rndStr)", "/\(tmp)/\(restoreBaseSystem)", "-nobrowse", "-noautoopen", "-noverify"])
-            let getBaseSystemDisk = getVolumeInfoByDisk(filterVolumeName: "/private/\(tmp)/\(basesystem)\(rndStr)", disk: "")
-            let getPrebootDisk = (getBaseSystemDisk!.disk + "s2")
-            
-            let _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["unmount", "\(getPrebootDisk)"] )
-
-            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
-
-            //MARK: make temp dir SharedSupport
-            let _ = mkDir(arg: "/\(tmp)/prebootbs\(rndStr)")
-            let _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", "-mountPoint", "/private/\(tmp)/prebootbs\(rndStr)", "\(getPrebootDisk)"] )
-            
-            //MARK: make temp dir SharedSupport
-            let _ = mkDir(arg: "/\(tmp)/prebootdest\(rndStr)")
+            _ = mkDir(arg: "/\(tmp)/prebootdest\(rndStr)")
             
             
             
-            
-            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
-
-            if let bm2tmp = getVolumeInfoByDisk(filterVolumeName: "bm2tmp0", disk: diskInfo.disk), let bigmac2 = getVolumeInfoByDisk(filterVolumeName: "bigmac2", disk: diskInfo.disk) {
+            if let bm2tmp = getVolumeInfoByDisk(filterVolumeName: "bm2tmp0_\(rndStr)", disk: diskInfo.disk), let bigmac2 = getVolumeInfoByDisk(filterVolumeName: bm2, disk: diskInfo.disk) {
                 let prebootDest = "\(diskInfo.disk)s2" //cheat
                 let _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", "\(prebootDest)"] )
                 let _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", bigmac2.diskSlice] )
                 
                 let _ = runCommandReturnString(binary: "/sbin/mount" , arguments: ["-uw", "/Volumes/\(bigmac2.volumeName)"])
-
-                sleep(1)
+                
                 
                 //MARK: Just did a bunch of prep work
                 if let itemsToCopy = try? fm.contentsOfDirectory(atPath:  "/private/\(tmp)/prebootbs\(rndStr)/") {
                     for i in itemsToCopy {
                         try? fm.copyItem(atPath: "/private/\(tmp)/prebootbs\(rndStr)/\(i)", toPath: "/Volumes/Preboot/\(i)")
                         try? fm.moveItem(atPath: "/Volumes/Preboot/\(i)", toPath: "/Volumes/Preboot/\(bigmac2.uuid)")
-
+                        
                     }
                 }
                 
-                ///Users/starplayrx/Documents/GitHub/bigmac/🍦/bigmac2app/bigmac2/Data/com.apple.Boot.plist
-
+                
                 //MARK: Make Preboot bootable and compatible with C-Key at boot time
                 if let appFolder = Bundle.main.resourceURL {
                     let bootPlist = "com.apple.Boot.plist"
                     let platformPlist = "BuildManifest.plist"
                     let buildManifestPlist = "PlatformSupport.plist"
-
+                    
                     let appFolderPath = "\(appFolder.path)"
-            
+                    
                     //Install Boot plist
                     
                     let _ = mkDir(arg: "/Volumes/Preboot/\(bigmac2.uuid)/restore/")
-
+                    
                     print("\nMaking System Disk Bootable...\n")
                     try? fm.removeItem(atPath: "/Volumes/Preboot/\(bigmac2.uuid)/Library/Preferences/SystemConfiguration/\(bootPlist)")
                     try? fm.removeItem(atPath: "/Volumes/Preboot/\(bigmac2.uuid)/System/Library/CoreServices/\(platformPlist)")
@@ -393,35 +335,81 @@ extension ViewController {
                     try? fm.copyItem(atPath: "/\(appFolderPath)/\(bootPlist)", toPath: "/Volumes/Preboot/\(bigmac2.uuid)/Library/Preferences/SystemConfiguration/\(bootPlist)")
                     try? fm.copyItem(atPath: "/\(appFolderPath)/\(bootPlist)", toPath: "/Volumes/Preboot/\(bigmac2.uuid)/System/Library/CoreServices/\(platformPlist)")
                     try? fm.copyItem(atPath: "/\(appFolderPath)/\(bootPlist)", toPath: "/Volumes/Preboot/\(bigmac2.uuid)/restore/\(buildManifestPlist)")
-                
+                    
                 }
-               
-
+                
+                
                 _ = blessVolume(bless: bigmac2.volumeName)
-               
-                
-
-                incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
-                
                 _ = removeApfsVolume(remove: bm2tmp.volumeName)
-
+                _ = mountDiskImage(arg: ["unmount", "/\(tmp)/\(basesystem)", "-force"])
+                _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["unmount", "\(getPrebootDisk)"] )
+                
             }
-
-                
-                
-           setMediaLabel("Big Sur Installer App Transfer")
+        }
+        
+        incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+    }
+    
+    func bigSurInstallerAppXfer(rndStr: String) {
+        setMediaLabel("Big Sur Installer App Transfer")
+        
+        let _ = mkDir(arg: "/Volumes/bigmac2_\(rndStr)/Install macOS Big Sur.app/Contents/SharedSupport/")
+        copyFile(atPath: "/Applications/Install macOS Big Sur.app/Contents/SharedSupport/SharedSupport.dmg", toPath: "/Volumes/bigmac2_\(rndStr)/Install macOS Big Sur.app/Contents/SharedSupport/SharedSupport.dmg")
+    }
+    
+    //MARK: Install Disk Setup
+    func disk(isBeta:Bool, diskInfo: myVolumeInfo) {
+        DispatchQueue.global(qos: .background).async { [self] in
             
-            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+            //MARK: Set vars and local constants
+            if isBeta {
+                installBigSur = "Install macOS Big Sur Beta.app"
+            }
             
-            let _ = mkDir(arg: "/Volumes/bigmac2/Install macOS Big Sur.app/Contents/SharedSupport/")
-            copyFile(atPath: "/Applications/Install macOS Big Sur.app/Contents/SharedSupport/SharedSupport.dmg", toPath: "/Volumes/bigmac2/Install macOS Big Sur.app/Contents/SharedSupport/SharedSupport.dmg")
+            let rndStr = String(Int.random(in: 100...999))
+            let baseSys = "macOS Base System"
+            let bm2 = "bigmac2_\(rndStr)"
             
+            //MARK: Start
+            incrementInstallGauge(resetGauge: true, incremment: false, setToFull: false)
+            spinnerAnimation(start: true, hide: false)
+            
+            //MARK: Step 0
             unmountDrives()
             
+            //MARK: Step 0.5
+            updateInstallerPkg()
+            
+            //MARK: Step 1
+            reformatSelectedApfsDisk(diskInfo: diskInfo)
+            
+            //MARK: Step 2
+            extractBaseSystem()
+            
+            //MARK: Step 3
+            createDirectory(diskInfo: diskInfo, disk: "bm2tmp0", rndStr: rndStr)
+            
+            //MARK: Step 4
+            installBaseSystem(diskInfo: diskInfo, baseSys: baseSys, bm2: bm2)
+            
+            //MARK: Step 5
+            setupPreboot(diskInfo: diskInfo, bm2: bm2, rndStr: rndStr)
+            
+            //MARK: Step 6
+            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+            
+            //MARK: Step 7
+            bigSurInstallerAppXfer(rndStr: rndStr)
+            
+            //MARK: Step 8
+            unmountDrives()
+            
+            _ = renameDisk(input: "bm2_\(rndStr)", output: "bigmac2")
+            _ = blessVolume(bless: "bigmac2")
+
+            //MARK: Finish
             incrementInstallGauge(resetGauge: false, incremment: false, setToFull: true)
             spinnerAnimation(start: false, hide: true)
-
-            
         }
     }
     
