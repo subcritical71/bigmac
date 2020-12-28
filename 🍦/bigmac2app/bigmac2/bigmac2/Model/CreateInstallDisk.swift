@@ -339,7 +339,6 @@ extension ViewController {
                 }
                 
                 
-                _ = blessVolume(bless: bigmac2.volumeName)
                 _ = removeApfsVolume(remove: bm2tmp.volumeName)
                 _ = mountDiskImage(arg: ["unmount", "/\(tmp)/\(basesystem)", "-force"])
                 _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["unmount", "\(getPrebootDisk)"] )
@@ -404,7 +403,8 @@ extension ViewController {
             //MARK: Step 8
             unmountDrives()
             
-            _ = renameDisk(input: "bm2_\(rndStr)", output: "bigmac2")
+            _ = renameDisk(input: "\(bm2)_\(rndStr)", output: "bigmac2")
+            sleep(1)
             _ = blessVolume(bless: "bigmac2")
 
             //MARK: Finish
