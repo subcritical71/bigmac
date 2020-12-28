@@ -367,28 +367,16 @@ extension ViewController {
         _ = blessVolume(bless: bigmac2)
         
         if let getBaseSystemDisk = getVolumeInfoByDisk(filterVolumeName: "/private/\(tmp)/\(basesystem)\(rndStr)", disk: "") {
-            _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["unmount", "\(getBaseSystemDisk.disk)"] )
-            _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eject", "\(getBaseSystemDisk.disk)"] )
             let infoDisc = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["apfs", "list", "\(getBaseSystemDisk.disk)"] ) ?? ""
             
             if !infoDisc.isEmpty {
                 let wholeDisk = getApfsPhysicalStoreDisk(apfsDiskInfo: infoDisc)
                 print("Eject \(wholeDisk)")
-                _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["apfs", "eject", wholeDisk] ) ?? ""
+                _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eject", wholeDisk] ) ?? ""
             }
-            
-    
-
-        
         }
 
-        if let getSharedSupportDisk = getVolumeInfoByDisk(filterVolumeName: "/private/\(tmp)/\(sharedsupport)", disk: "") {
-            _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["unmount", "\(getSharedSupportDisk.disk)"] )
-            _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eject", "\(getSharedSupportDisk.disk)"] )
-            _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eject", "Shared Support"] )
-
-        }
-        
+        _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eject", "Shared Support"] )
         
         incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
 
