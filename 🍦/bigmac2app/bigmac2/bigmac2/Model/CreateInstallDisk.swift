@@ -328,7 +328,7 @@ extension ViewController {
                     
                     let _ = mkDir(arg: "/Volumes/Preboot/\(bigmac2.uuid)/restore/")
                     
-                    print("\nMaking System Disk Bootable...\n")
+                    print("Making System Disk Bootable...\n")
                     try? fm.removeItem(atPath: "/Volumes/Preboot/\(bigmac2.uuid)/Library/Preferences/SystemConfiguration/\(bootPlist)")
                     try? fm.removeItem(atPath: "/Volumes/Preboot/\(bigmac2.uuid)/System/Library/CoreServices/\(platformPlist)")
                     try? fm.removeItem(atPath: "/Volumes/Preboot/\(bigmac2.uuid)/restore/\(buildManifestPlist)")
@@ -341,7 +341,6 @@ extension ViewController {
                 
                 
                 _ = removeApfsVolume(remove: bm2tmp.volumeName)
-                _ = mountDiskImage(arg: ["unmount", "/\(tmp)/\(basesystem)", "-force"])
                 _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["unmount", "\(getPrebootDisk)"] )
                 
             }
@@ -371,7 +370,6 @@ extension ViewController {
             
             if !infoDisc.isEmpty {
                 let wholeDisk = getApfsPhysicalStoreDisk(apfsDiskInfo: infoDisc)
-                print("Eject \(wholeDisk)")
                 _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eject", wholeDisk] ) ?? ""
             }
         }
