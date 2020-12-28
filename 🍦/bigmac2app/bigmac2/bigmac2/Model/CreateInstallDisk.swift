@@ -151,12 +151,13 @@ extension ViewController {
         return "Done"
     }
     
-    
+    //MARK: Erase Disk
     func eraseDisk(bin: String = "/usr/sbin/diskutil", diskSlice: String ) -> String {
         let result = runCommandReturnString(binary: bin, arguments: ["reformat", diskSlice]) ?? ""
         return result
     }
     
+    //MARK: MountVolume
     func mountVolume(bin: String = "/usr/sbin/diskutil", disk: String) -> String {
         //diskutil mountDisk disk9
         let result = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["mountDisk", disk]) ?? ""
@@ -204,34 +205,33 @@ extension ViewController {
         }
     }
     
-    
+    //UnmountDrives
     func unmountDrives() {
         let binary = "/usr/sbin/diskutil"
         let unmount = "unmount"
         
         let disks = ["Preboot","Recovery"]
         
+        
         for disk in disks {
             _ = runCommandReturnString( binary: binary, arguments: [ unmount, disk ] ) ?? ""
-            
         }
-        
     }
     
-    //MARK: Task #0.5
+    //MARK: Task #1
     func updateInstallerPkg(){
         _ = runCommandReturnString(binary: "/usr/sbin/installer" , arguments: ["-allowUntrusted", "-pkg", "/Users/Shared/InstallAssistant.pkg", "-target", "/" ]) ?? ""
         
         incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
     }
-    //MARK: Task #1
+    //MARK: Task #2
     func reformatSelectedApfsDisk(diskInfo: myVolumeInfo) {
         //MARK: Erase disk inplace using reformat
         _ = eraseDisk(diskSlice: diskInfo.diskSlice)
         incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
     }
     
-    //MARK: Task #2
+    //MARK: Task #3
     func extractBaseSystem() {
         //MARK: make temp dir SharedSupport
         _ = mkDir(arg: "/\(tmp)/\(sharedsupport)")
@@ -247,9 +247,10 @@ extension ViewController {
         
         _ = mountDiskImage(arg: ["unmount", "/\(tmp)/\(sharedsupport)", "-force"])
         
+        
     }
     
-    //MARK: Task #3
+    //MARK: Task #4
     func createDirectory(diskInfo: myVolumeInfo, disk: String, rndStr: String) {
         print(tempSystem)
         print("/dev/r\(diskInfo.disk)")
@@ -266,7 +267,7 @@ extension ViewController {
         let _ = renameDisk(input: disk, output: "\(disk)_\(rndStr)")
     }
     
-    //MARK: Task #4
+    //MARK: Task #5
     func installBaseSystem(diskInfo: myVolumeInfo, baseSys: String, bm2: String) {
         //MARK: Install Base System
         _ = addVolume(dmgPath: "/\(tmp)/\(restoreBaseSystem)", targetDisk: "/dev/r\(diskInfo.disk)", erase: false, title: "Installing Base System")
@@ -279,7 +280,8 @@ extension ViewController {
         incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
     }
     
-    //MARK: Task #5
+    
+    //MARK: Task #6
     func setupPreboot(diskInfo: myVolumeInfo, bm2: String, rndStr: String) {
         let _ = mkDir(arg: "/\(tmp)/\(basesystem)\(rndStr)")
         let _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["unmount", "/\(tmp)/\(restoreBaseSystem)"] )
@@ -294,7 +296,6 @@ extension ViewController {
             _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", "-mountPoint", "/private/\(tmp)/prebootbs\(rndStr)", "\(getPrebootDisk)"] )
             
             _ = mkDir(arg: "/\(tmp)/prebootdest\(rndStr)")
-            
             
             
             if let bm2tmp = getVolumeInfoByDisk(filterVolumeName: "bm2tmp0_\(rndStr)", disk: diskInfo.disk), let bigmac2 = getVolumeInfoByDisk(filterVolumeName: bm2, disk: diskInfo.disk) {
@@ -349,11 +350,48 @@ extension ViewController {
         incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
     }
     
+    //MARK: Task #7
     func bigSurInstallerAppXfer(rndStr: String) {
         setMediaLabel("Big Sur Installer App Transfer")
         
         let _ = mkDir(arg: "/Volumes/bigmac2_\(rndStr)/Install macOS Big Sur.app/Contents/SharedSupport/")
         copyFile(atPath: "/Applications/Install macOS Big Sur.app/Contents/SharedSupport/SharedSupport.dmg", toPath: "/Volumes/bigmac2_\(rndStr)/Install macOS Big Sur.app/Contents/SharedSupport/SharedSupport.dmg")
+    }
+    
+    //MARK: Task #8
+    func cleanup(bm2: String, rndStr: String) {
+        
+        let bigmac2 = bm2.replacingOccurrences(of: "_\(rndStr)", with: "")
+
+        _ = renameDisk(input: bm2, output: bigmac2)
+        _ = blessVolume(bless: bigmac2)
+        
+        if let getBaseSystemDisk = getVolumeInfoByDisk(filterVolumeName: "/private/\(tmp)/\(basesystem)\(rndStr)", disk: "") {
+            _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["unmount", "\(getBaseSystemDisk.disk)"] )
+            _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eject", "\(getBaseSystemDisk.disk)"] )
+            let infoDisc = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["apfs", "list", "\(getBaseSystemDisk.disk)"] ) ?? ""
+            
+            if !infoDisc.isEmpty {
+                let wholeDisk = getApfsPhysicalStoreDisk(apfsDiskInfo: infoDisc)
+                print("Eject \(wholeDisk)")
+                _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["apfs", "eject", wholeDisk] ) ?? ""
+            }
+            
+    
+
+        
+        }
+
+        if let getSharedSupportDisk = getVolumeInfoByDisk(filterVolumeName: "/private/\(tmp)/\(sharedsupport)", disk: "") {
+            _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["unmount", "\(getSharedSupportDisk.disk)"] )
+            _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eject", "\(getSharedSupportDisk.disk)"] )
+            _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eject", "Shared Support"] )
+
+        }
+        
+        
+        incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+
     }
     
     //MARK: Install Disk Setup
@@ -373,40 +411,36 @@ extension ViewController {
             incrementInstallGauge(resetGauge: true, incremment: false, setToFull: false)
             spinnerAnimation(start: true, hide: false)
             
-            //MARK: Step 0
+            //MARK: Rev Engine
             unmountDrives()
-            
-            //MARK: Step 0.5
-            updateInstallerPkg()
             
             //MARK: Step 1
-            reformatSelectedApfsDisk(diskInfo: diskInfo)
+            updateInstallerPkg()
             
             //MARK: Step 2
-            extractBaseSystem()
+            reformatSelectedApfsDisk(diskInfo: diskInfo)
             
             //MARK: Step 3
-            createDirectory(diskInfo: diskInfo, disk: "bm2tmp0", rndStr: rndStr)
+            extractBaseSystem()
             
             //MARK: Step 4
-            installBaseSystem(diskInfo: diskInfo, baseSys: baseSys, bm2: bm2)
+            createDirectory(diskInfo: diskInfo, disk: "bm2tmp0", rndStr: rndStr)
             
             //MARK: Step 5
-            setupPreboot(diskInfo: diskInfo, bm2: bm2, rndStr: rndStr)
+            installBaseSystem(diskInfo: diskInfo, baseSys: baseSys, bm2: bm2)
             
             //MARK: Step 6
-            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
-            
+            setupPreboot(diskInfo: diskInfo, bm2: bm2, rndStr: rndStr)
+          
             //MARK: Step 7
-            bigSurInstallerAppXfer(rndStr: rndStr)
+            //bigSurInstallerAppXfer(rndStr: rndStr)
             
-            //MARK: Step 8
+            //MARK: Rev Engine
             unmountDrives()
             
-            _ = renameDisk(input: "\(bm2)_\(rndStr)", output: "bigmac2")
-            sleep(1)
-            _ = blessVolume(bless: "bigmac2")
-
+            //MARK: Step 8 cleanup
+            cleanup(bm2: bm2, rndStr: rndStr)
+       
             //MARK: Finish
             incrementInstallGauge(resetGauge: false, incremment: false, setToFull: true)
             spinnerAnimation(start: false, hide: true)
