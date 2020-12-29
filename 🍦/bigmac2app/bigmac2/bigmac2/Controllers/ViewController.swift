@@ -86,15 +86,27 @@ extension ViewController {
             
             
             if libVal {
-                _ = runCommandReturnString(binary: "/usr/bin/defaults" , arguments: ["write", "/Library/Preferences/com.apple.security.libraryvalidation.plist DisableLibraryValidation", "-bool", "true"]) ?? ""
+                _ = runCommandReturnString(binary: "/usr/bin/defaults" , arguments: ["write", "/Library/Preferences/com.apple.security.libraryvalidation.plist", "DisableLibraryValidation", "-bool", "true"]) ?? ""
             }
             
             
+            /*
+             
+             sudo -u $SUDO_USER launchctl setenv DYLD_INSERT_LIBRARIES "$asentientbot$barrykn"
+             o
+             printf "———————————————————————————————————————————————————————————————————"
+             n
+             g
+             printf " 📀 DO NOT REBOOT. Please run the 'Install macOS Big Sur.app' now!"
+         else
+             launchctl setenv DYLD_INSERT_LIBRARIES "$asentientbot$barrykn"
+             
+             */
             ///bin/launchctl
             
             // launchctl  DYLD_INSERT_LIBRARIES "$asentientbot$barrykn"
             if libVal {
-                _ = runCommandReturnString(binary: "/bin/launchctl" , arguments: ["setenv", "DYLD_INSERT_LIBRARIES", haxDylib]) ?? ""
+                _ = runCommandReturnString(binary: "/usr/bin/sudo" , arguments: ["-u", "$SUDO_USER", "launchctl", "setenv", "DYLD_INSERT_LIBRARIES", haxDylib]) ?? ""
             }
            
 
