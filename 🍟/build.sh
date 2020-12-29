@@ -5,7 +5,7 @@
 # I'm not even sure that Make is the right tool for the job.
 
 FLAGS="-dynamiclib -fmodules"
-export MACOSX_DEPLOYMENT_TARGET=10.9
+export MACOSX_DEPLOYMENT_TARGET=10.13
 
 rm -f Hax*.dylib
 

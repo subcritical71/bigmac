@@ -29,6 +29,8 @@ class ViewController: NSViewController, URLSessionDelegate {
     let basesystem = "BaseSystem"
     let appFolder = Bundle.main.resourceURL
     let haxDylib = Bundle.main.resourceURL!.path + "/HaxDoNotSealNoAPFSROMCheck.dylib"
+    let hax = Bundle.main.resourceURL!.path + "/hax3"
+
     let tempSystem = Bundle.main.resourceURL!.path + "/bm2tmp0.dmg"
     let macSoftwareUpdate = "com_apple_MobileAsset_MacSoftwareUpdate"
     var installBigSur = "Install macOS Big Sur.app"
@@ -106,7 +108,7 @@ extension ViewController {
             
             // launchctl  DYLD_INSERT_LIBRARIES "$asentientbot$barrykn"
             if libVal {
-                _ = runCommandReturnString(binary: "/usr/bin/sudo" , arguments: ["-u", "$SUDO_USER", "launchctl", "setenv", "DYLD_INSERT_LIBRARIES", haxDylib]) ?? ""
+                _ = runCommandReturnString(binary: "/usr/bin/sudo" , arguments: [hax, haxDylib]) ?? ""
             }
            
 

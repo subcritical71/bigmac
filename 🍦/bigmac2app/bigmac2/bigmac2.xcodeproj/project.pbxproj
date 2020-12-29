@@ -16,10 +16,10 @@
 		2D23BF64258EA04B0019BD90 /* CommandRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D23BF63258EA04B0019BD90 /* CommandRunner.swift */; };
 		2D7787EF258F0BC700305EC3 /* CredsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7787EE258F0BC700305EC3 /* CredsViewController.swift */; };
 		2D7787F2258F0CD500305EC3 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7787F1258F0CD500305EC3 /* Global.swift */; };
+		2D7BFCB7259ADD1100E460CE /* hax3 in Resources */ = {isa = PBXBuildFile; fileRef = 2D7BFCB6259ADD1100E460CE /* hax3 */; };
 		2D993A66258DCA79003A5553 /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D993A65258DCA79003A5553 /* FileDownloader.swift */; };
 		2DAFF44C259AB7ED00D48E20 /* InstallerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAFF44B259AB7ED00D48E20 /* InstallerActions.swift */; };
 		2DAFF44F259AB8A100D48E20 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAFF44E259AB8A100D48E20 /* MainView.swift */; };
-		2DAFF478259AC50D00D48E20 /* HaxDoNotSealNoAPFSROMCheck.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2DAFF46C259AC2FD00D48E20 /* HaxDoNotSealNoAPFSROMCheck.dylib */; settings = {ATTRIBUTES = (Weak, ); }; };
 		2DD296902597D8AF00515D31 /* com.apple.Boot.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DD2968F2597D8AF00515D31 /* com.apple.Boot.plist */; };
 		2DD296932597D8B800515D31 /* BuildManifest.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DD296922597D8B800515D31 /* BuildManifest.plist */; };
 		2DD296962597D8BE00515D31 /* PlatformSupport.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DD296952597D8BE00515D31 /* PlatformSupport.plist */; };
@@ -39,11 +39,12 @@
 		2D23BF63258EA04B0019BD90 /* CommandRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandRunner.swift; sourceTree = "<group>"; };
 		2D7787EE258F0BC700305EC3 /* CredsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredsViewController.swift; sourceTree = "<group>"; };
 		2D7787F1258F0CD500305EC3 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
+		2D7BFCAB259AD97D00E460CE /* HaxDoNotSealNoAPFSROMCheck.dylib */ = {isa = PBXFileReference; explicitFileType = compiled; path = HaxDoNotSealNoAPFSROMCheck.dylib; sourceTree = "<group>"; };
+		2D7BFCB6259ADD1100E460CE /* hax3 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = hax3; sourceTree = "<group>"; };
 		2D993A63258DC0AC003A5553 /* bigmac2.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = bigmac2.entitlements; sourceTree = "<group>"; };
 		2D993A65258DCA79003A5553 /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
 		2DAFF44B259AB7ED00D48E20 /* InstallerActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallerActions.swift; sourceTree = "<group>"; };
 		2DAFF44E259AB8A100D48E20 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainView.swift; path = bigmac2/Model/MainView.swift; sourceTree = SOURCE_ROOT; };
-		2DAFF46C259AC2FD00D48E20 /* HaxDoNotSealNoAPFSROMCheck.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = HaxDoNotSealNoAPFSROMCheck.dylib; path = "../../../../🍟/HaxDoNotSealNoAPFSROMCheck.dylib"; sourceTree = "<group>"; };
 		2DD2968F2597D8AF00515D31 /* com.apple.Boot.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = com.apple.Boot.plist; sourceTree = "<group>"; };
 		2DD296922597D8B800515D31 /* BuildManifest.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BuildManifest.plist; sourceTree = "<group>"; };
 		2DD296952597D8BE00515D31 /* PlatformSupport.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PlatformSupport.plist; sourceTree = "<group>"; };
@@ -56,7 +57,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DAFF478259AC50D00D48E20 /* HaxDoNotSealNoAPFSROMCheck.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,12 +83,12 @@
 		2D1A32A1258D959D009DCDFD /* bigmac2 */ = {
 			isa = PBXGroup;
 			children = (
+				2D993A63258DC0AC003A5553 /* bigmac2.entitlements */,
 				2D7787F8258F1CDE00305EC3 /* Model */,
 				2D7787F7258F1CCC00305EC3 /* View */,
 				2D7787F4258F1C8C00305EC3 /* Controllers */,
 				2D1A32A6258D959E009DCDFD /* Assets.xcassets */,
 				2D1A32AB258D959E009DCDFD /* Info.plist */,
-				2D993A63258DC0AC003A5553 /* bigmac2.entitlements */,
 			);
 			path = bigmac2;
 			sourceTree = "<group>";
@@ -96,7 +96,8 @@
 		2D538EFD259008730066D908 /* Data */ = {
 			isa = PBXGroup;
 			children = (
-				2DAFF46C259AC2FD00D48E20 /* HaxDoNotSealNoAPFSROMCheck.dylib */,
+				2D7BFCB6259ADD1100E460CE /* hax3 */,
+				2D7BFCAB259AD97D00E460CE /* HaxDoNotSealNoAPFSROMCheck.dylib */,
 				2DF9BAA4259420BF0023C6B0 /* bm2tmp0.dmg */,
 				2DD2968F2597D8AF00515D31 /* com.apple.Boot.plist */,
 				2DD296922597D8B800515D31 /* BuildManifest.plist */,
@@ -201,6 +202,7 @@
 			files = (
 				2DD296932597D8B800515D31 /* BuildManifest.plist in Resources */,
 				2D1A32A7258D959E009DCDFD /* Assets.xcassets in Resources */,
+				2D7BFCB7259ADD1100E460CE /* hax3 in Resources */,
 				2DF9BAA5259420BF0023C6B0 /* bm2tmp0.dmg in Resources */,
 				2D1A32AA258D959E009DCDFD /* Main.storyboard in Resources */,
 				2DD296902597D8AF00515D31 /* com.apple.Boot.plist in Resources */,
@@ -376,6 +378,10 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Data",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.starplayrx..bigmac2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -397,6 +403,10 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/../Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Data",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.starplayrx..bigmac2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
