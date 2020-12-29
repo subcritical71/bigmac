@@ -469,7 +469,7 @@ chmod 755 "$destVolume$eden"
 chown 0:0 "$destVolume$eden"
 
 n
-printf "SSE 4.2 Emulator MouSSE by Syncretic"
+printf "SSE 4.2 Emulator s by Syncretic"
 n
 rm -Rf "$destVolume$libKext$AAAMouSSE"
 sleep 0.1

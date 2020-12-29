@@ -384,6 +384,7 @@ extension ViewController {
     func disk(isBeta:Bool, diskInfo: myVolumeInfo) {
         DispatchQueue.global(qos: .background).async { [self] in
             
+            
             //MARK: Set vars and local constants
             if isBeta {
                 installBigSur = "Install macOS Big Sur Beta.app"

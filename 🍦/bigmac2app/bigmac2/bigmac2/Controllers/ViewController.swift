@@ -9,6 +9,8 @@ import AppKit
 import Foundation
 
 
+
+
 class ViewController: NSViewController, URLSessionDelegate {
     
     //get Home Folder
@@ -25,7 +27,8 @@ class ViewController: NSViewController, URLSessionDelegate {
     
     let applications = "Applications"
     let basesystem = "BaseSystem"
-    let appFolder =  Bundle.main.resourceURL
+    let appFolder = Bundle.main.resourceURL
+    let haxDylib = Bundle.main.resourceURL!.path + "/HaxDoNotSealNoAPFSROMCheck.dylib"
     let tempSystem = Bundle.main.resourceURL!.path + "/bm2tmp0.dmg"
     let macSoftwareUpdate = "com_apple_MobileAsset_MacSoftwareUpdate"
     var installBigSur = "Install macOS Big Sur.app"
@@ -38,13 +41,9 @@ class ViewController: NSViewController, URLSessionDelegate {
 
     var getEraseDisk : ()? = nil
     var getCreateDisk : ()? = nil
-    
-    @IBOutlet weak var mediaLabel: NSTextField!
-    
-    internal var running: Bool = false
 
-    
-    //MARK: Downloads Tab -- To Do should we use a TabView Controller
+    //MARK: Downloads Tab
+    @IBOutlet weak var mediaLabel: NSTextField!
     @IBOutlet weak var progressBarDownload: NSProgressIndicator!
     @IBOutlet weak var buildLabel: NSTextField!
     @IBOutlet weak var gbLabel: NSTextField!
@@ -54,69 +53,65 @@ class ViewController: NSViewController, URLSessionDelegate {
     @IBOutlet weak var sharedSupportProgressBar: NSProgressIndicator!
     @IBOutlet weak var sharedSupportPercentage: NSTextField!
     @IBOutlet weak var sharedSupportGbLabel: NSTextField!
-
-    @IBAction func downloadMacOSAction(_ sender: Any) {
-        progressBarDownload.doubleValue = 0
-        progressBarDownload.isIndeterminate = false
-        downloadPkg()
-    }
-
-    //MARK: Phase 1.0
-    @IBAction func createInstallDisk(_ sender: Any) {
-        //Erase a Disk first
-        self.performSegue(withIdentifier: "eraseDisk", sender: self)
-    }
-
-    //MARK: Phase 1.1
-    @objc func gotEraseDisk(_ notification:Notification){
-        //Got permission to erase a disk, proceed with disk workflow
-        disk(isBeta: false, diskInfo: notification.object as! myVolumeInfo)
-    }
     
-    @objc func gotCreateDisk(_ notification:Notification){
-        print("gotCreateDisk")
-    }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        view.window?.titlebarAppearsTransparent = true
-        view.window?.styleMask.insert(NSWindow.StyleMask.fullSizeContentView)
-
-        view.wantsLayer = true
-        view.layer?.backgroundColor =  CGColor(red: 15 / 255, green: 15 / 255, blue: 15 / 255, alpha: 1.0)
-
-
-        
-        progressBarDownload.doubleValue = 0 //set progressBar to 0 at star
-        if NSUserName() == "root" {
-            rootMode = true
-        } else {
-            rootMode = false
-        }
+    //MARK: Preinstall Tab -- Outlets
+    @IBOutlet weak var bootArgsField: NSTextField!
+    @IBOutlet weak var DisableLibraryValidation: NSButton!
+    @IBOutlet weak var hax3DoNotSealAPFS: NSButton!
+    @IBOutlet weak var DisableSIP: NSButton!
+    @IBOutlet weak var DisableAuthRoot: NSButton!
+    @IBOutlet weak var LaunchInstaller: NSButton!
     
-        getEraseDisk = NotificationCenter.default.addObserver(self, selector: #selector(gotEraseDisk), name: .gotEraseDisk, object: nil)
-        getCreateDisk = NotificationCenter.default.addObserver(self, selector: #selector(gotCreateDisk), name: .gotCreateDisk, object: nil)
-    }
-        
-    override func viewWillAppear() {
-        super.viewDidAppear()
-        installerFuelGauge.doubleValue = 0
-    }
-    
-    
-    override func viewDidAppear() {
-        super.viewDidAppear()
-        view.window?.level = .floating
-        view.window?.title = "🍔 Big Mac 2.0"
-
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
-            
-            print(NSUserName())
-            if NSUserName() != "root" && (passWord.isEmpty || userName.isEmpty) {
-                self.performSegue(withIdentifier: "userNamePassWord", sender: self)
-                //let result =  performAppleScript(script: "return  \"HELLO TODD BOSS\"") //add permissions check
-            }
-        }
-    }
+   
+    //MARK:
 }
+
+
+
+extension ViewController {
+   
+    @IBAction func LaunchInstallerAction(_ sender: Any) {
+        
+        let bootArgs = bootArgsField.stringValue
+       /// let disableLibValidation = (DisableLibraryValidation.state == NSControl.StateValue.on) ?
+        
+        let libVal = DisableLibraryValidation.state == .on
+        let hax3 = hax3DoNotSealAPFS.state == .on
+        let SIP = DisableSIP.state == .on
+        let AR = DisableAuthRoot.state == .on
+        
+        ///
+        ///
+        func preInstallRunner(libVal: Bool, hax3: Bool, SIP: Bool, AR: Bool) {
+            
+            
+            if libVal {
+                _ = runCommandReturnString(binary: "/usr/bin/defaults" , arguments: ["write", "/Library/Preferences/com.apple.security.libraryvalidation.plist DisableLibraryValidation", "-bool", "true"]) ?? ""
+            }
+            
+            
+            ///bin/launchctl
+            
+            // launchctl  DYLD_INSERT_LIBRARIES "$asentientbot$barrykn"
+            if libVal {
+                _ = runCommandReturnString(binary: "/bin/launchctl" , arguments: ["setenv", "DYLD_INSERT_LIBRARIES", haxDylib]) ?? ""
+            }
+           
+
+            
+        }
+        
+        
+        
+        preInstallRunner(libVal: libVal, hax3: hax3, SIP: SIP, AR: AR)
+        
+
+
+    }
+    
+    
+    
+}
+
+
+

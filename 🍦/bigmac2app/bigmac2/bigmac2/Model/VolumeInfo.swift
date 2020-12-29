@@ -7,27 +7,6 @@
 
 import Foundation
 
-
-/*
- 
- let fileURL = URL(fileURLWithPath: "/")
- var error: Error? = nil
- var results: [URLResourceKey : Any]? = nil
- do {
-     results = try (fileURL as NSURL).resourceValues(forKeys: [.volumeTotalCapacityKey])
- } catch {
-     print("Error retrieving resource keys: \(error.localizedDescription ?? "")\n\((error as NSError?)?.userInfo ?? [:])")
-     abort()
- }
- if let result = results?[URLResourceKey.volumeTotalCapacityKey] {
-     
-     let r = round (result as! Double / 1000 / 1000 / 10 ) / 100
-     print("Available capacity for important usage: \(r)")
- }
-
- 
- */
-
 func getVolumeInfo(includeHiddenVolumes: Bool) -> [myVolumeInfo]? {
     
     let URLResourceKeys : [URLResourceKey] = [.volumeNameKey, .volumeIsRemovableKey, .volumeIsBrowsableKey, .volumeIsLocalKey, .volumeIsReadOnlyKey, .volumeIsInternalKey, .volumeIsAutomountedKey, .volumeIsEjectableKey, .volumeUUIDStringKey, .isWritableKey, .volumeIdentifierKey, .volumeLocalizedFormatDescriptionKey, .volumeLocalizedNameKey, .volumeTotalCapacityKey, .isHiddenKey]
@@ -75,11 +54,7 @@ func getVolumeInfo(includeHiddenVolumes: Bool) -> [myVolumeInfo]? {
                         } else if newVolume.displayName == "Preboot" && includeHiddenVolumes {
                             volArray.append(newVolume)
                         }
-
                     }
-                    
-                    
-                    
                 }
             }
             
