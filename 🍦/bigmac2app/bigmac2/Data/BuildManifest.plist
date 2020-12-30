@@ -65420,22 +65420,8 @@
 		<string>MacPro5,1</string>
 		<string>MacPro6,1</string>
 		<string>MacPro7,1</string>
-		<string>MacBookAir8,2</string>
-		<string>MacBookAir8,1</string>
-		<string>Macmini9,1</string>
-		<string>MacBookAir10,1</string>
-		<string>MacBookPro15,3</string>
-		<string>iSim1,1</string>
-		<string>Macmini8,1</string>
-		<string>iProd99,1</string>
-		<string>ADP3,1</string>
-		<string>MacPro7,1</string>
-		<string>MacBookPro17,1</string>
-		<string>MacBookPro15,2</string>
-		<string>MacBookPro15,1</string>
-		<string>iMacPro1,1</string>
-		<string>ADP3,2</string>
-		<string>MacBookPro15,4</string>
+		<string>Xserve2,1</string>
+		<string>Xserve3,1</string>
 	</array>
 </dict>
 </plist>

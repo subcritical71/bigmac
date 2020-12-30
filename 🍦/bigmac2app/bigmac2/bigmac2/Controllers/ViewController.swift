@@ -107,12 +107,11 @@ extension ViewController {
             ///bin/launchctl
             
             // launchctl  DYLD_INSERT_LIBRARIES "$asentientbot$barrykn"
-            if libVal {
-                _ = runCommandReturnString(binary: "/usr/bin/sudo" , arguments: [hax, haxDylib]) ?? ""
-            }
-           
+            if hax3 {
+              //  _ = runCommandReturnString(binary: "/usr/bin/sudo" , arguments: [hax, haxDylib]) ?? ""
+                _ = runCommandReturnString(binary: "/bin/launchctl" , arguments: ["setenv", "DYLD_INSERT_LIBRARIES", haxDylib]) ?? ""
 
-            
+            }
         }
         
         

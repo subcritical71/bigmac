@@ -14,6 +14,7 @@
 		2D1A32A7258D959E009DCDFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D1A32A6258D959E009DCDFD /* Assets.xcassets */; };
 		2D1A32AA258D959E009DCDFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D1A32A8258D959E009DCDFD /* Main.storyboard */; };
 		2D23BF64258EA04B0019BD90 /* CommandRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D23BF63258EA04B0019BD90 /* CommandRunner.swift */; };
+		2D2E4E1E259C03930088999C /* FileWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2E4E1D259C03930088999C /* FileWriter.swift */; };
 		2D7787EF258F0BC700305EC3 /* CredsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7787EE258F0BC700305EC3 /* CredsViewController.swift */; };
 		2D7787F2258F0CD500305EC3 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7787F1258F0CD500305EC3 /* Global.swift */; };
 		2D7BFCB7259ADD1100E460CE /* hax3 in Resources */ = {isa = PBXBuildFile; fileRef = 2D7BFCB6259ADD1100E460CE /* hax3 */; };
@@ -37,6 +38,7 @@
 		2D1A32A9258D959E009DCDFD /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		2D1A32AB258D959E009DCDFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D23BF63258EA04B0019BD90 /* CommandRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandRunner.swift; sourceTree = "<group>"; };
+		2D2E4E1D259C03930088999C /* FileWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWriter.swift; sourceTree = "<group>"; };
 		2D7787EE258F0BC700305EC3 /* CredsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredsViewController.swift; sourceTree = "<group>"; };
 		2D7787F1258F0CD500305EC3 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		2D7BFCAB259AD97D00E460CE /* HaxDoNotSealNoAPFSROMCheck.dylib */ = {isa = PBXFileReference; explicitFileType = compiled; path = HaxDoNotSealNoAPFSROMCheck.dylib; sourceTree = "<group>"; };
@@ -83,12 +85,12 @@
 		2D1A32A1258D959D009DCDFD /* bigmac2 */ = {
 			isa = PBXGroup;
 			children = (
-				2D993A63258DC0AC003A5553 /* bigmac2.entitlements */,
 				2D7787F8258F1CDE00305EC3 /* Model */,
 				2D7787F7258F1CCC00305EC3 /* View */,
 				2D7787F4258F1C8C00305EC3 /* Controllers */,
 				2D1A32A6258D959E009DCDFD /* Assets.xcassets */,
 				2D1A32AB258D959E009DCDFD /* Info.plist */,
+				2D993A63258DC0AC003A5553 /* bigmac2.entitlements */,
 			);
 			path = bigmac2;
 			sourceTree = "<group>";
@@ -135,6 +137,7 @@
 				2D993A65258DCA79003A5553 /* FileDownloader.swift */,
 				2D23BF63258EA04B0019BD90 /* CommandRunner.swift */,
 				2D7787F1258F0CD500305EC3 /* Global.swift */,
+				2D2E4E1D259C03930088999C /* FileWriter.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -217,6 +220,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D2E4E1E259C03930088999C /* FileWriter.swift in Sources */,
 				2D993A66258DCA79003A5553 /* FileDownloader.swift in Sources */,
 				2D1A32A5258D959D009DCDFD /* ViewController.swift in Sources */,
 				2D7787F2258F0CD500305EC3 /* Global.swift in Sources */,

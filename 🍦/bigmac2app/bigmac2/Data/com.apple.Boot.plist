@@ -4,5 +4,7 @@
 <dict>
 	<key>Kernel Flags</key>
 	<string>-v -no_compat_check -amfi_get_out_of_my_way=1</string>
+	<key>Graphics Mode</key>
+	<string>2560x1440x32</string>
 </dict>
 </plist>

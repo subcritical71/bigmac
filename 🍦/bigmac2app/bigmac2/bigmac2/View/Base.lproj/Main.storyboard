@@ -773,7 +773,7 @@
                                                     </subviews>
                                                 </customView>
                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eee-m6-Zf6">
-                                                    <rect key="frame" x="17" y="159" width="471" height="77"/>
+                                                    <rect key="frame" x="18" y="174" width="471" height="77"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <progressIndicator fixedFrame="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="MkA-uU-q1I">
@@ -829,38 +829,8 @@
                                                         </button>
                                                     </subviews>
                                                 </customView>
-                                                <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fZ6-qS-Gnm">
-                                                    <rect key="frame" x="17" y="17" width="472" height="20"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <subviews>
-                                                        <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B6s-kb-oOl">
-                                                            <rect key="frame" x="180" y="-4" width="294" height="25"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                            <popUpButtonCell key="cell" type="push" title="Big Sur 11.1 macOS Base System" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="ocd-Mi-12G" id="e5O-Ie-nWX">
-                                                                <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="menu"/>
-                                                                <menu key="menu" id="Lda-Xf-qSe">
-                                                                    <items>
-                                                                        <menuItem title="Big Sur 11.1 macOS Base System" state="on" id="ocd-Mi-12G"/>
-                                                                        <menuItem title="Catalina 10.15 macOS Base System" id="nJG-co-i9h"/>
-                                                                        <menuItem title="Mojave 10.14 macOS Base System" id="Inm-nw-22o"/>
-                                                                    </items>
-                                                                </menu>
-                                                            </popUpButtonCell>
-                                                        </popUpButton>
-                                                        <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Dsd-MV-3Tm">
-                                                            <rect key="frame" x="-2" y="3" width="173" height="16"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                            <textFieldCell key="cell" lineBreakMode="clipping" title="Installer Compatibility Layer" id="fSq-v5-dJx">
-                                                                <font key="font" metaFont="system"/>
-                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
-                                                                <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                                            </textFieldCell>
-                                                        </textField>
-                                                    </subviews>
-                                                </customView>
                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="556-P5-2ue">
-                                                    <rect key="frame" x="17" y="74" width="336" height="46"/>
+                                                    <rect key="frame" x="17" y="17" width="336" height="46"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Od-GF-iHL">
@@ -875,7 +845,7 @@
                                                             <rect key="frame" x="-2" y="0.0" width="340" height="15"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <textFieldCell key="cell" lineBreakMode="clipping" title="for native APFS boot support on Mac Pro 3,1 and Xserve 2,1" id="4Fv-gb-UHD">
-                                                                <font key="font" metaFont="system" size="12"/>
+                                                                <font key="font" metaFont="cellTitle"/>
                                                                 <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
@@ -884,13 +854,49 @@
                                                             <rect key="frame" x="152" y="29" width="72" height="14"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <textFieldCell key="cell" lineBreakMode="clipping" title="by Dosdude1" id="wrQ-Wn-YKG">
-                                                                <font key="font" metaFont="system" size="11"/>
+                                                                <font key="font" metaFont="smallSystem"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                         </textField>
                                                     </subviews>
                                                 </customView>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ahL-hY-ZTg">
+                                                    <rect key="frame" x="16" y="144" width="135" height="16"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Installer Boot Options" id="IVF-7J-YYB">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hE1-Fe-K3l">
+                                                    <rect key="frame" x="30" y="94" width="240" height="42"/>
+                                                    <subviews>
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LFa-gw-qF8">
+                                                            <rect key="frame" x="-2" y="25" width="242" height="18"/>
+                                                            <buttonCell key="cell" type="check" title="Single User (Supports Legacy USB)" bezelStyle="regularSquare" imagePosition="left" inset="2" id="tgT-VY-Thm">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                        </button>
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="woR-0I-Jr3">
+                                                            <rect key="frame" x="-2" y="-1" width="76" height="18"/>
+                                                            <buttonCell key="cell" type="check" title="Verbose" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="uh6-lb-jWr">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                        </button>
+                                                    </subviews>
+                                                    <visibilityPriorities>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                    </visibilityPriorities>
+                                                    <customSpacing>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                    </customSpacing>
+                                                </stackView>
                                             </subviews>
                                         </view>
                                     </tabViewItem>
@@ -900,18 +906,11 @@
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="19" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oT8-gl-BjV">
-                                                    <rect key="frame" x="41" y="134" width="229" height="121"/>
+                                                    <rect key="frame" x="41" y="106" width="192" height="86"/>
                                                     <subviews>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DYc-Ys-UxX">
-                                                            <rect key="frame" x="-2" y="104" width="180" height="18"/>
+                                                            <rect key="frame" x="-2" y="69" width="180" height="18"/>
                                                             <buttonCell key="cell" type="check" title="Disable Library Validation" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="eTi-1D-LUr">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="system"/>
-                                                            </buttonCell>
-                                                        </button>
-                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="j10-YE-GvE">
-                                                            <rect key="frame" x="-2" y="69" width="231" height="18"/>
-                                                            <buttonCell key="cell" type="check" title="Hax3 - Do Not Seal + HFS / APFS " bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="KRd-nW-1Yd">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
@@ -935,17 +934,15 @@
                                                         <integer value="1000"/>
                                                         <integer value="1000"/>
                                                         <integer value="1000"/>
-                                                        <integer value="1000"/>
                                                     </visibilityPriorities>
                                                     <customSpacing>
-                                                        <real value="3.4028234663852886e+38"/>
                                                         <real value="3.4028234663852886e+38"/>
                                                         <real value="3.4028234663852886e+38"/>
                                                         <real value="3.4028234663852886e+38"/>
                                                     </customSpacing>
                                                 </stackView>
                                                 <textField verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LFL-QC-eXl">
-                                                    <rect key="frame" x="121" y="287" width="297" height="21"/>
+                                                    <rect key="frame" x="121" y="214" width="368" height="21"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" borderStyle="bezel" bezelStyle="round" id="eUK-zZ-5Mm">
                                                         <font key="font" metaFont="system"/>
@@ -954,7 +951,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fJV-Q9-fb8">
-                                                    <rect key="frame" x="39" y="290" width="65" height="16"/>
+                                                    <rect key="frame" x="39" y="217" width="65" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Boot-args" id="fM7-K5-0WG">
                                                         <font key="font" metaFont="system"/>
@@ -963,7 +960,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dmX-Q4-ikD">
-                                                    <rect key="frame" x="34" y="73" width="206" height="32"/>
+                                                    <rect key="frame" x="34" y="58" width="206" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="push" title="Launch Installer" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="WYD-BG-JLe">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -976,6 +973,33 @@ DQ
                                                         <action selector="LaunchInstallerAction:" target="XfG-lQ-9wD" id="FWo-c4-wA5"/>
                                                     </connections>
                                                 </button>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="c9x-eu-Ewh">
+                                                    <rect key="frame" x="15" y="295" width="476" height="16"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Run these options when booted from a bigmac Installer Disk" id="Acb-2t-DSU">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Pn-Dq-u0a">
+                                                    <rect key="frame" x="39" y="251" width="395" height="16"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="left" title="Optional NVRAM" id="Lqq-3w-KKo">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fjh-kh-ghY">
+                                                    <rect key="frame" x="15" y="17" width="476" height="16"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Features Hax3 for native APFS Installs created by ASentientBot | BarryKN" id="EGr-yV-yOc">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
                                             </subviews>
                                         </view>
                                     </tabViewItem>
@@ -984,32 +1008,32 @@ DQ
                                             <rect key="frame" x="10" y="33" width="506" height="334"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="22" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XTi-Aa-BUh">
-                                                    <rect key="frame" x="49" y="132" width="170" height="168"/>
+                                                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="21" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XTi-Aa-BUh">
+                                                    <rect key="frame" x="49" y="154" width="170" height="164"/>
                                                     <subviews>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hwc-jj-Waw">
-                                                            <rect key="frame" x="-2" y="151" width="116" height="18"/>
+                                                            <rect key="frame" x="-2" y="147" width="116" height="18"/>
                                                             <buttonCell key="cell" type="check" title="Enable USB 1.1" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="VZC-dN-ptH">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0MJ-Iv-ywg">
-                                                            <rect key="frame" x="-2" y="113" width="156" height="18"/>
+                                                            <rect key="frame" x="-2" y="110" width="156" height="18"/>
                                                             <buttonCell key="cell" type="check" title="Disable Bluetooth 2.0" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="JlU-84-cz9">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="W3i-15-mCO">
-                                                            <rect key="frame" x="-2" y="75" width="157" height="18"/>
+                                                            <rect key="frame" x="-2" y="73" width="157" height="18"/>
                                                             <buttonCell key="cell" type="check" title="AMD SSE4.2 MouSSE" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="FpY-HT-NK3">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mAO-Pd-4vQ">
-                                                            <rect key="frame" x="-2" y="37" width="109" height="18"/>
+                                                            <rect key="frame" x="-2" y="36" width="109" height="18"/>
                                                             <buttonCell key="cell" type="check" title="AMD Teletrap" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Q2g-5h-nJd">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
@@ -1038,32 +1062,32 @@ DQ
                                                         <real value="3.4028234663852886e+38"/>
                                                     </customSpacing>
                                                 </stackView>
-                                                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="22" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o4s-W7-PG5">
-                                                    <rect key="frame" x="272" y="132" width="202" height="168"/>
+                                                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="21" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o4s-W7-PG5">
+                                                    <rect key="frame" x="272" y="154" width="202" height="164"/>
                                                     <subviews>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VPt-hA-tNG">
-                                                            <rect key="frame" x="-2" y="151" width="154" height="18"/>
+                                                            <rect key="frame" x="-2" y="147" width="154" height="18"/>
                                                             <buttonCell key="cell" type="check" title="CD / DVD SuperDrive" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="zWK-sP-Xli">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FId-UD-oKk">
-                                                            <rect key="frame" x="-2" y="113" width="204" height="18"/>
+                                                            <rect key="frame" x="-2" y="110" width="204" height="18"/>
                                                             <buttonCell key="cell" type="check" title="Apple HDA (Audio and Video)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="aSS-TC-Zkq">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zIZ-bF-5RK">
-                                                            <rect key="frame" x="-2" y="75" width="141" height="18"/>
+                                                            <rect key="frame" x="-2" y="73" width="141" height="18"/>
                                                             <buttonCell key="cell" type="check" title="NVidia HDMI Audio" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Zbv-kw-H56">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JFS-1h-7p0">
-                                                            <rect key="frame" x="-2" y="37" width="201" height="18"/>
+                                                            <rect key="frame" x="-2" y="36" width="201" height="18"/>
                                                             <buttonCell key="cell" type="check" title="AppStore macOS Downloads" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="HgB-AY-A1l">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
@@ -1092,6 +1116,54 @@ DQ
                                                         <real value="3.4028234663852886e+38"/>
                                                     </customSpacing>
                                                 </stackView>
+                                                <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uX0-cz-cil">
+                                                    <rect key="frame" x="17" y="111" width="472" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <levelIndicatorCell key="cell" alignment="left" doubleValue="5" maxValue="12" warningValue="8" criticalValue="4" id="wM0-0Y-uWc"/>
+                                                </levelIndicator>
+                                                <progressIndicator fixedFrame="YES" maxValue="100" doubleValue="50" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="AkS-LS-Bh7">
+                                                    <rect key="frame" x="17" y="56" width="472" height="20"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                </progressIndicator>
+                                                <progressIndicator fixedFrame="YES" maxValue="100" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="dFy-dm-OFa">
+                                                    <rect key="frame" x="473" y="78" width="16" height="16"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                </progressIndicator>
+                                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cpC-7g-ODn">
+                                                    <rect key="frame" x="243" y="10" width="253" height="32"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <buttonCell key="cell" type="push" title="Patch Disk" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Vog-pB-ekH">
+                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                        <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                                    </buttonCell>
+                                                </button>
+                                                <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yHl-mb-wuL">
+                                                    <rect key="frame" x="14" y="13" width="209" height="25"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="5zA-s5-jsr" id="TGT-DC-264">
+                                                        <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
+                                                        <font key="font" metaFont="menu"/>
+                                                        <menu key="menu" id="NQl-to-8Bh">
+                                                            <items>
+                                                                <menuItem title="Item 1" state="on" id="5zA-s5-jsr"/>
+                                                                <menuItem title="Item 2" id="CyB-xL-p4v"/>
+                                                                <menuItem title="Item 3" id="kUm-PP-f2A"/>
+                                                            </items>
+                                                        </menu>
+                                                    </popUpButtonCell>
+                                                </popUpButton>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hO9-BU-vgp">
+                                                    <rect key="frame" x="15" y="78" width="444" height="16"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" title="Task..." id="eNl-vE-fkb">
+                                                        <font key="font" metaFont="system"/>
+                                                        <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
                                             </subviews>
                                         </view>
                                     </tabViewItem>
@@ -1113,7 +1185,6 @@ DQ
                         <outlet property="buildLabel" destination="DFd-ov-bag" id="7C2-Lu-I2R"/>
                         <outlet property="createInstallSpinner" destination="nYg-kZ-fDy" id="8gV-FZ-sji"/>
                         <outlet property="gbLabel" destination="eLx-fH-b51" id="egU-jl-cn7"/>
-                        <outlet property="hax3DoNotSealAPFS" destination="j10-YE-GvE" id="w8N-ao-M6l"/>
                         <outlet property="installerFuelGauge" destination="Qi3-pO-eUD" id="z1u-q0-D43"/>
                         <outlet property="mediaLabel" destination="syK-06-F8B" id="Tm3-Pq-vCa"/>
                         <outlet property="percentageLabel" destination="dB3-ZJ-LZi" id="wCe-k6-zev"/>

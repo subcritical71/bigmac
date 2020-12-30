@@ -99,7 +99,7 @@ extension ViewController {
     
     //MARK: Make Rename Disk using diskutil
     internal func blessVolume(bin: String = "/usr/sbin/bless", bless: String) -> String {
-        let result = runCommandReturnString(binary: bin , arguments: ["--mount", "/Volumes/\(bless)"]) ?? ""
+        let result = runCommandReturnString(binary: bin , arguments: ["--mount", "/Volumes/\(bless)", "--label", bless]) ?? ""
         return result
     }
     
@@ -333,7 +333,26 @@ extension ViewController {
                     try? fm.removeItem(atPath: "/Volumes/Preboot/\(bigmac2.uuid)/System/Library/CoreServices/\(platformPlist)")
                     try? fm.removeItem(atPath: "/Volumes/Preboot/\(bigmac2.uuid)/restore/\(buildManifestPlist)")
                     
-                    try? fm.copyItem(atPath: "/\(appFolderPath)/\(bootPlist)", toPath: "/Volumes/Preboot/\(bigmac2.uuid)/Library/Preferences/SystemConfiguration/\(bootPlist)")
+                    let verbose = "-v"
+                    let singleUser = "-s"
+                    
+let bootPlistTxt =
+"""
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+    <plist version="1.0">
+        <dict>
+            <key>Kernel Flags</key>
+            <string>\(singleUser) \(verbose) -no_compat_check -amfi_get_out_of_my_way=1</string>
+        </dict>
+</plist>
+"""
+                    txt2file(text: bootPlistTxt, file: "/Volumes/Preboot/\(bigmac2.uuid)/Library/Preferences/SystemConfiguration/\(bootPlist)")
+                    
+                    _ = mkDir(arg: "/Volumes/\(bigmac2.volumeName)/Library/Preferences/SystemConfiguration/")
+                    
+                    txt2file(text: bootPlistTxt, file: "/Volumes/Preboot/\(bigmac2.uuid)/Library/Preferences/SystemConfiguration/\(bootPlist)")
+
                     try? fm.copyItem(atPath: "/\(appFolderPath)/\(bootPlist)", toPath: "/Volumes/Preboot/\(bigmac2.uuid)/System/Library/CoreServices/\(platformPlist)")
                     try? fm.copyItem(atPath: "/\(appFolderPath)/\(bootPlist)", toPath: "/Volumes/Preboot/\(bigmac2.uuid)/restore/\(buildManifestPlist)")
                     
@@ -410,17 +429,23 @@ extension ViewController {
             //MARK: Step 3
             extractBaseSystem()
             
+            sleep(1)
+            
             //MARK: Step 4
             createDirectory(diskInfo: diskInfo, disk: "bm2tmp0", rndStr: rndStr)
             
+            sleep(1)
+            
             //MARK: Step 5
             installBaseSystem(diskInfo: diskInfo, baseSys: baseSys, bm2: bm2)
+            
+            sleep(1)
             
             //MARK: Step 6
             setupPreboot(diskInfo: diskInfo, bm2: bm2, rndStr: rndStr)
           
             //MARK: Step 7
-            //bigSurInstallerAppXfer(rndStr: rndStr)
+            bigSurInstallerAppXfer(rndStr: rndStr)
             
             //MARK: Rev Engine
             unmountDrives()
