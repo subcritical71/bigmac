@@ -24,6 +24,8 @@ struct myVolumeInfo {
 extension Notification.Name {
     static let gotEraseDisk = Notification.Name("gotEraseDisk")
     static let gotCreateDisk = Notification.Name("gotCreateDisk")
+    static let gotAppChanged = Notification.Name("gotAppChanged")
+
 }
 
 

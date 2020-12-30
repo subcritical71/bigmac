@@ -27,6 +27,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
     
+    
+    func applicationDidBecomeActive(_ notification: Notification) {
+        NotificationCenter.default.post(name: .gotAppChanged, object: self)
+      
+
+
+    }
+    
+    func applicationWillResignActive(_ notification: Notification) {
+        NotificationCenter.default.post(name: .gotAppChanged, object: self)
+    }
 
     func applicationDidFinishLaunching(_ aNotification: Notification) {
         // Insert code here to initialize your application
@@ -38,4 +49,5 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
 
 }
+
 

@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2D02E032259453D500E8E1CF /* VolumeInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D02E031259453D500E8E1CF /* VolumeInfo.swift */; };
 		2D02E03525945BD000E8E1CF /* EraseDisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D02E03425945BD000E8E1CF /* EraseDisk.swift */; };
+		2D09EE40259C42C70054CF3A /* CreateInstallWorkflow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D09EE3F259C42C70054CF3A /* CreateInstallWorkflow.swift */; };
+		2D09EE43259C432C0054CF3A /* CreateInstallTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D09EE42259C432C0054CF3A /* CreateInstallTasks.swift */; };
 		2D1A32A3258D959D009DCDFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1A32A2258D959D009DCDFD /* AppDelegate.swift */; };
 		2D1A32A5258D959D009DCDFD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1A32A4258D959D009DCDFD /* ViewController.swift */; };
 		2D1A32A7258D959E009DCDFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D1A32A6258D959E009DCDFD /* Assets.xcassets */; };
@@ -20,7 +22,7 @@
 		2D7BFCB7259ADD1100E460CE /* hax3 in Resources */ = {isa = PBXBuildFile; fileRef = 2D7BFCB6259ADD1100E460CE /* hax3 */; };
 		2D993A66258DCA79003A5553 /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D993A65258DCA79003A5553 /* FileDownloader.swift */; };
 		2DAFF44C259AB7ED00D48E20 /* InstallerActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAFF44B259AB7ED00D48E20 /* InstallerActions.swift */; };
-		2DAFF44F259AB8A100D48E20 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAFF44E259AB8A100D48E20 /* MainView.swift */; };
+		2DAFF44F259AB8A100D48E20 /* ViewDidStuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAFF44E259AB8A100D48E20 /* ViewDidStuff.swift */; };
 		2DD296902597D8AF00515D31 /* com.apple.Boot.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DD2968F2597D8AF00515D31 /* com.apple.Boot.plist */; };
 		2DD296932597D8B800515D31 /* BuildManifest.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DD296922597D8B800515D31 /* BuildManifest.plist */; };
 		2DD296962597D8BE00515D31 /* PlatformSupport.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DD296952597D8BE00515D31 /* PlatformSupport.plist */; };
@@ -31,6 +33,8 @@
 /* Begin PBXFileReference section */
 		2D02E031259453D500E8E1CF /* VolumeInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VolumeInfo.swift; sourceTree = "<group>"; };
 		2D02E03425945BD000E8E1CF /* EraseDisk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EraseDisk.swift; sourceTree = "<group>"; };
+		2D09EE3F259C42C70054CF3A /* CreateInstallWorkflow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInstallWorkflow.swift; sourceTree = "<group>"; };
+		2D09EE42259C432C0054CF3A /* CreateInstallTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInstallTasks.swift; sourceTree = "<group>"; };
 		2D1A329F258D959D009DCDFD /* bigmac2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bigmac2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D1A32A2258D959D009DCDFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2D1A32A4258D959D009DCDFD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -46,7 +50,7 @@
 		2D993A63258DC0AC003A5553 /* bigmac2.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = bigmac2.entitlements; sourceTree = "<group>"; };
 		2D993A65258DCA79003A5553 /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
 		2DAFF44B259AB7ED00D48E20 /* InstallerActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallerActions.swift; sourceTree = "<group>"; };
-		2DAFF44E259AB8A100D48E20 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = MainView.swift; path = bigmac2/Model/MainView.swift; sourceTree = SOURCE_ROOT; };
+		2DAFF44E259AB8A100D48E20 /* ViewDidStuff.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewDidStuff.swift; path = bigmac2/View/ViewDidStuff.swift; sourceTree = SOURCE_ROOT; };
 		2DD2968F2597D8AF00515D31 /* com.apple.Boot.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = com.apple.Boot.plist; sourceTree = "<group>"; };
 		2DD296922597D8B800515D31 /* BuildManifest.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BuildManifest.plist; sourceTree = "<group>"; };
 		2DD296952597D8BE00515D31 /* PlatformSupport.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PlatformSupport.plist; sourceTree = "<group>"; };
@@ -121,7 +125,7 @@
 		2D7787F7258F1CCC00305EC3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2DAFF44E259AB8A100D48E20 /* MainView.swift */,
+				2DAFF44E259AB8A100D48E20 /* ViewDidStuff.swift */,
 				2D1A32A2258D959D009DCDFD /* AppDelegate.swift */,
 				2D1A32A8258D959E009DCDFD /* Main.storyboard */,
 			);
@@ -133,6 +137,8 @@
 			children = (
 				2DAFF44B259AB7ED00D48E20 /* InstallerActions.swift */,
 				2DE42E3C25918F56005E10C6 /* CreateInstallDisk.swift */,
+				2D09EE42259C432C0054CF3A /* CreateInstallTasks.swift */,
+				2D09EE3F259C42C70054CF3A /* CreateInstallWorkflow.swift */,
 				2D02E031259453D500E8E1CF /* VolumeInfo.swift */,
 				2D993A65258DCA79003A5553 /* FileDownloader.swift */,
 				2D23BF63258EA04B0019BD90 /* CommandRunner.swift */,
@@ -226,11 +232,13 @@
 				2D7787F2258F0CD500305EC3 /* Global.swift in Sources */,
 				2DE42E3D25918F56005E10C6 /* CreateInstallDisk.swift in Sources */,
 				2D1A32A3258D959D009DCDFD /* AppDelegate.swift in Sources */,
+				2D09EE40259C42C70054CF3A /* CreateInstallWorkflow.swift in Sources */,
 				2D23BF64258EA04B0019BD90 /* CommandRunner.swift in Sources */,
 				2D7787EF258F0BC700305EC3 /* CredsViewController.swift in Sources */,
 				2D02E032259453D500E8E1CF /* VolumeInfo.swift in Sources */,
 				2DAFF44C259AB7ED00D48E20 /* InstallerActions.swift in Sources */,
-				2DAFF44F259AB8A100D48E20 /* MainView.swift in Sources */,
+				2DAFF44F259AB8A100D48E20 /* ViewDidStuff.swift in Sources */,
+				2D09EE43259C432C0054CF3A /* CreateInstallTasks.swift in Sources */,
 				2D02E03525945BD000E8E1CF /* EraseDisk.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

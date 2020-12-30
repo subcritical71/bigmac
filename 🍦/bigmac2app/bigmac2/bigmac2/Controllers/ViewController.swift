@@ -5,13 +5,18 @@
 //  Created by starplayrx on 12/18/20.
 //
 
-import AppKit
-import Foundation
+import Cocoa
 
 
 
 
-class ViewController: NSViewController, URLSessionDelegate {
+class ViewController: NSViewController, URLSessionDelegate  {
+    
+  
+    @objc func gotAppChanged(_ notification:Notification){
+     
+    }
+   
     
     //get Home Folder
     let tempFolder = "/tmp"
@@ -43,7 +48,9 @@ class ViewController: NSViewController, URLSessionDelegate {
 
     var getEraseDisk : ()? = nil
     var getCreateDisk : ()? = nil
-
+    var getAppChanged : ()? = nil
+    
+    
     //MARK: Downloads Tab
     @IBOutlet weak var mediaLabel: NSTextField!
     @IBOutlet weak var progressBarDownload: NSProgressIndicator!
@@ -55,14 +62,18 @@ class ViewController: NSViewController, URLSessionDelegate {
     @IBOutlet weak var sharedSupportProgressBar: NSProgressIndicator!
     @IBOutlet weak var sharedSupportPercentage: NSTextField!
     @IBOutlet weak var sharedSupportGbLabel: NSTextField!
+    @IBOutlet weak var singleUserCheckbox: NSButton!
+    @IBOutlet weak var verboseUserCheckbox: NSButton!
+    
+    
+    
+    
     
     //MARK: Preinstall Tab -- Outlets
     @IBOutlet weak var bootArgsField: NSTextField!
     @IBOutlet weak var DisableLibraryValidation: NSButton!
-    @IBOutlet weak var hax3DoNotSealAPFS: NSButton!
     @IBOutlet weak var DisableSIP: NSButton!
     @IBOutlet weak var DisableAuthRoot: NSButton!
-    @IBOutlet weak var LaunchInstaller: NSButton!
     
    
     //MARK:
@@ -73,56 +84,38 @@ class ViewController: NSViewController, URLSessionDelegate {
 extension ViewController {
    
     @IBAction func LaunchInstallerAction(_ sender: Any) {
-        
+   
         let bootArgs = bootArgsField.stringValue
-       /// let disableLibValidation = (DisableLibraryValidation.state == NSControl.StateValue.on) ?
-        
         let libVal = DisableLibraryValidation.state == .on
-        let hax3 = hax3DoNotSealAPFS.state == .on
         let SIP = DisableSIP.state == .on
         let AR = DisableAuthRoot.state == .on
         
-        ///
-        ///
-        func preInstallRunner(libVal: Bool, hax3: Bool, SIP: Bool, AR: Bool) {
+        func preInstallRunner(libVal: Bool, SIP: Bool, AR: Bool) {
+            
+            if !bootArgs.isEmpty {
+                _ = runCommandReturnString(binary: "/usr/sbin/nvram" , arguments: ["boot-args=\"\(bootArgs)\""]) ?? ""
+            }
             
             
             if libVal {
                 _ = runCommandReturnString(binary: "/usr/bin/defaults" , arguments: ["write", "/Library/Preferences/com.apple.security.libraryvalidation.plist", "DisableLibraryValidation", "-bool", "true"]) ?? ""
             }
             
-            
-            /*
-             
-             sudo -u $SUDO_USER launchctl setenv DYLD_INSERT_LIBRARIES "$asentientbot$barrykn"
-             o
-             printf "———————————————————————————————————————————————————————————————————"
-             n
-             g
-             printf " 📀 DO NOT REBOOT. Please run the 'Install macOS Big Sur.app' now!"
-         else
-             launchctl setenv DYLD_INSERT_LIBRARIES "$asentientbot$barrykn"
-             
-             */
-            ///bin/launchctl
-            
-            // launchctl  DYLD_INSERT_LIBRARIES "$asentientbot$barrykn"
-            if hax3 {
-              //  _ = runCommandReturnString(binary: "/usr/bin/sudo" , arguments: [hax, haxDylib]) ?? ""
-                _ = runCommandReturnString(binary: "/bin/launchctl" , arguments: ["setenv", "DYLD_INSERT_LIBRARIES", haxDylib]) ?? ""
+            //This is required and only runs correctly on a base system
+            _ = runCommandReturnString(binary: "/bin/launchctl" , arguments: ["setenv", "DYLD_INSERT_LIBRARIES", haxDylib]) ?? ""
 
-            }
         }
         
         
         
-        preInstallRunner(libVal: libVal, hax3: hax3, SIP: SIP, AR: AR)
+        preInstallRunner(libVal: libVal, SIP: SIP, AR: AR)
         
 
 
     }
     
     
+
     
 }
 
