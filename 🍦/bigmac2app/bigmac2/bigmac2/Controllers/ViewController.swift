@@ -45,10 +45,7 @@ class ViewController: NSViewController, URLSessionDelegate  {
     let shared = "Shared/" //copy to shared directory
 
     var getEraseDisk : ()? = nil
-    var getCreateDisk : ()? = nil
-    var getAppChanged : ()? = nil
-    
-    
+
     //MARK: Downloads Tab
     @IBOutlet weak var mediaLabel: NSTextField!
     @IBOutlet weak var progressBarDownload: NSProgressIndicator!
@@ -69,4 +66,5 @@ class ViewController: NSViewController, URLSessionDelegate  {
     @IBOutlet weak var DisableSIP: NSButton!
     @IBOutlet weak var DisableAuthRoot: NSButton!
     
+ 
 }

@@ -688,7 +688,7 @@
                     <window key="window" title="Window" separatorStyle="none" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
                         <windowPositionMask key="initialPositionMask" leftStrut="YES" topStrut="YES" bottomStrut="YES"/>
-                        <rect key="contentRect" x="173" y="792" width="552" height="416"/>
+                        <rect key="contentRect" x="167" y="792" width="558" height="416"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1415"/>
                         <value key="minSize" type="size" width="552" height="416"/>
                         <value key="maxSize" type="size" width="552" height="416"/>
@@ -704,7 +704,7 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="74" y="249.5"/>
+            <point key="canvasLocation" x="71" y="249"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
@@ -879,6 +879,9 @@
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
+                                                            <connections>
+                                                                <action selector="baseSingleUserAction:" target="XfG-lQ-9wD" id="3LD-es-m7R"/>
+                                                            </connections>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="woR-0I-Jr3">
                                                             <rect key="frame" x="-2" y="-1" width="76" height="18"/>
@@ -886,6 +889,9 @@
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
+                                                            <connections>
+                                                                <action selector="baseVerboseAction:" target="XfG-lQ-9wD" id="DFp-qZ-gVS"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <visibilityPriorities>
@@ -1018,7 +1024,7 @@ DQ
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zIZ-bF-5RK">
                                                             <rect key="frame" x="-2" y="89" width="141" height="18"/>
-                                                            <buttonCell key="cell" type="check" title="NVidia HDMI Audio" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Zbv-kw-H56">
+                                                            <buttonCell key="cell" type="check" title="NVidia HDMI Audio" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Zbv-kw-H56">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
@@ -1032,14 +1038,14 @@ DQ
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Rsm-39-Um6">
                                                             <rect key="frame" x="-2" y="29" width="150" height="18"/>
-                                                            <buttonCell key="cell" type="check" title="Legacy 802.11n WiFi" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="P3r-Jm-dSi">
+                                                            <buttonCell key="cell" type="check" title="Legacy 802.11n WiFi" bezelStyle="regularSquare" imagePosition="left" inset="2" id="P3r-Jm-dSi">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pqh-XV-YeT">
-                                                            <rect key="frame" x="-2" y="-1" width="143" height="18"/>
-                                                            <buttonCell key="cell" type="check" title="-no_compat_check" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="GZ2-Jz-S3G">
+                                                            <rect key="frame" x="-2" y="-1" width="96" height="18"/>
+                                                            <buttonCell key="cell" type="check" title="Single User" bezelStyle="regularSquare" imagePosition="left" inset="2" id="GZ2-Jz-S3G">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
@@ -1136,7 +1142,7 @@ DQ
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mAO-Pd-4vQ">
                                                             <rect key="frame" x="-2" y="59" width="76" height="18"/>
-                                                            <buttonCell key="cell" type="check" title="Teletrap" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Q2g-5h-nJd">
+                                                            <buttonCell key="cell" type="check" title="Teletrap" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Q2g-5h-nJd">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
@@ -1150,7 +1156,7 @@ DQ
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vt6-hs-Whx">
                                                             <rect key="frame" x="-2" y="-1" width="76" height="18"/>
-                                                            <buttonCell key="cell" type="check" title="Verbose" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="gxJ-eD-L0g">
+                                                            <buttonCell key="cell" type="check" title="Verbose" bezelStyle="regularSquare" imagePosition="left" inset="2" id="gxJ-eD-L0g">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>

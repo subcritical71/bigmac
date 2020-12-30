@@ -9,9 +9,7 @@ import Foundation
 
 extension ViewController {
     
-    
     //MAIN WORKFLOW STARTS HERE
-    
     
     //MARK: Install Disk Setup
     func disk(isBeta:Bool, diskInfo: myVolumeInfo, isVerbose: Bool, isSingleUser: Bool) {
@@ -56,11 +54,9 @@ extension ViewController {
             
             //MARK: Step 6
             setupPreboot(diskInfo: diskInfo, bm2: bm2, rndStr: rndStr, isVerbose: isVerbose, isSingleUser: isSingleUser)
-            
-            print(bm2)
-            
+                        
+            //MARK: Step 6.5
             installEmojiFont(bm2: bm2)
-            
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
 
             //MARK: Step 7

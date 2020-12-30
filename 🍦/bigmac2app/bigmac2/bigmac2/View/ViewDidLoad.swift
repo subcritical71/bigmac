@@ -7,16 +7,32 @@
 
 import Cocoa
 
+extension Notification.Name {
+    static let gotEraseDisk = Notification.Name("gotEraseDisk")
+    
+}
+
 extension ViewController {
-   
-        
+    
+    
     override func viewWillAppear() {
         super.viewDidAppear()
         installerFuelGauge.doubleValue = 0
         view.window?.level = .floating
+        
+        let defaults = UserDefaults.standard
+
+        isBaseVerbose    = defaults.bool(forKey: "isBaseVerbose")
+        isBaseSingleUser = defaults.bool(forKey: "isBaseSingleUser")
+        isSysVerbose     = defaults.bool(forKey: "isSysVerbose")
+        isSysSingleUser  = defaults.bool(forKey: "isSysSingleUser")
+        
+        isBaseSingleUser ? (singleUserCheckbox.state = .on) : (singleUserCheckbox.state = .off)
+        isBaseVerbose ? (verboseUserCheckbox.state = .on) :  (verboseUserCheckbox.state = .off)
+
+      
     }
-
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -29,49 +45,25 @@ extension ViewController {
         } else {
             rootMode = false
         }
-
+        
+        
+        
         getEraseDisk = NotificationCenter.default.addObserver(self, selector: #selector(gotEraseDisk), name: .gotEraseDisk, object: nil)
-        getCreateDisk = NotificationCenter.default.addObserver(self, selector: #selector(gotCreateDisk), name: .gotCreateDisk, object: nil)
-        getAppChanged = NotificationCenter.default.addObserver(self, selector: #selector(gotAppChanged), name: .gotAppChanged, object: nil)
         
-       /* if #available(OSX 10.14, *) {
-            let customControlColor = NSColor(named: NSColor.Name("customControlColor"))
-            view.wantsRestingTouches = true
-            view.wantsLayer = true
-            view.layer?.backgroundColor =  customControlColor?.cgColor
-        } else {
-            // Fallback on earlier versions
-        }*/
-       
-        //nvram -p | grep boot-args
-        var bootargs = runCommandReturnString(binary: "/usr/sbin/nvram", arguments: ["-p"])
         
-        var nvramArray = bootargs?.components(separatedBy: "\n")
         
-        if let nvramArray = nvramArray {
-            for i in nvramArray {
-                if i.contains("boot-args") {
-                    bootargs = i
-                }
-            }
-        }
-      
-        bootargs = bootargs?.replacingOccurrences(of: "boot-args\t", with: "")
-        
-        if let b = bootargs, !b.isEmpty {
-            bootArgsField.stringValue = b
-        } else {
-            bootArgsField.stringValue = ""
-        }
     }
     
-
-  
     override func viewDidAppear() {
         super.viewDidAppear()
         view.window?.title = "🍔 Big Mac 2.0"
-    
+        
+        
+      
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+            
+            
+          
             
             print(NSUserName())
             if NSUserName() != "root" && (passWord.isEmpty || userName.isEmpty) {
@@ -83,3 +75,12 @@ extension ViewController {
 }
 
 
+
+/* if #available(OSX 10.14, *) {
+ let customControlColor = NSColor(named: NSColor.Name("customControlColor"))
+ view.wantsRestingTouches = true
+ view.wantsLayer = true
+ view.layer?.backgroundColor =  customControlColor?.cgColor
+ } else {
+ // Fallback on earlier versions
+ }*/

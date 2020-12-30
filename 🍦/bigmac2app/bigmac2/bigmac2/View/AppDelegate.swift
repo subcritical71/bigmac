@@ -27,27 +27,16 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         return true
     }
     
-    
-    func applicationDidBecomeActive(_ notification: Notification) {
-        NotificationCenter.default.post(name: .gotAppChanged, object: self)
-      
-
-
-    }
-    
-    func applicationWillResignActive(_ notification: Notification) {
-        NotificationCenter.default.post(name: .gotAppChanged, object: self)
-    }
-
-    func applicationDidFinishLaunching(_ aNotification: Notification) {
-        // Insert code here to initialize your application
-    }
-
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
+        
+        let defaults = UserDefaults.standard
+        defaults.set(isBaseVerbose, forKey: "isBaseVerbose")
+        defaults.set(isBaseSingleUser, forKey: "isBaseSingleUser")
+        
+        defaults.set(isSysVerbose, forKey: "isSysVerbose")
+        defaults.set(isSysSingleUser, forKey: "isSysSingleUser")
     }
-
-
 }
 
 

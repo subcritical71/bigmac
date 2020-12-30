@@ -12,6 +12,12 @@ var userName = ""
 var passWord = ""
 var rootMode = false
 
+var isBaseSingleUser = false
+var isBaseVerbose = false
+
+var isSysSingleUser = false
+var isSysVerbose = false
+
 //typealias myVolumeInfo = (diskSlice: String, disk: String, name: String, path: String, external: Bool, uuid: String)
 
 struct myVolumeInfo {
@@ -20,13 +26,6 @@ struct myVolumeInfo {
     var capacity: Int
 }
 
-
-extension Notification.Name {
-    static let gotEraseDisk = Notification.Name("gotEraseDisk")
-    static let gotCreateDisk = Notification.Name("gotCreateDisk")
-    static let gotAppChanged = Notification.Name("gotAppChanged")
-
-}
 
 
 

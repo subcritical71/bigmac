@@ -10,6 +10,15 @@ import Cocoa
 //MARK: Installer Actions
 extension ViewController {
     
+    @IBAction func baseVerboseAction(_ sender: Any) {
+        verboseUserCheckbox.state == .on ? (isBaseVerbose = true) : (isBaseVerbose = false)
+    }
+
+    
+    @IBAction func baseSingleUserAction(_ sender: Any) {
+        singleUserCheckbox.state == .on ? (isBaseSingleUser = true) : (isBaseSingleUser = false)
+    }
+    
     @IBAction func LaunchInstallerAction(_ sender: Any) {
    
         let bootArgs = bootArgsField.stringValue
@@ -58,8 +67,7 @@ extension ViewController {
 
         disk(isBeta: false, diskInfo: notification.object as! myVolumeInfo, isVerbose: isVerbose, isSingleUser: isSingleUser)
     }
-    
-    
+  
     
     @objc func gotCreateDisk(_ notification:Notification){
         print("gotCreateDisk")
