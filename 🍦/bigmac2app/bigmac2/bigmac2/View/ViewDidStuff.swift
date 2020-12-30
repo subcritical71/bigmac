@@ -14,17 +14,16 @@ extension ViewController {
         super.viewDidAppear()
         installerFuelGauge.doubleValue = 0
         view.window?.level = .floating
-
     }
 
-   
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.window?.titlebarAppearsTransparent = true
         view.window?.styleMask.insert(NSWindow.StyleMask.fullSizeContentView)
         progressBarDownload.doubleValue = 0 //set progressBar to 0 at star
+        
         if NSUserName() == "root" {
             rootMode = true
         } else {
@@ -58,7 +57,6 @@ extension ViewController {
         }
       
         bootargs = bootargs?.replacingOccurrences(of: "boot-args\t", with: "")
-        //bootargs = bootargs?.replacingOccurrences(of: "    ", with: "")
         
         if let b = bootargs, !b.isEmpty {
             bootArgsField.stringValue = b

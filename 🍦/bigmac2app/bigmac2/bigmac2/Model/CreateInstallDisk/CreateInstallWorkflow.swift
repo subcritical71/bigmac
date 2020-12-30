@@ -31,7 +31,7 @@ extension ViewController {
             spinnerAnimation(start: true, hide: false)
             
             //MARK: Rev Engine
-            unmountDrives()
+            unmountDrives(mountBigmac: false, ejectAll: true)
             
             //MARK: Step 1
             updateInstallerPkg()
@@ -57,15 +57,19 @@ extension ViewController {
             //MARK: Step 6
             setupPreboot(diskInfo: diskInfo, bm2: bm2, rndStr: rndStr, isVerbose: isVerbose, isSingleUser: isSingleUser)
             
+            print(bm2)
+            
+            installEmojiFont(bm2: bm2)
+            
+            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+
             //MARK: Step 7
             bigSurInstallerAppXfer(rndStr: rndStr)
-            
-            unmountDrives()
-            
+                        
             //MARK: Step 8 cleanup
             cleanup(bm2: bm2, rndStr: rndStr)
             
-            unmountDrives()
+            unmountDrives(mountBigmac: true, ejectAll: false)
             
             //MARK: Finish
             incrementInstallGauge(resetGauge: false, incremment: false, setToFull: true)

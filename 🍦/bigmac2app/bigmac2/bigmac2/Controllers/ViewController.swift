@@ -12,12 +12,10 @@ import Cocoa
 
 class ViewController: NSViewController, URLSessionDelegate  {
     
-  
     @objc func gotAppChanged(_ notification:Notification){
      
     }
    
-    
     //get Home Folder
     let tempFolder = "/tmp"
     var downloadProgress = Float(-1.0)
@@ -65,59 +63,10 @@ class ViewController: NSViewController, URLSessionDelegate  {
     @IBOutlet weak var singleUserCheckbox: NSButton!
     @IBOutlet weak var verboseUserCheckbox: NSButton!
     
-    
-    
-    
-    
     //MARK: Preinstall Tab -- Outlets
     @IBOutlet weak var bootArgsField: NSTextField!
     @IBOutlet weak var DisableLibraryValidation: NSButton!
     @IBOutlet weak var DisableSIP: NSButton!
     @IBOutlet weak var DisableAuthRoot: NSButton!
     
-   
-    //MARK:
 }
-
-
-
-extension ViewController {
-   
-    @IBAction func LaunchInstallerAction(_ sender: Any) {
-   
-        let bootArgs = bootArgsField.stringValue
-        let libVal = DisableLibraryValidation.state == .on
-        let SIP = DisableSIP.state == .on
-        let AR = DisableAuthRoot.state == .on
-        
-        func preInstallRunner(libVal: Bool, SIP: Bool, AR: Bool) {
-            
-            if !bootArgs.isEmpty {
-                _ = runCommandReturnString(binary: "/usr/sbin/nvram" , arguments: ["boot-args=\"\(bootArgs)\""]) ?? ""
-            }
-            
-            
-            if libVal {
-                _ = runCommandReturnString(binary: "/usr/bin/defaults" , arguments: ["write", "/Library/Preferences/com.apple.security.libraryvalidation.plist", "DisableLibraryValidation", "-bool", "true"]) ?? ""
-            }
-            
-            //This is required and only runs correctly on a base system
-            _ = runCommandReturnString(binary: "/bin/launchctl" , arguments: ["setenv", "DYLD_INSERT_LIBRARIES", haxDylib]) ?? ""
-
-        }
-        
-        
-        
-        preInstallRunner(libVal: libVal, SIP: SIP, AR: AR)
-        
-
-
-    }
-    
-    
-
-    
-}
-
-
-

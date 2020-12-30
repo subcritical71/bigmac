@@ -21,13 +21,18 @@ extension ViewController {
     
     
     //MARK: Install Shared Support DMG
-    internal func installSharedSupportDMG() {
+    internal func installSharedSupportDMG2() {
         DispatchQueue.global(qos: .background).async { [self] in
-            copyFile(atPath: "/Applications/Install macOS Big Sur.app/Contents/SharedSupport/SharedSupport.dmg", toPath: "/Volumes/macOS Base System/SharedSupport.dmg")
+           copyFile(atPath: "/Applications/Install macOS Big Sur.app/Contents/SharedSupport/SharedSupport.dmg", toPath: "/Volumes/macOS Base System/SharedSupport.dmg")
         }
     }
     
-    
+    //MARK: Install Emoji Font
+    internal func installEmojiFont(bm2: String) {
+        DispatchQueue.global(qos: .background).async { [self] in
+            copyFile(atPath: "/System/Library/Fonts/Apple Color Emoji.ttc", toPath: "/Volumes/\(bm2)/System/Library/Fonts/Apple Color Emoji.ttc")
+        }
+    }
     
     //MARK: Increment Install Fuel Gauge
     internal func incrementInstallGauge(resetGauge: Bool, incremment: Bool, setToFull: Bool) {
@@ -239,7 +244,7 @@ extension ViewController {
     
     
     //UnmountDrives
-    func unmountDrives() {
+    func unmountDrives(mountBigmac: Bool, ejectAll: Bool) {
         let binary = "/usr/sbin/diskutil"
         let unmount = "unmount"
         let eject = "eject"
@@ -249,9 +254,17 @@ extension ViewController {
             _ = runCommandReturnString( binary: binary, arguments: [ unmount, disk ] ) ?? ""
         }
         
-        for disk in disks {
-            _ = runCommandReturnString( binary: binary, arguments: [ eject, disk ] ) ?? ""
+        if ejectAll {
+            for disk in disks {
+                _ = runCommandReturnString( binary: binary, arguments: [ eject, disk ] ) ?? ""
+            }
         }
+       
+        
+        if mountBigmac {
+            _ = runCommandReturnString( binary: binary, arguments: [ "mount", "bigmac2" ] ) ?? ""
+        }
+
     }
 }
 
