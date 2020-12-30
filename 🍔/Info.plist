@@ -44,22 +44,42 @@
 	<string>12A8179f</string>
 	<key>IOKitPersonalities_x86_64</key>
 	<dict>
+		<key>MacPro3,1</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.AppleUSBHostMergeProperties</string>
+			<key>IOClass</key>
+			<string>AppleUSBHostMergeProperties</string>
+			<key>IOProviderClass</key>
+			<string>AppleBusPowerController</string>
+			<key>IOProviderMergeProperties</key>
+			<dict>
+				<key>kUSBSleepPortCurrentLimit</key>
+				<integer>1000</integer>
+				<key>kUSBSleepPowerSupply</key>
+				<integer>3000</integer>
+				<key>kUSBWakePortCurrentLimit</key>
+				<integer>1500</integer>
+				<key>kUSBWakePowerSupply</key>
+				<integer>3500</integer>
+			</dict>
+			<key>model</key>
+			<string>MacPro3,1</string>
+		</dict>
 		<key>MacPro3,1-EHCI</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
 			<string>com.apple.driver.AppleUSBHostMergeProperties</string>
 			<key>IOClass</key>
 			<string>AppleUSBHostMergeProperties</string>
-			<key>IOPathMatch</key>
-			<string>IOService:/AppleACPIPlatformExpert/PCI0@0/AppleACPIPCI/EHCI@1D,7/EHCI@fd000000</string>
+			<key>IONameMatch</key>
+			<string>EHCI</string>
 			<key>IOProviderClass</key>
 			<string>AppleUSBEHCIPCI</string>
 			<key>IOProviderMergeProperties</key>
 			<dict>
-				<key>kUSBMuxEnabled</key>
-				<false/>
 				<key>port-count</key>
-				<data>BQAAAA==</data>
+				<data>CAAAAA==</data>
 				<key>ports</key>
 				<dict>
 					<key>PRT1</key>
@@ -97,107 +117,26 @@
 						<key>port</key>
 						<data>BQAAAA==</data>
 					</dict>
-				</dict>
-			</dict>
-			<key>model</key>
-			<string>MacPro3,1</string>
-		</dict>
-		<key>MacPro3,1-PXS2</key>
-		<dict>
-			<key>CFBundleIdentifier</key>
-			<string>com.apple.driver.AppleUSBHostMergeProperties</string>
-			<key>IOClass</key>
-			<string>AppleUSBHostMergeProperties</string>
-			<key>IOPathMatch</key>
-			<string>IOService:/AppleACPIPlatformExpert/PCI0@0/AppleACPIPCI/NRP1@1/IOPP/PXS2@0/PXS2@00000000</string>
-			<key>IOProviderClass</key>
-			<string>AppleUSBXHCIPCI</string>
-			<key>IOProviderMergeProperties</key>
-			<dict>
-				<key>kUSBMuxEnabled</key>
-				<true/>
-				<key>port-count</key>
-				<data>BAAAAA==</data>
-				<key>ports</key>
-				<dict>
-					<key>HS01</key>
+					<key>PRT6</key>
 					<dict>
 						<key>UsbConnector</key>
-						<integer>3</integer>
+						<integer>255</integer>
 						<key>port</key>
-						<data>AwAAAA==</data>
+						<data>BgAAAA==</data>
 					</dict>
-					<key>HS02</key>
+					<key>PRT7</key>
 					<dict>
 						<key>UsbConnector</key>
-						<integer>3</integer>
+						<integer>255</integer>
 						<key>port</key>
-						<data>BAAAAA==</data>
+						<data>BwAAAA==</data>
 					</dict>
-					<key>SS01</key>
+					<key>PRT8</key>
 					<dict>
 						<key>UsbConnector</key>
-						<integer>3</integer>
+						<integer>255</integer>
 						<key>port</key>
-						<data>AQAAAA==</data>
-					</dict>
-					<key>SS02</key>
-					<dict>
-						<key>UsbConnector</key>
-						<integer>3</integer>
-						<key>port</key>
-						<data>AgAAAA==</data>
-					</dict>
-				</dict>
-			</dict>
-			<key>model</key>
-			<string>MacPro3,1</string>
-		</dict>
-		<key>MacPro3,1-PXS4</key>
-		<dict>
-			<key>CFBundleIdentifier</key>
-			<string>com.apple.driver.AppleUSBHostMergeProperties</string>
-			<key>IOClass</key>
-			<string>AppleUSBHostMergeProperties</string>
-			<key>IOPathMatch</key>
-			<string>IOService:/AppleACPIPlatformExpert/PCI0@0/AppleACPIPCI/P0P9@9/IOPP/P9P2@0/IOPP/P2P3@0/IOPP/PXS4@0/PXS4@01000000</string>
-			<key>IOProviderClass</key>
-			<string>AppleUSBXHCIPCI</string>
-			<key>IOProviderMergeProperties</key>
-			<dict>
-				<key>kUSBMuxEnabled</key>
-				<true/>
-				<key>port-count</key>
-				<data>BAAAAA==</data>
-				<key>ports</key>
-				<dict>
-					<key>HS01</key>
-					<dict>
-						<key>UsbConnector</key>
-						<integer>3</integer>
-						<key>port</key>
-						<data>AwAAAA==</data>
-					</dict>
-					<key>HS02</key>
-					<dict>
-						<key>UsbConnector</key>
-						<integer>3</integer>
-						<key>port</key>
-						<data>BAAAAA==</data>
-					</dict>
-					<key>SS01</key>
-					<dict>
-						<key>UsbConnector</key>
-						<integer>3</integer>
-						<key>port</key>
-						<data>AQAAAA==</data>
-					</dict>
-					<key>SS02</key>
-					<dict>
-						<key>UsbConnector</key>
-						<integer>3</integer>
-						<key>port</key>
-						<data>AgAAAA==</data>
+						<data>CAAAAA==</data>
 					</dict>
 				</dict>
 			</dict>
@@ -226,24 +165,132 @@
 			<key>model</key>
 			<string>MacPro3,1</string>
 		</dict>
-		<key>MacPro3,1</key>
+		<key>MacPro3,1-PXS2</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
 			<string>com.apple.driver.AppleUSBHostMergeProperties</string>
 			<key>IOClass</key>
 			<string>AppleUSBHostMergeProperties</string>
+			<key>IONameMatch</key>
+			<string>PXS2</string>
 			<key>IOProviderClass</key>
-			<string>AppleBusPowerController</string>
+			<string>AppleASMedia3142USBXHCI</string>
 			<key>IOProviderMergeProperties</key>
 			<dict>
-				<key>kUSBSleepPortCurrentLimit</key>
-				<integer>1000</integer>
-				<key>kUSBSleepPowerSupply</key>
-				<integer>3000</integer>
-				<key>kUSBWakePortCurrentLimit</key>
-				<integer>1500</integer>
-				<key>kUSBWakePowerSupply</key>
-				<integer>3500</integer>
+				<key>kUSBMuxEnabled</key>
+				<true/>
+				<key>port-count</key>
+				<data>BAAAAA==</data>
+				<key>ports</key>
+				<dict>
+					<key>HS01</key>
+					<dict>
+						<key>UsbConnector</key>
+						<integer>3</integer>
+						<key>port</key>
+						<data>AQAAAA==</data>
+					</dict>
+					<key>HS02</key>
+					<dict>
+						<key>UsbConnector</key>
+						<integer>3</integer>
+						<key>port</key>
+						<data>AgAAAA==</data>
+					</dict>
+					<key>HS03</key>
+					<dict>
+						<key>UsbConnector</key>
+						<integer>3</integer>
+						<key>port</key>
+						<data>AwAAAA==</data>
+					</dict>
+					<key>HS04</key>
+					<dict>
+						<key>UsbConnector</key>
+						<integer>3</integer>
+						<key>port</key>
+						<data>BAAAAA==</data>
+					</dict>
+				</dict>
+			</dict>
+			<key>model</key>
+			<string>MacPro3,1</string>
+		</dict>
+		<key>MacPro3,1-PXS3</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.AppleUSBHostMergeProperties</string>
+			<key>IOClass</key>
+			<string>AppleUSBHostMergeProperties</string>
+			<key>IONameMatch</key>
+			<string>PXS3</string>
+			<key>IOProviderClass</key>
+			<string>AppleASMediaUSBXHCI</string>
+			<key>IOProviderMergeProperties</key>
+			<dict>
+				<key>kUSBMuxEnabled</key>
+				<true/>
+				<key>port-count</key>
+				<data>CAAAAA==</data>
+				<key>ports</key>
+				<dict>
+					<key>HS01</key>
+					<dict>
+						<key>UsbConnector</key>
+						<integer>3</integer>
+						<key>port</key>
+						<data>AQAAAA==</data>
+					</dict>
+					<key>HS02</key>
+					<dict>
+						<key>UsbConnector</key>
+						<integer>3</integer>
+						<key>port</key>
+						<data>AgAAAA==</data>
+					</dict>
+					<key>HS03</key>
+					<dict>
+						<key>UsbConnector</key>
+						<integer>3</integer>
+						<key>port</key>
+						<data>AwAAAA==</data>
+					</dict>
+					<key>HS04</key>
+					<dict>
+						<key>UsbConnector</key>
+						<integer>3</integer>
+						<key>port</key>
+						<data>BAAAAA==</data>
+					</dict>
+					<key>SS01</key>
+					<dict>
+						<key>UsbConnector</key>
+						<integer>3</integer>
+						<key>port</key>
+						<data>BQAAAA==</data>
+					</dict>
+					<key>SS02</key>
+					<dict>
+						<key>UsbConnector</key>
+						<integer>3</integer>
+						<key>port</key>
+						<data>BgAAAA==</data>
+					</dict>
+					<key>SS03</key>
+					<dict>
+						<key>UsbConnector</key>
+						<integer>3</integer>
+						<key>port</key>
+						<data>BwAAAA==</data>
+					</dict>
+					<key>SS04</key>
+					<dict>
+						<key>UsbConnector</key>
+						<integer>3</integer>
+						<key>port</key>
+						<data>CAAAAA==</data>
+					</dict>
+				</dict>
 			</dict>
 			<key>model</key>
 			<string>MacPro3,1</string>
@@ -291,6 +338,44 @@
 			</dict>
 			<key>model</key>
 			<string>Xserve3,1</string>
+		</dict>
+		<key>ThunderboltDisplay2011</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.AppleUSBHostMergeProperties</string>
+			<key>IOClass</key>
+			<string>AppleUSBHostMergeProperties</string>
+			<key>IOProviderClass</key>
+			<string>AppleUSBEHCIPCI</string>
+			<key>IOProviderMergeProperties</key>
+			<dict>
+				<key>kUSBCompanion</key>
+				<false/>
+				<key>kUSBSleepPortCurrentLimit</key>
+				<integer>2100</integer>
+				<key>kUSBSleepPowerSupply</key>
+				<integer>6300</integer>
+				<key>kUSBWakePortCurrentLimit</key>
+				<integer>2100</integer>
+				<key>kUSBWakePowerSupply</key>
+				<integer>3700</integer>
+				<key>port-count</key>
+				<data>AQAAAA==</data>
+				<key>ports</key>
+				<dict>
+					<key>PRT1</key>
+					<dict>
+						<key>UsbConnector</key>
+						<integer>255</integer>
+						<key>port</key>
+						<data>AQAAAA==</data>
+					</dict>
+				</dict>
+			</dict>
+			<key>Tunnel Endpoint Device Model ID</key>
+			<data>AoAAAA==</data>
+			<key>Tunnel Endpoint Device Vendor ID</key>
+			<data>AQAAAA==</data>
 		</dict>
 	</dict>
 	<key>IOKitPersonalities</key>
@@ -632,6 +717,87 @@
 			<key>idVendor</key>
 			<integer>1452</integer>
 		</dict>
+		<key>Built-in iSight2 - 0x219</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.AppleUSBHostMergeProperties</string>
+			<key>IOClass</key>
+			<string>AppleUSBHostMergeProperties</string>
+			<key>IOProviderClass</key>
+			<string>IOUSBDevice</string>
+			<key>IOProviderMergeProperties</key>
+			<dict>
+				<key>kUSBDescriptorOverride</key>
+				<dict>
+					<key>descriptor</key>
+					<data>CQJ2BQMBAID6CAsAAg4DAAIJBAAAAQ4BAAINJAEAATMAAAk9AAEBEiQCAQECAAAAAAAAAAADCgAACSQDAgEBAAMACyQFAwEAAAJ/FQAHBYEDCAAGBSUDKAAJBAEAAA4CAAAPJAECmwSCAAICAAABAAAbJAQBB1lVWTIAABAAgAAAqgA4m3EQBQAAAABGJAUBAKAAeAAAAHcBAADKCACWAAAVFgUACxUWBQB0jAUAgBoGABzIBgAgoQcAJLgIACssCgAANQwAQEIPAFVYFACAhB4ARiQFAgCwAJAAAAB3AQAAyggAxgAAFRYFAAsVFgUAdIwFAIAaBgAcyAYAIKEHACS4CAArLAoAADUMAEBCDwBVWBQAgIQeAEYkBQMAQAHwAAAAdwEAAMoIAFgCABUWBQALFRYFAHSMBQCAGgYAHMgGACChBwAkuAgAKywKAAA1DABAQg8AVVgUAICEHgBGJAUEAGABIAEAAHcBAADKCAAYAwAVFgUACxUWBQB0jAUAgBoGABzIBgAgoQcAJLgIACssCgAANQwAQEIPAFVYFACAhB4ARiQFBQCAAuABAAB3AQAAyggAYAkAFRYFAAsVFgUAdIwFAIAaBgAcyAYAIKEHACS4CAArLAoAADUMAEBCDwBVWBQAgIQeAD4kBQYA0ALgAQAAdwEAAMoIAIwKAIAaBgAJgBoGABzIBgAgoQcAJLgIACssCgAANQwAQEIPAFVYFACAhB4APiQFBwDAAkACAAB3AQAAyggAYAwAgBoGAAmAGgYAHMgGACChBwAkuAgAKywKAAA1DABAQg8AVVgUAICEHgAiJAMAB6AAeACwAJAAQAHwAGABIAGAAuAB0ALgAcACQAIABiQNAQEBCyQGAggAAQAAAABKJAcBAIAC4AEAAHcBAADKCABgCQAVFgUADAuLAgAVFgUAdIwFAIAaBgAcyAYAIKEHACS4CAArLAoAADUMAEBCDwBVWBQAgIQeAEokBwIA0ALgAQAAdwEAAMoIAIwKABUWBQAMC4sCABUWBQB0jAUAgBoGABzIBgAgoQcAJLgIACssCgAANQwAQEIPAFVYFACAhB4ARiQHAwAgA1gCAAB3AQAAyggApg4AFRYFAAsVFgUAdIwFAIAaBgAcyAYAIKEHACS4CAArLAoAADUMAEBCDwBVWBQAgIQeAEYkBwQAAARAAgAAdwEAAMoIAAASABUWBQALFRYFAHSMBQCAGgYAHMgGACChBwAkuAgAKywKAAA1DABAQg8AVVgUAICEHgBGJAcFAAAEAAMAAHcBAADKCAAAGAAVFgUACxUWBQB0jAUAgBoGABzIBgAgoQcAJLgIACssCgAANQwAQEIPAFVYFACAhB4ARiQHBgAABdACAAB3AQAAyggAIBwAFRYFAAsVFgUAdIwFAIAaBgAcyAYAIKEHACS4CAArLAoAADUMAEBCDwBVWBRCgIQeAEYkBwcAAAXAAwAAdwEAAMoIAIAlABUWBQALFRYFAHSMBQCAGgYAHMgGACChBwAkuAgAKywKAAA1DABAQg8AVVgUAICEHgBGJAcIAAAFAAQAAHcBAADKCAAAKAAVFgUACxUWBQB0jAUAgBoGABzIBgAgoQcAJLgIACssCgAANQwAQEIPAFVYFACAhB4AJiQDAAiAAuAB0ALgASADWAIABEACAAQAAwAF0AIABcADAAUABAAGJA0BAQEJBAEBAQ4CAAAHBYIFgAABCQQBAgEOAgAABwWCBQACAQkEAQMBDgIAAAcFggUABAEJBAEEAQ4CAAAHBYIFAAsBCQQBBQEOAgAABwWCBQAMAQkEAQYBDgIAAAcFggWAEwEJBAEHAQ4CAAAHBYIFABQBCQQCAAD/AAAA</data>
+					<key>index</key>
+					<integer>0</integer>
+					<key>languageID</key>
+					<integer>0</integer>
+				</dict>
+			</dict>
+			<key>bcdDevice</key>
+			<integer>537</integer>
+			<key>idProduct</key>
+			<integer>34050</integer>
+			<key>idVendor</key>
+			<integer>1452</integer>
+		</dict>
+		<key>Built-in iSight3 - 0x319</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.AppleUSBHostMergeProperties</string>
+			<key>IOClass</key>
+			<string>AppleUSBHostMergeProperties</string>
+			<key>IOProviderClass</key>
+			<string>IOUSBDevice</string>
+			<key>IOProviderMergeProperties</key>
+			<dict>
+				<key>kUSBDescriptorOverride</key>
+				<dict>
+					<key>descriptor</key>
+					<data>CQKCAgMBAID6CAsAAg4DAAIJBAAAAQ4BAAINJAEAATMAAAk9AAEBEiQCAQECAAAAAAAAAAADCgAACSQDAgEBAAMACyQFAwEAAAJ/FQAHBYEDCAAGBSUDKAAJBAEAAA4CAAAOJAEBpwGCAAICAAABABskBAEFWVVZMgAAEACAAACqADibcRAFAAAAAEYkBQEAoAB4AAAAdwEAAMoIAJYAABUWBQALFRYFAHSMBQCAGgYAHMgGACChBwAkuAgAKywKAAA1DABAQg8AVVgUAICEHgBGJAUCALAAkAAAAHcBAADKCADGAAAVFgUACxUWBQB0jAUAgBoGABzIBgAgoQcAJLgIACssCgAANQwAQEIPAFVYFACAhB4ARiQFAwBAAfAAAAB3AQAAyggAWAIAFRYFAAsVFgUAdIwFAIAaBgAcyAYAIKEHACS4CAArLAoAADUMAEBCDwBVWBQAgIQeAEYkBQQAYAEgAQAAdwEAAMoIABgDABUWBQALFRYFAHSMBQCAGgYAHMgGACChBwAkuAgAKywKAAA1DABAQg8AVVgUAICEHgBGJAUFAIAC4AEAAHcBAADKCABgCQAVFgUACxUWBQB0jAUAgBoGABzIBgAgoQcAJLgIACssCgAANQwAQEIPAFVYFACAhB4AGiQDAAWgAHgAsACQAEAB8ABgASABgALgAQAGJA0BAQEJBAEBAQ4CAAAHBYIFgAABCQQBAgEOAgAABwWCBQACAQkEAQMBDgIAAAcFggUABAEJBAEEAQ4CAAAHBYIFAAsBCQQBBQEOAgAABwWCBQAMAQkEAQYBDgIAAAcFggWAEwEJBAEHAQ4CAAAHBYIFABQBCQQCAAD/AAAA</data>
+					<key>index</key>
+					<integer>0</integer>
+					<key>languageID</key>
+					<integer>0</integer>
+				</dict>
+			</dict>
+			<key>bcdDevice</key>
+			<integer>793</integer>
+			<key>idProduct</key>
+			<integer>34053</integer>
+			<key>idVendor</key>
+			<integer>1452</integer>
+		</dict>
+		<key>Built-in iSight5-0x419</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.AppleUSBHostMergeProperties</string>
+			<key>IOClass</key>
+			<string>AppleUSBHostMergeProperties</string>
+			<key>IOProviderClass</key>
+			<string>IOUSBDevice</string>
+			<key>IOProviderMergeProperties</key>
+			<dict>
+				<key>kUSBDescriptorOverride</key>
+				<dict>
+					<key>descriptor</key>
+					<data>CQKCAgMBAID6CAsAAg4DAAIJBAAAAQ4BAAINJAEAATMAAAk9AAEBEiQCAQECAAAAAAAAAAADCgAACSQDAgEBAAMACyQFAwEAAAJ/FQAHBYEDCAAGBSUDKAAJBAEAAA4CAAAOJAEBpwGCAAICAAABABskBAEFWVVZMgAAEACAAACqADibcRAFAAAAAEYkBQEAoAB4AAAAdwEAAMoIAJYAABUWBQALFRYFAHSMBQCAGgYAHMgGACChBwAkuAgAKywKAAA1DABAQg8AVVgUAICEHgBGJAUCALAAkAAAAHcBAADKCADGAAAVFgUACxUWBQB0jAUAgBoGABzIBgAgoQcAJLgIACssCgAANQwAQEIPAFVYFACAhB4ARiQFAwBAAfAAAAB3AQAAyggAWAIAFRYFAAsVFgUAdIwFAIAaBgAcyAYAIKEHACS4CAArLAoAADUMAEBCDwBVWBQAgIQeAEYkBQQAYAEgAQAAdwEAAMoIABgDABUWBQALFRYFAHSMBQCAGgYAHMgGACChBwAkuAgAKywKAAA1DABAQg8AVVgUAICEHgBGJAUFAIAC4AEAAHcBAADKCABgCQAVFgUACxUWBQB0jAUAgBoGABzIBgAgoQcAJLgIACssCgAANQwAQEIPAFVYFACAhB4AGiQDAAWgAHgAsACQAEAB8ABgASABgALgAQAGJA0BAQEJBAEBAQ4CAAAHBYIFgAABCQQBAgEOAgAABwWCBQACAQkEAQMBDgIAAAcFggUABAEJBAEEAQ4CAAAHBYIFAAsBCQQBBQEOAgAABwWCBQAMAQkEAQYBDgIAAAcFggWAEwEJBAEHAQ4CAAAHBYIFABQBCQQCAAD/AAAA</data>
+					<key>index</key>
+					<integer>0</integer>
+					<key>languageID</key>
+					<integer>0</integer>
+				</dict>
+			</dict>
+			<key>bcdDevice</key>
+			<integer>1049</integer>
+			<key>idProduct</key>
+			<integer>34055</integer>
+			<key>idVendor</key>
+			<integer>1452</integer>
+		</dict>
 		<key>DisplayiSight - 0x219</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
@@ -656,6 +822,31 @@
 			<integer>537</integer>
 			<key>idProduct</key>
 			<integer>34056</integer>
+			<key>idVendor</key>
+			<integer>1452</integer>
+		</dict>
+		<key>FaceTime Camera (Built-in) 34058</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.AppleUSBHostMergeProperties</string>
+			<key>IOClass</key>
+			<string>AppleUSBHostMergeProperties</string>
+			<key>IOProviderClass</key>
+			<string>IOUSBDevice</string>
+			<key>IOProviderMergeProperties</key>
+			<dict>
+				<key>kUSBDescriptorOverride</key>
+				<dict>
+					<key>descriptor</key>
+					<data>NgNGAGEAYwBlAFQAaQBtAGUAIABDAGEAbQBlAHIAYQAgACgAQgB1AGkAbAB0AC0AaQBuACkA</data>
+					<key>index</key>
+					<string>UsbDescriptorOverrideProductStringIndex</string>
+					<key>languageID</key>
+					<integer>1033</integer>
+				</dict>
+			</dict>
+			<key>idProduct</key>
+			<integer>34058</integer>
 			<key>idVendor</key>
 			<integer>1452</integer>
 		</dict>
@@ -735,6 +926,154 @@
 			<integer>4782</integer>
 			<key>idVendor</key>
 			<integer>1452</integer>
+		</dict>
+		<key>Linksys USB3GIGV1</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.AppleUSBHostMergeProperties</string>
+			<key>IOClass</key>
+			<string>AppleUSBHostMergeProperties</string>
+			<key>IOProviderClass</key>
+			<string>IOUSBHostDevice</string>
+			<key>IOProviderMergeProperties</key>
+			<dict>
+				<key>kUSBHostDeviceEnableLPM</key>
+				<false/>
+			</dict>
+			<key>idProductArray</key>
+			<array>
+				<integer>65</integer>
+			</array>
+			<key>idVendor</key>
+			<integer>5041</integer>
+		</dict>
+		<key>MacBookPro11,1 Card Reader</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.AppleUSBHostMergeProperties</string>
+			<key>IOClass</key>
+			<string>AppleUSBHostMergeProperties</string>
+			<key>IOProviderClass</key>
+			<string>IOUSBDevice</string>
+			<key>IOProviderMergeProperties</key>
+			<dict>
+				<key>kUSBDescriptorOverride</key>
+				<dict>
+					<key>descriptor</key>
+					<data>OANJAG4AdABlAHIAbgBhAGwAIABNAGUAbQBvAHIAeQAgAEMAYQByAGQAIABSAGUAYQBkAGUAcgA=</data>
+					<key>index</key>
+					<string>UsbDescriptorOverrideProductStringIndex</string>
+					<key>languageID</key>
+					<integer>1033</integer>
+				</dict>
+			</dict>
+			<key>idProductArray</key>
+			<array>
+				<integer>33795</integer>
+				<integer>33796</integer>
+				<integer>33798</integer>
+			</array>
+			<key>idVendor</key>
+			<integer>1452</integer>
+		</dict>
+		<key>Moshi USB 10/100/1000 LAN</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.AppleUSBHostMergeProperties</string>
+			<key>IOClass</key>
+			<string>AppleUSBHostMergeProperties</string>
+			<key>IOProviderClass</key>
+			<string>IOUSBHostDevice</string>
+			<key>IOProviderMergeProperties</key>
+			<dict>
+				<key>kUSBHostDeviceEnableLPM</key>
+				<false/>
+			</dict>
+			<key>idProductArray</key>
+			<array>
+				<integer>33107</integer>
+			</array>
+			<key>idVendor</key>
+			<integer>3034</integer>
+		</dict>
+		<key>Patriot Memory</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.AppleUSBComposite</string>
+			<key>IOClass</key>
+			<string>IOUSBCompositeDriver</string>
+			<key>IOProviderClass</key>
+			<string>IOUSBDevice</string>
+			<key>idProduct</key>
+			<integer>20992</integer>
+			<key>idVendor</key>
+			<integer>5118</integer>
+		</dict>
+		<key>SIXAXIS controller</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.AppleUSBHostMergeProperties</string>
+			<key>IOClass</key>
+			<string>AppleUSBHostMergeProperties</string>
+			<key>IOProviderClass</key>
+			<string>IOUSBInterface</string>
+			<key>IOProviderMergeProperties</key>
+			<dict>
+				<key>SIXAXIS compatibility</key>
+				<true/>
+			</dict>
+			<key>bConfigurationValue</key>
+			<integer>1</integer>
+			<key>bInterfaceNumber</key>
+			<integer>0</integer>
+			<key>idProduct</key>
+			<integer>616</integer>
+			<key>idVendor</key>
+			<integer>1356</integer>
+		</dict>
+		<key>Wave Camera Enable Reset</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.AppleUSBHostMergeProperties</string>
+			<key>IOClass</key>
+			<string>AppleUSBHostMergeProperties</string>
+			<key>IOProviderClass</key>
+			<string>IOUSBHostDevice</string>
+			<key>IOProviderMergeProperties</key>
+			<dict>
+				<key>UsbUserClientEnableReset</key>
+				<true/>
+			</dict>
+			<key>idProductArray</key>
+			<array>
+				<integer>34050</integer>
+				<integer>34056</integer>
+				<integer>34064</integer>
+			</array>
+			<key>idVendor</key>
+			<integer>1452</integer>
+		</dict>
+		<key>eLicenser Enable Data Toggle Reset</key>
+		<dict>
+			<key>CFBundleIdentifier</key>
+			<string>com.apple.driver.AppleUSBHostMergeProperties</string>
+			<key>IOClass</key>
+			<string>AppleUSBHostMergeProperties</string>
+			<key>IOProviderClass</key>
+			<string>IOUSBHostInterface</string>
+			<key>IOProviderMergeProperties</key>
+			<dict>
+				<key>UsbUserClientEnableDataToggleReset</key>
+				<true/>
+			</dict>
+			<key>bConfigurationValue</key>
+			<string>*</string>
+			<key>bInterfaceNumber</key>
+			<string>*</string>
+			<key>idProduct</key>
+			<integer>257</integer>
+			<key>idVendor</key>
+			<integer>2073</integer>
 		</dict>
 		<key>iPod</key>
 		<dict>

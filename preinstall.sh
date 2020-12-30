@@ -163,6 +163,7 @@ n
 o
 printf "————————————————————————————————————"
 n
+defaults write /Library/Preferences/com.apple.security.libraryvalidation.plist DisableLibraryValidation -bool true
 n
 o
 printf "———————————————————————————————————————————————————————————————————"
