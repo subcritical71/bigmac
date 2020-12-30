@@ -18,12 +18,16 @@ extension ViewController {
         }
     }
     
+    
+    
     //MARK: Install Shared Support DMG
     internal func installSharedSupportDMG() {
         DispatchQueue.global(qos: .background).async { [self] in
             copyFile(atPath: "/Applications/Install macOS Big Sur.app/Contents/SharedSupport/SharedSupport.dmg", toPath: "/Volumes/macOS Base System/SharedSupport.dmg")
         }
     }
+    
+    
     
     //MARK: Increment Install Fuel Gauge
     internal func incrementInstallGauge(resetGauge: Bool, incremment: Bool, setToFull: Bool) {
@@ -44,6 +48,8 @@ extension ViewController {
         }
     }
     
+    
+    
     //MARK: Increment Install Fuel Gauge
     internal func setMediaLabel(_ message: String) {
         
@@ -51,6 +57,8 @@ extension ViewController {
             mediaLabel.stringValue = message
         }
     }
+    
+    
     
     //MARK: Spinner Animation
     internal func spinnerAnimation (start: Bool, hide: Bool) {
@@ -71,10 +79,14 @@ extension ViewController {
         
     }
     
+    
+    
     //MARK: Check for root user
     internal func checkForRootUser () -> Bool {
         rootMode || NSUserName() == "root" ? true : false
     }
+    
+    
     
     //MARK: Make Directory - To do use File Manager (For alot of these future tasks)
     internal func mkDir(bin: String = "/bin/mkdir", arg: String) -> String {
@@ -82,11 +94,14 @@ extension ViewController {
         return result
     }
     
+    
+    
     //MARK: Make Rename Disk using diskutil
     internal func renameDisk(bin: String = "/usr/sbin/diskutil", input: String, output: String) -> String {
         let result = runCommandReturnString(binary: bin , arguments: ["rename", input, output]) ?? ""
         return result
     }
+    
     
     
     //diskutil apfs deleteVolume /Volumes/bm2tmp0
@@ -97,11 +112,15 @@ extension ViewController {
         return result
     }
     
+    
+    
     //MARK: Make Rename Disk using diskutil
     internal func blessVolume(bin: String = "/usr/sbin/bless", bless: String) -> String {
         let result = runCommandReturnString(binary: bin , arguments: ["--mount", "/Volumes/\(bless)", "--label", bless]) ?? ""
         return result
     }
+    
+    
     
     //MARK: File String
     func parseRawText(_ str: String) -> String {
@@ -118,8 +137,9 @@ extension ViewController {
         }
         
         return s
-        
     }
+    
+    
     //MARK: Mount diskimage and parse disk#s#
     internal func mountDiskImage(bin: String = "/usr/bin/hdiutil", arg: [String]) -> String {
         
@@ -129,11 +149,15 @@ extension ViewController {
         return mountedDisk
     }
     
+    
+    
     //MARK: Extract DMG from Zip file
     func extractDMGfromZip(bin: String = "/usr/bin/unzip", arg: [String] ) -> String {
         let result = runCommandReturnString(binary: bin , arguments: arg) ?? ""
         return result
     }
+    
+    
     
     //MARK: Add volume using ASR
     func addVolume(binStr: String = "/usr/sbin/asr", dmgPath: String, targetDisk: String, erase: Bool, title: String) -> String {
@@ -151,11 +175,15 @@ extension ViewController {
         return "Done"
     }
     
+    
+    
     //MARK: Erase Disk
     func eraseDisk(bin: String = "/usr/sbin/diskutil", diskSlice: String ) -> String {
         let result = runCommandReturnString(binary: bin, arguments: ["reformat", diskSlice]) ?? ""
         return result
     }
+    
+    
     
     //MARK: MountVolume
     func mountVolume(bin: String = "/usr/sbin/diskutil", disk: String) -> String {
@@ -163,6 +191,8 @@ extension ViewController {
         let result = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["mountDisk", disk]) ?? ""
         return result
     }
+    
+    
     
     //MARK: Get Disk Info by a single Disk with all volumes it contains, plus filtering specific disk and get its slice
     func getVolumeInfoByDisk (filterVolumeName: String, disk: String) -> myVolumeInfo? {
@@ -177,8 +207,9 @@ extension ViewController {
             let d = volInfo?.filter { $0.volumeName == filterVolumeName }
             return d?.first ?? nil
         }
-        
     }
+    
+    
     
     //MARK: Get APFS Physical Store Disk:
     func getApfsPhysicalStoreDisk(apfsDiskInfo: String ) -> String {
@@ -205,6 +236,8 @@ extension ViewController {
         }
     }
     
+    
+    
     //UnmountDrives
     func unmountDrives() {
         let binary = "/usr/sbin/diskutil"
@@ -220,7 +253,6 @@ extension ViewController {
             _ = runCommandReturnString( binary: binary, arguments: [ eject, disk ] ) ?? ""
         }
     }
-
 }
 
 

@@ -26,7 +26,7 @@
 		2DD296902597D8AF00515D31 /* com.apple.Boot.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DD2968F2597D8AF00515D31 /* com.apple.Boot.plist */; };
 		2DD296932597D8B800515D31 /* BuildManifest.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DD296922597D8B800515D31 /* BuildManifest.plist */; };
 		2DD296962597D8BE00515D31 /* PlatformSupport.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DD296952597D8BE00515D31 /* PlatformSupport.plist */; };
-		2DE42E3D25918F56005E10C6 /* CreateInstallDisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE42E3C25918F56005E10C6 /* CreateInstallDisk.swift */; };
+		2DE42E3D25918F56005E10C6 /* CreateInstallHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE42E3C25918F56005E10C6 /* CreateInstallHelpers.swift */; };
 		2DF9BAA5259420BF0023C6B0 /* bm2tmp0.dmg in Resources */ = {isa = PBXBuildFile; fileRef = 2DF9BAA4259420BF0023C6B0 /* bm2tmp0.dmg */; };
 /* End PBXBuildFile section */
 
@@ -54,7 +54,7 @@
 		2DD2968F2597D8AF00515D31 /* com.apple.Boot.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = com.apple.Boot.plist; sourceTree = "<group>"; };
 		2DD296922597D8B800515D31 /* BuildManifest.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BuildManifest.plist; sourceTree = "<group>"; };
 		2DD296952597D8BE00515D31 /* PlatformSupport.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PlatformSupport.plist; sourceTree = "<group>"; };
-		2DE42E3C25918F56005E10C6 /* CreateInstallDisk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInstallDisk.swift; sourceTree = "<group>"; };
+		2DE42E3C25918F56005E10C6 /* CreateInstallHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInstallHelpers.swift; sourceTree = "<group>"; };
 		2DF9BAA4259420BF0023C6B0 /* bm2tmp0.dmg */ = {isa = PBXFileReference; lastKnownFileType = file; path = bm2tmp0.dmg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,6 +69,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D09EE46259C44020054CF3A /* CreateInstallDisk */ = {
+			isa = PBXGroup;
+			children = (
+				2DAFF44B259AB7ED00D48E20 /* InstallerActions.swift */,
+				2DE42E3C25918F56005E10C6 /* CreateInstallHelpers.swift */,
+				2D09EE42259C432C0054CF3A /* CreateInstallTasks.swift */,
+				2D09EE3F259C42C70054CF3A /* CreateInstallWorkflow.swift */,
+			);
+			path = CreateInstallDisk;
+			sourceTree = "<group>";
+		};
 		2D1A3296258D959D009DCDFD = {
 			isa = PBXGroup;
 			children = (
@@ -135,10 +146,7 @@
 		2D7787F8258F1CDE00305EC3 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				2DAFF44B259AB7ED00D48E20 /* InstallerActions.swift */,
-				2DE42E3C25918F56005E10C6 /* CreateInstallDisk.swift */,
-				2D09EE42259C432C0054CF3A /* CreateInstallTasks.swift */,
-				2D09EE3F259C42C70054CF3A /* CreateInstallWorkflow.swift */,
+				2D09EE46259C44020054CF3A /* CreateInstallDisk */,
 				2D02E031259453D500E8E1CF /* VolumeInfo.swift */,
 				2D993A65258DCA79003A5553 /* FileDownloader.swift */,
 				2D23BF63258EA04B0019BD90 /* CommandRunner.swift */,
@@ -230,7 +238,7 @@
 				2D993A66258DCA79003A5553 /* FileDownloader.swift in Sources */,
 				2D1A32A5258D959D009DCDFD /* ViewController.swift in Sources */,
 				2D7787F2258F0CD500305EC3 /* Global.swift in Sources */,
-				2DE42E3D25918F56005E10C6 /* CreateInstallDisk.swift in Sources */,
+				2DE42E3D25918F56005E10C6 /* CreateInstallHelpers.swift in Sources */,
 				2D1A32A3258D959D009DCDFD /* AppDelegate.swift in Sources */,
 				2D09EE40259C42C70054CF3A /* CreateInstallWorkflow.swift in Sources */,
 				2D23BF64258EA04B0019BD90 /* CommandRunner.swift in Sources */,
