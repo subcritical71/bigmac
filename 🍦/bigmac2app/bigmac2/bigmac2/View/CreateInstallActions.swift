@@ -65,14 +65,13 @@ extension ViewController {
         let isSingleUser = singleUserCheckbox.state == .on
         let isVerbose = verboseUserCheckbox.state == .on
 
-        disk(isBeta: false, diskInfo: notification.object as! myVolumeInfo, isVerbose: isVerbose, isSingleUser: isSingleUser)
+        disk(isBeta: false, diskInfo: notification.object as! myVolumeInfo, isVerbose: isVerbose, isSingleUser: isSingleUser, fullDisk: false)
     }
   
     
     @objc func gotCreateDisk(_ notification:Notification){
         print("gotCreateDisk")
     }
-    
   
 }
 

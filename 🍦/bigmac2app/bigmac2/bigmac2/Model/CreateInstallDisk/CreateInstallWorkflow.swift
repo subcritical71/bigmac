@@ -12,7 +12,7 @@ extension ViewController {
     //MAIN WORKFLOW STARTS HERE
     
     //MARK: Install Disk Setup
-    func disk(isBeta:Bool, diskInfo: myVolumeInfo, isVerbose: Bool, isSingleUser: Bool) {
+    func disk(isBeta:Bool, diskInfo: myVolumeInfo, isVerbose: Bool, isSingleUser: Bool, fullDisk: Bool) {
         DispatchQueue.global(qos: .background).async { [self] in
             
             //MARK: Set vars and local constants
@@ -50,18 +50,23 @@ extension ViewController {
             //MARK: Step 5
             installBaseSystem(diskInfo: diskInfo, baseSys: baseSys, bm2: bm2)
             
+            
             sleep(1)
             
             //MARK: Step 6
             setupPreboot(diskInfo: diskInfo, bm2: bm2, rndStr: rndStr, isVerbose: isVerbose, isSingleUser: isSingleUser)
-                        
-            //MARK: Step 6.5
-            installEmojiFont(bm2: bm2)
-            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+                            
+            if fullDisk {
+                
+                //MARK: Step 6.5
+                installEmojiFont(bm2: bm2)
+                incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
 
-            //MARK: Step 7
-            bigSurInstallerAppXfer(rndStr: rndStr)
-                        
+                //MARK: Step 7
+                bigSurInstallerAppXfer(rndStr: rndStr)
+    
+            }
+        
             //MARK: Step 8 cleanup
             cleanup(bm2: bm2, rndStr: rndStr)
             
