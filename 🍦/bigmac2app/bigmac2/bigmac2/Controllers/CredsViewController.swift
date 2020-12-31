@@ -44,6 +44,15 @@ class CredsViewController: NSViewController {
         exit(0)
     }
     
+    
+    override func viewDidLoad() {
+        view.window?.titlebarAppearsTransparent = true
+        view.window?.styleMask.insert(NSWindow.StyleMask.fullSizeContentView)
+        view.window?.title = "🍔 Big Mac 2.0"
+        view.window?.level = .floating
+        view.window?.styleMask = .borderless
+        
+    }
     @IBAction func okButton(_ sender: Any) {
         saveNames()
         progressBar.isHidden = false
@@ -59,7 +68,7 @@ class CredsViewController: NSViewController {
             } else {
                 progressBar.isHidden = true
                 dismiss(self)
-                NotificationCenter.default.post(name: .gotNagScreen, object: nil)
+                NotificationCenter.default.post(name: .RunAtRootRequest, object: nil)
 
             }
         }

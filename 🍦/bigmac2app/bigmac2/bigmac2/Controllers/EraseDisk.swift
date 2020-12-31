@@ -41,9 +41,6 @@ class EraseDiskViewController : NSViewController {
     
  
     override func viewDidLoad() {
-        view.window?.titlebarAppearsTransparent = true
-        view.window?.styleMask.insert(NSWindow.StyleMask.fullSizeContentView)
-
         refresh()
         eraseDiskEntry.focusRingType = .none
         volumePopup.focusRingType = .none
@@ -67,7 +64,7 @@ class EraseDiskViewController : NSViewController {
             let int = Int(volumePopup.indexOfSelectedItem)
             let selectedDisk = volumeArray[int]
             
-            NotificationCenter.default.post(name: .gotEraseDisk, object: selectedDisk)
+            NotificationCenter.default.post(name: .EraseDisk, object: selectedDisk)
             
         } else {
             eraseDiskEntry.shake(duration: 1)

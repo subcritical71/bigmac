@@ -154,6 +154,7 @@
 			isa = PBXGroup;
 			children = (
 				2DAFF44E259AB8A100D48E20 /* Notifications.swift */,
+				2D3E60FD259D430C00DE6488 /* ViewSetup.swift */,
 				2D1A32A4258D959D009DCDFD /* ViewController.swift */,
 				2D02E03425945BD000E8E1CF /* EraseDisk.swift */,
 				2D7787EE258F0BC700305EC3 /* CredsViewController.swift */,
@@ -165,7 +166,6 @@
 			isa = PBXGroup;
 			children = (
 				2DAFF44B259AB7ED00D48E20 /* CreateInstallActions.swift */,
-				2D3E60FD259D430C00DE6488 /* ViewSetup.swift */,
 				2D1A32A2258D959D009DCDFD /* AppDelegate.swift */,
 				2D1A32A8258D959E009DCDFD /* Main.storyboard */,
 			);

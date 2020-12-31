@@ -14,13 +14,7 @@ extension ViewController {
     //MARK: View Will Appear
     override func viewWillAppear() {
         super.viewDidAppear()
-        
-
-        view.window?.titlebarAppearsTransparent = true
-        view.window?.styleMask.insert(NSWindow.StyleMask.fullSizeContentView)
-        view.window?.title = "🍔 Big Mac 2.0"
-        view.window?.level = .floating
-   
+    
         progressBarDownload.doubleValue = 0 //set progressBar to 0 at star
         
         if NSUserName() == "root" {
@@ -41,22 +35,32 @@ extension ViewController {
         isBaseSingleUser ? (singleUserCheckbox.state = .on) : (singleUserCheckbox.state = .off)
         isBaseVerbose ? (verboseUserCheckbox.state = .on) :  (verboseUserCheckbox.state = .off)
     }
-    
-
-    //MARK: View Did Appear()
-    override func viewDidAppear() {
-        super.viewDidAppear()
-        
-       /* DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
-            
-            print(NSUserName())
-            if NSUserName() != "root" && (passWord.isEmpty || userName.isEmpty) {
-                self.performSegue(withIdentifier: "userNamePassWord", sender: self)
-                //let result =  performAppleScript(script: "return  \"HELLO TODD BOSS\"") //add permissions check
-            }
-        }*/
-    }
 }
+
+class MainViewController : NSWindowController {
+    
+    override func windowDidLoad() {
+        _ = performAppleScript(script: "tell me to activate")
+        shouldCascadeWindows = true
+
+        if NSUserName() == "root" {
+            window?.setFrameAutosaveName("bigMacMainView")
+        } else {
+            window?.alphaValue = 0.0
+            window?.setFrameAutosaveName("") // don't save window position if it's not the root user. Otherwise things get weir
+        }
+        
+        super.windowDidLoad()
+
+        window?.titlebarAppearsTransparent = true
+        window?.styleMask.insert(NSWindow.StyleMask.fullSizeContentView)
+        window?.title = "🍔 Big Mac 2.0"
+        window?.level = .floating
+    
+    }
+    
+}
+
 
 
 //Backburner.. easier not ot use this

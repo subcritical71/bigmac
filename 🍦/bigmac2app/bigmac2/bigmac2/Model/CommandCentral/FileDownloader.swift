@@ -59,7 +59,7 @@ extension ViewController : URLSessionDownloadDelegate {
                 try? fileManager.moveItem(at: location, to: savedURL)
                 
               if filename == bigmacDisk {
-                   NotificationCenter.default.post(name: .gotCreateDisk, object: nil)
+                   NotificationCenter.default.post(name: .CreateDisk, object: nil)
                 }
             }
         }

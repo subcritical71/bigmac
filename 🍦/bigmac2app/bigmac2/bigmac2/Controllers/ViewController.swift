@@ -65,5 +65,7 @@ class ViewController: NSViewController, URLSessionDelegate  {
     @IBOutlet weak var DisableSIP: NSButton!
     @IBOutlet weak var DisableAuthRoot: NSButton!
     
- 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 }
