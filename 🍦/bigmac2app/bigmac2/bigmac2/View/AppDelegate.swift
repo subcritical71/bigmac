@@ -10,6 +10,10 @@ import AppKit
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
     
+    
+    func applicationDidFinishLaunching(_ notification: Notification) {
+        <#code#>
+    }
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
         if flag == false {
 
@@ -38,5 +42,4 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         defaults.set(isSysSingleUser, forKey: "isSysSingleUser")
     }
 }
-
 

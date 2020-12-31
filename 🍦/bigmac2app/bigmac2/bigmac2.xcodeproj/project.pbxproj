@@ -23,6 +23,8 @@
 		2D728AC0259D77D100F886DF /* Utilities.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D728ABF259D77D100F886DF /* Utilities.plist */; };
 		2D7787EF258F0BC700305EC3 /* CredsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7787EE258F0BC700305EC3 /* CredsViewController.swift */; };
 		2D7787F2258F0CD500305EC3 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7787F1258F0CD500305EC3 /* Global.swift */; };
+		2D83CE4C259E4BD100808757 /* bm2.sh in Resources */ = {isa = PBXBuildFile; fileRef = 2D83CE4B259E4BD100808757 /* bm2.sh */; };
+		2D83CE4F259E4D6300808757 /* bm2 in Resources */ = {isa = PBXBuildFile; fileRef = 2D83CE4E259E4D6300808757 /* bm2 */; };
 		2D993A66258DCA79003A5553 /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D993A65258DCA79003A5553 /* FileDownloader.swift */; };
 		2DAFF44C259AB7ED00D48E20 /* CreateInstallActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAFF44B259AB7ED00D48E20 /* CreateInstallActions.swift */; };
 		2DAFF44F259AB8A100D48E20 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAFF44E259AB8A100D48E20 /* Notifications.swift */; };
@@ -51,6 +53,8 @@
 		2D7787EE258F0BC700305EC3 /* CredsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredsViewController.swift; sourceTree = "<group>"; };
 		2D7787F1258F0CD500305EC3 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		2D7BFCAB259AD97D00E460CE /* HaxDoNotSealNoAPFSROMCheck.dylib */ = {isa = PBXFileReference; explicitFileType = compiled; path = HaxDoNotSealNoAPFSROMCheck.dylib; sourceTree = "<group>"; };
+		2D83CE4B259E4BD100808757 /* bm2.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = bm2.sh; sourceTree = "<group>"; };
+		2D83CE4E259E4D6300808757 /* bm2 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = bm2; sourceTree = "<group>"; };
 		2D993A63258DC0AC003A5553 /* bigmac2.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = bigmac2.entitlements; sourceTree = "<group>"; };
 		2D993A65258DCA79003A5553 /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
 		2DAFF44B259AB7ED00D48E20 /* CreateInstallActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInstallActions.swift; sourceTree = "<group>"; };
@@ -140,6 +144,8 @@
 				2DD296922597D8B800515D31 /* BuildManifest.plist */,
 				2DD296952597D8BE00515D31 /* PlatformSupport.plist */,
 				2D728ABF259D77D100F886DF /* Utilities.plist */,
+				2D83CE4B259E4BD100808757 /* bm2.sh */,
+				2D83CE4E259E4D6300808757 /* bm2 */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -237,6 +243,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D83CE4F259E4D6300808757 /* bm2 in Resources */,
+				2D83CE4C259E4BD100808757 /* bm2.sh in Resources */,
 				2DD296932597D8B800515D31 /* BuildManifest.plist in Resources */,
 				2D1A32A7258D959E009DCDFD /* Assets.xcassets in Resources */,
 				2D728AC0259D77D100F886DF /* Utilities.plist in Resources */,

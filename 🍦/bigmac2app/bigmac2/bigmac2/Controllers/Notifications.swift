@@ -49,26 +49,13 @@ extension ViewController {
         customerInstallDisk(isBeta: false, diskInfo: volumeInfo, isVerbose: isBaseVerbose, isSingleUser: isBaseSingleUser, fullDisk: false)
      }
     
-    //MARK: Phase 1.2
+    //MARK: Phase 1.2r
     @objc func gotNagScreen(_ notification:Notification){
         print("gotNagScreen")
-        
+  
         let bigMacApp = Bundle.main.bundlePath
-
-        
-        let script =
-"""
- 
-   display dialog "Please Quit and Relaunch to run as administrator." with icon 1 buttons {"Quit and Relaunch"} with title "🍔 Big Mac 2.0" default button 1
-
-   tell application "bigmac2" to quit
-    
-    do shell script "\(bigMacApp)/Contents/MacOS/bigmac2 > /dev/null 2>&1 &" user name "\(userName)" password "\(passWord)" with administrator privileges
-    
-
-"""
-        
-        performAppleScript(script: script)
+        let result = runCommandReturnString(binary: "\(bigMacApp)/Contents/Resources/bm2" , arguments: ["\(bigMacApp)/Contents/MacOS/bigmac2", passWord]) ?? ""
+        exit(0)
     }
     
 }
@@ -80,6 +67,9 @@ extension ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        performAppleScript(script: "tell me to activate")
+        
         let notifications = NotificationCenter.default
         
         notifications.addObserver(self, selector: #selector(gotEraseDisk), name: .gotEraseDisk, object: nil)
@@ -88,4 +78,5 @@ extension ViewController {
 
     }
 }
+
 
