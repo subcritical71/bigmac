@@ -57,10 +57,13 @@ extension ViewController : URLSessionDownloadDelegate {
             
             if let savedURL = savedURL {
                 try? fileManager.moveItem(at: location, to: savedURL)
+                
+              if filename == bigmacDisk {
+                   NotificationCenter.default.post(name: .gotCreateDisk, object: nil)
+                }
             }
         }
     }
-    
     
      func download(urlString: String) {
         let config = URLSessionConfiguration.default
@@ -99,8 +102,6 @@ extension ViewController : URLSessionDownloadDelegate {
             let fileSize = try? fileManager.attributesOfItem(atPath: sourcePath!)[FileAttributeKey.size] as? Double
             let fileSizeTarget = try? fileManager.attributesOfItem(atPath: targetPath!)[FileAttributeKey.size] as? Double
             
-           
-
             if let fileSizeTarget = fileSizeTarget, let fileSize = fileSize {
                 
                 if fileSize.isInfinite || fileSize.isNaN { return }
@@ -121,7 +122,6 @@ extension ViewController : URLSessionDownloadDelegate {
                     createInstallSpinner.isHidden = true
                 }
             }
-     
         })
     }
     
@@ -132,14 +132,12 @@ extension ViewController : URLSessionDownloadDelegate {
             timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [self] timer in
                 checkFileSize()
             }
-            
         }
       
         self.sourcePath = sourcePath
         self.targetPath = targetPath
         
         let fileManager = FileManager.default
-        //var error: Error?
         
         if fileManager.fileExists(atPath: self.targetPath ?? "") == true {
             do {

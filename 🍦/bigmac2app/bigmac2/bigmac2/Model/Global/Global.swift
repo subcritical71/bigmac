@@ -18,6 +18,10 @@ var isBaseVerbose = false
 var isSysSingleUser = false
 var isSysVerbose = false
 
+var bigmacDisk = "bigmac2.dmg"
+
+var volumeInfo = myVolumeInfo(diskSlice: "", disk: "", displayName: "", volumeName: "", path: "", uuid: "", external: false, capacity: 0)
+
 //typealias myVolumeInfo = (diskSlice: String, disk: String, name: String, path: String, external: Bool, uuid: String)
 
 struct myVolumeInfo {

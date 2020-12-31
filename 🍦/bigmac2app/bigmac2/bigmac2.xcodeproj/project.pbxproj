@@ -19,11 +19,13 @@
 		2D2E4E1E259C03930088999C /* FileWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2E4E1D259C03930088999C /* FileWriter.swift */; };
 		2D3E60F2259CFC6000DE6488 /* ParseBootArgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3E60F1259CFC6000DE6488 /* ParseBootArgs.swift */; };
 		2D3E60F7259D113D00DE6488 /* HaxDoNotSealNoAPFSROMCheck.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 2D7BFCAB259AD97D00E460CE /* HaxDoNotSealNoAPFSROMCheck.dylib */; };
+		2D3E60FE259D430C00DE6488 /* ViewSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3E60FD259D430C00DE6488 /* ViewSetup.swift */; };
+		2D728AC0259D77D100F886DF /* Utilities.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D728ABF259D77D100F886DF /* Utilities.plist */; };
 		2D7787EF258F0BC700305EC3 /* CredsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7787EE258F0BC700305EC3 /* CredsViewController.swift */; };
 		2D7787F2258F0CD500305EC3 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7787F1258F0CD500305EC3 /* Global.swift */; };
 		2D993A66258DCA79003A5553 /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D993A65258DCA79003A5553 /* FileDownloader.swift */; };
 		2DAFF44C259AB7ED00D48E20 /* CreateInstallActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAFF44B259AB7ED00D48E20 /* CreateInstallActions.swift */; };
-		2DAFF44F259AB8A100D48E20 /* ViewDidLoad.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAFF44E259AB8A100D48E20 /* ViewDidLoad.swift */; };
+		2DAFF44F259AB8A100D48E20 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAFF44E259AB8A100D48E20 /* Notifications.swift */; };
 		2DD296932597D8B800515D31 /* BuildManifest.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DD296922597D8B800515D31 /* BuildManifest.plist */; };
 		2DD296962597D8BE00515D31 /* PlatformSupport.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DD296952597D8BE00515D31 /* PlatformSupport.plist */; };
 		2DE42E3D25918F56005E10C6 /* CreateInstallHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE42E3C25918F56005E10C6 /* CreateInstallHelpers.swift */; };
@@ -44,13 +46,15 @@
 		2D23BF63258EA04B0019BD90 /* CommandRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandRunner.swift; sourceTree = "<group>"; };
 		2D2E4E1D259C03930088999C /* FileWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWriter.swift; sourceTree = "<group>"; };
 		2D3E60F1259CFC6000DE6488 /* ParseBootArgs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseBootArgs.swift; sourceTree = "<group>"; };
+		2D3E60FD259D430C00DE6488 /* ViewSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSetup.swift; sourceTree = "<group>"; };
+		2D728ABF259D77D100F886DF /* Utilities.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Utilities.plist; sourceTree = "<group>"; };
 		2D7787EE258F0BC700305EC3 /* CredsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredsViewController.swift; sourceTree = "<group>"; };
 		2D7787F1258F0CD500305EC3 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
 		2D7BFCAB259AD97D00E460CE /* HaxDoNotSealNoAPFSROMCheck.dylib */ = {isa = PBXFileReference; explicitFileType = compiled; path = HaxDoNotSealNoAPFSROMCheck.dylib; sourceTree = "<group>"; };
 		2D993A63258DC0AC003A5553 /* bigmac2.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = bigmac2.entitlements; sourceTree = "<group>"; };
 		2D993A65258DCA79003A5553 /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
 		2DAFF44B259AB7ED00D48E20 /* CreateInstallActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInstallActions.swift; sourceTree = "<group>"; };
-		2DAFF44E259AB8A100D48E20 /* ViewDidLoad.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = ViewDidLoad.swift; path = bigmac2/View/ViewDidLoad.swift; sourceTree = SOURCE_ROOT; };
+		2DAFF44E259AB8A100D48E20 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Notifications.swift; path = bigmac2/Controllers/Notifications.swift; sourceTree = SOURCE_ROOT; };
 		2DD296922597D8B800515D31 /* BuildManifest.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BuildManifest.plist; sourceTree = "<group>"; };
 		2DD296952597D8BE00515D31 /* PlatformSupport.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = PlatformSupport.plist; sourceTree = "<group>"; };
 		2DE42E3C25918F56005E10C6 /* CreateInstallHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInstallHelpers.swift; sourceTree = "<group>"; };
@@ -135,6 +139,7 @@
 				2DF9BAA4259420BF0023C6B0 /* bm2tmp0.dmg */,
 				2DD296922597D8B800515D31 /* BuildManifest.plist */,
 				2DD296952597D8BE00515D31 /* PlatformSupport.plist */,
+				2D728ABF259D77D100F886DF /* Utilities.plist */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -142,6 +147,7 @@
 		2D7787F4258F1C8C00305EC3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2DAFF44E259AB8A100D48E20 /* Notifications.swift */,
 				2D1A32A4258D959D009DCDFD /* ViewController.swift */,
 				2D02E03425945BD000E8E1CF /* EraseDisk.swift */,
 				2D7787EE258F0BC700305EC3 /* CredsViewController.swift */,
@@ -153,7 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				2DAFF44B259AB7ED00D48E20 /* CreateInstallActions.swift */,
-				2DAFF44E259AB8A100D48E20 /* ViewDidLoad.swift */,
+				2D3E60FD259D430C00DE6488 /* ViewSetup.swift */,
 				2D1A32A2258D959D009DCDFD /* AppDelegate.swift */,
 				2D1A32A8258D959E009DCDFD /* Main.storyboard */,
 			);
@@ -233,6 +239,7 @@
 			files = (
 				2DD296932597D8B800515D31 /* BuildManifest.plist in Resources */,
 				2D1A32A7258D959E009DCDFD /* Assets.xcassets in Resources */,
+				2D728AC0259D77D100F886DF /* Utilities.plist in Resources */,
 				2DF9BAA5259420BF0023C6B0 /* bm2tmp0.dmg in Resources */,
 				2D1A32AA258D959E009DCDFD /* Main.storyboard in Resources */,
 				2D3E60F7259D113D00DE6488 /* HaxDoNotSealNoAPFSROMCheck.dylib in Resources */,
@@ -253,12 +260,13 @@
 				2D7787F2258F0CD500305EC3 /* Global.swift in Sources */,
 				2DE42E3D25918F56005E10C6 /* CreateInstallHelpers.swift in Sources */,
 				2D1A32A3258D959D009DCDFD /* AppDelegate.swift in Sources */,
+				2D3E60FE259D430C00DE6488 /* ViewSetup.swift in Sources */,
 				2D09EE40259C42C70054CF3A /* CreateInstallWorkflow.swift in Sources */,
 				2D23BF64258EA04B0019BD90 /* CommandRunner.swift in Sources */,
 				2D7787EF258F0BC700305EC3 /* CredsViewController.swift in Sources */,
 				2D02E032259453D500E8E1CF /* VolumeInfo.swift in Sources */,
 				2DAFF44C259AB7ED00D48E20 /* CreateInstallActions.swift in Sources */,
-				2DAFF44F259AB8A100D48E20 /* ViewDidLoad.swift in Sources */,
+				2DAFF44F259AB8A100D48E20 /* Notifications.swift in Sources */,
 				2D09EE43259C432C0054CF3A /* CreateInstallTasks.swift in Sources */,
 				2D3E60F2259CFC6000DE6488 /* ParseBootArgs.swift in Sources */,
 				2D02E03525945BD000E8E1CF /* EraseDisk.swift in Sources */,

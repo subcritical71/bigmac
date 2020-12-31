@@ -1199,6 +1199,7 @@ DQ
                         <outlet property="bootArgsField" destination="LFL-QC-eXl" id="Ud1-E9-T2g"/>
                         <outlet property="buildLabel" destination="DFd-ov-bag" id="7C2-Lu-I2R"/>
                         <outlet property="createInstallSpinner" destination="nYg-kZ-fDy" id="8gV-FZ-sji"/>
+                        <outlet property="downloadLabel" destination="DFd-ov-bag" id="f6N-3p-Ktd"/>
                         <outlet property="gbLabel" destination="eLx-fH-b51" id="egU-jl-cn7"/>
                         <outlet property="installerFuelGauge" destination="Qi3-pO-eUD" id="z1u-q0-D43"/>
                         <outlet property="mediaLabel" destination="syK-06-F8B" id="Tm3-Pq-vCa"/>

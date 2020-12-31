@@ -9,15 +9,36 @@ import Foundation
 
 extension ViewController {
     
+    //MARK: To do - Setup a variable
     func downloadPkg() {
         //Remove pre-existing file
+        _ = runCommandReturnString(binary: "/bin/rm", arguments: ["-Rf","/Users/shared/InstallAssistant.pkg"]) //Future check if it's complete and has right checksum
         _ = runCommandReturnString(binary: "/bin/rm", arguments: ["-Rf","/tmp/InstallAssistant.pkg"]) //Future check if it's complete and has right checksum
         
+        DispatchQueue.main.async { [self] in
+            downloadLabel.stringValue = "macOS 11.1"
+        }
+
         DispatchQueue.global(qos: .background).async {
             self.download(urlString: "http://swcdn.apple.com/content/downloads/00/55/001-86606-A_9SF1TL01U7/5duug9lar1gypwunjfl96dza0upa854qgg/InstallAssistant.pkg")
         }
     }
     
+    
+    //MARK: To do - Setup a variable
+    func downloadBigMac2(dmg: String) {
+        //Remove pre-existing file
+        _ = runCommandReturnString(binary: "/bin/rm", arguments: ["-Rf","/Users/shared/bigmac2.dmg"]) //Future check if it's complete and has right checksum
+        _ = runCommandReturnString(binary: "/bin/rm", arguments: ["-Rf","/tmp/bigmac2.dmg"]) //Future check if it's complete and has right checksum
+        
+        DispatchQueue.main.async { [self] in
+            downloadLabel.stringValue = "Fetching boot disk"
+        }
+        
+        DispatchQueue.global(qos: .background).async {
+            self.download(urlString: dmg)
+        }
+    }
     
     
     //MARK: Install Shared Support DMG

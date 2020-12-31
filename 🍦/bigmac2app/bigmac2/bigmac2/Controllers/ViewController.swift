@@ -12,9 +12,7 @@ import Cocoa
 
 class ViewController: NSViewController, URLSessionDelegate  {
     
-    @objc func gotAppChanged(_ notification:Notification){
-     
-    }
+
    
     //get Home Folder
     let tempFolder = "/tmp"
@@ -44,8 +42,6 @@ class ViewController: NSViewController, URLSessionDelegate  {
     var timer: Timer?
     let shared = "Shared/" //copy to shared directory
 
-    var getEraseDisk : ()? = nil
-
     //MARK: Downloads Tab
     @IBOutlet weak var mediaLabel: NSTextField!
     @IBOutlet weak var progressBarDownload: NSProgressIndicator!
@@ -55,6 +51,9 @@ class ViewController: NSViewController, URLSessionDelegate  {
     @IBOutlet weak var createInstallSpinner: NSProgressIndicator!
     @IBOutlet weak var installerFuelGauge: NSLevelIndicator!
     @IBOutlet weak var sharedSupportProgressBar: NSProgressIndicator!
+    @IBOutlet weak var downloadLabel: NSTextField!
+    
+  
     @IBOutlet weak var sharedSupportPercentage: NSTextField!
     @IBOutlet weak var sharedSupportGbLabel: NSTextField!
     @IBOutlet weak var singleUserCheckbox: NSButton!

@@ -11,12 +11,15 @@ import AppKit
 
 class EraseDiskViewController : NSViewController {
     
+    
     @IBOutlet weak var volumePopup: NSPopUpButton!
     @IBOutlet weak var cancel: NSButton!
     @IBOutlet weak var okButton: NSButton!
     @IBOutlet weak var eraseDiskEntry: NSTextField!
     
+    
     var volumeArray = [myVolumeInfo]()
+    
     
     func refresh() {
         if let volArr = getVolumeInfo(includeHiddenVolumes: false) {
@@ -38,27 +41,23 @@ class EraseDiskViewController : NSViewController {
     
  
     override func viewDidLoad() {
-        
         view.window?.titlebarAppearsTransparent = true
         view.window?.styleMask.insert(NSWindow.StyleMask.fullSizeContentView)
 
-       /* view.wantsLayer = true
-        view.layer?.backgroundColor =  CGColor(red: 15 / 255, green: 15 / 255, blue: 15 / 255, alpha: 1.0) */
-        
-        
         refresh()
         eraseDiskEntry.focusRingType = .none
         volumePopup.focusRingType = .none
-
     }
     
     @IBAction func cancelAction(_ sender: Any) {
         dismiss(self)
     }
     
+    
     @IBAction func refreshDisks(_ sender: Any) {
         refresh()
     }
+    
     
     @IBAction func eraseDisk(_ sender: Any) {
         
@@ -67,15 +66,13 @@ class EraseDiskViewController : NSViewController {
             //Send disk info
             let int = Int(volumePopup.indexOfSelectedItem)
             let selectedDisk = volumeArray[int]
+            
             NotificationCenter.default.post(name: .gotEraseDisk, object: selectedDisk)
+            
         } else {
             eraseDiskEntry.shake(duration: 1)
         }
-        
-
     }
-    
-    
 }
 
 

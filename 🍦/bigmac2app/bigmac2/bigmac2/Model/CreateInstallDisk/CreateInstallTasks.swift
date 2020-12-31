@@ -81,16 +81,26 @@ extension ViewController {
         incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
     }
     
+    //MARK: Task #5.1
+    func installBaseSystemII(diskInfo: myVolumeInfo, baseSys: String, bm2: String) {
+        //MARK: Install Base System
+        _ = addVolume(dmgPath: "/Users/shared/\(bigmacDisk)", targetDisk: "/dev/r\(diskInfo.disk)", erase: true, title: "Installing Boot Disk")
+                
+        _ = mountVolume(disk: diskInfo.disk)
+        
+        incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+    }
+    
     
     
     //MARK: Task #6
-    func setupPreboot(diskInfo: myVolumeInfo, bm2: String, rndStr: String, isVerbose: Bool, isSingleUser: Bool) {
+    func setupPreboot(diskInfo: myVolumeInfo, bm2: String, rndStr: String, isVerbose: Bool, isSingleUser: Bool, slice: String) {
         let _ = mkDir(arg: "/\(tmp)/\(basesystem)\(rndStr)")
         let _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["unmount", "/\(tmp)/\(restoreBaseSystem)"] )
         let _ = mountDiskImage(arg: ["mount", "-mountPoint", "/\(tmp)/\(basesystem)\(rndStr)", "/\(tmp)/\(restoreBaseSystem)", "-nobrowse", "-noautoopen", "-noverify"])
         
         if let getBaseSystemDisk = getVolumeInfoByDisk(filterVolumeName: "/private/\(tmp)/\(basesystem)\(rndStr)", disk: "") {
-            let getPrebootDisk = (getBaseSystemDisk.disk + "s2")
+            let getPrebootDisk = (getBaseSystemDisk.disk + slice)
             
             _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["unmount", "\(getPrebootDisk)"] )
             
@@ -190,10 +200,96 @@ let bootPlistTxt =
     func bigSurInstallerAppXfer(rndStr: String) {
         setMediaLabel("Big Sur Installer App Transfer")
         
-        let _ = mkDir(arg: "/Volumes/bigmac2_\(rndStr)/Install macOS Big Sur.app/Contents/SharedSupport/")
-        copyFile(atPath: "/Applications/Install macOS Big Sur.app/Contents/SharedSupport/SharedSupport.dmg", toPath: "/Volumes/bigmac2_\(rndStr)/Install macOS Big Sur.app/Contents/SharedSupport/SharedSupport.dmg")
+        let _ = mkDir(arg: "/Volumes/\(bigmac2)/Install macOS Big Sur.app/Contents/SharedSupport/")
+        copyFile(atPath: "/Applications/Install macOS Big Sur.app/Contents/SharedSupport/SharedSupport.dmg", toPath: "/Volumes/\(bigmac2)/Install macOS Big Sur.app/Contents/SharedSupport/SharedSupport.dmg")
     }
     
+    
+    func BootItUp(bigmac2: myVolumeInfo) {
+        
+        if let bigmac2 = getVolumeInfoByDisk(filterVolumeName: bigmac2.volumeName, disk: bigmac2.disk) {
+            
+            //MARK: Make Preboot bootable and compatible with C-Key at boot time
+            if let appFolder = Bundle.main.resourceURL {
+                let bootPlist = "com.apple.Boot.plist"
+                let platformPlist = "BuildManifest.plist"
+                let buildManifestPlist = "PlatformSupport.plist"
+                
+                let appFolderPath = "\(appFolder.path)"
+                
+                //Install Boot plist
+                
+                let _ = mkDir(arg: "/Volumes/Preboot/\(bigmac2.uuid)/restore/")
+                
+                print("Making System Disk Bootable...\n")
+                try? fm.removeItem(atPath: "/Volumes/Preboot/\(bigmac2.uuid)/Library/Preferences/SystemConfiguration/\(bootPlist)")
+                try? fm.removeItem(atPath: "/Volumes/Preboot/\(bigmac2.uuid)/System/Library/CoreServices/\(platformPlist)")
+                try? fm.removeItem(atPath: "/Volumes/Preboot/\(bigmac2.uuid)/restore/\(buildManifestPlist)")
+                
+                var verbose = "-v "
+                var singleUser = "-s "
+                
+                if !isBaseVerbose {
+                    verbose = ""
+                }
+                
+                if !isBaseSingleUser {
+                    singleUser = ""
+                }
+                
+//Write our pList file
+let bootPlistTxt =
+"""
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>Kernel Flags</key>
+    <string>\(singleUser)\(verbose)-no_compat_check -amfi_get_out_of_my_way=1</string>
+</dict>
+</plist>
+"""
+
+                txt2file(text: bootPlistTxt, file: "/Volumes/Preboot/\(bigmac2.uuid)/Library/Preferences/SystemConfiguration/\(bootPlist)")
+                
+                //_ = mkDir(arg: "/Volumes/\(bigmac2.volumeName)/System/Library/Preferences/SystemConfiguration/")
+                
+               // txt2file(text: bootPlistTxt, file: "/Volumes/Preboot/\(bigmac2.uuid)/System/Library/Preferences/SystemConfiguration/\(bootPlist)")
+
+                try? fm.copyItem(atPath: "/\(appFolderPath)/\(bootPlist)", toPath: "/Volumes/Preboot/\(bigmac2.uuid)/System/Library/CoreServices/\(platformPlist)")
+                try? fm.copyItem(atPath: "/\(appFolderPath)/\(bootPlist)", toPath: "/Volumes/Preboot/\(bigmac2.uuid)/restore/\(buildManifestPlist)")
+               
+            }
+            
+        }
+
+    }
+
+
+    func installTheApp(bigmac2: myVolumeInfo) {
+        
+        if let bigmac2 = getVolumeInfoByDisk(filterVolumeName: bigmac2.volumeName, disk: bigmac2.disk) {
+            //MARK: Make Preboot bootable and compatible with C-Key at boot time
+            if let appFolder = Bundle.main.resourceURL  {
+                
+                print("Installing the goods...\n")
+                
+                let appFolderPath = "\(appFolder.path)"
+                let bigMacApp = Bundle.main.bundlePath
+                let burgerKing = bigmac2.volumeName
+                //Install Boot plist
+                
+                let util = "/Volumes/\(burgerKing)/System/Installation/CDIS/Recovery Springboard.app/Contents/Resources/Utilities.plist"
+                let bk = "/Volumes/\(burgerKing)/Applications/bigmac2.app"
+            
+                try? fm.removeItem(atPath: util)
+                try? fm.removeItem(atPath: bk)
+            
+                try? fm.copyItem(atPath: "/\(appFolderPath)/Utilities.plist", toPath: util)
+                try? fm.copyItem(atPath: "\(bigMacApp)", toPath: bk)
+            }
+        }
+    }
     
     
     //MARK: Task #8

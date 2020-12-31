@@ -56,23 +56,6 @@ extension ViewController {
         //Erase a Disk first
         self.performSegue(withIdentifier: "eraseDisk", sender: self)
     }
-
-   
-    //MARK: Phase 1.1
-    @objc func gotEraseDisk(_ notification:Notification){
-        //Got permission to erase a disk, proceed with disk workflow
-     
-        let isSingleUser = singleUserCheckbox.state == .on
-        let isVerbose = verboseUserCheckbox.state == .on
-
-        disk(isBeta: false, diskInfo: notification.object as! myVolumeInfo, isVerbose: isVerbose, isSingleUser: isSingleUser, fullDisk: false)
-    }
-  
-    
-    @objc func gotCreateDisk(_ notification:Notification){
-        print("gotCreateDisk")
-    }
-  
 }
 
 
