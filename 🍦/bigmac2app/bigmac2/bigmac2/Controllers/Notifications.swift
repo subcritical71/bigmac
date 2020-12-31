@@ -67,6 +67,8 @@ extension ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+    
+        
         
         performAppleScript(script: "tell me to activate")
         

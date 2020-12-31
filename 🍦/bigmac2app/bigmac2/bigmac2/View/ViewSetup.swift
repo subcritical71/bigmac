@@ -15,8 +15,12 @@ extension ViewController {
     override func viewWillAppear() {
         super.viewDidAppear()
         
+
         view.window?.titlebarAppearsTransparent = true
         view.window?.styleMask.insert(NSWindow.StyleMask.fullSizeContentView)
+        view.window?.title = "🍔 Big Mac 2.0"
+        view.window?.level = .floating
+   
         progressBarDownload.doubleValue = 0 //set progressBar to 0 at star
         
         if NSUserName() == "root" {
@@ -26,8 +30,7 @@ extension ViewController {
         }
         
         installerFuelGauge.doubleValue = 0
-        view.window?.level = .floating
-        
+   
         let defaults = UserDefaults.standard
 
         isBaseVerbose    = defaults.bool(forKey: "isBaseVerbose")
@@ -43,16 +46,15 @@ extension ViewController {
     //MARK: View Did Appear()
     override func viewDidAppear() {
         super.viewDidAppear()
-        view.window?.title = "🍔 Big Mac 2.0"
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+       /* DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
             
             print(NSUserName())
             if NSUserName() != "root" && (passWord.isEmpty || userName.isEmpty) {
                 self.performSegue(withIdentifier: "userNamePassWord", sender: self)
                 //let result =  performAppleScript(script: "return  \"HELLO TODD BOSS\"") //add permissions check
             }
-        }
+        }*/
     }
 }
 
