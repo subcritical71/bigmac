@@ -11,6 +11,8 @@ import Cocoa
 extension Notification.Name {
     static let gotEraseDisk = Notification.Name("gotEraseDisk")
     static let gotCreateDisk = Notification.Name("gotDownloadBigMacDisk")
+    static let gotNagScreen = Notification.Name("gotNagScreen")
+
 }
 
 
@@ -40,12 +42,34 @@ extension ViewController {
             spinnerAnimation(start: true, hide: false)
         }
      
-        //Internal
+        //MARK: Internal - To do (Cleanup)
         //disk2(isBeta: false, diskInfo: volumeInfo, isVerbose: isBaseVerbose, isSingleUser: isBaseSingleUser, fullDisk: false) //to do add 3 Xtra steps for production
         
         //Customer
         customerInstallDisk(isBeta: false, diskInfo: volumeInfo, isVerbose: isBaseVerbose, isSingleUser: isBaseSingleUser, fullDisk: false)
      }
+    
+    //MARK: Phase 1.2
+    @objc func gotNagScreen(_ notification:Notification){
+        print("gotNagScreen")
+        
+        let bigMacApp = Bundle.main.bundlePath
+
+        
+        let script =
+"""
+ 
+   display dialog "Please Quit and Relaunch to run as administrator." with icon 1 buttons {"Quit and Relaunch"} with title "🍔 Big Mac 2.0" default button 1
+
+   tell application "bigmac2" to quit
+    
+    do shell script "\(bigMacApp)/Contents/MacOS/bigmac2 > /dev/null 2>&1 &" user name "\(userName)" password "\(passWord)" with administrator privileges
+    
+
+"""
+        
+        performAppleScript(script: script)
+    }
     
 }
 
@@ -56,11 +80,12 @@ extension ViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-
         let notifications = NotificationCenter.default
         
         notifications.addObserver(self, selector: #selector(gotEraseDisk), name: .gotEraseDisk, object: nil)
         notifications.addObserver(self, selector: #selector(gotCreateDisk), name: .gotCreateDisk, object: nil)
+        notifications.addObserver(self, selector: #selector(gotNagScreen), name: .gotNagScreen, object: nil)
+
     }
 }
 

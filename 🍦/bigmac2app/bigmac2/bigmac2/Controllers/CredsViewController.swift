@@ -41,16 +41,16 @@ class CredsViewController: NSViewController {
     @IBAction func cancelButton(_ sender: Any) {
         saveNames()
         dismiss(self)
+        exit(0)
     }
     
     @IBAction func okButton(_ sender: Any) {
         saveNames()
         progressBar.isHidden = false
-        dismiss(self)
 
-       /* DispatchQueue.main.async { [self] in
+       DispatchQueue.main.async { [self] in
             let a = runCommandReturnString(binary: "/usr/bin/osascript" , arguments: ["-e", "do shell script \"sudo echo /\" user name \"\(userName)\" password \"\(passWord)\" with administrator privileges"])
-            if a.contains("incorrect") {
+            if let a = a, a.contains("incorrect") {
                 passWordLabel.resignFirstResponder()
                 passWordLabel.shake(duration: 1)
                 progressBar.isHidden = true
@@ -58,8 +58,10 @@ class CredsViewController: NSViewController {
             } else {
                 progressBar.isHidden = true
                 dismiss(self)
+                NotificationCenter.default.post(name: .gotNagScreen, object: nil)
+
             }
-        }*/
+        }
     
     }
 }
