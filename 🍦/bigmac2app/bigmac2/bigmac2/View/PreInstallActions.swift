@@ -38,10 +38,8 @@ extension ViewController {
                 }
                 
                 let bigMacApp = Bundle.main.bundlePath
-                _ = runCommandReturnString(binary: "\(bigMacApp)/Contents/Resources/lax" , arguments: [installAsstBaseOS]) ?? ""
-                
-                exit(0)
-                
+                _ = runCommandReturnString(binary: "\(bigMacApp)/Contents/Resources/lax" , arguments: [installAsstFullOS]) ?? ""
+                                
             } else if fm.fileExists(atPath: installAsstFullOS) {
                 
                 let script = """

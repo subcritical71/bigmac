@@ -15,10 +15,6 @@
 			<string>Restore from Time Machine</string>
 		</dict>
 		<dict>
-			<key>Arguments</key>
-			<array>
-				<string>-RunInOSIEnv</string>
-			</array>
 			<key>BundlePath</key>
 			<string>/Install macOS Big Sur.app</string>
 			<key>IsInstallAssistant</key>
@@ -50,7 +46,7 @@
 			<key>BundlePath</key>
 			<string>/Applications/RDM.app</string>
 			<key>DescriptionKey</key>
-			<string>RDM screen res Menu app</string>
+			<string>RDM aka Set Res X is Screen Res Switching Menu app</string>
 			<key>Path</key>
 			<string>/Applications/RDM.app/Contents/MacOS/SetResX</string>
 			<key>TitleKey</key>

@@ -72,7 +72,7 @@ class ViewController: NSViewController, URLSessionDelegate  {
     @IBOutlet weak var postInstallTab: NSTabViewItem!
     @IBOutlet weak var cloneToolTab: NSTabViewItem!
     
-    let setResX = "/Applications/RDM.app/Contents/MacOS/SetResX"
+    let setResX = "s"
     let baseOS = "/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
     
     func disableRetinaBtnCheck() {
@@ -103,7 +103,7 @@ class ViewController: NSViewController, URLSessionDelegate  {
      
     
     @IBAction func hiDPI(_ sender: Any) {
-        _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1920", "-h", "1080", "-s", "2", "-b", "32"])
+        _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1920", "-h", "1080", "-s", "2", "-b", "16"])
     }
     
     override func viewDidLoad() {
@@ -112,8 +112,11 @@ class ViewController: NSViewController, URLSessionDelegate  {
         disableRetinaBtnCheck()
         bootedToBaseOS = checkForBaseOS()
         
-        if ( !bootedToBaseOS) {
-
+        if ( bootedToBaseOS) {
+            tabViews.selectTabViewItem(preInstallTab)
+            tabViews.selectTabViewItem(downloadsTab)
+            tabViews.selectTabViewItem(postInstallTab)
+            tabViews.selectTabViewItem(cloneToolTab)
             tabViews.selectTabViewItem(preInstallTab)
             tabViews.drawsBackground = false
         }
