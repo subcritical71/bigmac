@@ -30,6 +30,21 @@ extension ViewController {
         //Erase a Disk first
         self.performSegue(withIdentifier: "eraseDisk", sender: self)
     }
+    
+    
+    @IBAction func LoRes_720(_ sender: Any) {
+        _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1280", "-h", "720", "-s", "1"])
+    }
+    @IBAction func HiRes_720(_ sender: Any) {
+        _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1280", "-h", "720", "-s", "2"])
+    }
+    @IBAction func LoRes_1080(_ sender: Any) {
+        _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1920", "-h", "1080", "-s", "1"])
+    }
+    
+    @IBAction func HiRes_1080(_ sender: Any) {
+        _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1920", "-h", "1080", "-s", "2"])
+    }
 }
 
 

@@ -36,7 +36,7 @@ extension ViewController {
         isBaseVerbose ? (verboseUserCheckbox.state = .on) :  (verboseUserCheckbox.state = .off)
     }
 }
-e
+
 class MainViewController : NSWindowController {
     
     override func windowDidLoad() {

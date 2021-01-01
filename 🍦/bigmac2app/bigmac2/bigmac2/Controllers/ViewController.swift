@@ -95,36 +95,91 @@ class ViewController: NSViewController, URLSessionDelegate  {
     @IBOutlet weak var availablePatchDisks: NSPopUpButton!
     @IBOutlet weak var patchDiskExecution_btn: NSButton!
     
+    var enableUSB = Bool()
+    var disableBT2 = Bool()
+    var amdMouSSE = Bool()
+    var teleTrap = Bool()
+    var SSE4Telemetry = Bool()
+    var VerboseBoot = Bool()
+    var superDrive = Bool()
+    var appStoreMacOS = Bool()
+    var appleHDA = Bool()
+    var hdmiAudio = Bool()
+    var singleUser = Bool()
+    var legacyWiFi = Bool()
+
+    
     func patchBool() {
-        let enableUSB : Bool
-        let disableBT2 : Bool
-        let amdMouSSE : Bool
-        let teleTrap : Bool
-        let SSE4Telemetry : Bool
-        let VerboseBoot : Bool
-        let superDrive : Bool
-        let appleHDA : Bool
-        let hdmiAudio : Bool
-        let appStoreMacOS : Bool
-        let legacyWiFi : Bool
-        let singleUser : Bool
-  
-        enableUSB       ? (enableUSB_btn.state == .on)      : (enableUSB_btn.state == .off)
-        disableBT2      ? (disableBT2_btn.state == .on)     : (disableBT2_btn.state == .off)
-        amdMouSSE       ? (amdMouSSE_btn.state == .on)      : (amdMouSSE_btn.state == .off)
-        teleTrap        ? (teleTrap_btn.state == .on)       : (teleTrap_btn.state == .off)
-        SSE4Telemetry   ? (SSE4Telemetry_btn.state == .on)  : (SSE4Telemetry_btn.state == .off)
-        VerboseBoot     ? (VerboseBoot_btn.state == .on)    : (VerboseBoot_btn.state == .off)
-        superDrive      ? (superDrive_btn.state == .on)     : (superDrive_btn.state == .off)
-        appleHDA        ? (appleHDA_btn.state == .on)       : (appleHDA_btn.state == .off)
-        hdmiAudio       ? (hdmiAudio_btn.state == .on)      : (hdmiAudio_btn.state == .off)
-        appStoreMacOS   ? (appStoreMacOS_btn.state == .on)  : (appStoreMacOS_btn.state == .off)
-        legacyWiFi      ? (legacyWiFi_btn.state == .on)     : (legacyWiFi_btn.state == .off)
-        
+        enableUSB       = (enableUSB_btn.state == .on)
+        disableBT2      = (disableBT2_btn.state == .on)
+        amdMouSSE       = (amdMouSSE_btn.state == .on)
+        teleTrap        = (teleTrap_btn.state == .on)
+        SSE4Telemetry   = (SSE4Telemetry_btn.state == .on)
+        VerboseBoot     = (VerboseBoot_btn.state == .on)
+        superDrive      = (superDrive_btn.state == .on)
+        appleHDA        = (appleHDA_btn.state == .on)
+        hdmiAudio       = (hdmiAudio_btn.state == .on)
+        appStoreMacOS   = (appStoreMacOS_btn.state == .on)
+        legacyWiFi      = (legacyWiFi_btn.state == .on)
     }
     
     
+    func installKext(dest: String, kext: String, fold: String) -> Bool {
+        var strg = ""
+        let fail = "Do not pass"
+        var pass = false
+        let copy = "Copying"
+        
+        if let source = Bundle.main.resourceURL?.path {
+            let destiny = "\(dest)/\(fold)/\(kext)"
+            strg = runCommandReturnString(binary: "/usr/bin/ditto", arguments: ["-v", "\(source)/\(kext)", destiny]) ?? fail
+            _ = runCommandReturnString(binary: "/usr/sbin/chown", arguments: ["-R", "0:0", destiny])
+            _ = runCommandReturnString(binary: "/bin/chmod", arguments: ["-R", "755", destiny])
+            _ = runCommandReturnString(binary: "/usr/bin/touch", arguments: [destiny])
+        }
+    
+        strg = strg.replacingOccurrences(of: "\n", with: "")
+        strg = strg.replacingOccurrences(of: "\r", with: "")
+        strg = strg.replacingOccurrences(of: " ", with: "")
+
+        if strg.hasPrefix(copy) && strg.hasSuffix(kext)  {
+            pass = !pass
+        }
+        
+        return pass
+    }
+    
     @IBAction func patchDiskExec_action(_ sender: Any) {
+        let driv = availablePatchDisks.title
+        let dest = "/Volumes/\(driv)"
+        let slek = "System/Library/Extensions"
+    
+        _ = runCommandReturnString(binary: "/sbin/mount", arguments: ["-uw", dest])
+
+        patchBool()
+        
+        
+        if enableUSB {
+            let kext = "IOHIDFamily.kext"
+            let pass = installKext(dest: dest, kext: kext, fold: slek)
+            print("enableUSB", "IOHIDFamily", pass)
+        }
+        
+        if appleHDA {
+            let kext = "AppleHDA.kext"
+            let pass = installKext(dest: dest, kext: kext, fold: slek)
+            print("appleHDA", "AppleHDA", pass)
+        }
+        
+        if superDrive {
+            let kext = "ioATAFamily.kext"
+            let pass = installKext(dest: dest, kext: kext, fold: slek)
+            print("superDrive", "ioATAFamily", pass)
+        }
+        
+        
+        
+        
         
     }
 

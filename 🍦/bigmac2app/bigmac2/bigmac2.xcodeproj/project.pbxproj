@@ -30,6 +30,21 @@
 		2D993A66258DCA79003A5553 /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D993A65258DCA79003A5553 /* FileDownloader.swift */; };
 		2D99C49A259F27210035669B /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D99C499259F27210035669B /* Utilities.swift */; };
 		2D99C49D259F2D280035669B /* PostInstallAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D99C49C259F2D280035669B /* PostInstallAction.swift */; };
+		2D99C4FC259F9B830035669B /* IOATAFamily.kext in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C4F5259F9B7F0035669B /* IOATAFamily.kext */; };
+		2D99C4FD259F9B830035669B /* IOHIDFamily.kext in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C4F6259F9B800035669B /* IOHIDFamily.kext */; };
+		2D99C4FE259F9B830035669B /* corecapture.kext in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C4F7259F9B800035669B /* corecapture.kext */; };
+		2D99C4FF259F9B830035669B /* usbInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C4F8259F9B800035669B /* usbInfo.plist */; };
+		2D99C500259F9B830035669B /* IO80211Family.kext in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C4F9259F9B810035669B /* IO80211Family.kext */; };
+		2D99C501259F9B830035669B /* AppleHDA.kext in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C4FA259F9B820035669B /* AppleHDA.kext */; };
+		2D99C502259F9B830035669B /* com.apple.telemetry.plugin in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C4FB259F9B830035669B /* com.apple.telemetry.plugin */; };
+		2D99C506259F9BD00035669B /* build.sh in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C504259F9BD00035669B /* build.sh */; };
+		2D99C50A259F9BE70035669B /* HDMIAudio.kext in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C509259F9BE70035669B /* HDMIAudio.kext */; };
+		2D99C50E259F9C570035669B /* SUVMMFaker.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D99C50C259F9C570035669B /* SUVMMFaker.dylib */; };
+		2D99C50F259F9C570035669B /* com.apple.softwareupdated.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C50D259F9C570035669B /* com.apple.softwareupdated.plist */; };
+		2D99C516259F9CDF0035669B /* AAAMouSSE.kext in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C512259F9CDF0035669B /* AAAMouSSE.kext */; };
+		2D99C517259F9CDF0035669B /* AAAMouSEE_README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C513259F9CDF0035669B /* AAAMouSEE_README.txt */; };
+		2D99C518259F9CDF0035669B /* telemetrap.kext in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C514259F9CDF0035669B /* telemetrap.kext */; };
+		2D99C520259FA17A0035669B /* bless in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C51F259FA17A0035669B /* bless */; };
 		2D9BB500259EAB0C007DE72A /* RDM.app in Resources */ = {isa = PBXBuildFile; fileRef = 2D9BB4FF259EAB0C007DE72A /* RDM.app */; };
 		2D9BB503259EAC96007DE72A /* PreInstallActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9BB502259EAC96007DE72A /* PreInstallActions.swift */; };
 		2DAFF44C259AB7ED00D48E20 /* CreateInstallActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAFF44B259AB7ED00D48E20 /* CreateInstallActions.swift */; };
@@ -67,6 +82,21 @@
 		2D993A65258DCA79003A5553 /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
 		2D99C499259F27210035669B /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		2D99C49C259F2D280035669B /* PostInstallAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInstallAction.swift; sourceTree = "<group>"; };
+		2D99C4F5259F9B7F0035669B /* IOATAFamily.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; path = IOATAFamily.kext; sourceTree = "<group>"; };
+		2D99C4F6259F9B800035669B /* IOHIDFamily.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; path = IOHIDFamily.kext; sourceTree = "<group>"; };
+		2D99C4F7259F9B800035669B /* corecapture.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; path = corecapture.kext; sourceTree = "<group>"; };
+		2D99C4F8259F9B800035669B /* usbInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = usbInfo.plist; sourceTree = "<group>"; };
+		2D99C4F9259F9B810035669B /* IO80211Family.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; path = IO80211Family.kext; sourceTree = "<group>"; };
+		2D99C4FA259F9B820035669B /* AppleHDA.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; path = AppleHDA.kext; sourceTree = "<group>"; };
+		2D99C4FB259F9B830035669B /* com.apple.telemetry.plugin */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = com.apple.telemetry.plugin; sourceTree = "<group>"; };
+		2D99C504259F9BD00035669B /* build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
+		2D99C509259F9BE70035669B /* HDMIAudio.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; path = HDMIAudio.kext; sourceTree = "<group>"; };
+		2D99C50C259F9C570035669B /* SUVMMFaker.dylib */ = {isa = PBXFileReference; explicitFileType = compiled; path = SUVMMFaker.dylib; sourceTree = "<group>"; };
+		2D99C50D259F9C570035669B /* com.apple.softwareupdated.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = com.apple.softwareupdated.plist; sourceTree = "<group>"; };
+		2D99C512259F9CDF0035669B /* AAAMouSSE.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; path = AAAMouSSE.kext; sourceTree = "<group>"; };
+		2D99C513259F9CDF0035669B /* AAAMouSEE_README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AAAMouSEE_README.txt; sourceTree = "<group>"; };
+		2D99C514259F9CDF0035669B /* telemetrap.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; path = telemetrap.kext; sourceTree = "<group>"; };
+		2D99C51F259FA17A0035669B /* bless */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = bless; sourceTree = "<group>"; };
 		2D9BB4FF259EAB0C007DE72A /* RDM.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = RDM.app; sourceTree = "<group>"; };
 		2D9BB502259EAC96007DE72A /* PreInstallActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreInstallActions.swift; sourceTree = "<group>"; };
 		2DAFF44B259AB7ED00D48E20 /* CreateInstallActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInstallActions.swift; sourceTree = "<group>"; };
@@ -82,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D99C50E259F9C570035669B /* SUVMMFaker.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -140,11 +171,10 @@
 			isa = PBXGroup;
 			children = (
 				2D02E031259453D500E8E1CF /* VolumeInfo.swift */,
-				2D99C499259F27210035669B /* Utilities.swift */,
 				2D993A65258DCA79003A5553 /* FileDownloader.swift */,
-				2D23BF63258EA04B0019BD90 /* CommandRunner.swift */,
 				2D2E4E1D259C03930088999C /* FileWriter.swift */,
 				2D3E60F1259CFC6000DE6488 /* ParseBootArgs.swift */,
+				2D23BF63258EA04B0019BD90 /* CommandRunner.swift */,
 			);
 			path = CommandCentral;
 			sourceTree = "<group>";
@@ -152,6 +182,21 @@
 		2D538EFD259008730066D908 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				2D99C51F259FA17A0035669B /* bless */,
+				2D99C513259F9CDF0035669B /* AAAMouSEE_README.txt */,
+				2D99C512259F9CDF0035669B /* AAAMouSSE.kext */,
+				2D99C514259F9CDF0035669B /* telemetrap.kext */,
+				2D99C50D259F9C570035669B /* com.apple.softwareupdated.plist */,
+				2D99C50C259F9C570035669B /* SUVMMFaker.dylib */,
+				2D99C509259F9BE70035669B /* HDMIAudio.kext */,
+				2D99C504259F9BD00035669B /* build.sh */,
+				2D99C4FA259F9B820035669B /* AppleHDA.kext */,
+				2D99C4FB259F9B830035669B /* com.apple.telemetry.plugin */,
+				2D99C4F7259F9B800035669B /* corecapture.kext */,
+				2D99C4F9259F9B810035669B /* IO80211Family.kext */,
+				2D99C4F5259F9B7F0035669B /* IOATAFamily.kext */,
+				2D99C4F6259F9B800035669B /* IOHIDFamily.kext */,
+				2D99C4F8259F9B800035669B /* usbInfo.plist */,
 				2D9BB4FF259EAB0C007DE72A /* RDM.app */,
 				2D7BFCAB259AD97D00E460CE /* HaxDoNotSealNoAPFSROMCheck.dylib */,
 				2DF9BAA4259420BF0023C6B0 /* bm2tmp0.dmg */,
@@ -169,6 +214,7 @@
 		2D7787F4258F1C8C00305EC3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				2D99C499259F27210035669B /* Utilities.swift */,
 				2D1A32A4258D959D009DCDFD /* ViewController.swift */,
 				2D3E60FD259D430C00DE6488 /* ViewSetup.swift */,
 				2DAFF44E259AB8A100D48E20 /* Notifications.swift */,
@@ -233,6 +279,7 @@
 				TargetAttributes = {
 					2D1A329E258D959D009DCDFD = {
 						CreatedOnToolsVersion = 12.3;
+						LastSwiftMigration = 1230;
 					};
 				};
 			};
@@ -261,16 +308,30 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D99C501259F9B830035669B /* AppleHDA.kext in Resources */,
+				2D99C4FC259F9B830035669B /* IOATAFamily.kext in Resources */,
 				2D19F128259EB89600AE82CE /* lax.sh in Resources */,
+				2D99C517259F9CDF0035669B /* AAAMouSEE_README.txt in Resources */,
 				2D83CE4F259E4D6300808757 /* bm2 in Resources */,
+				2D99C4FD259F9B830035669B /* IOHIDFamily.kext in Resources */,
 				2D83CE4C259E4BD100808757 /* bm2.sh in Resources */,
 				2DD296932597D8B800515D31 /* BuildManifest.plist in Resources */,
 				2D1A32A7258D959E009DCDFD /* Assets.xcassets in Resources */,
 				2D728AC0259D77D100F886DF /* Utilities.plist in Resources */,
+				2D99C506259F9BD00035669B /* build.sh in Resources */,
 				2DF9BAA5259420BF0023C6B0 /* bm2tmp0.dmg in Resources */,
+				2D99C518259F9CDF0035669B /* telemetrap.kext in Resources */,
+				2D99C500259F9B830035669B /* IO80211Family.kext in Resources */,
 				2D19F125259EB89000AE82CE /* lax in Resources */,
 				2D1A32AA258D959E009DCDFD /* Main.storyboard in Resources */,
+				2D99C520259FA17A0035669B /* bless in Resources */,
+				2D99C516259F9CDF0035669B /* AAAMouSSE.kext in Resources */,
+				2D99C50F259F9C570035669B /* com.apple.softwareupdated.plist in Resources */,
+				2D99C50A259F9BE70035669B /* HDMIAudio.kext in Resources */,
+				2D99C4FE259F9B830035669B /* corecapture.kext in Resources */,
 				2D9BB500259EAB0C007DE72A /* RDM.app in Resources */,
+				2D99C4FF259F9B830035669B /* usbInfo.plist in Resources */,
+				2D99C502259F9B830035669B /* com.apple.telemetry.plugin in Resources */,
 				2D3E60F7259D113D00DE6488 /* HaxDoNotSealNoAPFSROMCheck.dylib in Resources */,
 				2DD296962597D8BE00515D31 /* PlatformSupport.plist in Resources */,
 			);
@@ -444,6 +505,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = bigmac2/bigmac2.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -457,9 +519,12 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Data",
+					"$(PROJECT_DIR)/bigmac/💿",
+					"$(PROJECT_DIR)/bigmac/🍟",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.starplayrx.bigmac2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -470,6 +535,7 @@
 				ARCHS = "$(ARCHS_STANDARD)";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = bigmac2/bigmac2.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -483,6 +549,8 @@
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Data",
+					"$(PROJECT_DIR)/bigmac/💿",
+					"$(PROJECT_DIR)/bigmac/🍟",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.starplayrx.bigmac2;
 				PRODUCT_NAME = "$(TARGET_NAME)";

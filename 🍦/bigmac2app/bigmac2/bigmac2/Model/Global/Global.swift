@@ -19,8 +19,9 @@ var isSysSingleUser = false
 var isSysVerbose = false
 
 var bigmacDisk = "bigmac2.dmg"
+var bigmac2Str = "bigmac2"
 
-var volumeInfo = myVolumeInfo(diskSlice: "", disk: "", displayName: "", volumeName: "", path: "", uuid: "", external: false, capacity: 0)
+var volumeInfo = myVolumeInfo(diskSlice: "", disk: "", displayName: "", volumeName: "", path: "", uuid: "", external: false, root: false, capacity: 0)
 
 var ranHax3 = false
 
@@ -30,7 +31,7 @@ var bootedToBaseOS = false
 
 struct myVolumeInfo {
     var diskSlice, disk, displayName, volumeName, path, uuid: String
-    var external: Bool
+    var external, root: Bool
     var capacity: Int
 }
 
