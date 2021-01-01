@@ -1181,6 +1181,9 @@ DQ
 DQ
 </string>
                                                     </buttonCell>
+                                                    <connections>
+                                                        <action selector="patchDiskExec_action:" target="XfG-lQ-9wD" id="8Fu-XI-K1z"/>
+                                                    </connections>
                                                 </button>
                                                 <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yHl-mb-wuL">
                                                     <rect key="frame" x="14" y="13" width="209" height="25"/>
@@ -1281,16 +1284,30 @@ DQ
                         <outlet property="HiRes_720" destination="IlG-n8-9Wp" id="0Lx-NB-OF9"/>
                         <outlet property="LowRes_1080" destination="eSj-Nw-eOA" id="Ot7-d0-BVW"/>
                         <outlet property="LowRes_720" destination="3H5-KX-WJT" id="4mx-FG-2m4"/>
+                        <outlet property="SSE4Telemetry_btn" destination="aa6-JT-00t" id="hdR-rb-93W"/>
+                        <outlet property="VerboseBoot_btn" destination="vt6-hs-Whx" id="JgZ-h7-sbw"/>
+                        <outlet property="amdMouSSE_btn" destination="W3i-15-mCO" id="dpk-8K-l4h"/>
+                        <outlet property="appStoreMacOS_btn" destination="JFS-1h-7p0" id="rmc-15-LyP"/>
+                        <outlet property="appleHDA_btn" destination="FId-UD-oKk" id="AN7-MW-st1"/>
+                        <outlet property="availablePatchDisks" destination="yHl-mb-wuL" id="GjX-e0-Sya"/>
                         <outlet property="bootArgsField" destination="LFL-QC-eXl" id="Ud1-E9-T2g"/>
                         <outlet property="buildLabel" destination="DFd-ov-bag" id="7C2-Lu-I2R"/>
                         <outlet property="cloneToolTab" destination="QVi-mt-AWH" id="MoO-F9-hFv"/>
                         <outlet property="createInstallSpinner" destination="nYg-kZ-fDy" id="8gV-FZ-sji"/>
+                        <outlet property="disableBT2_btn" destination="0MJ-Iv-ywg" id="aVi-mD-sbf"/>
                         <outlet property="downloadLabel" destination="DFd-ov-bag" id="f6N-3p-Ktd"/>
                         <outlet property="downloadsTab" destination="MtW-aC-1cy" id="Wel-cP-HGl"/>
+                        <outlet property="enableUSB_btn" destination="Hwc-jj-Waw" id="CkQ-RI-cKr"/>
                         <outlet property="gbLabel" destination="eLx-fH-b51" id="egU-jl-cn7"/>
+                        <outlet property="hdmiAudio_btn" destination="zIZ-bF-5RK" id="Uly-zA-djN"/>
                         <outlet property="installerFuelGauge" destination="Qi3-pO-eUD" id="z1u-q0-D43"/>
+                        <outlet property="legacyWiFi_btn" destination="Rsm-39-Um6" id="HBR-wi-mhG"/>
                         <outlet property="mediaLabel" destination="syK-06-F8B" id="Tm3-Pq-vCa"/>
+                        <outlet property="patchDiskExecution_btn" destination="cpC-7g-ODn" id="ThD-nD-gyY"/>
                         <outlet property="percentageLabel" destination="dB3-ZJ-LZi" id="wCe-k6-zev"/>
+                        <outlet property="postInstallFuelGauge" destination="uX0-cz-cil" id="rg1-kT-CCe"/>
+                        <outlet property="postInstallProgressIndicator" destination="AkS-LS-Bh7" id="7ky-OC-wso"/>
+                        <outlet property="postInstallRunningIndicator" destination="dFy-dm-OFa" id="709-aH-w0J"/>
                         <outlet property="postInstallTab" destination="O2m-ec-BUk" id="NI6-Fb-qzU"/>
                         <outlet property="preInstallSpinner" destination="pZk-UF-Xb5" id="743-Mz-gGj"/>
                         <outlet property="preInstallTab" destination="5mC-sQ-iCM" id="616-Hl-r05"/>
@@ -1299,7 +1316,10 @@ DQ
                         <outlet property="sharedSupportPercentage" destination="Pzk-Hz-C1B" id="vhz-SM-Lv0"/>
                         <outlet property="sharedSupportProgressBar" destination="MkA-uU-q1I" id="w3s-61-gYA"/>
                         <outlet property="singleUserCheckbox" destination="LFa-gw-qF8" id="pYl-bX-baT"/>
+                        <outlet property="singleUser_btn" destination="pqh-XV-YeT" id="wpL-M4-MtJ"/>
+                        <outlet property="superDrive_btn" destination="VPt-hA-tNG" id="a4M-CW-nqM"/>
                         <outlet property="tabViews" destination="9xa-nA-Rvh" id="1Ut-EJ-4k6"/>
+                        <outlet property="teleTrap_btn" destination="mAO-Pd-4vQ" id="MXv-lD-zaa"/>
                         <outlet property="verboseUserCheckbox" destination="woR-0I-Jr3" id="Vbv-U2-Nyj"/>
                         <segue destination="30y-Mz-E5P" kind="sheet" identifier="userNamePassWord" id="2iv-7c-Fbr"/>
                         <segue destination="QRq-n9-edl" kind="sheet" identifier="eraseDisk" id="NKC-y8-uH7"/>

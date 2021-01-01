@@ -7,12 +7,10 @@
 
 import Cocoa
 
-
-
-
 class ViewController: NSViewController, URLSessionDelegate  {
     
-
+    let setResX = "/Applications/RDM.app/Contents/MacOS/SetResX"
+    let baseOS = "/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
    
     //get Home Folder
     let tempFolder = "/tmp"
@@ -63,7 +61,8 @@ class ViewController: NSViewController, URLSessionDelegate  {
     @IBOutlet weak var DisableLibraryValidation: NSButton!
     @IBOutlet weak var DisableSIP: NSButton!
     @IBOutlet weak var DisableAuthRoot: NSButton!
-    
+    @IBOutlet weak var preInstallSpinner: NSProgressIndicator!
+
     //MARK: Tab Views
     @IBOutlet weak var tabViews: NSTabView!
     @IBOutlet weak var downloadsTab: NSTabViewItem!
@@ -77,70 +76,71 @@ class ViewController: NSViewController, URLSessionDelegate  {
     @IBOutlet weak var HiRes_720: NSButton!
     @IBOutlet weak var LowRes_720: NSButton!
     
+    //MARK: Postinstall Tab
+    @IBOutlet weak var enableUSB_btn: NSButton!
+    @IBOutlet weak var disableBT2_btn: NSButton!
+    @IBOutlet weak var amdMouSSE_btn: NSButton!
+    @IBOutlet weak var teleTrap_btn: NSButton!
+    @IBOutlet weak var SSE4Telemetry_btn: NSButton!
+    @IBOutlet weak var VerboseBoot_btn: NSButton!
+    @IBOutlet weak var superDrive_btn: NSButton!
+    @IBOutlet weak var appleHDA_btn: NSButton!
+    @IBOutlet weak var hdmiAudio_btn: NSButton!
+    @IBOutlet weak var appStoreMacOS_btn: NSButton!
+    @IBOutlet weak var legacyWiFi_btn: NSButton!
+    @IBOutlet weak var singleUser_btn: NSButton!
+    @IBOutlet weak var postInstallFuelGauge: NSLevelIndicator!
+    @IBOutlet weak var postInstallProgressIndicator: NSProgressIndicator!
+    @IBOutlet weak var postInstallRunningIndicator: NSProgressIndicator!
+    @IBOutlet weak var availablePatchDisks: NSPopUpButton!
+    @IBOutlet weak var patchDiskExecution_btn: NSButton!
     
-    @IBOutlet weak var preInstallSpinner: NSProgressIndicator!
-    let setResX = "/Applications/RDM.app/Contents/MacOS/SetResX"
-    let baseOS = "/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
-    
-    func disableSetResXButtonsCheck() {
-        if !fm.fileExists(atPath: setResX) {
-            LowRes_720.isHidden = true
-            HiRes_720.isHidden = true
-            LowRes_1080.isHidden = true
-            HiRes_1080.isHidden = true
-        }
-    }
-    
-    
-    //MARK: Move to Utilities
-    func checkIfFileExists(path: String) -> Bool {
-        if fm.fileExists(atPath: path) {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    
-    func checkForBaseOS() -> Bool {
-        if fm.fileExists(atPath: baseOS) {
-            return true
-        } else {
-            return false
-        }
-    }
-    
-    @IBAction func LoRes_720(_ sender: Any) {
-        _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1280", "-h", "720", "-s", "1"])
-    }
-    @IBAction func HiRes_720(_ sender: Any) {
-        _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1280", "-h", "720", "-s", "2"])
-    }
-    @IBAction func LoRes_1080(_ sender: Any) {
-        _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1920", "-h", "1080", "-s", "1"])
-    }
-    
-    @IBAction func HiRes_1080(_ sender: Any) {
-        _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1920", "-h", "1080", "-s", "2"])
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        parseBootArgs()
-        disableSetResXButtonsCheck()
-        bootedToBaseOS = checkForBaseOS()
+    func patchBool() {
+        let enableUSB : Bool
+        let disableBT2 : Bool
+        let amdMouSSE : Bool
+        let teleTrap : Bool
+        let SSE4Telemetry : Bool
+        let VerboseBoot : Bool
+        let superDrive : Bool
+        let appleHDA : Bool
+        let hdmiAudio : Bool
+        let appStoreMacOS : Bool
+        let legacyWiFi : Bool
+        let singleUser : Bool
+  
+        enableUSB       ? (enableUSB_btn.state == .on)      : (enableUSB_btn.state == .off)
+        disableBT2      ? (disableBT2_btn.state == .on)     : (disableBT2_btn.state == .off)
+        amdMouSSE       ? (amdMouSSE_btn.state == .on)      : (amdMouSSE_btn.state == .off)
+        teleTrap        ? (teleTrap_btn.state == .on)       : (teleTrap_btn.state == .off)
+        SSE4Telemetry   ? (SSE4Telemetry_btn.state == .on)  : (SSE4Telemetry_btn.state == .off)
+        VerboseBoot     ? (VerboseBoot_btn.state == .on)    : (VerboseBoot_btn.state == .off)
+        superDrive      ? (superDrive_btn.state == .on)     : (superDrive_btn.state == .off)
+        appleHDA        ? (appleHDA_btn.state == .on)       : (appleHDA_btn.state == .off)
+        hdmiAudio       ? (hdmiAudio_btn.state == .on)      : (hdmiAudio_btn.state == .off)
+        appStoreMacOS   ? (appStoreMacOS_btn.state == .on)  : (appStoreMacOS_btn.state == .off)
+        legacyWiFi      ? (legacyWiFi_btn.state == .on)     : (legacyWiFi_btn.state == .off)
         
-        if ( bootedToBaseOS) {
-            tabViews.selectTabViewItem(preInstallTab)
-            tabViews.drawsBackground = false
-        }
-
+    }s
+    
+    
+    @IBAction func patchDiskExec_action(_ sender: Any) {
+        
     }
+
+ 
 }
 
+
+
+
+
+
+
+
+//No need for this yet
 class TabView : NSTabView {
-    
     override func awakeFromNib() {
+        
     }
-    
 }
