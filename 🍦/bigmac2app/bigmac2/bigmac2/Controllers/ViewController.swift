@@ -121,7 +121,7 @@ class ViewController: NSViewController, URLSessionDelegate  {
         appStoreMacOS   ? (appStoreMacOS_btn.state == .on)  : (appStoreMacOS_btn.state == .off)
         legacyWiFi      ? (legacyWiFi_btn.state == .on)     : (legacyWiFi_btn.state == .off)
         
-    }s
+    }
     
     
     @IBAction func patchDiskExec_action(_ sender: Any) {
