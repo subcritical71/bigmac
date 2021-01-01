@@ -1074,6 +1074,10 @@ DQ
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                 </textField>
+                                                <progressIndicator fixedFrame="YES" maxValue="5" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="pZk-UF-Xb5">
+                                                    <rect key="frame" x="443" y="63" width="32" height="32"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                </progressIndicator>
                                             </subviews>
                                         </view>
                                     </tabViewItem>
@@ -1288,6 +1292,7 @@ DQ
                         <outlet property="mediaLabel" destination="syK-06-F8B" id="Tm3-Pq-vCa"/>
                         <outlet property="percentageLabel" destination="dB3-ZJ-LZi" id="wCe-k6-zev"/>
                         <outlet property="postInstallTab" destination="O2m-ec-BUk" id="NI6-Fb-qzU"/>
+                        <outlet property="preInstallSpinner" destination="pZk-UF-Xb5" id="743-Mz-gGj"/>
                         <outlet property="preInstallTab" destination="5mC-sQ-iCM" id="616-Hl-r05"/>
                         <outlet property="progressBarDownload" destination="5Lr-xQ-MWE" id="W6L-fI-SjD"/>
                         <outlet property="sharedSupportGbLabel" destination="Xpg-5b-Ifl" id="sN0-N4-fh9"/>

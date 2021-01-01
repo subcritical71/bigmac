@@ -64,18 +64,21 @@ class ViewController: NSViewController, URLSessionDelegate  {
     @IBOutlet weak var DisableSIP: NSButton!
     @IBOutlet weak var DisableAuthRoot: NSButton!
     
- 
+    //MARK: Tab Views
     @IBOutlet weak var tabViews: NSTabView!
     @IBOutlet weak var downloadsTab: NSTabViewItem!
     @IBOutlet weak var preInstallTab: NSTabViewItem!
     @IBOutlet weak var postInstallTab: NSTabViewItem!
     @IBOutlet weak var cloneToolTab: NSTabViewItem!
     
+    //MARK: Screen Res Switching
     @IBOutlet weak var HiRes_1080: NSButton!
     @IBOutlet weak var LowRes_1080: NSButton!
     @IBOutlet weak var HiRes_720: NSButton!
     @IBOutlet weak var LowRes_720: NSButton!
     
+    
+    @IBOutlet weak var preInstallSpinner: NSProgressIndicator!
     let setResX = "/Applications/RDM.app/Contents/MacOS/SetResX"
     let baseOS = "/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
     
@@ -108,17 +111,17 @@ class ViewController: NSViewController, URLSessionDelegate  {
     }
     
     @IBAction func LoRes_720(_ sender: Any) {
-        _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1280", "-h", "720", "-s", "1", "-b", "16"])
+        _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1280", "-h", "720", "-s", "1", "-b", "24"])
     }
     @IBAction func HiRes_720(_ sender: Any) {
-        _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1280", "-h", "720", "-s", "2", "-b", "16"])
+        _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1280", "-h", "720", "-s", "2", "-b", "24"])
     }
     @IBAction func LoRes_1080(_ sender: Any) {
-        _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1920", "-h", "1080", "-s", "1", "-b", "16"])
+        _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1920", "-h", "1080", "-s", "1", "-b", "24"])
     }
     
     @IBAction func HiRes_1080(_ sender: Any) {
-        _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1920", "-h", "1080", "-s", "2", "-b", "16"])
+        _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1920", "-h", "1080", "-s", "2", "-b", "24"])
     }
     
     override func viewDidLoad() {
@@ -128,10 +131,6 @@ class ViewController: NSViewController, URLSessionDelegate  {
         bootedToBaseOS = checkForBaseOS()
         
         if ( bootedToBaseOS) {
-            tabViews.selectTabViewItem(preInstallTab)
-            tabViews.selectTabViewItem(downloadsTab)
-            tabViews.selectTabViewItem(postInstallTab)
-            tabViews.selectTabViewItem(cloneToolTab)
             tabViews.selectTabViewItem(preInstallTab)
             tabViews.drawsBackground = false
         }

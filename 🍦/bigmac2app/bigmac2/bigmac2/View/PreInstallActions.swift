@@ -39,7 +39,21 @@ extension ViewController {
                 
                 let bigMacApp = Bundle.main.bundlePath
                 _ = runCommandReturnString(binary: "\(bigMacApp)/Contents/Resources/lax" , arguments: [installAsstFullOS]) ?? ""
-                                
+                 
+                
+                DispatchQueue.global(qos: .background).async {
+                    for i in 1...6 {
+                        sleep(1)
+                        DispatchQueue.main.async { [self] in
+                            preInstallSpinner.doubleValue = Double(i)
+                            if i > 5 {
+                                exit(0)
+                            }
+                        }
+                    }
+                }
+              
+            
             } else if fm.fileExists(atPath: installAsstFullOS) {
                 
                 let script = """
@@ -57,6 +71,18 @@ extension ViewController {
                
                 let bigMacApp = Bundle.main.bundlePath
                 _ = runCommandReturnString(binary: "\(bigMacApp)/Contents/Resources/lax" , arguments: [installAsstFullOS]) ?? ""
+                
+                DispatchQueue.global(qos: .background).async {
+                    for i in 1...6 {
+                        sleep(1)
+                        DispatchQueue.main.async { [self] in
+                            preInstallSpinner.doubleValue = Double(i)
+                            if i > 5 {
+                                exit(0)
+                            }
+                        }
+                    }
+                }
             }
         }
         
