@@ -52,8 +52,7 @@ class ViewController: NSViewController, URLSessionDelegate  {
     @IBOutlet weak var installerFuelGauge: NSLevelIndicator!
     @IBOutlet weak var sharedSupportProgressBar: NSProgressIndicator!
     @IBOutlet weak var downloadLabel: NSTextField!
-    
-  
+
     @IBOutlet weak var sharedSupportPercentage: NSTextField!
     @IBOutlet weak var sharedSupportGbLabel: NSTextField!
     @IBOutlet weak var singleUserCheckbox: NSButton!
@@ -67,5 +66,6 @@ class ViewController: NSViewController, URLSessionDelegate  {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        parseBootArgs()
     }
 }

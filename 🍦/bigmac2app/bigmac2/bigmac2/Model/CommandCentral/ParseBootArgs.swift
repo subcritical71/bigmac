@@ -22,7 +22,8 @@ extension ViewController {
         }
       
         bootargs = bootargs?.replacingOccurrences(of: "boot-args\t", with: "")
-        
+        bootargs = bootargs?.replacingOccurrences(of: "\"", with: "")
+
         if let b = bootargs, !b.isEmpty {
             bootArgsField.stringValue = b
         } else {

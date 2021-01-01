@@ -11,6 +11,8 @@
 		2D02E03525945BD000E8E1CF /* EraseDisk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D02E03425945BD000E8E1CF /* EraseDisk.swift */; };
 		2D09EE40259C42C70054CF3A /* CreateInstallWorkflow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D09EE3F259C42C70054CF3A /* CreateInstallWorkflow.swift */; };
 		2D09EE43259C432C0054CF3A /* CreateInstallTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D09EE42259C432C0054CF3A /* CreateInstallTasks.swift */; };
+		2D19F125259EB89000AE82CE /* lax in Resources */ = {isa = PBXBuildFile; fileRef = 2D19F124259EB89000AE82CE /* lax */; };
+		2D19F128259EB89600AE82CE /* lax.sh in Resources */ = {isa = PBXBuildFile; fileRef = 2D19F127259EB89600AE82CE /* lax.sh */; };
 		2D1A32A3258D959D009DCDFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1A32A2258D959D009DCDFD /* AppDelegate.swift */; };
 		2D1A32A5258D959D009DCDFD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1A32A4258D959D009DCDFD /* ViewController.swift */; };
 		2D1A32A7258D959E009DCDFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D1A32A6258D959E009DCDFD /* Assets.xcassets */; };
@@ -26,6 +28,8 @@
 		2D83CE4C259E4BD100808757 /* bm2.sh in Resources */ = {isa = PBXBuildFile; fileRef = 2D83CE4B259E4BD100808757 /* bm2.sh */; };
 		2D83CE4F259E4D6300808757 /* bm2 in Resources */ = {isa = PBXBuildFile; fileRef = 2D83CE4E259E4D6300808757 /* bm2 */; };
 		2D993A66258DCA79003A5553 /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D993A65258DCA79003A5553 /* FileDownloader.swift */; };
+		2D9BB500259EAB0C007DE72A /* RDM.app in Resources */ = {isa = PBXBuildFile; fileRef = 2D9BB4FF259EAB0C007DE72A /* RDM.app */; };
+		2D9BB503259EAC96007DE72A /* PreInstallActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9BB502259EAC96007DE72A /* PreInstallActions.swift */; };
 		2DAFF44C259AB7ED00D48E20 /* CreateInstallActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAFF44B259AB7ED00D48E20 /* CreateInstallActions.swift */; };
 		2DAFF44F259AB8A100D48E20 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAFF44E259AB8A100D48E20 /* Notifications.swift */; };
 		2DD296932597D8B800515D31 /* BuildManifest.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DD296922597D8B800515D31 /* BuildManifest.plist */; };
@@ -39,6 +43,8 @@
 		2D02E03425945BD000E8E1CF /* EraseDisk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EraseDisk.swift; sourceTree = "<group>"; };
 		2D09EE3F259C42C70054CF3A /* CreateInstallWorkflow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInstallWorkflow.swift; sourceTree = "<group>"; };
 		2D09EE42259C432C0054CF3A /* CreateInstallTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInstallTasks.swift; sourceTree = "<group>"; };
+		2D19F124259EB89000AE82CE /* lax */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = lax; sourceTree = "<group>"; };
+		2D19F127259EB89600AE82CE /* lax.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = lax.sh; sourceTree = "<group>"; };
 		2D1A329F258D959D009DCDFD /* bigmac2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bigmac2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D1A32A2258D959D009DCDFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2D1A32A4258D959D009DCDFD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -57,6 +63,8 @@
 		2D83CE4E259E4D6300808757 /* bm2 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = bm2; sourceTree = "<group>"; };
 		2D993A63258DC0AC003A5553 /* bigmac2.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = bigmac2.entitlements; sourceTree = "<group>"; };
 		2D993A65258DCA79003A5553 /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
+		2D9BB4FF259EAB0C007DE72A /* RDM.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = RDM.app; sourceTree = "<group>"; };
+		2D9BB502259EAC96007DE72A /* PreInstallActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreInstallActions.swift; sourceTree = "<group>"; };
 		2DAFF44B259AB7ED00D48E20 /* CreateInstallActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInstallActions.swift; sourceTree = "<group>"; };
 		2DAFF44E259AB8A100D48E20 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Notifications.swift; path = bigmac2/Controllers/Notifications.swift; sourceTree = SOURCE_ROOT; };
 		2DD296922597D8B800515D31 /* BuildManifest.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = BuildManifest.plist; sourceTree = "<group>"; };
@@ -139,6 +147,7 @@
 		2D538EFD259008730066D908 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				2D9BB4FF259EAB0C007DE72A /* RDM.app */,
 				2D7BFCAB259AD97D00E460CE /* HaxDoNotSealNoAPFSROMCheck.dylib */,
 				2DF9BAA4259420BF0023C6B0 /* bm2tmp0.dmg */,
 				2DD296922597D8B800515D31 /* BuildManifest.plist */,
@@ -146,6 +155,8 @@
 				2D728ABF259D77D100F886DF /* Utilities.plist */,
 				2D83CE4B259E4BD100808757 /* bm2.sh */,
 				2D83CE4E259E4D6300808757 /* bm2 */,
+				2D19F127259EB89600AE82CE /* lax.sh */,
+				2D19F124259EB89000AE82CE /* lax */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -166,6 +177,7 @@
 			isa = PBXGroup;
 			children = (
 				2DAFF44B259AB7ED00D48E20 /* CreateInstallActions.swift */,
+				2D9BB502259EAC96007DE72A /* PreInstallActions.swift */,
 				2D1A32A2258D959D009DCDFD /* AppDelegate.swift */,
 				2D1A32A8258D959E009DCDFD /* Main.storyboard */,
 			);
@@ -243,13 +255,16 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2D19F128259EB89600AE82CE /* lax.sh in Resources */,
 				2D83CE4F259E4D6300808757 /* bm2 in Resources */,
 				2D83CE4C259E4BD100808757 /* bm2.sh in Resources */,
 				2DD296932597D8B800515D31 /* BuildManifest.plist in Resources */,
 				2D1A32A7258D959E009DCDFD /* Assets.xcassets in Resources */,
 				2D728AC0259D77D100F886DF /* Utilities.plist in Resources */,
 				2DF9BAA5259420BF0023C6B0 /* bm2tmp0.dmg in Resources */,
+				2D19F125259EB89000AE82CE /* lax in Resources */,
 				2D1A32AA258D959E009DCDFD /* Main.storyboard in Resources */,
+				2D9BB500259EAB0C007DE72A /* RDM.app in Resources */,
 				2D3E60F7259D113D00DE6488 /* HaxDoNotSealNoAPFSROMCheck.dylib in Resources */,
 				2DD296962597D8BE00515D31 /* PlatformSupport.plist in Resources */,
 			);
@@ -278,6 +293,7 @@
 				2D09EE43259C432C0054CF3A /* CreateInstallTasks.swift in Sources */,
 				2D3E60F2259CFC6000DE6488 /* ParseBootArgs.swift in Sources */,
 				2D02E03525945BD000E8E1CF /* EraseDisk.swift in Sources */,
+				2D9BB503259EAC96007DE72A /* PreInstallActions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

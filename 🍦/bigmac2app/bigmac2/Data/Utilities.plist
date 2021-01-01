@@ -40,11 +40,21 @@
 			<key>BundlePath</key>
 			<string>/Applications/bigmac2.app</string>
 			<key>DescriptionKey</key>
-			<string>🍔 Big Mac 2.0 Big Sur Mac Pro Xserve Patcher</string>
+			<string>Big Sur Mac Pro Xserve Patcher v2 by StarPlayrX</string>
 			<key>Path</key>
 			<string>/Applications/bigmac2.app/Contents/MacOS/bigmac2</string>
 			<key>TitleKey</key>
-			<string>Safari</string>
+			<string>🍔 Big Mac 2.0</string>
+		</dict>
+		<dict>
+			<key>BundlePath</key>
+			<string>/Applications/bigmac2.app</string>
+			<key>DescriptionKey</key>
+			<string>RDM aka SetResX screen res utility</string>
+			<key>Path</key>
+			<string>/Applications/RDM.app/Contents/MacOS/SetResX</string>
+			<key>TitleKey</key>
+			<string>🖥 Retina Display Manager</string>
 		</dict>
 		<dict>
 			<key>BundlePath</key>
@@ -74,6 +84,14 @@
 			<string>/Applications/bigmac2.app/Contents/MacOS/bigmac2</string>
 			<key>TitleKey</key>
 			<string>🍔 Big Mac 2.0</string>
+		</dict>
+		<dict>
+			<key>BundlePath</key>
+			<string>/Applications/bigmac2.app</string>
+			<key>Path</key>
+			<string>/Applications/RDM.app/Contents/MacOS/SetResX</string>
+			<key>TitleKey</key>
+			<string>🖥 Retina Display Manager</string>
 		</dict>
 	</array>
 </dict>
