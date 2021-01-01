@@ -89,7 +89,7 @@ extension ViewController : URLSessionDownloadDelegate {
            
         DispatchQueue.main.async { [self] in
             createInstallSpinner.isHidden = false
-            createInstallSpinner.stopAnimation(self)
+            createInstallSpinner.startAnimation(self)
         }
     }
     
