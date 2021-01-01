@@ -36,12 +36,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         
         defaults.set(isSysVerbose, forKey: "isSysVerbose")
         defaults.set(isSysSingleUser, forKey: "isSysSingleUser")
-        
-        defaults.set(passWord, forKey: "passWord")
-        
-        defaults.set(userName, forKey: "userName")
-
-
+   
     }
 }
 
