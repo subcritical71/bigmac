@@ -687,12 +687,12 @@
                 <windowController id="B8D-0N-5wS" customClass="MainViewController" customModule="bigmac2" sceneMemberID="viewController">
                     <window key="window" title="Window" separatorStyle="none" allowsToolTipsWhenApplicationIsInactive="NO" autorecalculatesKeyViewLoop="NO" releasedWhenClosed="NO" visibleAtLaunch="NO" animationBehavior="default" titlebarAppearsTransparent="YES" id="IQv-IB-iLA">
                         <windowStyleMask key="styleMask" titled="YES" closable="YES" miniaturizable="YES" resizable="YES" fullSizeContentView="YES"/>
-                        <rect key="contentRect" x="393" y="658" width="558" height="416"/>
+                        <rect key="contentRect" x="393" y="658" width="552" height="416"/>
                         <rect key="screenRect" x="0.0" y="0.0" width="2560" height="1415"/>
-                        <value key="minSize" type="size" width="558" height="416"/>
-                        <value key="maxSize" type="size" width="558" height="416"/>
-                        <value key="minFullScreenContentSize" type="size" width="558" height="416"/>
-                        <value key="maxFullScreenContentSize" type="size" width="558" height="416"/>
+                        <value key="minSize" type="size" width="552" height="416"/>
+                        <value key="maxSize" type="size" width="552" height="416"/>
+                        <value key="minFullScreenContentSize" type="size" width="552" height="416"/>
+                        <value key="maxFullScreenContentSize" type="size" width="552" height="416"/>
                         <connections>
                             <outlet property="delegate" destination="B8D-0N-5wS" id="98r-iN-zZc"/>
                         </connections>
@@ -903,9 +903,9 @@
                                                     </customSpacing>
                                                 </stackView>
                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JbP-BI-H0f">
-                                                    <rect key="frame" x="425" y="7" width="72" height="32"/>
+                                                    <rect key="frame" x="402" y="9" width="94" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                    <buttonCell key="cell" type="push" title="Retina" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zKe-qh-uC1">
+                                                    <buttonCell key="cell" type="push" title="4k@60Hz" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zKe-qh-uC1">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                         <font key="font" metaFont="system"/>
                                                         <string key="keyEquivalent" base64-UTF8="YES">

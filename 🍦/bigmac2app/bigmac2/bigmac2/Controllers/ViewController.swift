@@ -71,7 +71,6 @@ class ViewController: NSViewController, URLSessionDelegate  {
         if !fm.fileExists(atPath: installAsstBaseOS) {
             HiDPI_Retina.isEnabled = false
             HiDPI_Retina.isHidden = true
-
         }
     }
     
