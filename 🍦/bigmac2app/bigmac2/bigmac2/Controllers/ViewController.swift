@@ -63,7 +63,6 @@ class ViewController: NSViewController, URLSessionDelegate  {
     @IBOutlet weak var DisableLibraryValidation: NSButton!
     @IBOutlet weak var DisableSIP: NSButton!
     @IBOutlet weak var DisableAuthRoot: NSButton!
-    @IBOutlet weak var HiDPI_Retina: NSButton!
     
  
     @IBOutlet weak var tabViews: NSTabView!
@@ -72,13 +71,20 @@ class ViewController: NSViewController, URLSessionDelegate  {
     @IBOutlet weak var postInstallTab: NSTabViewItem!
     @IBOutlet weak var cloneToolTab: NSTabViewItem!
     
-    let setResX = "s"
+    @IBOutlet weak var HiRes_1080: NSButton!
+    @IBOutlet weak var LowRes_1080: NSButton!
+    @IBOutlet weak var HiRes_720: NSButton!
+    @IBOutlet weak var LowRes_720: NSButton!
+    
+    let setResX = "/Applications/RDM.app/Contents/MacOS/SetResX"
     let baseOS = "/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
     
-    func disableRetinaBtnCheck() {
+    func disableSetResXButtonsCheck() {
         if !fm.fileExists(atPath: setResX) {
-            HiDPI_Retina.isEnabled = false
-            HiDPI_Retina.isHidden = true
+            LowRes_720.isHidden = true
+            HiRes_720.isHidden = true
+            LowRes_1080.isHidden = true
+            HiRes_1080.isHidden = true
         }
     }
     
@@ -100,16 +106,25 @@ class ViewController: NSViewController, URLSessionDelegate  {
             return false
         }
     }
-     
     
-    @IBAction func hiDPI(_ sender: Any) {
+    @IBAction func LoRes_720(_ sender: Any) {
+        _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1280", "-h", "720", "-s", "1", "-b", "16"])
+    }
+    @IBAction func HiRes_720(_ sender: Any) {
+        _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1280", "-h", "720", "-s", "2", "-b", "16"])
+    }
+    @IBAction func LoRes_1080(_ sender: Any) {
+        _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1920", "-h", "1080", "-s", "1", "-b", "16"])
+    }
+    
+    @IBAction func HiRes_1080(_ sender: Any) {
         _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1920", "-h", "1080", "-s", "2", "-b", "16"])
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         parseBootArgs()
-        disableRetinaBtnCheck()
+        disableSetResXButtonsCheck()
         bootedToBaseOS = checkForBaseOS()
         
         if ( bootedToBaseOS) {

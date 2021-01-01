@@ -83,6 +83,14 @@
 		</dict>
 		<dict>
 			<key>BundlePath</key>
+			<string>/Install macOS Big Sur.app</string>
+			<key>Path</key>
+			<string>/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant</string>
+			<key>TitleKey</key>
+			<string> Install macOS 11 Big Sur</string>
+		</dict>
+		<dict>
+			<key>BundlePath</key>
 			<string>/Applications/RDM.app</string>
 			<key>Path</key>
 			<string>/Applications/RDM.app/Contents/MacOS/SetResX</string>

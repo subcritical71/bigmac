@@ -845,7 +845,7 @@
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <textFieldCell key="cell" lineBreakMode="clipping" title="for native APFS boot support on Mac Pro 3,1 and Xserve 2,1" id="4Fv-gb-UHD">
                                                                 <font key="font" metaFont="cellTitle"/>
-                                                                <color key="textColor" name="systemGrayColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                         </textField>
@@ -854,7 +854,7 @@
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <textFieldCell key="cell" lineBreakMode="clipping" title="by Dosdude1" id="wrQ-Wn-YKG">
                                                                 <font key="font" metaFont="smallSystem"/>
-                                                                <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                                                <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                         </textField>
@@ -902,20 +902,75 @@
                                                         <real value="3.4028234663852886e+38"/>
                                                     </customSpacing>
                                                 </stackView>
-                                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JbP-BI-H0f">
-                                                    <rect key="frame" x="402" y="9" width="94" height="32"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                    <buttonCell key="cell" type="push" title="4k@60Hz" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zKe-qh-uC1">
-                                                        <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                        <font key="font" metaFont="system"/>
-                                                        <string key="keyEquivalent" base64-UTF8="YES">
+                                                <stackView distribution="fill" orientation="vertical" alignment="centerX" spacing="14" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lmZ-SP-4m1">
+                                                    <rect key="frame" x="401" y="17" width="92" height="122"/>
+                                                    <subviews>
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="3H5-KX-WJT">
+                                                            <rect key="frame" x="-7" y="95" width="106" height="32"/>
+                                                            <buttonCell key="cell" type="push" title="LoRes 720p" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="64t-KI-cwx">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="LoRes_720:" target="XfG-lQ-9wD" id="EDt-ad-4Wd"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IlG-n8-9Wp">
+                                                            <rect key="frame" x="-6" y="61" width="104" height="32"/>
+                                                            <buttonCell key="cell" type="push" title="HiRes 720p" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="mpX-jp-mDF">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="HiRes_720:" target="XfG-lQ-9wD" id="EDW-a4-1Uu"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="eSj-Nw-eOA">
+                                                            <rect key="frame" x="-6" y="27" width="105" height="32"/>
+                                                            <buttonCell key="cell" type="push" title="LoRes 1080" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="pk1-5t-yzB">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                                <string key="keyEquivalent" base64-UTF8="YES">
 DQ
 </string>
-                                                        <connections>
-                                                            <action selector="hiDPI:" target="XfG-lQ-9wD" id="uP4-em-Fzi"/>
-                                                        </connections>
-                                                    </buttonCell>
-                                                </button>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="LoRes_1080:" target="XfG-lQ-9wD" id="enA-cR-ag1"/>
+                                                            </connections>
+                                                        </button>
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JbP-BI-H0f">
+                                                            <rect key="frame" x="-5" y="-7" width="103" height="32"/>
+                                                            <buttonCell key="cell" type="push" title="HiRes 1080" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zKe-qh-uC1">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="HiRes_1080:" target="XfG-lQ-9wD" id="C1b-wU-LBt"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
+                                                    <visibilityPriorities>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                        <integer value="1000"/>
+                                                    </visibilityPriorities>
+                                                    <customSpacing>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
+                                                    </customSpacing>
+                                                </stackView>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ves-hf-kl5">
+                                                    <rect key="frame" x="399" y="146" width="96" height="14"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="LoRes is faster" id="tJ8-NA-kyN">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="tertiaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
                                             </subviews>
                                         </view>
                                     </tabViewItem>
@@ -1218,7 +1273,10 @@ DQ
                         <outlet property="DisableAuthRoot" destination="2hw-ui-YuN" id="V2Y-eh-QCe"/>
                         <outlet property="DisableLibraryValidation" destination="DYc-Ys-UxX" id="US9-Ta-lWL"/>
                         <outlet property="DisableSIP" destination="M0Z-5v-afG" id="lSN-cb-V6u"/>
-                        <outlet property="HiDPI_Retina" destination="JbP-BI-H0f" id="y1v-ch-7lz"/>
+                        <outlet property="HiRes_1080" destination="JbP-BI-H0f" id="cpm-aZ-BGc"/>
+                        <outlet property="HiRes_720" destination="IlG-n8-9Wp" id="0Lx-NB-OF9"/>
+                        <outlet property="LowRes_1080" destination="eSj-Nw-eOA" id="Ot7-d0-BVW"/>
+                        <outlet property="LowRes_720" destination="3H5-KX-WJT" id="4mx-FG-2m4"/>
                         <outlet property="bootArgsField" destination="LFL-QC-eXl" id="Ud1-E9-T2g"/>
                         <outlet property="buildLabel" destination="DFd-ov-bag" id="7C2-Lu-I2R"/>
                         <outlet property="cloneToolTab" destination="QVi-mt-AWH" id="MoO-F9-hFv"/>
