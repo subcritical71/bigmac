@@ -49,7 +49,7 @@ extension ViewController {
         customerInstallDisk(isBeta: false, diskInfo: volumeInfo, isVerbose: isBaseVerbose, isSingleUser: isBaseSingleUser, fullDisk: true) //not fulldisk is for internal testing
      }
     
-    //MARK: Phase 1.2r
+    //MARK: Phase 1.2
     @objc func RunAtRootRequest(_ notification:Notification){
         
         //runs out app as root, pretty sweet
@@ -74,7 +74,6 @@ extension ViewController {
         if NSUserName() != "root" {
             performSegue(withIdentifier: "userNamePassWord", sender: nil)
         }
-        
     }
 }
 

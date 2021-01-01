@@ -48,9 +48,9 @@
 		</dict>
 		<dict>
 			<key>BundlePath</key>
-			<string>/Applications/bigmac2.app</string>
+			<string>/Applications/RDM.app</string>
 			<key>DescriptionKey</key>
-			<string>RDM aka SetResX screen res utility</string>
+			<string>RDM screen res Menu app</string>
 			<key>Path</key>
 			<string>/Applications/RDM.app/Contents/MacOS/SetResX</string>
 			<key>TitleKey</key>
@@ -87,7 +87,7 @@
 		</dict>
 		<dict>
 			<key>BundlePath</key>
-			<string>/Applications/bigmac2.app</string>
+			<string>/Applications/RDM.app</string>
 			<key>Path</key>
 			<string>/Applications/RDM.app/Contents/MacOS/SetResX</string>
 			<key>TitleKey</key>

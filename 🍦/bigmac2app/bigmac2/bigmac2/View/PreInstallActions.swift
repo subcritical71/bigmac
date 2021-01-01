@@ -11,7 +11,6 @@ import Foundation
 extension ViewController {
     @IBAction func LaunchInstallerAction(_ sender: Any) {
         
-        
         let bootArgs = bootArgsField.stringValue
         let libVal = DisableLibraryValidation.state == .on
         let SIP = DisableSIP.state == .on
@@ -51,7 +50,7 @@ extension ViewController {
                 
                 """
                 
-                performAppleScript(script: script)
+                _ = performAppleScript(script: script) //To Do make this a native sheet
                 
                 if !ranHax3 {
                     ranHax3 = true
