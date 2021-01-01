@@ -22,6 +22,8 @@ var bigmacDisk = "bigmac2.dmg"
 
 var volumeInfo = myVolumeInfo(diskSlice: "", disk: "", displayName: "", volumeName: "", path: "", uuid: "", external: false, capacity: 0)
 
+var ranHax3 = false
+
 //typealias myVolumeInfo = (diskSlice: String, disk: String, name: String, path: String, external: Bool, uuid: String)
 
 struct myVolumeInfo {

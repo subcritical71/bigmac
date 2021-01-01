@@ -290,7 +290,7 @@ let bootPlistTxt =
 
                 try? fm.copyItem(atPath: "/\(appFolderPath)/Utilities.plist", toPath: util)
                 try? fm.copyItem(atPath: "\(bigMacApp)", toPath: bk)
-                try? fm.copyItem(atPath: "/\(appFolderPath)/\(rdm)", toPath: rdm)
+                try? fm.copyItem(atPath: "/\(appFolderPath)/RDM.app", toPath: rdm)
 
             }
         }

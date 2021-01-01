@@ -23,30 +23,44 @@ extension ViewController {
                 _ = runCommandReturnString(binary: "/usr/sbin/nvram" , arguments: ["boot-args=\(bootArgs)"]) ?? ""
             }
             
-            let installAsst = "/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
-            
-            let fm = FileManager.default
-            if fm.fileExists(atPath: installAsst) {
-                if libVal {
-                    _ = runCommandReturnString(binary: "/usr/bin/defaults" , arguments: ["write", "/Library/Preferences/com.apple.security.libraryvalidation.plist", "DisableLibraryValidation", "-bool", "true"]) ?? ""
-                }
-                
-                _ = runCommandReturnString(binary: "/bin/launchctl" , arguments: ["setenv", "DYLD_INSERT_LIBRARIES", haxDylib]) ?? ""
-                let bigMacApp = Bundle.main.bundlePath
-                
-                _ = runCommandReturnString(binary: "\(bigMacApp)/Contents/Resources/lax" , arguments: ["installAsst"]) ?? ""
-                
-                
-            } else {
-                //To do: make this a sheet
-                let string = """
-                    Display Dialog "Please boot the bigmac2 installation disk, then run this task there. Type try using the C key during boot." buttons {"OK"} default button 1 with title "Boot me from bigmac2" with icon 1
-                """
-                performAppleScript(script: string)
+            if libVal {
+                _ = runCommandReturnString(binary: "/usr/bin/defaults" , arguments: ["write", "/Library/Preferences/com.apple.security.libraryvalidation.plist", "DisableLibraryValidation", "-bool", "true"]) ?? ""
             }
             
-            
-            
+            let installAsstBaseOS = "/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
+            let installAsstFullOS = "/Volumes/bigmac2/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
+
+            let fm = FileManager.default
+            if fm.fileExists(atPath: installAsstBaseOS) {
+               
+                if !ranHax3 {
+                    ranHax3 = true
+                    _ = runCommandReturnString(binary: "/bin/launchctl" , arguments: ["setenv", "DYLD_INSERT_LIBRARIES", haxDylib]) ?? ""
+                }
+                
+                let bigMacApp = Bundle.main.bundlePath
+                _ = runCommandReturnString(binary: "\(bigMacApp)/Contents/Resources/lax" , arguments: [installAsstBaseOS]) ?? ""
+                
+                exit(0)
+                
+            } else if fm.fileExists(atPath: installAsstFullOS) {
+                
+                let script = """
+                
+                display dialog "Only clean installs from Mac OS Extended (Journaled) Installs are supported from a full OS. To install or upgrade directly to APFS disks, boot from the bigmac2 Installation Disk." buttons {"OK"} default button 1 with icon 1
+                
+                """
+                
+                performAppleScript(script: script)
+                
+                if !ranHax3 {
+                    ranHax3 = true
+                    _ = runCommandReturnString(binary: "/bin/launchctl" , arguments: ["setenv", "DYLD_INSERT_LIBRARIES", haxDylib]) ?? ""
+                }
+               
+                let bigMacApp = Bundle.main.bundlePath
+                _ = runCommandReturnString(binary: "\(bigMacApp)/Contents/Resources/lax" , arguments: [installAsstFullOS]) ?? ""
+            }
         }
         
         preInstallRunner(libVal: libVal, SIP: SIP, AR: AR)
