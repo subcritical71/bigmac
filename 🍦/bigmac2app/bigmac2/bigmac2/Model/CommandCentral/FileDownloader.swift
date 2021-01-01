@@ -34,9 +34,7 @@ extension ViewController : URLSessionDownloadDelegate {
             }
             
             downloadProgress = x
-        }
-      
-      
+        }  
     }
     
     //to do add error handling

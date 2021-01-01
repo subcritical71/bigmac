@@ -41,7 +41,7 @@ class MainViewController : NSWindowController {
     
     override func windowDidLoad() {
         _ = performAppleScript(script: "tell me to activate")
-        shouldCascadeWindows = true
+        shouldCascadeWindows = false
 
         if NSUserName() == "root" {
             window?.setFrameAutosaveName("bigMacMainView")
@@ -51,12 +51,11 @@ class MainViewController : NSWindowController {
         }
         
         super.windowDidLoad()
-
         window?.titlebarAppearsTransparent = true
         window?.styleMask.insert(NSWindow.StyleMask.fullSizeContentView)
         window?.title = "🍔 Big Mac 2.0"
-        window?.level = .floating
-    
+        window?.level = .normal
+
     }
     
 }

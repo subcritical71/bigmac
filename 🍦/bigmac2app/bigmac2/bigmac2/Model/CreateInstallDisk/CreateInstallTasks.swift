@@ -84,7 +84,15 @@ extension ViewController {
     //MARK: Task #5.1
     func installBaseSystemII(diskInfo: myVolumeInfo, baseSys: String, bm2: String) {
         //MARK: Install Base System
-        _ = addVolume(dmgPath: "/Users/shared/\(bigmacDisk)", targetDisk: "/dev/r\(diskInfo.disk)", erase: true, title: "Installing Boot Disk")
+        
+        let path = "/Users/shared/\(bigmacDisk)"
+        
+        if checkIfFileExists(path: path) {
+            _ = addVolume(dmgPath: "/Users/shared/\(bigmacDisk)", targetDisk: "/dev/r\(diskInfo.disk)", erase: true, title: "Installing Boot Disk")
+        } else {
+            
+            print("BASE SYSTEM.... DISK NOT FOUND...\n")
+        }
                 
         _ = mountVolume(disk: diskInfo.disk)
         

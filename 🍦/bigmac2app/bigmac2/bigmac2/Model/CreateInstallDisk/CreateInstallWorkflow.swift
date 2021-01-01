@@ -85,7 +85,7 @@ extension ViewController {
             
             //MARK: Set vars and local constants
             if isBeta {
-                installBigSur = "Install macOS Big Sur Beta.app"
+                installBigSur = "Install macOS Big Sur Beta.app" //Not currently implemented
             }
             
             let rndStr = ""

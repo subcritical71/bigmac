@@ -26,16 +26,21 @@ extension ViewController {
          volumeInfo = notification.object as! myVolumeInfo //Store in a global
 
         // permission to erase a disk, proceed with download of BigMacII disk then Create disk workflow
-        downloadBigMac2(dmg:"https://www.starplayrx.com/bigmac2/bigmac2.dmg")
         
         DispatchQueue.main.async { [self] in
             spinnerAnimation(start: true, hide: false)
         }
+        
+        let path = "/Users/shared/\(bigmacDisk)"
+        
+        if !checkIfFileExists(path: path) {
+            downloadBigMac2(dmg:"https://www.starplayrx.com/bigmac2/bigmac2.dmg")
+        } else {
+            installDisk()
+        }
      }
-
-     //MARK: Phase 1.2
-     @objc func CreateDisk(_ notification:Notification){
-
+    
+    func installDisk() {
         DispatchQueue.main.async { [self] in
             isBaseSingleUser = singleUserCheckbox.state == .on
             isBaseVerbose = verboseUserCheckbox.state == .on
@@ -47,6 +52,11 @@ extension ViewController {
         
         //Customer
         customerInstallDisk(isBeta: false, diskInfo: volumeInfo, isVerbose: isBaseVerbose, isSingleUser: isBaseSingleUser, fullDisk: true) //not fulldisk is for internal testing
+    }
+    
+     //MARK: Phase 1.2
+     @objc func CreateDisk(_ notification:Notification){
+        installDisk()
      }
     
     //MARK: Phase 1.2

@@ -713,7 +713,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="552" height="416"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <tabView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9xa-nA-Rvh">
+                            <tabView fixedFrame="YES" drawsBackground="NO" allowsTruncatedLabels="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9xa-nA-Rvh" customClass="TabView" customModule="bigmac2" customModuleProvider="target">
                                 <rect key="frame" x="13" y="11" width="526" height="380"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <font key="font" metaFont="system"/>
@@ -912,7 +912,7 @@
 DQ
 </string>
                                                         <connections>
-                                                            <action selector="hiDPI:" target="XfG-lQ-9wD" id="zB6-j8-grX"/>
+                                                            <action selector="hiDPI:" target="XfG-lQ-9wD" id="uP4-em-Fzi"/>
                                                         </connections>
                                                     </buttonCell>
                                                 </button>
@@ -1209,21 +1209,25 @@ DQ
                         <outlet property="DisableAuthRoot" destination="2hw-ui-YuN" id="V2Y-eh-QCe"/>
                         <outlet property="DisableLibraryValidation" destination="DYc-Ys-UxX" id="US9-Ta-lWL"/>
                         <outlet property="DisableSIP" destination="M0Z-5v-afG" id="lSN-cb-V6u"/>
-                        <outlet property="HiDPI" destination="JbP-BI-H0f" id="APn-va-fho"/>
-                        <outlet property="HiDPI_Retina" destination="JbP-BI-H0f" id="Js9-PX-bPE"/>
+                        <outlet property="HiDPI_Retina" destination="JbP-BI-H0f" id="y1v-ch-7lz"/>
                         <outlet property="bootArgsField" destination="LFL-QC-eXl" id="Ud1-E9-T2g"/>
                         <outlet property="buildLabel" destination="DFd-ov-bag" id="7C2-Lu-I2R"/>
+                        <outlet property="cloneToolTab" destination="QVi-mt-AWH" id="MoO-F9-hFv"/>
                         <outlet property="createInstallSpinner" destination="nYg-kZ-fDy" id="8gV-FZ-sji"/>
                         <outlet property="downloadLabel" destination="DFd-ov-bag" id="f6N-3p-Ktd"/>
+                        <outlet property="downloadsTab" destination="MtW-aC-1cy" id="Wel-cP-HGl"/>
                         <outlet property="gbLabel" destination="eLx-fH-b51" id="egU-jl-cn7"/>
                         <outlet property="installerFuelGauge" destination="Qi3-pO-eUD" id="z1u-q0-D43"/>
                         <outlet property="mediaLabel" destination="syK-06-F8B" id="Tm3-Pq-vCa"/>
                         <outlet property="percentageLabel" destination="dB3-ZJ-LZi" id="wCe-k6-zev"/>
+                        <outlet property="postInstallTab" destination="O2m-ec-BUk" id="NI6-Fb-qzU"/>
+                        <outlet property="preInstallTab" destination="5mC-sQ-iCM" id="616-Hl-r05"/>
                         <outlet property="progressBarDownload" destination="5Lr-xQ-MWE" id="W6L-fI-SjD"/>
                         <outlet property="sharedSupportGbLabel" destination="Xpg-5b-Ifl" id="sN0-N4-fh9"/>
                         <outlet property="sharedSupportPercentage" destination="Pzk-Hz-C1B" id="vhz-SM-Lv0"/>
                         <outlet property="sharedSupportProgressBar" destination="MkA-uU-q1I" id="w3s-61-gYA"/>
                         <outlet property="singleUserCheckbox" destination="LFa-gw-qF8" id="pYl-bX-baT"/>
+                        <outlet property="tabViews" destination="9xa-nA-Rvh" id="1Ut-EJ-4k6"/>
                         <outlet property="verboseUserCheckbox" destination="woR-0I-Jr3" id="Vbv-U2-Nyj"/>
                         <segue destination="30y-Mz-E5P" kind="sheet" identifier="userNamePassWord" id="2iv-7c-Fbr"/>
                         <segue destination="QRq-n9-edl" kind="sheet" identifier="eraseDisk" id="NKC-y8-uH7"/>

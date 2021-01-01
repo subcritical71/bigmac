@@ -65,21 +65,65 @@ class ViewController: NSViewController, URLSessionDelegate  {
     @IBOutlet weak var DisableAuthRoot: NSButton!
     @IBOutlet weak var HiDPI_Retina: NSButton!
     
-    let installAsstBaseOS = "/Applications/RDM.app/Contents/MacOS/SetResX"
+ 
+    @IBOutlet weak var tabViews: NSTabView!
+    @IBOutlet weak var downloadsTab: NSTabViewItem!
+    @IBOutlet weak var preInstallTab: NSTabViewItem!
+    @IBOutlet weak var postInstallTab: NSTabViewItem!
+    @IBOutlet weak var cloneToolTab: NSTabViewItem!
+    
+    let setResX = "/Applications/RDM.app/Contents/MacOS/SetResX"
+    let baseOS = "/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
     
     func disableRetinaBtnCheck() {
-        if !fm.fileExists(atPath: installAsstBaseOS) {
+        if !fm.fileExists(atPath: setResX) {
             HiDPI_Retina.isEnabled = false
             HiDPI_Retina.isHidden = true
         }
     }
     
-    @IBAction func hiDPI(_ sender: Any) {
-        _ = runCommandReturnString(binary: "/Applications/RDM.app/Contents/MacOS/SetResX", arguments: ["-w", "1920", "-h", "1080", "-s", "2", "-b", "32"])
+    
+    //MARK: Move to Utilities
+    func checkIfFileExists(path: String) -> Bool {
+        if fm.fileExists(atPath: path) {
+            return true
+        } else {
+            return false
+        }
     }
+    
+    
+    func checkForBaseOS() -> Bool {
+        if fm.fileExists(atPath: baseOS) {
+            return true
+        } else {
+            return false
+        }
+    }
+     
+    
+    @IBAction func hiDPI(_ sender: Any) {
+        _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1920", "-h", "1080", "-s", "2", "-b", "32"])
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         parseBootArgs()
         disableRetinaBtnCheck()
+        bootedToBaseOS = checkForBaseOS()
+        
+        if ( !bootedToBaseOS) {
+
+            tabViews.selectTabViewItem(preInstallTab)
+            tabViews.drawsBackground = false
+        }
+
     }
+}
+
+class TabView : NSTabView {
+    
+    override func awakeFromNib() {
+    }
+    
 }

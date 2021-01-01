@@ -24,6 +24,8 @@ var volumeInfo = myVolumeInfo(diskSlice: "", disk: "", displayName: "", volumeNa
 
 var ranHax3 = false
 
+var bootedToBaseOS = false
+
 //typealias myVolumeInfo = (diskSlice: String, disk: String, name: String, path: String, external: Bool, uuid: String)
 
 struct myVolumeInfo {
