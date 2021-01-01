@@ -153,7 +153,8 @@ class ViewController: NSViewController, URLSessionDelegate  {
         let driv = availablePatchDisks.title
         let dest = "/Volumes/\(driv)"
         let slek = "System/Library/Extensions"
-    
+        let lext = "/Library/Extensions"
+
         _ = runCommandReturnString(binary: "/sbin/mount", arguments: ["-uw", dest])
 
         patchBool()
@@ -177,13 +178,40 @@ class ViewController: NSViewController, URLSessionDelegate  {
             print("superDrive", "ioATAFamily", pass)
         }
         
+        if legacyWiFi {
+            let kext = "IO80211Family.kext"
+            var pass = installKext(dest: dest, kext: kext, fold: slek)
+            print("legacyWiFi", "IO80211Family", pass)
+            
+            pass = installKext(dest: dest, kext: kext, fold: slek)
+            print("corecapture", "IO80211Family", pass)
+        }
         
+        if teleTrap {
+            let kext = "telemetrap.kext"
+            let pass = installKext(dest: dest, kext: kext, fold: slek)
+            print("teleTrap", "telemetrap", pass)
+        }
         
+        if amdMouSSE {
+            let kext = "AAAMouSSE.kext"
+            let pass = installKext(dest: dest, kext: kext, fold: lext)
+            print("amdMouSSE", "AAAMouSSE", pass)
+        }
         
+        if hdmiAudio {
+            let kext = "HDMIAudio.kext"
+            let pass = installKext(dest: dest, kext: kext, fold: lext)
+            print("hdmiAudio", "HDMIAudio", pass)
+        }
         
-    }
+        if SSE4Telemetry {
+            let plug = "com.apple.telemetry.plugin"
+            let pass = installKext(dest: dest, kext: plug, fold: lext)
+            print("SSE4Telemetry", "com.apple.telemetry.plugin", pass)
+        }
 
- 
+    }
 }
 
 

@@ -132,7 +132,7 @@
 		2D1A3296258D959D009DCDFD = {
 			isa = PBXGroup;
 			children = (
-				2D538EFD259008730066D908 /* Data */,
+				2D538EFD259008730066D908 /* Resources */,
 				2D1A32A1258D959D009DCDFD /* bigmac2 */,
 				2D1A32A0258D959D009DCDFD /* Products */,
 			);
@@ -179,7 +179,7 @@
 			path = CommandCentral;
 			sourceTree = "<group>";
 		};
-		2D538EFD259008730066D908 /* Data */ = {
+		2D538EFD259008730066D908 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
 				2D99C51F259FA17A0035669B /* bless */,
@@ -208,7 +208,7 @@
 				2D19F127259EB89600AE82CE /* lax.sh */,
 				2D19F124259EB89000AE82CE /* lax */,
 			);
-			path = Data;
+			path = Resources;
 			sourceTree = "<group>";
 		};
 		2D7787F4258F1C8C00305EC3 /* Controllers */ = {
