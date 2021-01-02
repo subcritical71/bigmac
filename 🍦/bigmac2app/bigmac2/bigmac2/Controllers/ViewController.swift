@@ -132,6 +132,11 @@ class ViewController: NSViewController, URLSessionDelegate  {
         
         if let source = Bundle.main.resourceURL?.path {
             let destiny = "\(dest)/\(fold)/\(kext)"
+            let mdir = "\(dest)/\(fold)/"
+            print("")
+            //MARK: To do add check if directory exists
+            _ = runCommandReturnString(binary: "/bin/mkdir", arguments: [mdir])
+            
             strg = runCommandReturnString(binary: "/usr/bin/ditto", arguments: ["-v", "\(source)/\(kext)", destiny]) ?? fail
             _ = runCommandReturnString(binary: "/usr/sbin/chown", arguments: ["-R", "0:0", destiny])
             _ = runCommandReturnString(binary: "/bin/chmod", arguments: ["-R", "755", destiny])
@@ -153,8 +158,10 @@ class ViewController: NSViewController, URLSessionDelegate  {
         let driv = availablePatchDisks.title
         let dest = "/Volumes/\(driv)"
         let slek = "System/Library/Extensions"
-        let lext = "/Library/Extensions"
-
+        let uepi = "System/Library/UserEventPlugins"
+        let lext = "Library/Extensions"
+        let ulib = "usr/local/lib"
+        
         _ = runCommandReturnString(binary: "/sbin/mount", arguments: ["-uw", dest])
 
         patchBool()
@@ -179,38 +186,50 @@ class ViewController: NSViewController, URLSessionDelegate  {
         }
         
         if legacyWiFi {
-            let kext = "IO80211Family.kext"
+            var kext = "IO80211Family.kext"
             var pass = installKext(dest: dest, kext: kext, fold: slek)
-            print("legacyWiFi", "IO80211Family", pass)
+            print("legacyWiFi", kext, pass)
             
+            kext = "corecapture.kext"
             pass = installKext(dest: dest, kext: kext, fold: slek)
-            print("corecapture", "IO80211Family", pass)
+            print("corecapture", kext, pass)
         }
         
         if teleTrap {
             let kext = "telemetrap.kext"
             let pass = installKext(dest: dest, kext: kext, fold: slek)
-            print("teleTrap", "telemetrap", pass)
+            print("teleTrap", kext, pass)
         }
         
         if amdMouSSE {
             let kext = "AAAMouSSE.kext"
             let pass = installKext(dest: dest, kext: kext, fold: lext)
-            print("amdMouSSE", "AAAMouSSE", pass)
+            print("amdMouSSE", kext, pass)
         }
         
         if hdmiAudio {
             let kext = "HDMIAudio.kext"
             let pass = installKext(dest: dest, kext: kext, fold: lext)
-            print("hdmiAudio", "HDMIAudio", pass)
+            print("hdmiAudio", kext, pass)
         }
         
         if SSE4Telemetry {
             let plug = "com.apple.telemetry.plugin"
-            let pass = installKext(dest: dest, kext: plug, fold: lext)
-            print("SSE4Telemetry", "com.apple.telemetry.plugin", pass)
+            let pass = installKext(dest: dest, kext: plug, fold: uepi)
+            print("SSE4Telemetry", plug, pass)
         }
 
+        //SUVMMFaker
+        if appStoreMacOS {
+            let dlib = "SUVMMFaker.dylib"
+            var pass = installKext(dest: dest, kext: dlib, fold: ulib)
+            print("appStoreMacOS", dlib, pass)
+
+            let plst = "com.apple.softwareupdated.plist"
+            let dmns = "System/Library/LaunchDaemons"
+            pass = installKext(dest: dest, kext: plst, fold: dmns)
+            print("appStoreMacOS", plst, pass)
+        }
     }
 }
 

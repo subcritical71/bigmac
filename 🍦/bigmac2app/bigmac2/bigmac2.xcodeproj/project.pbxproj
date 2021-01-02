@@ -39,7 +39,6 @@
 		2D99C502259F9B830035669B /* com.apple.telemetry.plugin in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C4FB259F9B830035669B /* com.apple.telemetry.plugin */; };
 		2D99C506259F9BD00035669B /* build.sh in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C504259F9BD00035669B /* build.sh */; };
 		2D99C50A259F9BE70035669B /* HDMIAudio.kext in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C509259F9BE70035669B /* HDMIAudio.kext */; };
-		2D99C50E259F9C570035669B /* SUVMMFaker.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 2D99C50C259F9C570035669B /* SUVMMFaker.dylib */; };
 		2D99C50F259F9C570035669B /* com.apple.softwareupdated.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C50D259F9C570035669B /* com.apple.softwareupdated.plist */; };
 		2D99C516259F9CDF0035669B /* AAAMouSSE.kext in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C512259F9CDF0035669B /* AAAMouSSE.kext */; };
 		2D99C517259F9CDF0035669B /* AAAMouSEE_README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C513259F9CDF0035669B /* AAAMouSEE_README.txt */; };
@@ -49,6 +48,7 @@
 		2D9BB503259EAC96007DE72A /* PreInstallActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9BB502259EAC96007DE72A /* PreInstallActions.swift */; };
 		2DAFF44C259AB7ED00D48E20 /* CreateInstallActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAFF44B259AB7ED00D48E20 /* CreateInstallActions.swift */; };
 		2DAFF44F259AB8A100D48E20 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAFF44E259AB8A100D48E20 /* Notifications.swift */; };
+		2DCB3EC2259FFDD5004FF0AB /* SUVMMFaker.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C50C259F9C570035669B /* SUVMMFaker.dylib */; };
 		2DD296932597D8B800515D31 /* BuildManifest.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DD296922597D8B800515D31 /* BuildManifest.plist */; };
 		2DD296962597D8BE00515D31 /* PlatformSupport.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DD296952597D8BE00515D31 /* PlatformSupport.plist */; };
 		2DE42E3D25918F56005E10C6 /* CreateInstallHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE42E3C25918F56005E10C6 /* CreateInstallHelpers.swift */; };
@@ -112,7 +112,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D99C50E259F9C570035669B /* SUVMMFaker.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -323,6 +322,7 @@
 				2D99C518259F9CDF0035669B /* telemetrap.kext in Resources */,
 				2D99C500259F9B830035669B /* IO80211Family.kext in Resources */,
 				2D19F125259EB89000AE82CE /* lax in Resources */,
+				2DCB3EC2259FFDD5004FF0AB /* SUVMMFaker.dylib in Resources */,
 				2D1A32AA258D959E009DCDFD /* Main.storyboard in Resources */,
 				2D99C520259FA17A0035669B /* bless in Resources */,
 				2D99C516259F9CDF0035669B /* AAAMouSSE.kext in Resources */,
