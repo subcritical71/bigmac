@@ -187,8 +187,8 @@ let bootPlistTxt =
                     
                    // txt2file(text: bootPlistTxt, file: "/Volumes/Preboot/\(bigmac2.uuid)/System/Library/Preferences/SystemConfiguration/\(bootPlist)")
 
-                    try? fm.copyItem(atPath: "/\(appFolderPath)/\(bootPlist)", toPath: "/Volumes/Preboot/\(bigmac2.uuid)/System/Library/CoreServices/\(platformPlist)")
-                    try? fm.copyItem(atPath: "/\(appFolderPath)/\(bootPlist)", toPath: "/Volumes/Preboot/\(bigmac2.uuid)/restore/\(buildManifestPlist)")
+                    try? fm.copyItem(atPath: "/\(appFolderPath)/\(platformPlist)", toPath: "/Volumes/Preboot/\(bigmac2.uuid)/System/Library/CoreServices/\(platformPlist)")
+                    try? fm.copyItem(atPath: "/\(appFolderPath)/\(buildManifestPlist)", toPath: "/Volumes/Preboot/\(bigmac2.uuid)/restore/\(buildManifestPlist)")
                     
                 }
                 
@@ -264,8 +264,8 @@ let bootPlistTxt =
                 
                // txt2file(text: bootPlistTxt, file: "/Volumes/Preboot/\(bigmac2.uuid)/System/Library/Preferences/SystemConfiguration/\(bootPlist)")
 
-                try? fm.copyItem(atPath: "/\(appFolderPath)/\(bootPlist)", toPath: "/Volumes/Preboot/\(bigmac2.uuid)/System/Library/CoreServices/\(platformPlist)")
-                try? fm.copyItem(atPath: "/\(appFolderPath)/\(bootPlist)", toPath: "/Volumes/Preboot/\(bigmac2.uuid)/restore/\(buildManifestPlist)")
+                try? fm.copyItem(atPath: "/\(appFolderPath)/\(platformPlist)", toPath: "/Volumes/Preboot/\(bigmac2.uuid)/System/Library/CoreServices/\(platformPlist)")
+                try? fm.copyItem(atPath: "/\(appFolderPath)/\(buildManifestPlist)", toPath: "/Volumes/Preboot/\(bigmac2.uuid)/restore/\(buildManifestPlist)")
                
             }
             

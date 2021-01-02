@@ -7,15 +7,15 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "368AD897-0713-48EA-82CF-05288438CD47"
+            uuid = "92119061-8C57-467B-AEBD-6EB35E9D9F46"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "bigmac2/Controllers/ViewController.swift"
+            filePath = "bigmac2/View/PostInstallAction.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "199"
-            endingLineNumber = "199"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
             landmarkName = "patchDiskExec_action(_:)"
             landmarkType = "7">
          </BreakpointContent>
