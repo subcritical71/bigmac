@@ -120,11 +120,12 @@ class ViewController: NSViewController, URLSessionDelegate  {
         appleHDA        = (appleHDA_btn.state == .on)
         hdmiAudio       = (hdmiAudio_btn.state == .on)
         appStoreMacOS   = (appStoreMacOS_btn.state == .on)
+        singleUser      = (singleUser_btn.state == .on)
         legacyWiFi      = (legacyWiFi_btn.state == .on)
     }
     
     
-    func installKext(dest: String, kext: String, fold: String) -> Bool {
+    func installKext(dest: String, kext: String, fold: String, sour: String = "") -> Bool {
         var strg = ""
         let fail = "Do not pass"
         var pass = false
@@ -137,7 +138,8 @@ class ViewController: NSViewController, URLSessionDelegate  {
             //MARK: To do add check if directory exists
             _ = runCommandReturnString(binary: "/bin/mkdir", arguments: [mdir])
             
-            strg = runCommandReturnString(binary: "/usr/bin/ditto", arguments: ["-v", "\(source)/\(kext)", destiny]) ?? fail
+            //MARK: Sour is used as a special prefix for the source file incase the name is different.
+            strg = runCommandReturnString(binary: "/usr/bin/ditto", arguments: ["-v", "\(sour)\(source)/\(kext)", destiny]) ?? fail
             _ = runCommandReturnString(binary: "/usr/sbin/chown", arguments: ["-R", "0:0", destiny])
             _ = runCommandReturnString(binary: "/bin/chmod", arguments: ["-R", "755", destiny])
             _ = runCommandReturnString(binary: "/usr/bin/touch", arguments: [destiny])
@@ -230,6 +232,40 @@ class ViewController: NSViewController, URLSessionDelegate  {
             pass = installKext(dest: dest, kext: plst, fold: dmns)
             print("appStoreMacOS", plst, pass)
         }
+        
+        if disableBT2 {
+            let fold = "System/Library/Extensions/IOUSBHostFamily.kext/Contents/PlugIns/AppleUSBHostMergeProperties.kext/Contents"
+            let list = "Info.plist"
+            let sour = "usb"
+
+            var pass = installKext(dest: dest, kext: list, fold: fold)
+            print("disableBT2", list, pass)
+
+        }
+        
+        /*
+         
+         IOHIDFamily="IOHIDFamily.kext"
+         IOUSBHostFamily="IOUSBHostFamily.kext"
+         PlugIns="/Contents/PlugIns/"
+         AppleUSBHostMergeProperties="AppleUSBHostMergeProperties.kext"
+         Contents="/Contents/"
+         Info="Info.plist"
+         IOBluetoothFamily="IOBluetoothFamily.kext"
+         AppleMCEReporterDisabler="AppleMCEReporterDisabler.kext"
+
+
+         n
+         printf "Mac Pro 3,1 Bluetooth 2 Disabler, Bluetooth 4 Enabler by StarPlayrX"
+         n
+         sleep 0.1
+         ditto -v "$source$Info" "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties$Contents$Info"
+         chown -R 0:0 "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties"
+         chmod -R 755 "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties"
+         touch "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties"
+
+         
+         */
     }
 }
 

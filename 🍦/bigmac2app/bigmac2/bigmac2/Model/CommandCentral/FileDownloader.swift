@@ -6,9 +6,7 @@
 //
 
 
-import Foundation
-import AppKit
-//import AppleScriptObjC
+import Cocoa
 
 extension ViewController : URLSessionDownloadDelegate {
     

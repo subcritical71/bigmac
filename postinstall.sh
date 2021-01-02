@@ -379,7 +379,8 @@ ditto -v "$bootdisk$bigsur$platformsupport" "$destVolume$coreservices$platformsu
 chmod 755 "$destVolume$coreservices$platformsupport"
 chown 0:0 "$destVolume$coreservices$platformsupport"
 
-#Preboot work
+#Preboot workusb
+
 n
 printf "Loading preboot..."
 preboot=$( diskutil list $destVolume | grep Preboot | grep disk | awk '{ printf $7 }' )
@@ -588,6 +589,18 @@ ditto -v "$source$IOHIDFamily" "$destVolume$kext$IOHIDFamily"
 chown -R 0:0 "$destVolume$kext$IOHIDFamily"
 chmod -R 755 "$destVolume$kext$IOHIDFamily"
 touch "$destVolume$kext$IOHIDFamily"
+
+
+
+IOHIDFamily="IOHIDFamily.kext"
+IOUSBHostFamily="IOUSBHostFamily.kext"
+PlugIns="/Contents/PlugIns/"
+AppleUSBHostMergeProperties="AppleUSBHostMergeProperties.kext"
+Contents="/Contents/"
+Info="Info.plist"
+IOBluetoothFamily="IOBluetoothFamily.kext"
+AppleMCEReporterDisabler="AppleMCEReporterDisabler.kext"
+
 
 n
 printf "Mac Pro 3,1 Bluetooth 2 Disabler, Bluetooth 4 Enabler by StarPlayrX"
