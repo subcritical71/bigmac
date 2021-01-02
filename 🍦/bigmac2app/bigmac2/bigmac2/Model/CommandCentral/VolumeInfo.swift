@@ -7,7 +7,7 @@
 
 import Foundation
 
-func getVolumeInfo(includeHiddenVolumes: Bool, includeRootVol: Bool = false) -> [myVolumeInfo]? {
+func getVolumeInfo(includeHiddenVolumes: Bool, includeRootVol: Bool = false, includePrebootVol: Bool = false) -> [myVolumeInfo]? {
     
     let URLResourceKeys : [URLResourceKey] = [.volumeNameKey, .volumeIsRemovableKey, .volumeIsBrowsableKey, .volumeIsLocalKey, .volumeIsReadOnlyKey, .volumeIsInternalKey, .volumeIsAutomountedKey, .volumeIsEjectableKey, .volumeUUIDStringKey, .isWritableKey, .volumeIdentifierKey, .volumeLocalizedFormatDescriptionKey, .volumeLocalizedNameKey, .volumeTotalCapacityKey, .isHiddenKey, .volumeIsRootFileSystemKey]
     
@@ -23,7 +23,6 @@ func getVolumeInfo(includeHiddenVolumes: Bool, includeRootVol: Bool = false) -> 
     
     if includeHiddenVolumes { FileManagerOptions = [] }
     let volumes = FileManager.default.mountedVolumeURLs(includingResourceValuesForKeys: URLResourceKeys, options: FileManagerOptions)
-
     if let session = DASessionCreate(kCFAllocatorDefault)  {
         if let drive = volumes {
             
@@ -33,7 +32,7 @@ func getVolumeInfo(includeHiddenVolumes: Bool, includeRootVol: Bool = false) -> 
                 
                 let dp = String(disk.path)
                 
-                if dp.contains(volumeString) || includeHiddenVolumes  || (includeRootVol && dp == "/" ) {
+                if dp.contains(volumeString) || includeHiddenVolumes || (includeRootVol && dp == "/") || (includePrebootVol && dp == "Preboot" || 1 == 1) {
                     
                     var newVolume = myVolumeInfo(diskSlice: emptyString, disk: emptyString, displayName: emptyString, volumeName: emptyString, path: emptyString, uuid: emptyString, external: false, root: false, capacity: 0)
 

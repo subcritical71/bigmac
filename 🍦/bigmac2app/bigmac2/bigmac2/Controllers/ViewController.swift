@@ -158,6 +158,45 @@ class ViewController: NSViewController, URLSessionDelegate  {
     
     @IBAction func patchDiskExec_action(_ sender: Any) {
         let driv = availablePatchDisks.title
+        
+                
+        var isMatch = false
+        var isRoot = false
+        var systemVolume : myVolumeInfo!
+        systemVolume = getVolumeInfoByDisk(filterVolumeName: driv, disk: "")
+        
+        //MARK: Confirm we have a match
+        ///This is a good practice and should be used when checking disks in the downloads areas
+        if systemVolume == nil  {
+            systemVolume = getVolumeInfoByDisk(filterVolumeName: "/", disk: "", isRoot: true)
+            if systemVolume.displayName == driv {
+                isMatch = true
+                isRoot = true
+            }
+        } else if systemVolume.volumeName == driv {
+            isMatch = true
+        }
+        
+        //MARK: Decided what to do because things are not right
+        if systemVolume == nil {
+            return
+        }
+        
+        //Get the preboot volume next
+        //let volInfo = getVolumeInfo(includeHiddenVolumes: true, includeRootVol: true, includePrebootVol: true )
+        
+        //let disks = volInfo?.filter { $0.disk == systemVolume.disk }
+    
+        let pb = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["list", "\(systemVolume.disk)"]) ?? ""
+        
+        let pbArray = pb.components(separatedBy: "\n")
+        
+        for i in pbArray {
+            if i.contains("Preboot") {
+                print(i.suffix(systemVolume.disk.count + 2))
+            }
+        }
+        
         let dest = "/Volumes/\(driv)"
         let slek = "System/Library/Extensions"
         let uepi = "System/Library/UserEventPlugins"
@@ -243,27 +282,166 @@ class ViewController: NSViewController, URLSessionDelegate  {
 
         }
         
-        /*
+        //             if let system = getVolumeInfoByDisk(filterVolumeName: systemVolume.volumeName, disk: systemVolume.disk) {
+
+        
+        
+       
+        
+        func BootItUp(system: myVolumeInfo, isVerbose: Bool, isSingleUser: Bool) {
+            
+                //MARK: Make Preboot bootable and compatible with C-Key at boot time
+                if let appFolder = Bundle.main.resourceURL {
+                    let bootPlist = "com.apple.Boot.plist"
+                    let platformPlist = "BuildManifest.plist"
+                    let buildManifestPlist = "PlatformSupport.plist"
+                    
+                    let appFolderPath = "\(appFolder.path)"
+                    
+                    //Install Boot plist
+                    
+                    let _ = mkDir(arg: "/Volumes/Preboot/\(system.uuid)/restore/")
+                    
+
+                    
+                    
+                    print("Making System Disk Bootable...\n")
+                    
+                    if system.root {
+                        
+                        try? fm.removeItem(atPath: "/Volumes/\(system.volumeName)/Library/Preferences/SystemConfiguration/\(bootPlist)")
+                        try? fm.removeItem(atPath: "/Volumes/\(system.volumeName)/System/Library/CoreServices/\(platformPlist)")
+                        try? fm.removeItem(atPath: "/System/Volumes/Preboot/\(system.uuid)/Library/Preferences/SystemConfiguration/\(bootPlist)")
+                        try? fm.removeItem(atPath: "/System/Volumes/Preboot/\(system.uuid)/System/Library/CoreServices/\(platformPlist)")
+                        try? fm.removeItem(atPath: "/System/Volumes/Preboot/\(system.uuid)/restore/\(buildManifestPlist)")
+                        
+                    } else {
+                        
+                        try? fm.removeItem(atPath: "/Library/Preferences/SystemConfiguration/\(bootPlist)")
+                        try? fm.removeItem(atPath: "/System/Library/CoreServices/\(platformPlist)")
+                        try? fm.removeItem(atPath: "/System/Volumes/Preboot/\(system.uuid)/Library/Preferences/SystemConfiguration/\(bootPlist)")
+                        try? fm.removeItem(atPath: "/System/Volumes/Preboot/\(system.uuid)/System/Library/CoreServices/\(platformPlist)")
+                        try? fm.removeItem(atPath: "/System/Volumes/Preboot/\(system.uuid)/restore/\(buildManifestPlist)")
+                        
+                    }
+                  
+                    
+                    var verbose = "-v "
+                    var singleUser = "-s "
+                    
+                    if !isVerbose {
+                        verbose = ""
+                    }
+                    
+                    if !isSingleUser {
+                        singleUser = ""
+                    }
+                    
+//Write our pList file
+let bootPlistTxt =
+"""
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>Kernel Flags</key>
+        <string>\(singleUser)\(verbose)-no_compat_check -amfi_get_out_of_my_way=1</string>
+    </dict>
+</plist>
+"""
+                    if system.root {
+                        
+                        txt2file(text: bootPlistTxt, file: "/Library/Preferences/SystemConfiguration/\(bootPlist)")
+                        try? fm.copyItem(atPath: "/\(appFolderPath)/\(bootPlist)", toPath: "/System/Library/CoreServices/\(platformPlist)")
+
+                        txt2file(text: bootPlistTxt, file: "/System/Volumes/Preboot/\(system.uuid)/Library/Preferences/SystemConfiguration/\(bootPlist)")
+                        try? fm.copyItem(atPath: "/\(appFolderPath)/\(bootPlist)", toPath: "/System/Volumes/Preboot/\(system.uuid)/System/Library/CoreServices/\(platformPlist)")
+                        try? fm.copyItem(atPath: "/\(appFolderPath)/\(bootPlist)", toPath: "/System/Volumes/Preboot/\(system.uuid)/restore/\(buildManifestPlist)")
+                        
+                    } else {
+                        
+                    }
+          
+                   
+                }
+                
+
+        }
+
+       /*
          
-         IOHIDFamily="IOHIDFamily.kext"
-         IOUSBHostFamily="IOUSBHostFamily.kext"
-         PlugIns="/Contents/PlugIns/"
-         AppleUSBHostMergeProperties="AppleUSBHostMergeProperties.kext"
-         Contents="/Contents/"
-         Info="Info.plist"
-         IOBluetoothFamily="IOBluetoothFamily.kext"
-         AppleMCEReporterDisabler="AppleMCEReporterDisabler.kext"
+         
+         #cp "$bootdisk$bigsur$bootplist" "$(pwd)$systemconfig$bootplist"
+         ditto -v "$bootdisk$bigsur$bootplist" "$destVolume$systemconfig$bootplist"
+         chmod 755 "$destVolume$systemconfig$bootplist"
+         chown 0:0 "$destVolume$systemconfig$bootplist"
 
+         ditto -v "$bootdisk$bigsur$platformsupport" "$destVolume$coreservices$platformsupport"
+         chmod 755 "$destVolume$coreservices$platformsupport"
+         chown 0:0 "$destVolume$coreservices$platformsupport"
+
+         #Preboot workusb
 
          n
-         printf "Mac Pro 3,1 Bluetooth 2 Disabler, Bluetooth 4 Enabler by StarPlayrX"
-         n
-         sleep 0.1
-         ditto -v "$source$Info" "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties$Contents$Info"
-         chown -R 0:0 "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties"
-         chmod -R 755 "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties"
-         touch "$destVolume$kext$IOUSBHostFamily$PlugIns$AppleUSBHostMergeProperties"
+         printf "Loading preboot..."
+         preboot=$( diskutil list $destVolume | grep Preboot | grep disk | awk '{ printf $7 }' )
 
+
+         prebootlocation=$bigmac$ghost
+         prebootid=""
+         loc=""
+         slash=""
+
+         restoremanifest="/restore/BuildManifest.plist"
+
+         if [ $destVolume != "/" ]
+             then
+               printf "Testing Preboot mount..."
+               test=$(diskutil unmount force "$preboot")
+               printf "Mounting Preboot Volume..."
+               diskutil mount -mountPoint "$prebootlocation" "$preboot"
+               sleep 1
+               prebootid=$( diskutil info "$destVolume" | grep Group | awk '{ printf $4 }' )
+               loc=$prebootlocation$prebootid$slash
+
+             else
+               #Preboot Volumes are already mounted on Startup disks
+               prebootlocation="/System/Volumes/Preboot/"
+               prebootid=$( diskutil info / | grep Group | awk '{ printf $4 }' )
+               loc=$prebootlocation$prebootid$slash
+               echo $loc
+         fi
+
+
+         if [ ! -d "$prebootlocation$prebootid" ]
+             then
+                 echo "Could not find Preboot Volume exiting... If this persists, reboot."
+                 diskutil umount force $preboot
+                 exit 0
+         fi
+
+         sleep 1
+
+         n
+         ditto -v "$bootdisk$bigsur$bootplist" "$loc$systemconfig$bootplist"
+         chmod 755 "$loc$systemconfig$bootplist"
+         chown 0:0 "$loc$systemconfig$bootplist"
+
+         ditto -v "$bootdisk$bigsur$buildmanifest" "$loc$restoremanifest"
+         chmod 755 "$loc$restoremanifest"
+         chown 0:0 "$loc$restoremanifest"
+
+         ditto -v "$bootdisk$bigsur$platformsupport" "$loc$coreservices$platformsupport"
+         chmod 755 "$loc$coreservices$platformsupport"
+         chown 0:0 "$loc$coreservices$platformsupport"
+
+         #If it's not the startup disk unmount the Preboot volume
+         if [ "$destVolume" != "/" ]
+             then
+                 n
+                 diskutil unmount force "$preboot"
+         fi
+         
          
          */
     }

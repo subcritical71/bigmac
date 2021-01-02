@@ -221,9 +221,9 @@ extension ViewController {
     
     
     //MARK: Get Disk Info by a single Disk with all volumes it contains, plus filtering specific disk and get its slice
-    func getVolumeInfoByDisk (filterVolumeName: String, disk: String) -> myVolumeInfo? {
+    func getVolumeInfoByDisk (filterVolumeName: String, disk: String, isRoot: Bool = false) -> myVolumeInfo? {
         
-        let volInfo = getVolumeInfo(includeHiddenVolumes: true)
+        let volInfo = getVolumeInfo(includeHiddenVolumes: true, includeRootVol: isRoot )
         
         if disk != "" {
             let disks = volInfo?.filter { $0.disk == disk }
