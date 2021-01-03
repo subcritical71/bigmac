@@ -93,57 +93,66 @@ extension ViewController {
             let baseSys = "macOS Base System"
             let bm2 = bigmac2
             
-            //MARK: Start
-            incrementInstallGauge(resetGauge: true, incremment: true, setToFull: false, cylon: true)
+            //MARK: Step 1a
+            incrementInstallGauge(resetGauge: true, incremment: true, setToFull: false, cylon: true, title: "Reformatting \(diskInfo.displayName) in place...")
             spinnerAnimation(start: true, hide: false)
             
-            //MARK: Rev Engine
+            //MARK: Step 2a
             unmountDrives(mountBigmac: false, ejectAll: true)
 
-            //MARK: Step 1
+            //MARK: Step 2a
             updateInstallerPkg()
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: true)
 
-            //MARK: Step 2
+            //MARK: Step 3a
             reformatSelectedApfsDisk(diskInfo: diskInfo)
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: true)
 
-            //MARK: Step 5.1
+            //MARK: Step 4a
             installBaseSystemII(diskInfo: diskInfo, baseSys: baseSys, bm2: bm2)
-            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
             
             let prebootDiskSlice = getDisk(substr: "Preboot", usingDiskorSlice: diskInfo.disk, isSlice: false) ?? diskInfo.disk + "s2"
             
-            //MARK: Update systemVolume volume because UUIDs have chnaged
+            //Get Preboot Ready
+            _ = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["mount", diskInfo.diskSlice])
+
+            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: true, title: "Making disk bootable...")
+
+            //MARK: Update systemVolume volume because UUIDs have changed
             if let systemVolume = getVolumeInfoByDisk(filterVolumeName: diskInfo.volumeName, disk: diskInfo.disk, isRoot: diskInfo.root) {
+                
+                _ = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["mount", systemVolume.diskSlice])
+
                 BootSystem(system: systemVolume, dataVolumeUUID: systemVolume.uuid, isVerbose: isBaseVerbose, isSingleUser: isBaseSingleUser, prebootVolume: prebootDiskSlice, isBaseSystem: true)
+                print("Bootable System Success.")
             } else {
-                print("Boot System Failure")
+                print("Bootable System Failure.")
             }
             
-            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: false)
-            
-            installTheApp(bigmac2: diskInfo)
-            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+            sleep(1)
             
             if fullDisk {
+                incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: false, title: "Installing Big Sur 2.0")
                 
-                //MARK: Step 6.5
-                installEmojiFont(bm2: bm2)
-                incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
-
-                //MARK: Step 7
+                //MARK: Step 7a
                 bigSurInstallerAppXfer(rndStr: rndStr)
                 incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
-    
             }
+            
+            //MARK: Step 5a
+            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, title: "Installing Emoji Font...")
+            installEmojiFont(bm2: bm2)
         
-            //MARK: Step 8 cleanup
+            //MARK: Step 6a
+            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, title: "Installing Big Mac 2.0 app...")
+            installTheApp(bigmac2: diskInfo)
+            
+            //MARK: Step 8a
             cleanup(bm2: bm2, rndStr: rndStr)
             unmountDrives(mountBigmac: true, ejectAll: false)
             
             //MARK: Finish
-            incrementInstallGauge(resetGauge: false, incremment: false, setToFull: true)
+            incrementInstallGauge(resetGauge: false, incremment: false, setToFull: true, title: "Boot Disk is complete...")
             spinnerAnimation(start: false, hide: true)
         }
     }

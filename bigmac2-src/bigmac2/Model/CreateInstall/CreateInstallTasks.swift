@@ -88,15 +88,15 @@ extension ViewController {
         let path = "/Users/shared/\(bigmacDisk)"
         
         if checkIfFileExists(path: path) {
-            _ = addVolume(dmgPath: "/Users/shared/\(bigmacDisk)", targetDisk: "/dev/r\(diskInfo.disk)", erase: true, title: "Installing Boot Disk")
+            _ = addVolume(dmgPath: "/Users/shared/\(bigmacDisk)", targetDisk: "/dev/r\(diskInfo.disk)", erase: true, title: "Installing Boot Disk...")
         } else {
             
-            print("BASE SYSTEM.... DISK NOT FOUND...\n")
+            print("BASE SYSTEM... DISK NOT FOUND...\n")
         }
                 
         _ = mountVolume(disk: diskInfo.disk)
         
-        incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+        incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: false)
     }
     
     
