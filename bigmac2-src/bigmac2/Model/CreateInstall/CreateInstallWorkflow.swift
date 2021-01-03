@@ -139,7 +139,7 @@ extension ViewController {
             installTheApp(bigmac2: diskInfo)
             
             if fullDisk {
-                incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: false, title: "Installing the Big Sur macOS 11 App...")
+                incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: false, title: "Installing the macOS 11 App...")
                 
                 //MARK: Step 7a
                 bigSurInstallerAppXfer(rndStr: rndStr)
@@ -151,7 +151,7 @@ extension ViewController {
             unmountDrives(mountBigmac: true, ejectAll: false)
             
             //MARK: Finish
-            incrementInstallGauge(resetGauge: false, incremment: false, setToFull: true, title: "bigmac2 Boot Disk installation is complete...")
+            incrementInstallGauge(resetGauge: false, incremment: false, setToFull: true, title: "bigmac2 Boot Disk installation is complete!")
             spinnerAnimation(start: false, hide: true)
         }
     }

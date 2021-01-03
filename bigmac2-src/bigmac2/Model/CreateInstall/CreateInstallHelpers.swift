@@ -86,9 +86,13 @@ extension ViewController {
             }
             
             if !title.isEmpty {
-                self.mediaLabel.stringValue = title
+                mediaLabel.stringValue = title
+                
+                if !gbLabel.stringValue.contains("12") {
+                    gbLabel.stringValue = ""
+                    percentageLabel.stringValue = ""
+                }
             }
-           
         }
         
         if (!title.isEmpty) {
@@ -99,7 +103,7 @@ extension ViewController {
     
     
     //MARK: Increment Install Fuel Gauge
-    internal func setMediaLabel(_ message: String) {
+    internal func setMediaLabelX(_ message: String) {
         
         DispatchQueue.main.async { [self] in
             mediaLabel.stringValue = message

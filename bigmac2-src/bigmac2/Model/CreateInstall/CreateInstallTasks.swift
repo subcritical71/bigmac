@@ -187,8 +187,6 @@ let bootPlistTxt =
     
     //MARK: Task #7
     func bigSurInstallerAppXfer(rndStr: String) {
-        setMediaLabel("Big Sur Installer App Transfer")
-        
         let _ = mkDir(arg: "/Volumes/\(bigmac2)/Install macOS Big Sur.app/Contents/SharedSupport/")
         copyFile(atPath: "/Applications/Install macOS Big Sur.app/Contents/SharedSupport/SharedSupport.dmg", toPath: "/Volumes/\(bigmac2)/Install macOS Big Sur.app/Contents/SharedSupport/SharedSupport.dmg")
     }
@@ -204,7 +202,6 @@ let bootPlistTxt =
                 let bigMacApp = Bundle.main.bundlePath
                 
                 let burgerKing = bigmac2.volumeName
-                //Install Boot plist
                 
                 let util = "/Volumes/\(burgerKing)/System/Installation/CDIS/Recovery Springboard.app/Contents/Resources/Utilities.plist"
                 let bk = "/Volumes/\(burgerKing)/Applications/bigmac2.app"
@@ -215,12 +212,10 @@ let bootPlistTxt =
                 try? fm.removeItem(atPath: rdm)
 
                 try? fm.copyItem(atPath: "/\(appFolderPath)/Utilities.plist", toPath: util)
-                //try? fm.copyItem(atPath: "\(bigMacApp)", toPath: bk)
+                try? fm.copyItem(atPath: "\(bigMacApp)", toPath: bk)
                 try? fm.copyItem(atPath: "/\(appFolderPath)/RDM.app", toPath: rdm)
                 
-                copyFile(atPath: "\(bigMacApp)", toPath: bk)
-
-
+                //copyFile(atPath: "\(bigMacApp)", toPath: bk)
             }
         }
     }
