@@ -116,14 +116,16 @@ extension ViewController {
     
     
     /* Run command in the background */
-    func runIndeterminateProcess(binary: String, arguments: [String], title: String) {
+    func runIndeterminateProcess(binary: String, arguments: [String], title: String, sleepForHeadings: Bool = false) {
 
         DispatchQueue.main.async { [self] in
             postInstallTask_label.stringValue = title
             postInstallDetails_label.stringValue = ""
         }
         
-        sleep(2)
+        if sleepForHeadings {
+            sleep(2)
+        }
             
         //DispatchQueue.global(qos: .background).async {
             let process = Process()

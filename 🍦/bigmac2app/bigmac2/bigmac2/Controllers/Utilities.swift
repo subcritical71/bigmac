@@ -30,9 +30,10 @@ extension ViewController {
         let systemPath = "/Volumes/\(drive)/System/Library/CoreServices/SystemVersion.plist"
         //let systemURL = NSURL(string: systemPath)
         let systemURL = URL(fileURLWithPath: systemPath)
-        
         var systemInfo : systemInfoCodable?
         do {
+            
+        
             let data = try Data(contentsOf: systemURL )
             let decoder = PropertyListDecoder()
             systemInfo = try decoder.decode(systemInfoCodable.self, from: data)
@@ -74,20 +75,7 @@ extension ViewController {
     }
     
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        parseBootArgs()
-        disableSetResXButtonsCheck()
-        bootedToBaseOS = checkForBaseOS()
-        
-        //MARK: Set Up and AI that knows what tab to do (checks for maybe an unpatch drive or 11.1 presence)
-        if ( bootedToBaseOS) {
-            tabViews.selectTabViewItem(preInstallTab)
-            tabViews.drawsBackground = false
-        }
-        
-        refreshPatchDisks()
-    }
+
     
     func refreshPatchDisks() {
         if let getDisks = getVolumeInfo(includeHiddenVolumes: false, includeRootVol: true) {
@@ -118,7 +106,6 @@ extension ViewController {
         disableBT2      = (disableBT2_btn.state == .on)
         amdMouSSE       = (amdMouSSE_btn.state == .on)
         teleTrap        = (teleTrap_btn.state == .on)
-        SSE4Telemetry   = (SSE4Telemetry_btn.state == .on)
         VerboseBoot     = (VerboseBoot_btn.state == .on)
         superDrive      = (superDrive_btn.state == .on)
         appleHDA        = (appleHDA_btn.state == .on)

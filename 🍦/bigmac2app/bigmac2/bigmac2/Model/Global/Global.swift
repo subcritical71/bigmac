@@ -35,7 +35,29 @@ struct myVolumeInfo {
     var capacity: Int
 }
 
+// MARK: - Snapshots
+struct Snapshots: Codable {
+    let snapshots: [Snapshot]
 
+    enum CodingKeys: String, CodingKey {
+        case snapshots = "Snapshots"
+    }
+}
+
+// MARK: - Snapshot
+struct Snapshot: Codable {
+    let limitingContainerShrink, purgeable: Bool
+    let snapshotName, snapshotUUID: String
+    let snapshotXID: Int
+
+    enum CodingKeys: String, CodingKey {
+        case limitingContainerShrink = "LimitingContainerShrink"
+        case purgeable = "Purgeable"
+        case snapshotName = "SnapshotName"
+        case snapshotUUID = "SnapshotUUID"
+        case snapshotXID = "SnapshotXID"
+    }
+}
 
 
 

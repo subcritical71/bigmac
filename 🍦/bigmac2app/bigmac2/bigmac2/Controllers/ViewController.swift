@@ -81,7 +81,6 @@ class ViewController: NSViewController, URLSessionDelegate  {
     @IBOutlet weak var disableBT2_btn: NSButton!
     @IBOutlet weak var amdMouSSE_btn: NSButton!
     @IBOutlet weak var teleTrap_btn: NSButton!
-    @IBOutlet weak var SSE4Telemetry_btn: NSButton!
     @IBOutlet weak var VerboseBoot_btn: NSButton!
     @IBOutlet weak var superDrive_btn: NSButton!
     @IBOutlet weak var appleHDA_btn: NSButton!
@@ -93,9 +92,15 @@ class ViewController: NSViewController, URLSessionDelegate  {
     @IBOutlet weak var postInstallProgressIndicator: NSProgressIndicator!
     @IBOutlet weak var availablePatchDisks: NSPopUpButton!
     @IBOutlet weak var patchDiskExecution_btn: NSButton!
+    
     @IBOutlet weak var postInstallTask_label: NSTextField!
     @IBOutlet weak var postInstallDetails_label: NSTextField!
+    
     @IBOutlet weak var postInstallSpinner: NSProgressIndicator!
+    @IBOutlet weak var deleteAPFSSnapshotsButton: NSButton!
+    @IBOutlet weak var BlessVolume: NSButton!
+    @IBOutlet weak var updateBootSysKCs: NSButton!
+    @IBOutlet weak var patchDisk_btn: NSButton!
     
     var enableUSB = Bool()
     var disableBT2 = Bool()
@@ -109,6 +114,23 @@ class ViewController: NSViewController, URLSessionDelegate  {
     var hdmiAudio = Bool()
     var singleUser = Bool()
     var legacyWiFi = Bool()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        parseBootArgs()
+        disableSetResXButtonsCheck()
+        bootedToBaseOS = checkForBaseOS()
+        
+        //MARK: Set Up and AI that knows what tab to do (checks for maybe an unpatch drive or 11.1 presence)
+        if ( bootedToBaseOS) {
+            tabViews.selectTabViewItem(preInstallTab)
+            tabViews.drawsBackground = false
+        }
+        
+        refreshPatchDisks()
+    }
+    
+    
 
 }
 

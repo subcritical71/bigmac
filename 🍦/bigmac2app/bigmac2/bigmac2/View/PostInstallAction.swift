@@ -20,7 +20,7 @@ extension ViewController {
                 postInstallSpinner.startAnimation(sender)
                 postInstallSpinner.isHidden = false
             }
-            
+        
             patchBool()
             
             let driv = availablePatchDisks.title
@@ -30,6 +30,7 @@ extension ViewController {
             var dataVolume : myVolumeInfo!
             
             systemVolume = getVolumeInfoByDisk(filterVolumeName: driv, disk: "")
+
             
             //MARK: Confirm we have a match
             ///This is a good practice and should be used when checking disks in the downloads areas
@@ -101,8 +102,12 @@ extension ViewController {
             
             if teleTrap {
                 let kext = "telemetrap.kext"
-                let pass = installKext(dest: dest, kext: kext, fold: slek)
+                var pass = installKext(dest: dest, kext: kext, fold: slek)
                 print("teleTrap", kext, pass)
+                
+                let plug = "com.apple.telemetry.plugin"
+                pass = installKext(dest: dest, kext: plug, fold: uepi)
+                print("SSE4Telemetry", plug, pass)
             }
             
             if amdMouSSE {
@@ -115,12 +120,6 @@ extension ViewController {
                 let kext = "HDMIAudio.kext"
                 let pass = installKext(dest: dest, kext: kext, fold: lext)
                 print("hdmiAudio", kext, pass)
-            }
-            
-            if SSE4Telemetry {
-                let plug = "com.apple.telemetry.plugin"
-                let pass = installKext(dest: dest, kext: plug, fold: uepi)
-                print("SSE4Telemetry", plug, pass)
             }
             
             //SUVMMFaker
@@ -142,11 +141,12 @@ extension ViewController {
                 
                 let pass = installKext(dest: dest, kext: list, fold: fold, prfx: prfx)
                 print("disableBT2", prfx, list, pass)
-                
             }
             
             postInstallProgressIndicator.doubleValue += 1
-        
+            
+            postInstallTask_label.stringValue = "Making disk bootable..."
+
             BootSystem(system: systemVolume, dataVolume: dataVolume, isVerbose: VerboseBoot, isSingleUser: singleUser, prebootVolume: preboot)
             
             var sysPath = systemVolume.path + "/"
@@ -155,32 +155,62 @@ extension ViewController {
                 sysPath = systemVolume.path
             }
             
-            postInstallProgressIndicator.doubleValue += 1
-
-            updateMac11onMac11SystemCache(destVolume: sysPath)
             
+            postInstallProgressIndicator.doubleValue += 1
+            
+            
+            //MARK Update Boot, System Caches
+            if updateBootSysKCs.state == .on {
+                postInstallTask_label.stringValue = "Updating Kernel Collections and Prelinked Kernel..."
+
+                updateMac11onMac11SystemCache(destVolume: sysPath)
+            }
+            
+            //** Let's kill the snapshots **//
+            
+            if deleteAPFSSnapshotsButton.state == .on {
+                postInstallTask_label.stringValue = "Deleting Snapshots..."
+
+                let plist = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["apfs", "listsnapshots", "-plist", systemVolume.diskSlice]) ?? ""
+                
+                
+                //Delete Snapshotsw
+                do {
+                    
+                    if  let plistData: Data = plist.data(using: .utf8) {
+                        let decoder = PropertyListDecoder()
+                        let snapshots = try decoder.decode(Snapshots.self, from: plistData).snapshots
+                        
+                        for s in snapshots {
+                            
+                            runIndeterminateProcess(binary: "/usr/sbin/diskutil", arguments: ["apfs", "deletesnapshot", "-xid", "\(s.snapshotXID)"], title: "Deleting Snapshot \(s.snapshotName)", sleepForHeadings: false)
+                            
+                            //runIndeterminateProcess(binary: "/usr/sbin/diskutil", arguments: ["apfs", "deletesnapshot", "-uuid", "\(s.snapshotUUID)"], title: "Deleting Snapshot \(s.snapshotName)")
+
+                           // diskutil apfs deletesnapshot "$destVolume" -uuid $uuid
+                        }
+                    }
+                 
+                } catch {
+                    // Handle error
+                    print(error)
+                }
+            }
+            
+            postInstallProgressIndicator.doubleValue += 1
+            postInstallFuelGauge.doubleValue += 1
+
             DispatchQueue.main.async { [self] in
                 postInstallFuelGauge.doubleValue = postInstallFuelGauge.maxValue
                 postInstallProgressIndicator.doubleValue = postInstallProgressIndicator.maxValue
                 postInstallSpinner.stopAnimation(sender)
                 postInstallSpinner.isHidden = true
-
-
             }
         }
         
-       
+        
     }
 }
 
 
-/*
-snapshots=$(diskutil apfs listsnapshots "$destVolume" | grep +-- | awk '{print $2}')
-for uuid in $snapshots
-do
-    printf '📸 Attempting to delete snapshot => $uuid \n"
-    n
-    
-    diskutil apfs deletesnapshot "$destVolume" -uuid $uuid
-done
-*/
+

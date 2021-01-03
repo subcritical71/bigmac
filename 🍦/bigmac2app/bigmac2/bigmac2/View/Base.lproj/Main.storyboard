@@ -1017,53 +1017,61 @@ DQ
                                             <rect key="frame" x="10" y="33" width="506" height="334"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o4s-W7-PG5">
-                                                    <rect key="frame" x="255" y="177" width="220" height="146"/>
+                                                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="9" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="o4s-W7-PG5">
+                                                    <rect key="frame" x="255" y="157" width="220" height="166"/>
                                                     <subviews>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VPt-hA-tNG">
-                                                            <rect key="frame" x="-2" y="129" width="154" height="18"/>
+                                                            <rect key="frame" x="-2" y="149" width="154" height="18"/>
                                                             <buttonCell key="cell" type="check" title="CD / DVD SuperDrive" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="zWK-sP-Xli">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FId-UD-oKk">
-                                                            <rect key="frame" x="-2" y="103" width="222" height="18"/>
+                                                            <rect key="frame" x="-2" y="124" width="222" height="18"/>
                                                             <buttonCell key="cell" type="check" title="Apple HDA (Audio and Webcam)" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="aSS-TC-Zkq">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zIZ-bF-5RK">
-                                                            <rect key="frame" x="-2" y="77" width="141" height="18"/>
+                                                            <rect key="frame" x="-2" y="99" width="141" height="18"/>
                                                             <buttonCell key="cell" type="check" title="NVidia HDMI Audio" bezelStyle="regularSquare" imagePosition="left" inset="2" id="Zbv-kw-H56">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JFS-1h-7p0">
-                                                            <rect key="frame" x="-2" y="51" width="201" height="18"/>
+                                                            <rect key="frame" x="-2" y="74" width="201" height="18"/>
                                                             <buttonCell key="cell" type="check" title="AppStore macOS Downloads" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="HgB-AY-A1l">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                         </button>
-                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Rsm-39-Um6">
-                                                            <rect key="frame" x="-2" y="25" width="150" height="18"/>
-                                                            <buttonCell key="cell" type="check" title="Legacy 802.11n WiFi" bezelStyle="regularSquare" imagePosition="left" inset="2" id="P3r-Jm-dSi">
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pqh-XV-YeT">
+                                                            <rect key="frame" x="-2" y="49" width="169" height="18"/>
+                                                            <buttonCell key="cell" type="check" title="Delete APFS Snapshots" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="GZ2-Jz-S3G">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                         </button>
-                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pqh-XV-YeT">
-                                                            <rect key="frame" x="-2" y="-1" width="96" height="18"/>
-                                                            <buttonCell key="cell" type="check" title="Single User" bezelStyle="regularSquare" imagePosition="left" inset="2" id="GZ2-Jz-S3G">
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Rxd-wm-kl7">
+                                                            <rect key="frame" x="-2" y="24" width="156" height="18"/>
+                                                            <buttonCell key="cell" type="check" title="Bless System Volume" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="kug-9y-iIP">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                        </button>
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hG2-oA-ihQ">
+                                                            <rect key="frame" x="-2" y="-1" width="205" height="18"/>
+                                                            <buttonCell key="cell" type="check" title="Update Boot and System KCs" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Rzc-4a-LEb">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                         </button>
                                                     </subviews>
                                                     <visibilityPriorities>
+                                                        <integer value="1000"/>
                                                         <integer value="1000"/>
                                                         <integer value="1000"/>
                                                         <integer value="1000"/>
@@ -1078,15 +1086,11 @@ DQ
                                                         <real value="3.4028234663852886e+38"/>
                                                         <real value="3.4028234663852886e+38"/>
                                                         <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
                                                     </customSpacing>
                                                 </stackView>
-                                                <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uX0-cz-cil">
-                                                    <rect key="frame" x="17" y="143" width="472" height="18"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                    <levelIndicatorCell key="cell" alignment="left" maxValue="14" warningValue="8" criticalValue="4" id="wM0-0Y-uWc"/>
-                                                </levelIndicator>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hO9-BU-vgp">
-                                                    <rect key="frame" x="15" y="115" width="452" height="16"/>
+                                                    <rect key="frame" x="15" y="99" width="452" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <textFieldCell key="cell" lineBreakMode="truncatingTail" title="Task" id="eNl-vE-fkb">
                                                         <font key="font" metaFont="system"/>
@@ -1095,11 +1099,11 @@ DQ
                                                     </textFieldCell>
                                                 </textField>
                                                 <progressIndicator fixedFrame="YES" maxValue="10" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="AkS-LS-Bh7">
-                                                    <rect key="frame" x="17" y="93" width="472" height="20"/>
+                                                    <rect key="frame" x="17" y="80" width="472" height="20"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </progressIndicator>
                                                 <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cpC-7g-ODn">
-                                                    <rect key="frame" x="243" y="10" width="253" height="32"/>
+                                                    <rect key="frame" x="243" y="6" width="253" height="32"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <buttonCell key="cell" type="push" title="Patch Disk" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Vog-pB-ekH">
                                                         <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1113,7 +1117,7 @@ DQ
                                                     </connections>
                                                 </button>
                                                 <popUpButton verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="yHl-mb-wuL">
-                                                    <rect key="frame" x="14" y="13" width="209" height="25"/>
+                                                    <rect key="frame" x="14" y="9" width="213" height="25"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <popUpButtonCell key="cell" type="push" title="Item 1" bezelStyle="rounded" alignment="left" lineBreakMode="truncatingTail" state="on" borderStyle="borderAndBezel" imageScaling="proportionallyDown" inset="2" selectedItem="5zA-s5-jsr" id="TGT-DC-264">
                                                         <behavior key="behavior" lightByBackground="YES" lightByGray="YES"/>
@@ -1127,53 +1131,61 @@ DQ
                                                         </menu>
                                                     </popUpButtonCell>
                                                 </popUpButton>
-                                                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XTi-Aa-BUh">
-                                                    <rect key="frame" x="42" y="177" width="170" height="146"/>
+                                                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="9" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XTi-Aa-BUh">
+                                                    <rect key="frame" x="37" y="157" width="186" height="166"/>
                                                     <subviews>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Hwc-jj-Waw">
-                                                            <rect key="frame" x="-2" y="129" width="116" height="18"/>
-                                                            <buttonCell key="cell" type="check" title="Enable USB 1.1" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="VZC-dN-ptH">
+                                                            <rect key="frame" x="-2" y="149" width="163" height="18"/>
+                                                            <buttonCell key="cell" type="check" title="Enable Legacy USB 1.1" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="VZC-dN-ptH">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0MJ-Iv-ywg">
-                                                            <rect key="frame" x="-2" y="103" width="156" height="18"/>
+                                                            <rect key="frame" x="-2" y="124" width="156" height="18"/>
                                                             <buttonCell key="cell" type="check" title="Disable Bluetooth 2.0" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="JlU-84-cz9">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                         </button>
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Rsm-39-Um6">
+                                                            <rect key="frame" x="-2" y="99" width="150" height="18"/>
+                                                            <buttonCell key="cell" type="check" title="Legacy 802.11n WiFi" bezelStyle="regularSquare" imagePosition="left" inset="2" id="P3r-Jm-dSi">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                        </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="W3i-15-mCO">
-                                                            <rect key="frame" x="-2" y="77" width="157" height="18"/>
+                                                            <rect key="frame" x="-2" y="74" width="157" height="18"/>
                                                             <buttonCell key="cell" type="check" title="AMD SSE4.2 MouSSE" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="FpY-HT-NK3">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mAO-Pd-4vQ">
-                                                            <rect key="frame" x="-2" y="51" width="76" height="18"/>
-                                                            <buttonCell key="cell" type="check" title="Teletrap" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Q2g-5h-nJd">
-                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                                                <font key="font" metaFont="system"/>
-                                                            </buttonCell>
-                                                        </button>
-                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="aa6-JT-00t">
-                                                            <rect key="frame" x="-2" y="25" width="172" height="18"/>
-                                                            <buttonCell key="cell" type="check" title="SSE4.1 Telemetry Plugin" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="6ty-yQ-qAs">
+                                                            <rect key="frame" x="-2" y="49" width="188" height="18"/>
+                                                            <buttonCell key="cell" type="check" title="Teletrap / Telemetry Plugin" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Q2g-5h-nJd">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vt6-hs-Whx">
-                                                            <rect key="frame" x="-2" y="-1" width="76" height="18"/>
-                                                            <buttonCell key="cell" type="check" title="Verbose" bezelStyle="regularSquare" imagePosition="left" inset="2" id="gxJ-eD-L0g">
+                                                            <rect key="frame" x="-2" y="24" width="108" height="18"/>
+                                                            <buttonCell key="cell" type="check" title="Verbose Boot" bezelStyle="regularSquare" imagePosition="left" inset="2" id="gxJ-eD-L0g">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                        </button>
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FwH-JD-Dhj">
+                                                            <rect key="frame" x="-2" y="-1" width="128" height="18"/>
+                                                            <buttonCell key="cell" type="check" title="Single User Boot" bezelStyle="regularSquare" imagePosition="left" inset="2" id="33d-6r-azb">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                         </button>
                                                     </subviews>
                                                     <visibilityPriorities>
+                                                        <integer value="1000"/>
                                                         <integer value="1000"/>
                                                         <integer value="1000"/>
                                                         <integer value="1000"/>
@@ -1188,10 +1200,11 @@ DQ
                                                         <real value="3.4028234663852886e+38"/>
                                                         <real value="3.4028234663852886e+38"/>
                                                         <real value="3.4028234663852886e+38"/>
+                                                        <real value="3.4028234663852886e+38"/>
                                                     </customSpacing>
                                                 </stackView>
                                                 <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fkS-xl-NCQ">
-                                                    <rect key="frame" x="15" y="52" width="476" height="38"/>
+                                                    <rect key="frame" x="15" y="42" width="476" height="38"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <textFieldCell key="cell" selectable="YES" title="Detail" id="Su9-te-4Hs">
                                                         <font key="font" metaFont="system" size="12"/>
@@ -1200,9 +1213,14 @@ DQ
                                                     </textFieldCell>
                                                 </textField>
                                                 <progressIndicator fixedFrame="YES" maxValue="100" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="d5Q-mA-6g6">
-                                                    <rect key="frame" x="473" y="115" width="16" height="16"/>
+                                                    <rect key="frame" x="473" y="100" width="16" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                 </progressIndicator>
+                                                <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uX0-cz-cil">
+                                                    <rect key="frame" x="17" y="125" width="472" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <levelIndicatorCell key="cell" alignment="left" maxValue="14" warningValue="8" criticalValue="4" id="wM0-0Y-uWc"/>
+                                                </levelIndicator>
                                             </subviews>
                                         </view>
                                     </tabViewItem>
@@ -1297,10 +1315,10 @@ DQ
                         </subviews>
                     </view>
                     <connections>
+                        <outlet property="BlessVolume" destination="Rxd-wm-kl7" id="0V0-Ez-lty"/>
                         <outlet property="DisableAuthRoot" destination="2hw-ui-YuN" id="V2Y-eh-QCe"/>
                         <outlet property="DisableLibraryValidation" destination="DYc-Ys-UxX" id="US9-Ta-lWL"/>
                         <outlet property="DisableSIP" destination="M0Z-5v-afG" id="lSN-cb-V6u"/>
-                        <outlet property="SSE4Telemetry_btn" destination="aa6-JT-00t" id="hdR-rb-93W"/>
                         <outlet property="VerboseBoot_btn" destination="vt6-hs-Whx" id="JgZ-h7-sbw"/>
                         <outlet property="amdMouSSE_btn" destination="W3i-15-mCO" id="dpk-8K-l4h"/>
                         <outlet property="appStoreMacOS_btn" destination="JFS-1h-7p0" id="rmc-15-LyP"/>
@@ -1309,6 +1327,7 @@ DQ
                         <outlet property="bootArgsField" destination="LFL-QC-eXl" id="Ud1-E9-T2g"/>
                         <outlet property="buildLabel" destination="DFd-ov-bag" id="7C2-Lu-I2R"/>
                         <outlet property="createInstallSpinner" destination="nYg-kZ-fDy" id="8gV-FZ-sji"/>
+                        <outlet property="deleteAPFSSnapshotsButton" destination="pqh-XV-YeT" id="lrc-8u-Pmx"/>
                         <outlet property="disableBT2_btn" destination="0MJ-Iv-ywg" id="aVi-mD-sbf"/>
                         <outlet property="downloadLabel" destination="DFd-ov-bag" id="f6N-3p-Ktd"/>
                         <outlet property="downloadsTab" destination="MtW-aC-1cy" id="Wel-cP-HGl"/>
@@ -1319,6 +1338,7 @@ DQ
                         <outlet property="legacyWiFi_btn" destination="Rsm-39-Um6" id="HBR-wi-mhG"/>
                         <outlet property="mediaLabel" destination="syK-06-F8B" id="Tm3-Pq-vCa"/>
                         <outlet property="patchDiskExecution_btn" destination="cpC-7g-ODn" id="ThD-nD-gyY"/>
+                        <outlet property="patchDisk_btn" destination="cpC-7g-ODn" id="b2E-x2-Ury"/>
                         <outlet property="percentageLabel" destination="dB3-ZJ-LZi" id="wCe-k6-zev"/>
                         <outlet property="postInstallDetails_label" destination="fkS-xl-NCQ" id="n3B-mE-up7"/>
                         <outlet property="postInstallFuelGauge" destination="uX0-cz-cil" id="rg1-kT-CCe"/>
@@ -1333,10 +1353,11 @@ DQ
                         <outlet property="sharedSupportPercentage" destination="Pzk-Hz-C1B" id="vhz-SM-Lv0"/>
                         <outlet property="sharedSupportProgressBar" destination="MkA-uU-q1I" id="w3s-61-gYA"/>
                         <outlet property="singleUserCheckbox" destination="LFa-gw-qF8" id="pYl-bX-baT"/>
-                        <outlet property="singleUser_btn" destination="pqh-XV-YeT" id="wpL-M4-MtJ"/>
+                        <outlet property="singleUser_btn" destination="FwH-JD-Dhj" id="S4N-gT-Qry"/>
                         <outlet property="superDrive_btn" destination="VPt-hA-tNG" id="a4M-CW-nqM"/>
                         <outlet property="tabViews" destination="9xa-nA-Rvh" id="1Ut-EJ-4k6"/>
                         <outlet property="teleTrap_btn" destination="mAO-Pd-4vQ" id="MXv-lD-zaa"/>
+                        <outlet property="updateBootSysKCs" destination="hG2-oA-ihQ" id="zpY-It-kiu"/>
                         <outlet property="verboseUserCheckbox" destination="woR-0I-Jr3" id="Vbv-U2-Nyj"/>
                         <segue destination="30y-Mz-E5P" kind="sheet" identifier="userNamePassWord" id="2iv-7c-Fbr"/>
                         <segue destination="QRq-n9-edl" kind="sheet" identifier="eraseDisk" id="NKC-y8-uH7"/>
@@ -1344,7 +1365,7 @@ DQ
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="74" y="785"/>
+            <point key="canvasLocation" x="71" y="847"/>
         </scene>
         <!--Erase Disk View Controller-->
         <scene sceneID="VUo-hP-nw9">
