@@ -180,7 +180,7 @@ extension ViewController {
     
     
     //MARK: Update Base System - Preboot and System
-    func BootSystem(system: myVolumeInfo, dataVolume: myVolumeInfo, isVerbose: Bool, isSingleUser: Bool, prebootVolume : String) {
+    func BootSystem(system: myVolumeInfo, dataVolumeUUID: String, isVerbose: Bool, isSingleUser: Bool, prebootVolume : String) {
         
         //MARK: Make Preboot bootable and compatible with C-Key at boot time
         if let appFolder = Bundle.main.resourceURL {
@@ -231,16 +231,16 @@ extension ViewController {
             if system.root {
                 try? fm.removeItem(atPath: "\(system.path)Library/Preferences/SystemConfiguration/\(bootPlist)")
                 try? fm.removeItem(atPath: "\(system.path)System/Library/CoreServices/\(platformPlist)")
-                try? fm.removeItem(atPath: "\(system.path)System/Volumes/Preboot/\(dataVolume.uuid)/Library/Preferences/SystemConfiguration/\(bootPlist)")
-                try? fm.removeItem(atPath: "\(system.path)System/Volumes/Preboot/\(dataVolume.uuid)/System/Library/CoreServices/\(platformPlist)")
-                try? fm.removeItem(atPath: "\(system.path)System/Volumes/Preboot/\(dataVolume.uuid)/restore/\(buildManifestPlist)")
+                try? fm.removeItem(atPath: "\(system.path)System/Volumes/Preboot/\(dataVolumeUUID)/Library/Preferences/SystemConfiguration/\(bootPlist)")
+                try? fm.removeItem(atPath: "\(system.path)System/Volumes/Preboot/\(dataVolumeUUID)/System/Library/CoreServices/\(platformPlist)")
+                try? fm.removeItem(atPath: "\(system.path)System/Volumes/Preboot/\(dataVolumeUUID)/restore/\(buildManifestPlist)")
                 
             } else {
                 try? fm.removeItem(atPath: "\(system.path)/Library/Preferences/SystemConfiguration/\(bootPlist)")
                 try? fm.removeItem(atPath: "\(system.path)/System/Library/CoreServices/\(platformPlist)")
-                try? fm.removeItem(atPath: "\(prebootPath)/\(dataVolume.uuid)/Library/Preferences/SystemConfiguration/\(bootPlist)")
-                try? fm.removeItem(atPath: "\(prebootPath)/\(dataVolume.uuid)/System/Library/CoreServices/\(platformPlist)")
-                try? fm.removeItem(atPath: "\(prebootPath)/\(dataVolume.uuid)/restore/\(buildManifestPlist)")
+                try? fm.removeItem(atPath: "\(prebootPath)/\(dataVolumeUUID)/Library/Preferences/SystemConfiguration/\(bootPlist)")
+                try? fm.removeItem(atPath: "\(prebootPath)/\(dataVolumeUUID)/System/Library/CoreServices/\(platformPlist)")
+                try? fm.removeItem(atPath: "\(prebootPath)/\(dataVolumeUUID)/restore/\(buildManifestPlist)")
             }
             
             if system.root {
@@ -249,16 +249,16 @@ extension ViewController {
                 txt2file(text: bootPlistTxt, file:  "\(system.path)System/Volumes/Preboot/*/Library/Preferences/SystemConfiguration/\(bootPlist)")
                 
                 try? fm.copyItem(atPath: "/\(appFolderPath)/\(platformPlist)",       toPath: "\(system.path)System/Library/CoreServices/\(platformPlist)")
-                try? fm.copyItem(atPath: "/\(appFolderPath)/\(platformPlist)",       toPath: "\(prebootPath)/\(dataVolume.uuid)/System/Library/CoreServices/\(platformPlist)")
-                try? fm.copyItem(atPath: "/\(appFolderPath)/\(buildManifestPlist)",  toPath: "\(prebootPath)/\(dataVolume.uuid)/restore/\(buildManifestPlist)")
+                try? fm.copyItem(atPath: "/\(appFolderPath)/\(platformPlist)",       toPath: "\(prebootPath)/\(dataVolumeUUID)/System/Library/CoreServices/\(platformPlist)")
+                try? fm.copyItem(atPath: "/\(appFolderPath)/\(buildManifestPlist)",  toPath: "\(prebootPath)/\(dataVolumeUUID)/restore/\(buildManifestPlist)")
                 
             } else {
                 txt2file(text: bootPlistTxt, file:  "\(system.path)/Library/Preferences/SystemConfiguration/\(bootPlist)")
-                txt2file(text: bootPlistTxt, file:  "\(prebootPath)/\(dataVolume.uuid)/Library/Preferences/SystemConfiguration/\(bootPlist)")
+                txt2file(text: bootPlistTxt, file:  "\(prebootPath)/\(dataVolumeUUID)/Library/Preferences/SystemConfiguration/\(bootPlist)")
                 
                 try? fm.copyItem(atPath: "/\(appFolderPath)/\(platformPlist)",       toPath: "\(system.path)/System/Library/CoreServices/\(platformPlist)")
-                try? fm.copyItem(atPath: "/\(appFolderPath)/\(platformPlist)",       toPath: "\(prebootPath)/\(dataVolume.uuid)/System/Library/CoreServices/\(platformPlist)")
-                try? fm.copyItem(atPath: "/\(appFolderPath)/\(buildManifestPlist)",  toPath: "\(prebootPath)/\(dataVolume.uuid)/restore/\(buildManifestPlist)")
+                try? fm.copyItem(atPath: "/\(appFolderPath)/\(platformPlist)",       toPath: "\(prebootPath)/\(dataVolumeUUID)/System/Library/CoreServices/\(platformPlist)")
+                try? fm.copyItem(atPath: "/\(appFolderPath)/\(buildManifestPlist)",  toPath: "\(prebootPath)/\(dataVolumeUUID)/restore/\(buildManifestPlist)")
             }
             
             _ = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["unmount", "force", prebootVolume])

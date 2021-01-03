@@ -52,17 +52,21 @@ extension ViewController {
                 return
             }
             
+
             let preboot = getDisk(substr: "Preboot", usingDiskorSlice: systemVolume.disk, isSlice: false) ?? systemVolume.disk + "s2"
             
             let dataSlice = getDisk(substr: "Data", usingDiskorSlice: systemVolume.disk, isSlice: false) ?? systemVolume.disk + "s1"
-            
-            
-            let gotDisks = getVolumeInfo(includeHiddenVolumes: true, includeRootVol: true, includePrebootVol: true)
-            
-            let dataVol = gotDisks?.filter { $0.diskSlice == dataSlice }
-            
-            dataVolume = dataVol?.first
-            
+                
+            let apfs = "/System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util"
+            var apfsUtil = "\(systemVolume.path)\(apfs)"
+
+
+            if systemVolume.root {
+                apfsUtil = apfs
+            }
+        
+            let dataVolumeUUID = runCommandReturnString(binary: apfsUtil, arguments: [dataSlice]) ?? ""
+
             let dest = systemVolume.path
             let slek = "System/Library/Extensions"
             let uepi = "System/Library/UserEventPlugins"
@@ -143,11 +147,13 @@ extension ViewController {
                 print("disableBT2", prfx, list, pass)
             }
             
-            postInstallProgressIndicator.doubleValue += 1
+            DispatchQueue.main.async { [self] in
+                postInstallProgressIndicator.doubleValue += 1
+            }
             
             postInstallTask_label.stringValue = "Making disk bootable..."
 
-            BootSystem(system: systemVolume, dataVolume: dataVolume, isVerbose: VerboseBoot, isSingleUser: singleUser, prebootVolume: preboot)
+            BootSystem(system: systemVolume, dataVolumeUUID: dataVolumeUUID, isVerbose: VerboseBoot, isSingleUser: singleUser, prebootVolume: preboot)
             
             var sysPath = systemVolume.path + "/"
             
@@ -155,8 +161,9 @@ extension ViewController {
                 sysPath = systemVolume.path
             }
             
-            
-            postInstallProgressIndicator.doubleValue += 1
+            DispatchQueue.main.async { [self] in
+                postInstallProgressIndicator.doubleValue += 1
+            }
             
             
             //MARK Update Boot, System Caches
@@ -197,10 +204,23 @@ extension ViewController {
                 }
             }
             
-            postInstallProgressIndicator.doubleValue += 1
-            postInstallFuelGauge.doubleValue += 1
-
+            if BlessVolume.state == .on {
+                
+                if let app = appFolder  {
+                    let bless = app.path + "/bless"
+                    var path = systemVolume.path + "/"
+                    
+                    if systemVolume.root {
+                        path = systemVolume.path
+                    }
+                    
+                    runIndeterminateProcess(binary: bless, arguments: ["--folder", "\(path)System/Library/CoreServices" , "--bootefi", "--label", systemVolume.displayName, "--setBoot"], title: "Blessing System Volume \(systemVolume.displayName)", sleepForHeadings: true)
+                }
+            }
+            
             DispatchQueue.main.async { [self] in
+                postInstallProgressIndicator.doubleValue += 1
+                postInstallFuelGauge.doubleValue += 1
                 postInstallFuelGauge.doubleValue = postInstallFuelGauge.maxValue
                 postInstallProgressIndicator.doubleValue = postInstallProgressIndicator.maxValue
                 postInstallSpinner.stopAnimation(sender)
