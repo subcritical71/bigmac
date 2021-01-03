@@ -223,7 +223,16 @@ extension ViewController {
             //Get Preboot Ready
             let prebootPath = "/tmp/\(prebootVolume)"
             
-            _ = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["unmount", "force", prebootVolume])
+            func forceUnmounts() {
+                let unmounts = ["Preboot", prebootVolume, "Recovery", "Update"]
+                
+                for i in unmounts {
+                    _ = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["unmount", "force", i])
+
+                }
+            }
+          
+            forceUnmounts()
             
             if !system.root {
                 _ = mkDir(arg:prebootPath)
@@ -318,8 +327,8 @@ extension ViewController {
                 try? fm.copyItem(atPath: "/\(appFolderPath)/\(buildManifestPlist)",  toPath: "\(prebootPath)/\(dataVolumeUUID)/restore/\(buildManifestPlist)")
             }
             
-            _ = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["unmount", "force", prebootVolume])
-            
+            forceUnmounts()
+
         }
     }
     

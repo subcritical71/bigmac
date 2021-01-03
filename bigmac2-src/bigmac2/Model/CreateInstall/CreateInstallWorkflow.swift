@@ -34,6 +34,7 @@ extension ViewController {
             //MARK: Step 1
             updateInstallerPkg()
             
+            
             //MARK: Step 2
             reformatSelectedApfsDisk(diskInfo: diskInfo)
             
@@ -93,7 +94,7 @@ extension ViewController {
             let bm2 = bigmac2
             
             //MARK: Start
-            incrementInstallGauge(resetGauge: true, incremment: true, setToFull: false)
+            incrementInstallGauge(resetGauge: true, incremment: true, setToFull: false, cylon: true)
             spinnerAnimation(start: true, hide: false)
             
             //MARK: Rev Engine
@@ -101,18 +102,26 @@ extension ViewController {
 
             //MARK: Step 1
             updateInstallerPkg()
-            
+            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: true)
+
             //MARK: Step 2
             reformatSelectedApfsDisk(diskInfo: diskInfo)
-        
+            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: true)
+
             //MARK: Step 5.1
             installBaseSystemII(diskInfo: diskInfo, baseSys: baseSys, bm2: bm2)
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
             
             let prebootDiskSlice = getDisk(substr: "Preboot", usingDiskorSlice: diskInfo.disk, isSlice: false) ?? diskInfo.disk + "s2"
-            BootSystem(system: diskInfo, dataVolumeUUID: diskInfo.uuid, isVerbose: isBaseVerbose, isSingleUser: isBaseSingleUser, prebootVolume: prebootDiskSlice)
             
-            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+            //MARK: Update systemVolume volume because UUIDs have chnaged
+            if let systemVolume = getVolumeInfoByDisk(filterVolumeName: diskInfo.volumeName, disk: diskInfo.disk, isRoot: diskInfo.root) {
+                BootSystem(system: systemVolume, dataVolumeUUID: systemVolume.uuid, isVerbose: isBaseVerbose, isSingleUser: isBaseSingleUser, prebootVolume: prebootDiskSlice, isBaseSystem: true)
+            } else {
+                print("Boot System Failure")
+            }
+            
+            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: false)
             
             installTheApp(bigmac2: diskInfo)
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)

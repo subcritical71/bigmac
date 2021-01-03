@@ -137,8 +137,6 @@ class ViewController: NSViewController, URLSessionDelegate  {
     var blessSystemtl = String()
     var deleteSnaphotstl = String()
 
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         parseBootArgs()
@@ -153,9 +151,6 @@ class ViewController: NSViewController, URLSessionDelegate  {
         
         refreshPatchDisks()
     }
-    
-    
-
 }
 
 

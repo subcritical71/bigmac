@@ -32,8 +32,8 @@ extension ViewController {
         isSysVerbose     = defaults.bool(forKey: "isSysVerbose")
         isSysSingleUser  = defaults.bool(forKey: "isSysSingleUser")
         
-        isBaseSingleUser ? (singleUserCheckbox.state = .on) : (singleUserCheckbox.state = .off)
-        isBaseVerbose ? (verboseUserCheckbox.state = .on) :  (verboseUserCheckbox.state = .off)
+        isBaseSingleUser = singleUserCheckbox.state == .on
+        isBaseVerbose    = verboseUserCheckbox.state == .on
     }
 }
 

@@ -56,9 +56,20 @@ extension ViewController {
     }
     
     //MARK: Increment Install Fuel Gauge
-    internal func incrementInstallGauge(resetGauge: Bool, incremment: Bool, setToFull: Bool) {
+    internal func incrementInstallGauge(resetGauge: Bool, incremment: Bool, setToFull: Bool, cylon: Bool = false) {
         
         DispatchQueue.main.async { [self] in
+            if cylon {
+                sharedSupportProgressBar.isIndeterminate = true
+                sharedSupportProgressBar.startAnimation(self)
+            } else {
+                sharedSupportProgressBar.stopAnimation(self)
+                sharedSupportProgressBar.isHidden = true
+                sharedSupportProgressBar.isIndeterminate = false
+                sharedSupportProgressBar.doubleValue = 0
+                sharedSupportProgressBar.minValue = 0
+                sharedSupportProgressBar.maxValue = 100
+            }
             
             if resetGauge {
                 installerFuelGauge.doubleValue = installerFuelGauge.minValue
@@ -71,6 +82,8 @@ extension ViewController {
             if setToFull {
                 installerFuelGauge.doubleValue = installerFuelGauge.maxValue
             }
+            
+           
         }
     }
     
