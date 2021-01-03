@@ -30,7 +30,7 @@
 		2D8630FE25A234D3006DDFFC /* PostInstallWorkflow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8630FD25A234D3006DDFFC /* PostInstallWorkflow.swift */; };
 		2D993A66258DCA79003A5553 /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D993A65258DCA79003A5553 /* FileDownloader.swift */; };
 		2D99C49A259F27210035669B /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D99C499259F27210035669B /* Utilities.swift */; };
-		2D99C49D259F2D280035669B /* PostInstallAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D99C49C259F2D280035669B /* PostInstallAction.swift */; };
+		2D99C49D259F2D280035669B /* PostInstallActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D99C49C259F2D280035669B /* PostInstallActions.swift */; };
 		2D99C4FC259F9B830035669B /* IOATAFamily.kext in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C4F5259F9B7F0035669B /* IOATAFamily.kext */; };
 		2D99C4FD259F9B830035669B /* IOHIDFamily.kext in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C4F6259F9B800035669B /* IOHIDFamily.kext */; };
 		2D99C4FE259F9B830035669B /* corecapture.kext in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C4F7259F9B800035669B /* corecapture.kext */; };
@@ -83,7 +83,7 @@
 		2D993A63258DC0AC003A5553 /* bigmac2.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = bigmac2.entitlements; sourceTree = "<group>"; };
 		2D993A65258DCA79003A5553 /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
 		2D99C499259F27210035669B /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
-		2D99C49C259F2D280035669B /* PostInstallAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInstallAction.swift; sourceTree = "<group>"; };
+		2D99C49C259F2D280035669B /* PostInstallActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInstallActions.swift; sourceTree = "<group>"; };
 		2D99C4F5259F9B7F0035669B /* IOATAFamily.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; path = IOATAFamily.kext; sourceTree = "<group>"; };
 		2D99C4F6259F9B800035669B /* IOHIDFamily.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; path = IOHIDFamily.kext; sourceTree = "<group>"; };
 		2D99C4F7259F9B800035669B /* corecapture.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; path = corecapture.kext; sourceTree = "<group>"; };
@@ -213,6 +213,14 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		2D62EB2525A2891900C528CD /* Preinstall */ = {
+			isa = PBXGroup;
+			children = (
+				2D9BB502259EAC96007DE72A /* PreInstallActions.swift */,
+			);
+			path = Preinstall;
+			sourceTree = "<group>";
+		};
 		2D7787F4258F1C8C00305EC3 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
@@ -229,7 +237,6 @@
 		2D7787F7258F1CCC00305EC3 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				2D9BB502259EAC96007DE72A /* PreInstallActions.swift */,
 				2D1A32A2258D959D009DCDFD /* AppDelegate.swift */,
 				2D1A32A8258D959E009DCDFD /* Main.storyboard */,
 			);
@@ -242,6 +249,7 @@
 				2D3E60ED259CFB7D00DE6488 /* Global */,
 				2D3E60EE259CFB9400DE6488 /* CommandCentral */,
 				2D09EE46259C44020054CF3A /* CreateInstall */,
+				2D62EB2525A2891900C528CD /* Preinstall */,
 				2D86310025A247B0006DDFFC /* PostInstall */,
 			);
 			path = Model;
@@ -250,7 +258,7 @@
 		2D86310025A247B0006DDFFC /* PostInstall */ = {
 			isa = PBXGroup;
 			children = (
-				2D99C49C259F2D280035669B /* PostInstallAction.swift */,
+				2D99C49C259F2D280035669B /* PostInstallActions.swift */,
 				2D8630FD25A234D3006DDFFC /* PostInstallWorkflow.swift */,
 			);
 			path = PostInstall;
@@ -369,7 +377,7 @@
 				2D02E032259453D500E8E1CF /* VolumeInfo.swift in Sources */,
 				2DAFF44C259AB7ED00D48E20 /* CreateInstallActions.swift in Sources */,
 				2DAFF44F259AB8A100D48E20 /* Notifications.swift in Sources */,
-				2D99C49D259F2D280035669B /* PostInstallAction.swift in Sources */,
+				2D99C49D259F2D280035669B /* PostInstallActions.swift in Sources */,
 				2D09EE43259C432C0054CF3A /* CreateInstallTasks.swift in Sources */,
 				2D8630FE25A234D3006DDFFC /* PostInstallWorkflow.swift in Sources */,
 				2D3E60F2259CFC6000DE6488 /* ParseBootArgs.swift in Sources */,
@@ -519,6 +527,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = bigmac2/bigmac2.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 5;
@@ -546,6 +555,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = bigmac2/bigmac2.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 5;
