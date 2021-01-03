@@ -91,9 +91,11 @@ class ViewController: NSViewController, URLSessionDelegate  {
     @IBOutlet weak var singleUser_btn: NSButton!
     @IBOutlet weak var postInstallFuelGauge: NSLevelIndicator!
     @IBOutlet weak var postInstallProgressIndicator: NSProgressIndicator!
-    @IBOutlet weak var postInstallRunningIndicator: NSProgressIndicator!
     @IBOutlet weak var availablePatchDisks: NSPopUpButton!
     @IBOutlet weak var patchDiskExecution_btn: NSButton!
+    @IBOutlet weak var postInstallTask_label: NSTextField!
+    @IBOutlet weak var postInstallDetails_label: NSTextField!
+    @IBOutlet weak var postInstallSpinner: NSProgressIndicator!
     
     var enableUSB = Bool()
     var disableBT2 = Bool()
@@ -107,9 +109,7 @@ class ViewController: NSViewController, URLSessionDelegate  {
     var hdmiAudio = Bool()
     var singleUser = Bool()
     var legacyWiFi = Bool()
-    
-   
-   
+
 }
 
 

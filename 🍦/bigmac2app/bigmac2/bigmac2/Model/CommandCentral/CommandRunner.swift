@@ -93,7 +93,6 @@ extension ViewController {
                     }
                     
                     //PSTT    0    100    start replicate
-
                     //self.statusTextView.string = self.statusTextView.string + (output as String)
                 }
             }
@@ -113,7 +112,96 @@ extension ViewController {
             process.waitUntilExit()
        // }
     }
+    
+    
+    
+    /* Run command in the background */
+    func runIndeterminateProcess(binary: String, arguments: [String], title: String) {
+
+        DispatchQueue.main.async { [self] in
+            postInstallTask_label.stringValue = title
+            postInstallDetails_label.stringValue = ""
+        }
+        
+        sleep(2)
+            
+        //DispatchQueue.global(qos: .background).async {
+            let process = Process()
+            process.launchPath = binary
+            process.arguments = arguments
+            
+            let pipe = Pipe()
+            let pipe2 = Pipe()
+
+            process.standardOutput = pipe
+            process.standardError = pipe2
+            
+            let handler =  { (file: FileHandle!) -> Void in
+                let data = file.availableData
+                guard let output = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
+                    else { return }
+                
+                DispatchQueue.main.async { [self] in
+                    
+                    var str = String(output)
+                    
+                    str = str.replacingOccurrences(of: "\t", with: "")
+                    str = str.replacingOccurrences(of: "\r", with: "")
+                    str = str.replacingOccurrences(of: "\n", with: " ")
+                    str = str.replacingOccurrences(of: "      ", with: " ")
+                    str = str.replacingOccurrences(of: "     ", with: " ")
+                    str = str.replacingOccurrences(of: "    ", with: " ")
+                    str = str.replacingOccurrences(of: "   ", with: " ")
+                    str = str.replacingOccurrences(of: "  ", with: " ")
+
+                    if (!str.isEmpty || str.count > 6 || str != "") && !str.contains("  ") {
+                        self.postInstallTask_label.stringValue = str as String
+                    }
+                }
+            }
+        
+            let handler2 = { (file: FileHandle! ) -> Void in
+                let data = file.availableData
+                guard let output2 = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
+                    else { return }
+                
+                DispatchQueue.main.async { [self] in
+                    
+                    var fix = String(output2) as String
+                    fix = String(fix.prefix(54))
+                    let io = String(output2).deletingPrefix(fix)
+                    
+                    if !String(io).isEmpty && !String(io).contains("kmutil") && (String(io).contains("alidating") || String(io).contains("riting")) {
+                        self.postInstallDetails_label.stringValue = io as String
+                    }
+                    
+                }
+            }
+            
+            pipe.fileHandleForReading.readabilityHandler = handler
+            pipe2.fileHandleForReading.readabilityHandler = handler2
+
+            //Finish the Job
+            process.terminationHandler = { (task: Process?) -> () in
+                pipe.fileHandleForReading.readabilityHandler = nil
+                
+                DispatchQueue.main.async { [self] in
+                    postInstallFuelGauge.doubleValue += 1
+                    postInstallProgressIndicator.doubleValue += 1
+                }
+            }
+            
+            process.launch()
+            process.waitUntilExit()
+       // }
+    }
 
 }
 
 
+extension String {
+    func deletingPrefix(_ prefix: String) -> String {
+        guard self.hasPrefix(prefix) else { return self }
+        return String(self.dropFirst(prefix.count))
+    }
+}

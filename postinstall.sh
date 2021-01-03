@@ -758,7 +758,7 @@ fi
 
 
 #Snapshot deletion code by StarPlayrX 2020
-snapshots=$(diskutil apfs listsnapshots "$destVolume" | grep +-- | awk '{print $2}')
+
 
 
 n
@@ -769,13 +769,11 @@ n
 
 printf 'Checking snapshots.'
 n
+
+snapshots=$(diskutil apfs listsnapshots "$destVolume" | grep +-- | awk '{print $2}')
 for uuid in $snapshots
 do
-    n
-    printf ' 📸 Attempting to delete snapshot => '
-    n
-    printf ' '
-    printf $uuid
+    printf '📸 Attempting to delete snapshot => $uuid \n"
     n
     
     diskutil apfs deletesnapshot "$destVolume" -uuid $uuid

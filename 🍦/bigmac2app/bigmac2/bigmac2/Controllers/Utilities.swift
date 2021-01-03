@@ -162,6 +162,9 @@ extension ViewController {
             pass = !pass
         }
         
+        
+        postInstallFuelGauge.doubleValue += 1
+
         return pass
     }
     
@@ -188,6 +191,8 @@ extension ViewController {
         
     }
     
+    
+    //MARK: Update Base System - Preboot and System
     func BootSystem(system: myVolumeInfo, dataVolume: myVolumeInfo, isVerbose: Bool, isSingleUser: Bool, prebootVolume : String) {
         
         //MARK: Make Preboot bootable and compatible with C-Key at boot time
@@ -225,7 +230,7 @@ extension ViewController {
             
             //Write our pList file
             let bootPlistTxt =
-"""
+                """
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
@@ -250,12 +255,12 @@ extension ViewController {
                 try? fm.removeItem(atPath: "\(prebootPath)/\(dataVolume.uuid)/System/Library/CoreServices/\(platformPlist)")
                 try? fm.removeItem(atPath: "\(prebootPath)/\(dataVolume.uuid)/restore/\(buildManifestPlist)")
             }
-              
+            
             if system.root {
                 
                 txt2file(text: bootPlistTxt, file:  "\(system.path)Library/Preferences/SystemConfiguration/\(bootPlist)")
                 txt2file(text: bootPlistTxt, file:  "\(system.path)System/Volumes/Preboot/*/Library/Preferences/SystemConfiguration/\(bootPlist)")
-
+                
                 try? fm.copyItem(atPath: "/\(appFolderPath)/\(platformPlist)",       toPath: "\(system.path)System/Library/CoreServices/\(platformPlist)")
                 try? fm.copyItem(atPath: "/\(appFolderPath)/\(platformPlist)",       toPath: "\(prebootPath)/\(dataVolume.uuid)/System/Library/CoreServices/\(platformPlist)")
                 try? fm.copyItem(atPath: "/\(appFolderPath)/\(buildManifestPlist)",  toPath: "\(prebootPath)/\(dataVolume.uuid)/restore/\(buildManifestPlist)")
@@ -263,11 +268,141 @@ extension ViewController {
             } else {
                 txt2file(text: bootPlistTxt, file:  "\(system.path)/Library/Preferences/SystemConfiguration/\(bootPlist)")
                 txt2file(text: bootPlistTxt, file:  "\(prebootPath)/\(dataVolume.uuid)/Library/Preferences/SystemConfiguration/\(bootPlist)")
-
+                
                 try? fm.copyItem(atPath: "/\(appFolderPath)/\(platformPlist)",       toPath: "\(system.path)/System/Library/CoreServices/\(platformPlist)")
                 try? fm.copyItem(atPath: "/\(appFolderPath)/\(platformPlist)",       toPath: "\(prebootPath)/\(dataVolume.uuid)/System/Library/CoreServices/\(platformPlist)")
                 try? fm.copyItem(atPath: "/\(appFolderPath)/\(buildManifestPlist)",  toPath: "\(prebootPath)/\(dataVolume.uuid)/restore/\(buildManifestPlist)")
             }
+            
+            _ = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["unmount", "force", prebootVolume])
+            
         }
     }
+    
+    
+    //MARK: Update System - Preboot only
+    func BaseSystem(dataVolume: myVolumeInfo, isVerbose: Bool, isSingleUser: Bool, prebootVolume : String) {
+        
+        //MARK: Make Preboot bootable and compatible with C-Key at boot time
+        if let appFolder = Bundle.main.resourceURL {
+            
+            //Get Preboot Ready
+            let prebootPath = "/tmp/\(prebootVolume)"
+            
+            _ = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["unmount", "force", prebootVolume])
+            
+            _ = mkDir(arg:prebootPath)
+            _ = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["mount", "-mountPoint", prebootPath, prebootVolume])
+            
+            // diskutil mount -mountPoint /tmp/disk4s2 disk4s2
+            let bootPlist = "com.apple.Boot.plist"
+            let platformPlist = "PlatformSupport.plist"
+            let buildManifestPlist = "BuildManifest.plist"
+            
+            let appFolderPath = "\(appFolder.path)"
+            
+            print("Making System Disk Bootable...\n")
+            
+            var verbose = "-v "
+            var singleUser = "-s "
+            
+            if !isVerbose {
+                verbose = ""
+            }
+            
+            if !isSingleUser {
+                singleUser = ""
+            }
+            
+            //Write our pList file
+            let bootPlistTxt =
+                """
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>Kernel Flags</key>
+        <string>\(singleUser)\(verbose)-no_compat_check -amfi_get_out_of_my_way=1</string>
+    </dict>
+</plist>
+"""
+            try? fm.removeItem(atPath: "\(prebootPath)/\(dataVolume.uuid)/Library/Preferences/SystemConfiguration/\(bootPlist)")
+            try? fm.removeItem(atPath: "\(prebootPath)/\(dataVolume.uuid)/System/Library/CoreServices/\(platformPlist)")
+            try? fm.removeItem(atPath: "\(prebootPath)/\(dataVolume.uuid)/restore/\(buildManifestPlist)")
+            txt2file(text: bootPlistTxt, file:  "\(prebootPath)/\(dataVolume.uuid)/Library/Preferences/SystemConfiguration/\(bootPlist)")
+            
+            try? fm.copyItem(atPath: "/\(appFolderPath)/\(platformPlist)",       toPath: "\(prebootPath)/\(dataVolume.uuid)/System/Library/CoreServices/\(platformPlist)")
+            try? fm.copyItem(atPath: "/\(appFolderPath)/\(buildManifestPlist)",  toPath: "\(prebootPath)/\(dataVolume.uuid)/restore/\(buildManifestPlist)")
+            
+            _ = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["unmount", "force", prebootVolume])
+        }
+        
+        
+    }
+    /* Update System Caches on macOS 11.1 */
+    func updateMac11onMac11SystemCache(destVolume: String) {
+        
+        //MARK: Constants
+        let appleSysLib     = "Library/Apple/System/Library"
+        let appleSysLibExt  = "Library/Apple/System/Library/Extensions"
+        let appleSysLibPre  = "Library/Apple/System/Library/PrelinkedKernels"
+        let prelinkedkernel = "System/Library/PrelinkedKernels/prelinkedkernel"
+        let sysLibExt       = "System/Library/Extensions"
+        let sysLibDriverExt = "System/Library/DriverExtensions"
+        let libExt          = "Library/Extensions"
+        let libDriveExt     = "Library/DriverExtensions"
+        let kernel          = "System/Library/Kernels/kernel"
+        
+        //MARK: Commands
+        let touch =         "\(destVolume)usr/bin/touch"
+        let kmutil =        "\(destVolume)usr/bin/kmutil"
+        let kcditto =       "\(destVolume)usr/sbin/kcditto"
+        
+       // print(touch,kmutil, kcditto)
+        
+        let appleSysLibExists               = checkIfFileExists(path: "\(destVolume)\(appleSysLib)")
+        let appleSysLibPreKernelsExists     = checkIfFileExists(path: "\(destVolume)\(appleSysLibPre)")
+        print("appleSysLibExists", appleSysLibExists)
+        _ = runCommandReturnString(binary: touch, arguments: ["\(destVolume)\(appleSysLib)"])
+        _ = runCommandReturnString(binary: touch, arguments: ["\(destVolume)\(appleSysLibExt)"])
+        _ = runCommandReturnString(binary: touch, arguments: ["\(destVolume)\(sysLibExt)"])
+        _ = runCommandReturnString(binary: touch, arguments: ["\(destVolume)\(sysLibDriverExt)"])
+        _ = runCommandReturnString(binary: touch, arguments: ["\(destVolume)\(libExt)"])
+        _ = runCommandReturnString(binary: touch, arguments: ["\(destVolume)\(libDriveExt)"])
+        
+        
+       //MARK: Updating All Kernel Extensions
+        let kmArrA = ["install", "--update-all", "--check-rebuild", "--repository", "/\(sysLibExt)", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--repository", "/\(appleSysLibExt)", "--volume-root", "\(destVolume)"]
+        runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title: "Updating All Kernel Extensions...")
+        
+        //MARK: Rechecking Extensions
+        let kmArrRE = ["install", "--repository", "/\(sysLibExt)", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--repository", "/\(appleSysLibExt)", "--volume-root", "\(destVolume)"]
+        runIndeterminateProcess(binary: kmutil, arguments: kmArrRE, title: "Rechecking Extensions...")
+        
+        //MARK: Updating Library Extensions
+        let kmArrB = ["install", "--check-rebuild", "--repository", "/\(libExt)", "--repository", "/\(sysLibExt)", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--repository", "/\(appleSysLibExt)", "--volume-root", "\(destVolume)"]
+        runIndeterminateProcess(binary: kmutil, arguments: kmArrB, title: "Updating Library Extensions...")
+    
+        if appleSysLibExists {
+            
+            if !appleSysLibPreKernelsExists {
+                _ = mkDir(arg: "\(destVolume)/\(appleSysLibPre)")
+            }
+            
+            let kmArrA = ["create", "-n", "-boot", "--boot-path", "\(appleSysLibPre)", "-f", "'OSBundleRequired'=='Local-Root'", "--kernel", "/\(kernel)", "--repository", "/\(sysLibExt)", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--repository", "/\(appleSysLibExt)", "--volume-root", "\(destVolume)"]
+            
+            runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title: "Updating Prelinked Kernel...")
+            
+        } else {
+            
+            let kmArrA = ["create", "-n", "-boot", "--boot-path", "/\(prelinkedkernel)", "-f", "'OSBundleRequired'=='Local-Root'", "--kernel", "/\(kernel)", "--repository", "/\(sysLibExt)", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--repository", "/\(appleSysLibExt)", "--volume-root", "\(destVolume)"]
+            
+            runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title: "Updating Prelinked Kernel...")
+            
+        }
+        
+        runIndeterminateProcess(binary: kcditto, arguments: [], title: "Running kcditto...")
+        
+    }
+    
 }

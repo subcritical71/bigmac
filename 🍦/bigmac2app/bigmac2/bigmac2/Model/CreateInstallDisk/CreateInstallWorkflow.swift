@@ -108,8 +108,14 @@ extension ViewController {
             //MARK: Step 5.1
             installBaseSystemII(diskInfo: diskInfo, baseSys: baseSys, bm2: bm2)
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
-
-            BootItUp(bigmac2: diskInfo)
+            
+            
+            let prebootDiskSlice = getDisk(substr: "Preboot", usingDiskorSlice: diskInfo.disk, isSlice: false) ?? diskInfo.disk + "s2"
+            BaseSystem(dataVolume: diskInfo, isVerbose: isBaseVerbose, isSingleUser: isBaseSingleUser, prebootVolume : prebootDiskSlice)
+            
+            
+            
+            
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
             
             installTheApp(bigmac2: diskInfo)

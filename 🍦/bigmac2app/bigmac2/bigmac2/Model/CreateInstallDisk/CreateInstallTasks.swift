@@ -120,22 +120,19 @@ extension ViewController {
             
             if let bm2tmp = getVolumeInfoByDisk(filterVolumeName: "bm2tmp0_\(rndStr)", disk: diskInfo.disk), let bigmac2 = getVolumeInfoByDisk(filterVolumeName: bm2, disk: diskInfo.disk) {
                 let prebootDest = "\(diskInfo.disk)s2" //cheat
+                
                 let _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", "\(prebootDest)"] )
                 let _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", bigmac2.diskSlice] )
-                
                 let _ = runCommandReturnString(binary: "/sbin/mount" , arguments: ["-uw", "/Volumes/\(bigmac2.volumeName)"])
-                
                 
                 //MARK: Just did a bunch of prep work
                 if let itemsToCopy = try? fm.contentsOfDirectory(atPath:  "/private/\(tmp)/prebootbs\(rndStr)/") {
                     for i in itemsToCopy {
                         try? fm.copyItem(atPath: "/private/\(tmp)/prebootbs\(rndStr)/\(i)", toPath: "/Volumes/Preboot/\(i)")
                         try? fm.moveItem(atPath: "/Volumes/Preboot/\(i)", toPath: "/Volumes/Preboot/\(bigmac2.uuid)")
-                        
                     }
                 }
-                
-                
+            
                 //MARK: Make Preboot bootable and compatible with C-Key at boot time
                 if let appFolder = Bundle.main.resourceURL {
                     let bootPlist = "com.apple.Boot.plist"
@@ -163,9 +160,7 @@ extension ViewController {
                     if !isSingleUser {
                         singleUser = ""
                     }
-                    
-             
-                    
+    
 //Write our pList file
 let bootPlistTxt =
 """
@@ -178,24 +173,13 @@ let bootPlistTxt =
         </dict>
 </plist>
 """
-         
-                    
-                    
                     txt2file(text: bootPlistTxt, file: "/Volumes/Preboot/\(bigmac2.uuid)/Library/Preferences/SystemConfiguration/\(bootPlist)")
-                    
-                    //_ = mkDir(arg: "/Volumes/\(bigmac2.volumeName)/System/Library/Preferences/SystemConfiguration/")
-                    
-                   // txt2file(text: bootPlistTxt, file: "/Volumes/Preboot/\(bigmac2.uuid)/System/Library/Preferences/SystemConfiguration/\(bootPlist)")
-
                     try? fm.copyItem(atPath: "/\(appFolderPath)/\(platformPlist)", toPath: "/Volumes/Preboot/\(bigmac2.uuid)/System/Library/CoreServices/\(platformPlist)")
                     try? fm.copyItem(atPath: "/\(appFolderPath)/\(buildManifestPlist)", toPath: "/Volumes/Preboot/\(bigmac2.uuid)/restore/\(buildManifestPlist)")
-                    
                 }
-                
                 
                 _ = removeApfsVolume(remove: bm2tmp.volumeName)
                 _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["unmount", "\(getPrebootDisk)"] )
-                
             }
         }
                 
@@ -213,15 +197,15 @@ let bootPlistTxt =
     }
     
     
-    func BootItUp(bigmac2: myVolumeInfo) {
+    func BootItUpX(bigmac2: myVolumeInfo) {
         
         if let bigmac2 = getVolumeInfoByDisk(filterVolumeName: bigmac2.volumeName, disk: bigmac2.disk) {
             
             //MARK: Make Preboot bootable and compatible with C-Key at boot time
             if let appFolder = Bundle.main.resourceURL {
                 let bootPlist = "com.apple.Boot.plist"
-                let platformPlist = "BuildManifest.plist"
-                let buildManifestPlist = "PlatformSupport.plist"
+                let buildManifestPlist = "BuildManifest.plist"
+                let platformPlist = "PlatformSupport.plist"
                 
                 let appFolderPath = "\(appFolder.path)"
                 
@@ -259,11 +243,6 @@ let bootPlistTxt =
 """
 
                 txt2file(text: bootPlistTxt, file: "/Volumes/Preboot/\(bigmac2.uuid)/Library/Preferences/SystemConfiguration/\(bootPlist)")
-                
-                //_ = mkDir(arg: "/Volumes/\(bigmac2.volumeName)/System/Library/Preferences/SystemConfiguration/")
-                
-               // txt2file(text: bootPlistTxt, file: "/Volumes/Preboot/\(bigmac2.uuid)/System/Library/Preferences/SystemConfiguration/\(bootPlist)")
-
                 try? fm.copyItem(atPath: "/\(appFolderPath)/\(platformPlist)", toPath: "/Volumes/Preboot/\(bigmac2.uuid)/System/Library/CoreServices/\(platformPlist)")
                 try? fm.copyItem(atPath: "/\(appFolderPath)/\(buildManifestPlist)", toPath: "/Volumes/Preboot/\(bigmac2.uuid)/restore/\(buildManifestPlist)")
                
