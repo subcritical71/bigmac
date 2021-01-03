@@ -861,7 +861,7 @@
                                                     </subviews>
                                                 </customView>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ahL-hY-ZTg">
-                                                    <rect key="frame" x="16" y="146" width="135" height="16"/>
+                                                    <rect key="frame" x="16" y="142" width="135" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Installer Boot Options" id="IVF-7J-YYB">
                                                         <font key="font" metaFont="system"/>
@@ -869,11 +869,11 @@
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                 </textField>
-                                                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hE1-Fe-K3l">
-                                                    <rect key="frame" x="30" y="85" width="240" height="47"/>
+                                                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hE1-Fe-K3l">
+                                                    <rect key="frame" x="30" y="90" width="240" height="42"/>
                                                     <subviews>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LFa-gw-qF8">
-                                                            <rect key="frame" x="-2" y="30" width="242" height="18"/>
+                                                            <rect key="frame" x="-2" y="25" width="242" height="18"/>
                                                             <buttonCell key="cell" type="check" title="Single User (Supports Legacy USB)" bezelStyle="regularSquare" imagePosition="left" inset="2" id="tgT-VY-Thm">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>

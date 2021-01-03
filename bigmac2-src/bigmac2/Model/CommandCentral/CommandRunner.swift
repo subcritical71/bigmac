@@ -29,7 +29,6 @@ func runCommandReturnString(binary: String, arguments: [String]) -> String? {
     let data = pipe.fileHandleForReading.readDataToEndOfFile()
     
     if let output = String(data: data, encoding: String.Encoding.utf8), !output.isEmpty {
-        print(output)
         return output
     }
     

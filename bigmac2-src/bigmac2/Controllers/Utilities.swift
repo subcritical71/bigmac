@@ -246,12 +246,6 @@ extension ViewController {
             
             let appFolderPath = "\(appFolder.path)"
             
-            print("appFolderPath", appFolderPath)
-            print("prebootPath", prebootPath)
-
-            
-            print("Making System Disk Bootable...\n")
-            
             var verbose = "-v "
             var singleUser = "-s "
             
@@ -353,12 +347,10 @@ extension ViewController {
         let touch =         "\(destVolume)usr/bin/touch"
         let kmutil =        "\(destVolume)usr/bin/kmutil"
         let kcditto =       "\(destVolume)usr/sbin/kcditto"
-        
-       // print(touch,kmutil, kcditto)
-        
+                
         let appleSysLibExists               = checkIfFileExists(path: "\(destVolume)\(appleSysLib)")
         let appleSysLibPreKernelsExists     = checkIfFileExists(path: "\(destVolume)\(appleSysLibPre)")
-        print("appleSysLibExists", appleSysLibExists)
+
         _ = runCommandReturnString(binary: touch, arguments: ["\(destVolume)\(appleSysLib)"])
         _ = runCommandReturnString(binary: touch, arguments: ["\(destVolume)\(appleSysLibExt)"])
         _ = runCommandReturnString(binary: touch, arguments: ["\(destVolume)\(sysLibExt)"])

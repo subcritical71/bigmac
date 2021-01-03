@@ -50,10 +50,11 @@ extension ViewController {
     
     //MARK: Install Emoji Font
     internal func installEmojiFont(bm2: String) {
-        DispatchQueue.global(qos: .background).async { [self] in
+        //DispatchQueue.global(qos: .background).async { [self] in
             copyFile(atPath: "/System/Library/Fonts/Apple Color Emoji.ttc", toPath: "/Volumes/\(bm2)/System/Library/Fonts/Apple Color Emoji.ttc")
-        }
+       // }
     }
+    
     
     //MARK: Increment Install Fuel Gauge
     internal func incrementInstallGauge(resetGauge: Bool, incremment: Bool, setToFull: Bool, cylon: Bool = false, title: String = "") {
@@ -71,6 +72,8 @@ extension ViewController {
             
             if resetGauge {
                 installerFuelGauge.doubleValue = installerFuelGauge.minValue
+                sharedSupportProgressBar.doubleValue = sharedSupportProgressBar.minValue
+
             }
             
             if incremment {
@@ -79,6 +82,7 @@ extension ViewController {
             
             if setToFull {
                 installerFuelGauge.doubleValue = installerFuelGauge.maxValue
+                sharedSupportProgressBar.doubleValue = sharedSupportProgressBar.maxValue
             }
             
             if !title.isEmpty {
@@ -88,7 +92,7 @@ extension ViewController {
         }
         
         if (!title.isEmpty) {
-            sleep(1)
+            sleep(2)
         }
     }
     

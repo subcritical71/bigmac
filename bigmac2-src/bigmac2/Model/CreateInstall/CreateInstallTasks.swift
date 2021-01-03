@@ -51,8 +51,6 @@ extension ViewController {
     
     //MARK: Task #4
     func createDirectory(diskInfo: myVolumeInfo, disk: String, rndStr: String) {
-        print(tempSystem)
-        print("/dev/r\(diskInfo.disk)")
         
         for _ in 1...3 {
             let result = addVolume(dmgPath: tempSystem, targetDisk: "/dev/r\(diskInfo.disk)", erase: true, title: "Creating Directory")
@@ -86,17 +84,17 @@ extension ViewController {
         //MARK: Install Base System
         
         let path = "/Users/shared/\(bigmacDisk)"
+        let ttle = "Installing the bigmac2 Boot Disk..."
         
         if checkIfFileExists(path: path) {
-            _ = addVolume(dmgPath: "/Users/shared/\(bigmacDisk)", targetDisk: "/dev/r\(diskInfo.disk)", erase: true, title: "Installing Boot Disk...")
+            _ = addVolume(dmgPath: "/Users/shared/\(bigmacDisk)", targetDisk: "/dev/r\(diskInfo.disk)", erase: true, title: ttle)
         } else {
-            
             print("BASE SYSTEM... DISK NOT FOUND...\n")
         }
                 
         _ = mountVolume(disk: diskInfo.disk)
         
-        incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: false)
+        incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: false, title: ttle)
     }
     
     
@@ -145,7 +143,6 @@ extension ViewController {
                     
                     let _ = mkDir(arg: "/Volumes/Preboot/\(bigmac2.uuid)/restore/")
                     
-                    print("Making System Disk Bootable...\n")
                     try? fm.removeItem(atPath: "/Volumes/Preboot/\(bigmac2.uuid)/Library/Preferences/SystemConfiguration/\(bootPlist)")
                     try? fm.removeItem(atPath: "/Volumes/Preboot/\(bigmac2.uuid)/System/Library/CoreServices/\(platformPlist)")
                     try? fm.removeItem(atPath: "/Volumes/Preboot/\(bigmac2.uuid)/restore/\(buildManifestPlist)")
@@ -202,9 +199,7 @@ let bootPlistTxt =
         if let bigmac2 = getVolumeInfoByDisk(filterVolumeName: bigmac2.volumeName, disk: bigmac2.disk) {
             //MARK: Make Preboot bootable and compatible with C-Key at boot time
             if let appFolder = Bundle.main.resourceURL  {
-                
-                print("Installing the goods...\n")
-                
+                                
                 let appFolderPath = "\(appFolder.path)"
                 let bigMacApp = Bundle.main.bundlePath
                 
@@ -220,8 +215,11 @@ let bootPlistTxt =
                 try? fm.removeItem(atPath: rdm)
 
                 try? fm.copyItem(atPath: "/\(appFolderPath)/Utilities.plist", toPath: util)
-                try? fm.copyItem(atPath: "\(bigMacApp)", toPath: bk)
+                //try? fm.copyItem(atPath: "\(bigMacApp)", toPath: bk)
                 try? fm.copyItem(atPath: "/\(appFolderPath)/RDM.app", toPath: rdm)
+                
+                copyFile(atPath: "\(bigMacApp)", toPath: bk)
+
 
             }
         }

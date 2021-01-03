@@ -15,12 +15,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         if flag == false {
 
             for window in sender.windows {
-                print(window)
+
                 if (window.delegate?.isKind(of: ViewController.self)) == true {
                     window.orderFront(self)
                 } else {
                     window.makeKeyAndOrderFront(self)
-
                 }
             }
         }

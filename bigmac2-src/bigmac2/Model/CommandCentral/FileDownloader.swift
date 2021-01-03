@@ -105,6 +105,9 @@ extension ViewController : URLSessionDownloadDelegate {
                 
                 let gigsCopied = round ( fileSizeTarget / 1000 / 1000 / 10 ) / 100
                 let gigsTotal = round ( fileSize / 1000 / 1000 / 10 ) / 100
+                
+                if Double(gigsCopied / gigsTotal * 100).isInfinite || Double(gigsCopied / gigsTotal * 100).isNaN { return }
+
                 let percentageDouble = Double(gigsCopied / gigsTotal * 100)
                 let percentageInt = Int(gigsCopied / gigsTotal * 100)
 

@@ -85,19 +85,16 @@ extension ViewController {
         if enableUSB {
             let kext = "IOHIDFamily.kext"
             let pass = installKext(dest: dest, kext: kext, fold: slek, ttle: enableUSBtl)
-            print("enableUSB", "IOHIDFamily", pass)
         }
         
         if appleHDA {
             let kext = "AppleHDA.kext"
             let pass = installKext(dest: dest, kext: kext, fold: slek, ttle: appleHDAtl)
-            print("appleHDA", "AppleHDA", pass)
         }
         
         if superDrive {
             let kext = "ioATAFamily.kext"
             let pass = installKext(dest: dest, kext: kext, fold: slek, ttle: superDrivetl)
-            print("superDrive", "ioATAFamily", pass)
         }
         
         indicatorBump(updateProgBar: true)
@@ -105,27 +102,22 @@ extension ViewController {
         if legacyWiFi {
             var kext = "IO80211Family.kext"
             var pass = installKext(dest: dest, kext: kext, fold: slek, ttle: legacyWiFitl)
-            print("legacyWiFi", kext, pass)
             
             kext = "corecapture.kext"
             pass = installKext(dest: dest, kext: kext, fold: slek, ttle: legacyWiFitl)
-            print("corecapture", kext, pass)
         }
         
         if teleTrap {
             let kext = "telemetrap.kext"
             var pass = installKext(dest: dest, kext: kext, fold: slek, ttle: teleTraptl)
-            print("teleTrap", kext, pass)
             
             let plug = "com.apple.telemetry.plugin"
             pass = installKext(dest: dest, kext: plug, fold: uepi, ttle: teleTraptl)
-            print("SSE4Telemetry", plug, pass)
         }
         
         if amdMouSSE {
             let kext = "AAAMouSSE.kext"
             let pass = installKext(dest: dest, kext: kext, fold: lext, ttle: amdMouSSEtl)
-            print("amdMouSSE", kext, pass)
         }
         
         indicatorBump(updateProgBar: true)
@@ -133,19 +125,16 @@ extension ViewController {
         if hdmiAudio {
             let kext = "HDMIAudio.kext"
             let pass = installKext(dest: dest, kext: kext, fold: lext, ttle: hdmiAudiotl)
-            print("hdmiAudio", kext, pass)
         }
         
         //SUVMMFaker
         if appStoreMacOS {
             let dlib = "SUVMMFaker.dylib"
             var pass = installKext(dest: dest, kext: dlib, fold: ulib, ttle: appStoreMacOStl)
-            print("appStoreMacOS", dlib, pass)
             
             let plst = "com.apple.softwareupdated.plist"
             let dmns = "System/Library/LaunchDaemons"
             pass = installKext(dest: dest, kext: plst, fold: dmns)
-            print("appStoreMacOS", plst, pass)
         }
         
         if disableBT2 {
@@ -154,7 +143,6 @@ extension ViewController {
             let prfx = "usb"
             
             let pass = installKext(dest: dest, kext: list, fold: fold, prfx: prfx, ttle: disableBT2tl)
-            print("disableBT2", prfx, list, pass)
         }
         
         indicatorBump(updateProgBar: true)
