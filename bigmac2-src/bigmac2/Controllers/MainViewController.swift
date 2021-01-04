@@ -41,7 +41,6 @@ class ViewController: NSViewController, URLSessionDelegate  {
     let shared = "Shared/" //copy to shared directory
     
     let apfs = "/System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util"
-
     
     //MARK: Downloads Tab
     @IBOutlet weak var mediaLabel: NSTextField!
@@ -90,35 +89,19 @@ class ViewController: NSViewController, URLSessionDelegate  {
     @IBOutlet weak var appStoreMacOS_btn: NSButton!
     @IBOutlet weak var legacyWiFi_btn: NSButton!
     @IBOutlet weak var singleUser_btn: NSButton!
+    @IBOutlet weak var deleteAPFSSnapshotsButton: NSButton!
+    @IBOutlet weak var BlessVolume: NSButton!
+    
     @IBOutlet weak var postInstallFuelGauge: NSLevelIndicator!
     @IBOutlet weak var postInstallProgressIndicator: NSProgressIndicator!
     @IBOutlet weak var availablePatchDisks: NSPopUpButton!
     @IBOutlet weak var patchDiskExecution_btn: NSButton!
-    
     @IBOutlet weak var postInstallTask_label: NSTextField!
     @IBOutlet weak var postInstallDetails_label: NSTextField!
-    
     @IBOutlet weak var postInstallSpinner: NSProgressIndicator!
-    @IBOutlet weak var deleteAPFSSnapshotsButton: NSButton!
-    @IBOutlet weak var BlessVolume: NSButton!
     @IBOutlet weak var updateBootSysKCs: NSButton!
     @IBOutlet weak var patchDisk_btn: NSButton!
-    
 
-    var enableUSB = Bool()
-    var disableBT2 = Bool()
-    var amdMouSSE = Bool()
-    var teleTrap = Bool()
-    var VerboseBoot = Bool()
-    var superDrive = Bool()
-    var appStoreMacOS = Bool()
-    var appleHDA = Bool()
-    var hdmiAudio = Bool()
-    var singleUser = Bool()
-    var legacyWiFi = Bool()
-    var installKCs = Bool()
-    var blessSystem = Bool()
-    var deleteSnaphots = Bool()
     var driv = String()
     
     var enableUSBtl = String()
@@ -150,6 +133,9 @@ class ViewController: NSViewController, URLSessionDelegate  {
         
         refreshPatchDisks()
     }
+    
+    
+
 }
 
 

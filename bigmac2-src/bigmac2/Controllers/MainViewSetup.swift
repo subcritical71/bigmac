@@ -8,6 +8,8 @@
 import Cocoa
 
 
+
+
 //MARK: Main View Setup
 extension ViewController {
     
@@ -15,6 +17,9 @@ extension ViewController {
     override func viewWillAppear() {
         super.viewDidAppear()
     
+        
+ 
+        
         progressBarDownload.doubleValue = 0 //set progressBar to 0 at star
         
         if NSUserName() == "root" {
@@ -32,8 +37,41 @@ extension ViewController {
         isSysVerbose     = defaults.bool(forKey: "isSysVerbose")
         isSysSingleUser  = defaults.bool(forKey: "isSysSingleUser")
         
-        isBaseSingleUser = singleUserCheckbox.state == .on
-        isBaseVerbose    = verboseUserCheckbox.state == .on
+        enableUSB       = defaults.bool(forKey: "enableUSB")
+        disableBT2      = defaults.bool(forKey: "disableBT2")
+        amdMouSSE       = defaults.bool(forKey: "amdMouSSE")
+        teleTrap        = defaults.bool(forKey: "teleTrap")
+        VerboseBoot     = defaults.bool(forKey: "VerboseBoot")
+        superDrive      = defaults.bool(forKey: "superDrive")
+        appStoreMacOS   = defaults.bool(forKey: "appStoreMacOS")
+        appleHDA        = defaults.bool(forKey: "appleHDA")
+        hdmiAudio       = defaults.bool(forKey: "hdmiAudio")
+        singleUser      = defaults.bool(forKey: "singleUser")
+        legacyWiFi      = defaults.bool(forKey: "legacyWiFi")
+        installKCs      = defaults.bool(forKey: "installKCs")
+        blessSystem     = defaults.bool(forKey: "blessSystem")
+        deleteSnaphots  = defaults.bool(forKey: "deleteSnaphots")
+        
+        isBaseSingleUser ? (singleUserCheckbox.state = .on) : (singleUserCheckbox.state = .off)
+        isBaseVerbose    ? (verboseUserCheckbox.state = .on) : (verboseUserCheckbox.state = .off)
+        
+        enableUSB       ? (enableUSB_btn.state = .on)       : (enableUSB_btn.state = .off)
+        disableBT2      ? (disableBT2_btn.state = .on)      : (disableBT2_btn.state = .off)
+        amdMouSSE       ? (amdMouSSE_btn.state = .on)       : (amdMouSSE_btn.state = .off)
+        teleTrap        ? (teleTrap_btn.state = .on)        : (teleTrap_btn.state = .off)
+        VerboseBoot     ? (VerboseBoot_btn.state = .on)     : (VerboseBoot_btn.state = .off)
+        superDrive      ? (superDrive_btn.state = .on)      : (superDrive_btn.state = .off)
+        appStoreMacOS   ? (appStoreMacOS_btn.state = .on)   : (appStoreMacOS_btn.state = .off)
+        appleHDA        ? (appleHDA_btn.state = .on)        : (appleHDA_btn.state = .off)
+        hdmiAudio       ? (hdmiAudio_btn.state = .on)       : (hdmiAudio_btn.state = .off)
+        singleUser      ? (singleUser_btn.state = .on)      : (singleUser_btn.state = .off)
+        legacyWiFi      ? (legacyWiFi_btn.state = .on)      : (legacyWiFi_btn.state = .off)
+        installKCs      ? (updateBootSysKCs.state = .on)    : (updateBootSysKCs.state = .off)
+        blessSystem     ? (BlessVolume.state = .on)         : (BlessVolume.state = .off)
+        deleteSnaphots  ? (deleteAPFSSnapshotsButton.state = .on) : (deleteAPFSSnapshotsButton.state = .off)
+
+        print(blessSystem)
+ 
     }
 }
 

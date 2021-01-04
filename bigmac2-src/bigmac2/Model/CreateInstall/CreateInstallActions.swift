@@ -18,6 +18,7 @@ extension ViewController {
     @IBAction func baseSingleUserAction(_ sender: Any) {
         singleUserCheckbox.state == .on ? (isBaseSingleUser = true) : (isBaseSingleUser = false)
     }
+ 
     
     @IBAction func downloadMacOSAction(_ sender: Any) {
         progressBarDownload.doubleValue = 0

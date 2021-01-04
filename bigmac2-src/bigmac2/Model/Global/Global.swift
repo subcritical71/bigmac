@@ -27,6 +27,21 @@ var ranHax3 = false
 
 var bootedToBaseOS = false
 
+var enableUSB = true
+var disableBT2 = true
+var amdMouSSE = true
+var teleTrap = true
+var VerboseBoot = false
+var superDrive = true
+var appStoreMacOS = true
+var appleHDA = true
+var hdmiAudio = false
+var singleUser = false
+var legacyWiFi = false
+var installKCs = true
+var blessSystem = true
+var deleteSnaphots = true
+
 //MARK: - VolumeInfo
 struct myVolumeInfo {
     var diskSlice, disk, displayName, volumeName, path, uuid: String

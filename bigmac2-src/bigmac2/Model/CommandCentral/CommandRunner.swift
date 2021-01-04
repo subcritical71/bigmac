@@ -112,10 +112,26 @@ extension ViewController {
        // }
     }
     
-    
+    //MARK: Pseudo Logger to estimate time stamp size
+    func fakeLogger(format: String, pname: String) -> String {
+        let fmt = DateFormatter()
+        fmt.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS.mmm.mmmm"
+        let timestamp = fmt.string(from: NSDate() as Date)
+
+        let pinfo = ProcessInfo()
+        let pid = pinfo.processIdentifier
+        var tid = UInt64(0)
+        pthread_threadid_np(nil, &tid)
+
+        return "\(timestamp) \(pname)[\(pid):\(tid)]"
+    }
     
     /* Run command in the background */
     func runIndeterminateProcess(binary: String, arguments: [String], title: String, sleepForHeadings: Bool = false) {
+        
+        //MARK: Used to get a count for kmutil prefix
+        ///Used to strip out time stamps from the GUI outout as it's not relevant and takes up a lot of real estate.
+        let pre = fakeLogger(format: "", pname: "kmutil").count
 
         DispatchQueue.main.async { [self] in
             postInstallTask_label.stringValue = title
@@ -167,11 +183,10 @@ extension ViewController {
                     else { return }
                 
                 DispatchQueue.main.async { [self] in
-                    
                     var fix = String(output2) as String
-                    fix = String(fix.prefix(54))
+                    fix = String(fix.prefix(pre))
                     let io = String(output2).deletingPrefix(fix)
-                    
+                                        
                     if !String(io).isEmpty && !String(io).contains("kmutil") && (String(io).contains("alidating") || String(io).contains("riting")) {
                         self.postInstallDetails_label.stringValue = io as String
                     }

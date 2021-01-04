@@ -813,7 +813,7 @@
                                                         <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qi3-pO-eUD">
                                                             <rect key="frame" x="153" y="57" width="294" height="18"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                            <levelIndicatorCell key="cell" alignment="left" doubleValue="7" maxValue="9" warningValue="6" criticalValue="3" numberOfMajorTickMarks="10" id="g8f-sV-Aat"/>
+                                                            <levelIndicatorCell key="cell" alignment="left" maxValue="9" warningValue="6" criticalValue="3" numberOfMajorTickMarks="10" id="g8f-sV-Aat"/>
                                                         </levelIndicator>
                                                         <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="egX-nd-j8s">
                                                             <rect key="frame" x="-7" y="50" width="155" height="32"/>
@@ -926,9 +926,6 @@
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
-                                                            <connections>
-                                                                <action selector="DisableSIP_Action:" target="XfG-lQ-9wD" id="FZU-kH-6T3"/>
-                                                            </connections>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2hw-ui-YuN">
                                                             <rect key="frame" x="-2" y="-1" width="194" height="18"/>
@@ -936,9 +933,6 @@
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
-                                                            <connections>
-                                                                <action selector="disableAuthRoot_action:" target="XfG-lQ-9wD" id="A8B-iH-T5h"/>
-                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <visibilityPriorities>
@@ -1032,6 +1026,9 @@ DQ
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
+                                                            <connections>
+                                                                <action selector="superDrive_act:" target="XfG-lQ-9wD" id="Ise-n3-aJd"/>
+                                                            </connections>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FId-UD-oKk">
                                                             <rect key="frame" x="-2" y="124" width="222" height="18"/>
@@ -1039,6 +1036,9 @@ DQ
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
+                                                            <connections>
+                                                                <action selector="appleHDA_act:" target="XfG-lQ-9wD" id="NqJ-DD-yFy"/>
+                                                            </connections>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="zIZ-bF-5RK">
                                                             <rect key="frame" x="-2" y="99" width="141" height="18"/>
@@ -1046,6 +1046,9 @@ DQ
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
+                                                            <connections>
+                                                                <action selector="hdmiAudio_act:" target="XfG-lQ-9wD" id="x6T-6J-vbd"/>
+                                                            </connections>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="JFS-1h-7p0">
                                                             <rect key="frame" x="-2" y="74" width="201" height="18"/>
@@ -1053,6 +1056,9 @@ DQ
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
+                                                            <connections>
+                                                                <action selector="appStoreMacOsDownloads_act:" target="XfG-lQ-9wD" id="S8W-QT-ceP"/>
+                                                            </connections>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="pqh-XV-YeT">
                                                             <rect key="frame" x="-2" y="49" width="169" height="18"/>
@@ -1060,6 +1066,9 @@ DQ
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
+                                                            <connections>
+                                                                <action selector="deleteApfsSnapshots_act:" target="XfG-lQ-9wD" id="SCc-d5-cKj"/>
+                                                            </connections>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Rxd-wm-kl7">
                                                             <rect key="frame" x="-2" y="24" width="156" height="18"/>
@@ -1067,6 +1076,9 @@ DQ
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
+                                                            <connections>
+                                                                <action selector="blessVolumeSetBoot_act:" target="XfG-lQ-9wD" id="uZi-dH-ogg"/>
+                                                            </connections>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="hG2-oA-ihQ">
                                                             <rect key="frame" x="-2" y="-1" width="205" height="18"/>
@@ -1074,6 +1086,9 @@ DQ
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
+                                                            <connections>
+                                                                <action selector="updateBootSystemKCs_act:" target="XfG-lQ-9wD" id="msD-42-FSv"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <visibilityPriorities>
@@ -1146,6 +1161,9 @@ DQ
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
+                                                            <connections>
+                                                                <action selector="legacyUSB_act:" target="XfG-lQ-9wD" id="AQC-VY-yQZ"/>
+                                                            </connections>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="0MJ-Iv-ywg">
                                                             <rect key="frame" x="-2" y="124" width="156" height="18"/>
@@ -1153,6 +1171,9 @@ DQ
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
+                                                            <connections>
+                                                                <action selector="disableBluetooth_act:" target="XfG-lQ-9wD" id="oIA-1C-5MN"/>
+                                                            </connections>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Rsm-39-Um6">
                                                             <rect key="frame" x="-2" y="99" width="150" height="18"/>
@@ -1160,13 +1181,19 @@ DQ
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
+                                                            <connections>
+                                                                <action selector="legacyWiFi_Action_act:" target="XfG-lQ-9wD" id="RC1-mI-iVh"/>
+                                                            </connections>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="W3i-15-mCO">
-                                                            <rect key="frame" x="-2" y="74" width="157" height="18"/>
-                                                            <buttonCell key="cell" type="check" title="AMD SSE4.2 MouSSE" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="FpY-HT-NK3">
+                                                            <rect key="frame" x="-2" y="74" width="187" height="18"/>
+                                                            <buttonCell key="cell" type="check" title="AMD GPU SSE4.2 MouSSE" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="FpY-HT-NK3">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
+                                                            <connections>
+                                                                <action selector="mouSSE_Action_act:" target="XfG-lQ-9wD" id="uaw-6d-oUp"/>
+                                                            </connections>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mAO-Pd-4vQ">
                                                             <rect key="frame" x="-2" y="49" width="188" height="18"/>
@@ -1174,6 +1201,9 @@ DQ
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
+                                                            <connections>
+                                                                <action selector="teleTrap_Action_act:" target="XfG-lQ-9wD" id="dog-he-nFc"/>
+                                                            </connections>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="vt6-hs-Whx">
                                                             <rect key="frame" x="-2" y="24" width="108" height="18"/>
@@ -1181,6 +1211,9 @@ DQ
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
+                                                            <connections>
+                                                                <action selector="verboseBoot_act:" target="XfG-lQ-9wD" id="Q1C-oK-95g"/>
+                                                            </connections>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="FwH-JD-Dhj">
                                                             <rect key="frame" x="-2" y="-1" width="128" height="18"/>
@@ -1188,6 +1221,9 @@ DQ
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
+                                                            <connections>
+                                                                <action selector="singleUser_act:" target="XfG-lQ-9wD" id="ykR-S0-UDq"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <visibilityPriorities>
@@ -1313,6 +1349,15 @@ DQ
                                                         <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                     </textFieldCell>
                                                 </textField>
+                                                <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="G4F-b5-6dO">
+                                                    <rect key="frame" x="210" y="312" width="87" height="14"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="bigmac2 Res X" id="6cM-vc-Rt7">
+                                                        <font key="font" metaFont="smallSystem"/>
+                                                        <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                                        <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    </textFieldCell>
+                                                </textField>
                                             </subviews>
                                         </view>
                                     </tabViewItem>
@@ -1365,7 +1410,6 @@ DQ
                         <outlet property="singleUserCheckbox" destination="LFa-gw-qF8" id="pYl-bX-baT"/>
                         <outlet property="singleUser_btn" destination="FwH-JD-Dhj" id="S4N-gT-Qry"/>
                         <outlet property="superDrive_btn" destination="VPt-hA-tNG" id="a4M-CW-nqM"/>
-                        <outlet property="tabViews" destination="9xa-nA-Rvh" id="1Ut-EJ-4k6"/>
                         <outlet property="teleTrap_btn" destination="mAO-Pd-4vQ" id="MXv-lD-zaa"/>
                         <outlet property="updateBootSysKCs" destination="hG2-oA-ihQ" id="zpY-It-kiu"/>
                         <outlet property="verboseUserCheckbox" destination="woR-0I-Jr3" id="Vbv-U2-Nyj"/>
