@@ -143,7 +143,7 @@ extension ViewController {
             incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, title: "Installing the Big Mac 2 App...")
             installTheApp(bigmac2: diskInfo)
             
-            if !fullDisk {
+            if fullDisk {
                 incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: false, title: "Installing the macOS 11 App...")
                 
                 //MARK: Step 7a
