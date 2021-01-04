@@ -66,7 +66,6 @@ class ViewController: NSViewController, URLSessionDelegate  {
     @IBOutlet weak var preInstallSpinner: NSProgressIndicator!
 
     //MARK: Tab Views
-    @IBOutlet weak var tabViews: NSTabView!
     @IBOutlet weak var downloadsTab: NSTabViewItem!
     @IBOutlet weak var preInstallTab: NSTabViewItem!
     @IBOutlet weak var postInstallTab: NSTabViewItem!
@@ -126,10 +125,9 @@ class ViewController: NSViewController, URLSessionDelegate  {
         bootedToBaseOS = checkForBaseOS()
         
         //MARK: Set Up and AI that knows what tab to do (checks for maybe an unpatch drive or 11.1 presence)
-        if ( bootedToBaseOS) {
-            tabViews.selectTabViewItem(preInstallTab)
-            tabViews.drawsBackground = false
-        }
+        //if ( !bootedToBaseOS) {
+           // tabViews.selectTabViewItem(preInstallTab)
+        //}
         
         refreshPatchDisks()
     }

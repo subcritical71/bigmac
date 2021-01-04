@@ -84,57 +84,57 @@ extension ViewController {
         
         if enableUSB {
             let kext = "IOHIDFamily.kext"
-            let pass = installKext(dest: dest, kext: kext, fold: slek, ttle: enableUSBtl)
+            _ = installKext(dest: dest, kext: kext, fold: slek, ttle: enableUSBtl)
         }
         
         if appleHDA {
             let kext = "AppleHDA.kext"
-            let pass = installKext(dest: dest, kext: kext, fold: slek, ttle: appleHDAtl)
+            _ = installKext(dest: dest, kext: kext, fold: slek, ttle: appleHDAtl)
         }
         
         if superDrive {
             let kext = "ioATAFamily.kext"
-            let pass = installKext(dest: dest, kext: kext, fold: slek, ttle: superDrivetl)
+            _ = installKext(dest: dest, kext: kext, fold: slek, ttle: superDrivetl)
         }
         
         indicatorBump(updateProgBar: true)
 
         if legacyWiFi {
             var kext = "IO80211Family.kext"
-            var pass = installKext(dest: dest, kext: kext, fold: slek, ttle: legacyWiFitl)
+            _  = installKext(dest: dest, kext: kext, fold: slek, ttle: legacyWiFitl)
             
             kext = "corecapture.kext"
-            pass = installKext(dest: dest, kext: kext, fold: slek, ttle: legacyWiFitl)
+            _ = installKext(dest: dest, kext: kext, fold: slek, ttle: legacyWiFitl)
         }
         
         if teleTrap {
             let kext = "telemetrap.kext"
-            var pass = installKext(dest: dest, kext: kext, fold: slek, ttle: teleTraptl)
+            _ = installKext(dest: dest, kext: kext, fold: slek, ttle: teleTraptl)
             
             let plug = "com.apple.telemetry.plugin"
-            pass = installKext(dest: dest, kext: plug, fold: uepi, ttle: teleTraptl)
+            _ = installKext(dest: dest, kext: plug, fold: uepi, ttle: teleTraptl)
         }
         
         if amdMouSSE {
             let kext = "AAAMouSSE.kext"
-            let pass = installKext(dest: dest, kext: kext, fold: lext, ttle: amdMouSSEtl)
+            _ = installKext(dest: dest, kext: kext, fold: lext, ttle: amdMouSSEtl)
         }
         
         indicatorBump(updateProgBar: true)
 
         if hdmiAudio {
             let kext = "HDMIAudio.kext"
-            let pass = installKext(dest: dest, kext: kext, fold: lext, ttle: hdmiAudiotl)
+            _ = installKext(dest: dest, kext: kext, fold: lext, ttle: hdmiAudiotl)
         }
         
         //SUVMMFaker
         if appStoreMacOS {
             let dlib = "SUVMMFaker.dylib"
-            var pass = installKext(dest: dest, kext: dlib, fold: ulib, ttle: appStoreMacOStl)
+            _ = installKext(dest: dest, kext: dlib, fold: ulib, ttle: appStoreMacOStl)
             
             let plst = "com.apple.softwareupdated.plist"
             let dmns = "System/Library/LaunchDaemons"
-            pass = installKext(dest: dest, kext: plst, fold: dmns)
+            _ = installKext(dest: dest, kext: plst, fold: dmns)
         }
         
         if disableBT2 {
@@ -142,7 +142,7 @@ extension ViewController {
             let list = "Info.plist"
             let prfx = "usb"
             
-            let pass = installKext(dest: dest, kext: list, fold: fold, prfx: prfx, ttle: disableBT2tl)
+            _ = installKext(dest: dest, kext: list, fold: fold, prfx: prfx, ttle: disableBT2tl)
         }
         
         indicatorBump(updateProgBar: true)
@@ -201,16 +201,17 @@ extension ViewController {
         
         if blessSystem {
             
-            if let app = appFolder  {
-                let bless = app.path + "/bless"
+           // if let app = appFolder  {
+                var bless = systemVolume.path + "/usr/sbin/bless"
                 var path = systemVolume.path + "/"
                 
                 if systemVolume.root {
+                    bless = systemVolume.path + "/usr/sbin/bless"
                     path = systemVolume.path
                 }
                 
                 runIndeterminateProcess(binary: bless, arguments: ["--folder", "\(path)System/Library/CoreServices" , "--bootefi", "--label", systemVolume.displayName, "--setBoot"], title: "Blessing System Volume \(systemVolume.displayName)", sleepForHeadings: true)
-            }
+           // }
         }
         
         indicatorBump(updateProgBar: true)

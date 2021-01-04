@@ -11,8 +11,6 @@
 		2D02E03525945BD000E8E1CF /* EraseDiskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D02E03425945BD000E8E1CF /* EraseDiskController.swift */; };
 		2D09EE40259C42C70054CF3A /* CreateInstallWorkflow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D09EE3F259C42C70054CF3A /* CreateInstallWorkflow.swift */; };
 		2D09EE43259C432C0054CF3A /* CreateInstallTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D09EE42259C432C0054CF3A /* CreateInstallTasks.swift */; };
-		2D19F125259EB89000AE82CE /* lax in Resources */ = {isa = PBXBuildFile; fileRef = 2D19F124259EB89000AE82CE /* lax */; };
-		2D19F128259EB89600AE82CE /* lax.sh in Resources */ = {isa = PBXBuildFile; fileRef = 2D19F127259EB89600AE82CE /* lax.sh */; };
 		2D1A32A3258D959D009DCDFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1A32A2258D959D009DCDFD /* AppDelegate.swift */; };
 		2D1A32A5258D959D009DCDFD /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1A32A4258D959D009DCDFD /* MainViewController.swift */; };
 		2D1A32A7258D959E009DCDFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D1A32A6258D959E009DCDFD /* Assets.xcassets */; };
@@ -20,38 +18,19 @@
 		2D23BF64258EA04B0019BD90 /* CommandRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D23BF63258EA04B0019BD90 /* CommandRunner.swift */; };
 		2D2E4E1E259C03930088999C /* FileWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2E4E1D259C03930088999C /* FileWriter.swift */; };
 		2D3E60F2259CFC6000DE6488 /* ParseBootArgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3E60F1259CFC6000DE6488 /* ParseBootArgs.swift */; };
-		2D3E60F7259D113D00DE6488 /* HaxDoNotSealNoAPFSROMCheck.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 2D7BFCAB259AD97D00E460CE /* HaxDoNotSealNoAPFSROMCheck.dylib */; };
 		2D3E60FE259D430C00DE6488 /* MainViewSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3E60FD259D430C00DE6488 /* MainViewSetup.swift */; };
-		2D728AC0259D77D100F886DF /* Utilities.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D728ABF259D77D100F886DF /* Utilities.plist */; };
 		2D7787EF258F0BC700305EC3 /* CredsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7787EE258F0BC700305EC3 /* CredsViewController.swift */; };
 		2D7787F2258F0CD500305EC3 /* Global.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7787F1258F0CD500305EC3 /* Global.swift */; };
-		2D83CE4C259E4BD100808757 /* bm2.sh in Resources */ = {isa = PBXBuildFile; fileRef = 2D83CE4B259E4BD100808757 /* bm2.sh */; };
-		2D83CE4F259E4D6300808757 /* bm2 in Resources */ = {isa = PBXBuildFile; fileRef = 2D83CE4E259E4D6300808757 /* bm2 */; };
 		2D8630FE25A234D3006DDFFC /* PostInstallWorkflow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D8630FD25A234D3006DDFFC /* PostInstallWorkflow.swift */; };
 		2D993A66258DCA79003A5553 /* FileDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D993A65258DCA79003A5553 /* FileDownloader.swift */; };
 		2D99C49A259F27210035669B /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D99C499259F27210035669B /* Utilities.swift */; };
 		2D99C49D259F2D280035669B /* PostInstallActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D99C49C259F2D280035669B /* PostInstallActions.swift */; };
-		2D99C4FC259F9B830035669B /* IOATAFamily.kext in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C4F5259F9B7F0035669B /* IOATAFamily.kext */; };
-		2D99C4FD259F9B830035669B /* IOHIDFamily.kext in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C4F6259F9B800035669B /* IOHIDFamily.kext */; };
-		2D99C4FE259F9B830035669B /* corecapture.kext in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C4F7259F9B800035669B /* corecapture.kext */; };
-		2D99C4FF259F9B830035669B /* usbInfo.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C4F8259F9B800035669B /* usbInfo.plist */; };
-		2D99C500259F9B830035669B /* IO80211Family.kext in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C4F9259F9B810035669B /* IO80211Family.kext */; };
-		2D99C501259F9B830035669B /* AppleHDA.kext in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C4FA259F9B820035669B /* AppleHDA.kext */; };
-		2D99C502259F9B830035669B /* com.apple.telemetry.plugin in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C4FB259F9B830035669B /* com.apple.telemetry.plugin */; };
-		2D99C506259F9BD00035669B /* build.sh in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C504259F9BD00035669B /* build.sh */; };
-		2D99C50A259F9BE70035669B /* HDMIAudio.kext in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C509259F9BE70035669B /* HDMIAudio.kext */; };
-		2D99C50F259F9C570035669B /* com.apple.softwareupdated.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C50D259F9C570035669B /* com.apple.softwareupdated.plist */; };
-		2D99C516259F9CDF0035669B /* AAAMouSSE.kext in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C512259F9CDF0035669B /* AAAMouSSE.kext */; };
-		2D99C517259F9CDF0035669B /* AAAMouSEE_README.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C513259F9CDF0035669B /* AAAMouSEE_README.txt */; };
-		2D99C518259F9CDF0035669B /* telemetrap.kext in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C514259F9CDF0035669B /* telemetrap.kext */; };
-		2D99C520259FA17A0035669B /* bless in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C51F259FA17A0035669B /* bless */; };
-		2D9BB500259EAB0C007DE72A /* RDM.app in Resources */ = {isa = PBXBuildFile; fileRef = 2D9BB4FF259EAB0C007DE72A /* RDM.app */; };
 		2D9BB503259EAC96007DE72A /* PreInstallActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9BB502259EAC96007DE72A /* PreInstallActions.swift */; };
 		2DAFF44C259AB7ED00D48E20 /* CreateInstallActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAFF44B259AB7ED00D48E20 /* CreateInstallActions.swift */; };
 		2DAFF44F259AB8A100D48E20 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAFF44E259AB8A100D48E20 /* Notifications.swift */; };
-		2DCB3EC2259FFDD5004FF0AB /* SUVMMFaker.dylib in Resources */ = {isa = PBXBuildFile; fileRef = 2D99C50C259F9C570035669B /* SUVMMFaker.dylib */; };
 		2DE42E3D25918F56005E10C6 /* CreateInstallHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE42E3C25918F56005E10C6 /* CreateInstallHelpers.swift */; };
-		2DF9BAA5259420BF0023C6B0 /* bm2tmp0.dmg in Resources */ = {isa = PBXBuildFile; fileRef = 2DF9BAA4259420BF0023C6B0 /* bm2tmp0.dmg */; };
+		2DFE54FB25A2D7D500BE3AA0 /* bm2 in Resources */ = {isa = PBXBuildFile; fileRef = 2DFE54FA25A2D7D500BE3AA0 /* bm2 */; };
+		2DFE54FE25A2D7DE00BE3AA0 /* lax in Resources */ = {isa = PBXBuildFile; fileRef = 2DFE54FD25A2D7DE00BE3AA0 /* lax */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -59,8 +38,6 @@
 		2D02E03425945BD000E8E1CF /* EraseDiskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EraseDiskController.swift; sourceTree = "<group>"; };
 		2D09EE3F259C42C70054CF3A /* CreateInstallWorkflow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInstallWorkflow.swift; sourceTree = "<group>"; };
 		2D09EE42259C432C0054CF3A /* CreateInstallTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInstallTasks.swift; sourceTree = "<group>"; };
-		2D19F124259EB89000AE82CE /* lax */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = lax; sourceTree = "<group>"; };
-		2D19F127259EB89600AE82CE /* lax.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = lax.sh; sourceTree = "<group>"; };
 		2D1A329F258D959D009DCDFD /* bigmac2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bigmac2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D1A32A2258D959D009DCDFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2D1A32A4258D959D009DCDFD /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -71,38 +48,21 @@
 		2D2E4E1D259C03930088999C /* FileWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWriter.swift; sourceTree = "<group>"; };
 		2D3E60F1259CFC6000DE6488 /* ParseBootArgs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseBootArgs.swift; sourceTree = "<group>"; };
 		2D3E60FD259D430C00DE6488 /* MainViewSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewSetup.swift; sourceTree = "<group>"; };
-		2D728ABF259D77D100F886DF /* Utilities.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Utilities.plist; sourceTree = "<group>"; };
+		2D522BA825A2E1DF00E25780 /* bigdata.dmg */ = {isa = PBXFileReference; lastKnownFileType = file; path = bigdata.dmg; sourceTree = "<group>"; };
+		2D522BA925A2E20000E25780 /* bm2tmp0.dmg */ = {isa = PBXFileReference; lastKnownFileType = file; path = bm2tmp0.dmg; sourceTree = "<group>"; };
 		2D7787EE258F0BC700305EC3 /* CredsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CredsViewController.swift; sourceTree = "<group>"; };
 		2D7787F1258F0CD500305EC3 /* Global.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Global.swift; sourceTree = "<group>"; };
-		2D7BFCAB259AD97D00E460CE /* HaxDoNotSealNoAPFSROMCheck.dylib */ = {isa = PBXFileReference; explicitFileType = compiled; path = HaxDoNotSealNoAPFSROMCheck.dylib; sourceTree = "<group>"; };
-		2D83CE4B259E4BD100808757 /* bm2.sh */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = bm2.sh; sourceTree = "<group>"; };
-		2D83CE4E259E4D6300808757 /* bm2 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = bm2; sourceTree = "<group>"; };
 		2D8630FD25A234D3006DDFFC /* PostInstallWorkflow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInstallWorkflow.swift; sourceTree = "<group>"; };
 		2D993A63258DC0AC003A5553 /* bigmac2.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = bigmac2.entitlements; sourceTree = "<group>"; };
 		2D993A65258DCA79003A5553 /* FileDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileDownloader.swift; sourceTree = "<group>"; };
 		2D99C499259F27210035669B /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		2D99C49C259F2D280035669B /* PostInstallActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInstallActions.swift; sourceTree = "<group>"; };
-		2D99C4F5259F9B7F0035669B /* IOATAFamily.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; path = IOATAFamily.kext; sourceTree = "<group>"; };
-		2D99C4F6259F9B800035669B /* IOHIDFamily.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; path = IOHIDFamily.kext; sourceTree = "<group>"; };
-		2D99C4F7259F9B800035669B /* corecapture.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; path = corecapture.kext; sourceTree = "<group>"; };
-		2D99C4F8259F9B800035669B /* usbInfo.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = usbInfo.plist; sourceTree = "<group>"; };
-		2D99C4F9259F9B810035669B /* IO80211Family.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; path = IO80211Family.kext; sourceTree = "<group>"; };
-		2D99C4FA259F9B820035669B /* AppleHDA.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; path = AppleHDA.kext; sourceTree = "<group>"; };
-		2D99C4FB259F9B830035669B /* com.apple.telemetry.plugin */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = com.apple.telemetry.plugin; sourceTree = "<group>"; };
-		2D99C504259F9BD00035669B /* build.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = build.sh; sourceTree = "<group>"; };
-		2D99C509259F9BE70035669B /* HDMIAudio.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; path = HDMIAudio.kext; sourceTree = "<group>"; };
-		2D99C50C259F9C570035669B /* SUVMMFaker.dylib */ = {isa = PBXFileReference; explicitFileType = compiled; path = SUVMMFaker.dylib; sourceTree = "<group>"; };
-		2D99C50D259F9C570035669B /* com.apple.softwareupdated.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = com.apple.softwareupdated.plist; sourceTree = "<group>"; };
-		2D99C512259F9CDF0035669B /* AAAMouSSE.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; path = AAAMouSSE.kext; sourceTree = "<group>"; };
-		2D99C513259F9CDF0035669B /* AAAMouSEE_README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = AAAMouSEE_README.txt; sourceTree = "<group>"; };
-		2D99C514259F9CDF0035669B /* telemetrap.kext */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.kernel-extension"; path = telemetrap.kext; sourceTree = "<group>"; };
-		2D99C51F259FA17A0035669B /* bless */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = bless; sourceTree = "<group>"; };
-		2D9BB4FF259EAB0C007DE72A /* RDM.app */ = {isa = PBXFileReference; lastKnownFileType = wrapper.application; path = RDM.app; sourceTree = "<group>"; };
 		2D9BB502259EAC96007DE72A /* PreInstallActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreInstallActions.swift; sourceTree = "<group>"; };
 		2DAFF44B259AB7ED00D48E20 /* CreateInstallActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInstallActions.swift; sourceTree = "<group>"; };
 		2DAFF44E259AB8A100D48E20 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = Notifications.swift; path = bigmac2/Model/CommandCentral/Notifications.swift; sourceTree = SOURCE_ROOT; };
 		2DE42E3C25918F56005E10C6 /* CreateInstallHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInstallHelpers.swift; sourceTree = "<group>"; };
-		2DF9BAA4259420BF0023C6B0 /* bm2tmp0.dmg */ = {isa = PBXFileReference; lastKnownFileType = file; path = bm2tmp0.dmg; sourceTree = "<group>"; };
+		2DFE54FA25A2D7D500BE3AA0 /* bm2 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = bm2; sourceTree = "<group>"; };
+		2DFE54FD25A2D7DE00BE3AA0 /* lax */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = lax; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,29 +142,10 @@
 		2D538EFD259008730066D908 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				2D99C51F259FA17A0035669B /* bless */,
-				2D99C513259F9CDF0035669B /* AAAMouSEE_README.txt */,
-				2D99C512259F9CDF0035669B /* AAAMouSSE.kext */,
-				2D99C514259F9CDF0035669B /* telemetrap.kext */,
-				2D99C50D259F9C570035669B /* com.apple.softwareupdated.plist */,
-				2D99C50C259F9C570035669B /* SUVMMFaker.dylib */,
-				2D99C509259F9BE70035669B /* HDMIAudio.kext */,
-				2D99C504259F9BD00035669B /* build.sh */,
-				2D99C4FA259F9B820035669B /* AppleHDA.kext */,
-				2D99C4FB259F9B830035669B /* com.apple.telemetry.plugin */,
-				2D99C4F7259F9B800035669B /* corecapture.kext */,
-				2D99C4F9259F9B810035669B /* IO80211Family.kext */,
-				2D99C4F5259F9B7F0035669B /* IOATAFamily.kext */,
-				2D99C4F6259F9B800035669B /* IOHIDFamily.kext */,
-				2D99C4F8259F9B800035669B /* usbInfo.plist */,
-				2D9BB4FF259EAB0C007DE72A /* RDM.app */,
-				2D7BFCAB259AD97D00E460CE /* HaxDoNotSealNoAPFSROMCheck.dylib */,
-				2DF9BAA4259420BF0023C6B0 /* bm2tmp0.dmg */,
-				2D728ABF259D77D100F886DF /* Utilities.plist */,
-				2D83CE4B259E4BD100808757 /* bm2.sh */,
-				2D83CE4E259E4D6300808757 /* bm2 */,
-				2D19F127259EB89600AE82CE /* lax.sh */,
-				2D19F124259EB89000AE82CE /* lax */,
+				2D522BA925A2E20000E25780 /* bm2tmp0.dmg */,
+				2D522BA825A2E1DF00E25780 /* bigdata.dmg */,
+				2DFE54FA25A2D7D500BE3AA0 /* bm2 */,
+				2DFE54FD25A2D7DE00BE3AA0 /* lax */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -320,31 +261,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2D99C501259F9B830035669B /* AppleHDA.kext in Resources */,
-				2D99C4FC259F9B830035669B /* IOATAFamily.kext in Resources */,
-				2D19F128259EB89600AE82CE /* lax.sh in Resources */,
-				2D99C517259F9CDF0035669B /* AAAMouSEE_README.txt in Resources */,
-				2D83CE4F259E4D6300808757 /* bm2 in Resources */,
-				2D99C4FD259F9B830035669B /* IOHIDFamily.kext in Resources */,
-				2D83CE4C259E4BD100808757 /* bm2.sh in Resources */,
+				2DFE54FE25A2D7DE00BE3AA0 /* lax in Resources */,
+				2DFE54FB25A2D7D500BE3AA0 /* bm2 in Resources */,
 				2D1A32A7258D959E009DCDFD /* Assets.xcassets in Resources */,
-				2D728AC0259D77D100F886DF /* Utilities.plist in Resources */,
-				2D99C506259F9BD00035669B /* build.sh in Resources */,
-				2DF9BAA5259420BF0023C6B0 /* bm2tmp0.dmg in Resources */,
-				2D99C518259F9CDF0035669B /* telemetrap.kext in Resources */,
-				2D99C500259F9B830035669B /* IO80211Family.kext in Resources */,
-				2D19F125259EB89000AE82CE /* lax in Resources */,
-				2DCB3EC2259FFDD5004FF0AB /* SUVMMFaker.dylib in Resources */,
 				2D1A32AA258D959E009DCDFD /* Main.storyboard in Resources */,
-				2D99C520259FA17A0035669B /* bless in Resources */,
-				2D99C516259F9CDF0035669B /* AAAMouSSE.kext in Resources */,
-				2D99C50F259F9C570035669B /* com.apple.softwareupdated.plist in Resources */,
-				2D99C50A259F9BE70035669B /* HDMIAudio.kext in Resources */,
-				2D99C4FE259F9B830035669B /* corecapture.kext in Resources */,
-				2D9BB500259EAB0C007DE72A /* RDM.app in Resources */,
-				2D99C4FF259F9B830035669B /* usbInfo.plist in Resources */,
-				2D99C502259F9B830035669B /* com.apple.telemetry.plugin in Resources */,
-				2D3E60F7259D113D00DE6488 /* HaxDoNotSealNoAPFSROMCheck.dylib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,119 +315,14 @@
 		2D1A32AD258D959E009DCDFD /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = dwarf;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_TESTABILITY = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
-				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Debug;
 		};
 		2D1A32AE258D959E009DCDFD /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				ARCHS = "$(ARCHS_STANDARD)";
-				CLANG_ANALYZER_NONNULL = YES;
-				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_ENABLE_OBJC_WEAK = YES;
-				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_COMMA = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
-				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INFINITE_RECURSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
-				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
-				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
-				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
-				CLANG_WARN_STRICT_PROTOTYPES = YES;
-				CLANG_WARN_SUSPICIOUS_MOVE = YES;
-				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				ENABLE_NS_ASSERTIONS = NO;
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_C_LANGUAGE_STANDARD = gnu11;
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_OPTIMIZATION_LEVEL = fast;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				MTL_FAST_MATH = YES;
-				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
 		};
@@ -519,10 +334,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = bigmac2/bigmac2.entitlements;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = bigmac2/Info.plist;
@@ -530,8 +345,12 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Resources/data",
+				);
 				MARKETING_VERSION = 2.0;
+				OTHER_LDFLAGS = "-mmacosx-version-min=10.13";
 				PRODUCT_BUNDLE_IDENTIFIER = com.starplayrx.bigmac2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -547,10 +366,10 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = bigmac2/bigmac2.entitlements;
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 7;
+				CURRENT_PROJECT_VERSION = 8;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = bigmac2/Info.plist;
@@ -558,10 +377,15 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Resources/data",
+				);
 				MARKETING_VERSION = 2.0;
+				OTHER_LDFLAGS = "-mmacosx-version-min=10.13";
 				PRODUCT_BUNDLE_IDENTIFIER = com.starplayrx.bigmac2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
