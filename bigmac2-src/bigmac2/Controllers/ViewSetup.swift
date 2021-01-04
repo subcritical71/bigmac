@@ -17,9 +17,6 @@ extension ViewController {
     override func viewWillAppear() {
         super.viewDidAppear()
     
-        
- 
-        
         progressBarDownload.doubleValue = 0 //set progressBar to 0 at star
         
         if NSUserName() == "root" {
@@ -75,28 +72,6 @@ extension ViewController {
     }
 }
 
-class MainViewController : NSWindowController {
-    
-    override func windowDidLoad() {
-        _ = performAppleScript(script: "tell me to activate")
-        shouldCascadeWindows = false
-
-        if NSUserName() == "root" {
-            window?.setFrameAutosaveName("bigMacMainView")
-        } else {
-            window?.alphaValue = 0.0
-            window?.setFrameAutosaveName("") // don't save window position if it's not the root user. Otherwise things get weird
-        }
-        
-        super.windowDidLoad()
-        window?.titlebarAppearsTransparent = true
-        window?.styleMask.insert(NSWindow.StyleMask.fullSizeContentView)
-        window?.title = "🍔 Big Mac 2.0"
-        window?.level = .normal
-
-    }
-    
-}
 
 
 

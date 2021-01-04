@@ -128,13 +128,17 @@ class ViewController: NSViewController, URLSessionDelegate  {
         //if ( !bootedToBaseOS) {
            // tabViews.selectTabViewItem(preInstallTab)
         //}
-        
+        print("1")
         refreshPatchDisks()
     }
-    
-    
 
 }
+
+
+
+
+
+
 
 
 //No need for this yet
