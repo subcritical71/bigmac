@@ -1,5 +1,7 @@
 # 🍔 bigmac2
 
+### This software is not yet ready for a release.
+
 Big Sur macOS 11 Mac Pro patcher (in the works)
 
 # 🍟 coming soon
