@@ -7,20 +7,6 @@
 
 import Cocoa
 
-// MARK: - System Info code
-struct systemInfoCodable: Codable {
-    let productVersion, productBuildVersion, productCopyright, productName: String
-    let iOSSupportVersion, productUserVisibleVersion: String
-    
-    enum CodingKeys: String, CodingKey {
-        case productVersion = "ProductVersion"
-        case productBuildVersion = "ProductBuildVersion"
-        case productCopyright = "ProductCopyright"
-        case productName = "ProductName"
-        case iOSSupportVersion
-        case productUserVisibleVersion = "ProductUserVisibleVersion"
-    }
-}
 
 extension ViewController {
     
@@ -50,10 +36,10 @@ extension ViewController {
     
     func disableSetResXButtonsCheck() {
         if !fm.fileExists(atPath: setResX) {
-            LowRes_720.isHidden = true
-            HiRes_720.isHidden = true
-            LowRes_1080.isHidden = true
-            HiRes_1080.isHidden = true
+            LowRes_720.isEnabled = false
+            HiRes_720.isEnabled = false
+            LowRes_1080.isEnabled = false
+            HiRes_1080.isEnabled = false
         }
     }
     
@@ -275,12 +261,12 @@ extension ViewController {
                 if !isBaseSystem {
                     try? fm.removeItem(atPath: "\(system.path)Library/Preferences/SystemConfiguration/\(bootPlist)")
                     try? fm.removeItem(atPath: "\(system.path)System/Volumes/Preboot/\(dataVolumeUUID)/Library/Preferences/SystemConfiguration/\(bootPlist)")
-                    try? fm.removeItem(atPath: "\(system.path)System/Volumes/Preboot/\(dataVolumeUUID)/System/Library/CoreServices/\(platformPlist)")
-                    try? fm.removeItem(atPath: "\(system.path)System/Volumes/Preboot/\(dataVolumeUUID)/restore/\(buildManifestPlist)")
+                    try? fm.removeItem(atPath: "\(system.path)System/Volumes/Preboot/\(dataVolumeUUID)/System/Library/CoreServices/\(platformPlist)") //Causes more trouble
+                    try? fm.removeItem(atPath: "\(system.path)System/Volumes/Preboot/\(dataVolumeUUID)/restore/\(buildManifestPlist)") //Causes more trouble
                 }
                 
                 try? fm.removeItem(atPath: "\(system.path)System/Library/Templates/Data/Library/Preferences/SystemConfiguration/\(bootPlist)")
-                try? fm.removeItem(atPath: "\(system.path)System/Library/CoreServices/\(platformPlist)")
+                try? fm.removeItem(atPath: "\(system.path)System/Library/CoreServices/\(platformPlist)") //Causes more trouble
 
             } else {
                 if !isBaseSystem {
@@ -288,13 +274,13 @@ extension ViewController {
                 }
                 
                 try? fm.removeItem(atPath: "\(system.path)/System/Library/Templates/Data/Library/Preferences/SystemConfiguration/\(bootPlist)")
-                try? fm.removeItem(atPath: "\(system.path)/System/Library/CoreServices/\(platformPlist)")
+                try? fm.removeItem(atPath: "\(system.path)/System/Library/CoreServices/\(platformPlist)") //Causes more trouble
                 try? fm.removeItem(atPath: "\(prebootPath)/\(dataVolumeUUID)/Library/Preferences/SystemConfiguration/\(bootPlist)")
-                try? fm.removeItem(atPath: "\(prebootPath)/\(dataVolumeUUID)/System/Library/CoreServices/\(platformPlist)")
-                try? fm.removeItem(atPath: "\(prebootPath)/\(dataVolumeUUID)/restore/\(buildManifestPlist)")
+                try? fm.removeItem(atPath: "\(prebootPath)/\(dataVolumeUUID)/System/Library/CoreServices/\(platformPlist)") //Causes more trouble
+                try? fm.removeItem(atPath: "\(prebootPath)/\(dataVolumeUUID)/restore/\(buildManifestPlist)") //Causes more trouble
             }
             
-            //MARK: Write Items
+            //MARK: write boot plist items back
             if system.root {
                 
                 if !isBaseSystem {
@@ -303,10 +289,6 @@ extension ViewController {
                 
                 txt2file(text: bootPlistTxt, file:  "\(system.path)System/Library/Templates/Data/Library/Preferences/SystemConfiguration/\(bootPlist)")
                 txt2file(text: bootPlistTxt, file:  "\(system.path)System/Volumes/Preboot/\(dataVolumeUUID)/Library/Preferences/SystemConfiguration/\(bootPlist)")
-                try? fm.copyItem(atPath: "/\(appFolderPath)/\(platformPlist)",       toPath: "\(system.path)System/Library/CoreServices/\(platformPlist)")
-                try? fm.copyItem(atPath: "/\(appFolderPath)/\(platformPlist)",       toPath: "\(prebootPath)/\(dataVolumeUUID)/System/Library/CoreServices/\(platformPlist)")
-                try? fm.copyItem(atPath: "/\(appFolderPath)/\(buildManifestPlist)",  toPath: "\(prebootPath)/\(dataVolumeUUID)/restore/\(buildManifestPlist)")
-                
             } else {
                 
                 if !isBaseSystem {
@@ -315,10 +297,7 @@ extension ViewController {
                 
                 txt2file(text: bootPlistTxt, file:  "\(system.path)/System/Library/Templates/Data/Library/Preferences/SystemConfiguration/\(bootPlist)")
                 txt2file(text: bootPlistTxt, file:  "\(prebootPath)/\(dataVolumeUUID)/Library/Preferences/SystemConfiguration/\(bootPlist)")
-
-                try? fm.copyItem(atPath: "/\(appFolderPath)/\(platformPlist)",       toPath: "\(system.path)/System/Library/CoreServices/\(platformPlist)")
-                try? fm.copyItem(atPath: "/\(appFolderPath)/\(platformPlist)",       toPath: "\(prebootPath)/\(dataVolumeUUID)/System/Library/CoreServices/\(platformPlist)")
-                try? fm.copyItem(atPath: "/\(appFolderPath)/\(buildManifestPlist)",  toPath: "\(prebootPath)/\(dataVolumeUUID)/restore/\(buildManifestPlist)")
+                
             }
             
             forceUnmounts()

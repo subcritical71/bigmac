@@ -71,13 +71,12 @@ class ViewController: NSViewController, URLSessionDelegate  {
     @IBOutlet weak var downloadsTab: NSTabViewItem!
     @IBOutlet weak var preInstallTab: NSTabViewItem!
     @IBOutlet weak var postInstallTab: NSTabViewItem!
-    @IBOutlet weak var cloneToolTab: NSTabViewItem!
     
     //MARK: Screen Res Switching
-    @IBOutlet weak var HiRes_1080: NSButton!
+    @IBOutlet weak var LowRes_720: NSButton!
     @IBOutlet weak var LowRes_1080: NSButton!
     @IBOutlet weak var HiRes_720: NSButton!
-    @IBOutlet weak var LowRes_720: NSButton!
+    @IBOutlet weak var HiRes_1080: NSButton!
     
     //MARK: Postinstall Tab
     @IBOutlet weak var enableUSB_btn: NSButton!

@@ -772,7 +772,7 @@
                                                     </subviews>
                                                 </customView>
                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eee-m6-Zf6">
-                                                    <rect key="frame" x="18" y="174" width="471" height="77"/>
+                                                    <rect key="frame" x="18" y="176" width="471" height="77"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <progressIndicator fixedFrame="YES" maxValue="100" indeterminate="YES" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="MkA-uU-q1I">
@@ -861,7 +861,7 @@
                                                     </subviews>
                                                 </customView>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ahL-hY-ZTg">
-                                                    <rect key="frame" x="16" y="142" width="135" height="16"/>
+                                                    <rect key="frame" x="16" y="145" width="135" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Installer Boot Options" id="IVF-7J-YYB">
                                                         <font key="font" metaFont="system"/>
@@ -1229,12 +1229,12 @@ DQ
                                             <rect key="frame" x="10" y="33" width="506" height="334"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
-                                                <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="14" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7u5-WS-sWl">
-                                                    <rect key="frame" x="51" y="284" width="404" height="20"/>
+                                                <stackView distribution="fill" orientation="horizontal" alignment="centerY" spacing="19" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="7u5-WS-sWl">
+                                                    <rect key="frame" x="51" y="284" width="403" height="20"/>
                                                     <subviews>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ZKg-uq-kj7">
-                                                            <rect key="frame" x="-7" y="-7" width="106" height="32"/>
-                                                            <buttonCell key="cell" type="push" title="LoRes 720p" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EeA-ty-f0n">
+                                                            <rect key="frame" x="-7" y="-7" width="98" height="32"/>
+                                                            <buttonCell key="cell" type="push" title="LoRes 720" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EeA-ty-f0n">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
@@ -1243,7 +1243,7 @@ DQ
                                                             </connections>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="q9s-ft-hyY">
-                                                            <rect key="frame" x="99" y="-7" width="105" height="32"/>
+                                                            <rect key="frame" x="96" y="-7" width="105" height="32"/>
                                                             <buttonCell key="cell" type="push" title="LoRes 1080" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Qv7-bW-E99">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
@@ -1256,8 +1256,8 @@ DQ
                                                             </connections>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="OZM-v9-diM">
-                                                            <rect key="frame" x="204" y="-7" width="104" height="32"/>
-                                                            <buttonCell key="cell" type="push" title="HiRes 720p" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="SbZ-KL-SKX">
+                                                            <rect key="frame" x="206" y="-7" width="96" height="32"/>
+                                                            <buttonCell key="cell" type="push" title="HiRes 720" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="SbZ-KL-SKX">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
@@ -1266,7 +1266,7 @@ DQ
                                                             </connections>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="tyJ-MQ-GFN">
-                                                            <rect key="frame" x="308" y="-7" width="103" height="32"/>
+                                                            <rect key="frame" x="307" y="-7" width="103" height="32"/>
                                                             <buttonCell key="cell" type="push" title="HiRes 1080" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="EaW-gM-veN">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
@@ -1319,6 +1319,10 @@ DQ
                         <outlet property="DisableAuthRoot" destination="2hw-ui-YuN" id="V2Y-eh-QCe"/>
                         <outlet property="DisableLibraryValidation" destination="DYc-Ys-UxX" id="US9-Ta-lWL"/>
                         <outlet property="DisableSIP" destination="M0Z-5v-afG" id="lSN-cb-V6u"/>
+                        <outlet property="HiRes_1080" destination="tyJ-MQ-GFN" id="64S-be-hW5"/>
+                        <outlet property="HiRes_720" destination="OZM-v9-diM" id="MhO-av-I8U"/>
+                        <outlet property="LowRes_1080" destination="q9s-ft-hyY" id="QxG-TF-Pgi"/>
+                        <outlet property="LowRes_720" destination="ZKg-uq-kj7" id="wD3-tw-4No"/>
                         <outlet property="VerboseBoot_btn" destination="vt6-hs-Whx" id="JgZ-h7-sbw"/>
                         <outlet property="amdMouSSE_btn" destination="W3i-15-mCO" id="dpk-8K-l4h"/>
                         <outlet property="appStoreMacOS_btn" destination="JFS-1h-7p0" id="rmc-15-LyP"/>

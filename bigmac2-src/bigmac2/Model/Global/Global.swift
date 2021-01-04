@@ -27,8 +27,7 @@ var ranHax3 = false
 
 var bootedToBaseOS = false
 
-//typealias myVolumeInfo = (diskSlice: String, disk: String, name: String, path: String, external: Bool, uuid: String)
-
+//MARK: - VolumeInfo
 struct myVolumeInfo {
     var diskSlice, disk, displayName, volumeName, path, uuid: String
     var external, root: Bool
@@ -59,6 +58,18 @@ struct Snapshot: Codable {
     }
 }
 
-
-
+// MARK: - System Info code
+struct systemInfoCodable: Codable {
+    let productVersion, productBuildVersion, productCopyright, productName: String
+    let iOSSupportVersion, productUserVisibleVersion: String
+    
+    enum CodingKeys: String, CodingKey {
+        case productVersion = "ProductVersion"
+        case productBuildVersion = "ProductBuildVersion"
+        case productCopyright = "ProductCopyright"
+        case productName = "ProductName"
+        case iOSSupportVersion
+        case productUserVisibleVersion = "ProductUserVisibleVersion"
+    }
+}
 
