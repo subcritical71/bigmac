@@ -926,6 +926,9 @@
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
+                                                            <connections>
+                                                                <action selector="DisableSIP_Action:" target="XfG-lQ-9wD" id="FZU-kH-6T3"/>
+                                                            </connections>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2hw-ui-YuN">
                                                             <rect key="frame" x="-2" y="-1" width="194" height="18"/>
@@ -933,6 +936,9 @@
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
+                                                            <connections>
+                                                                <action selector="disableAuthRoot_action:" target="XfG-lQ-9wD" id="A8B-iH-T5h"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <visibilityPriorities>

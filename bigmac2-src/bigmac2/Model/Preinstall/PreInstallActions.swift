@@ -26,6 +26,16 @@ extension ViewController {
                 _ = runCommandReturnString(binary: "/usr/bin/defaults" , arguments: ["write", "/Library/Preferences/com.apple.security.libraryvalidation.plist", "DisableLibraryValidation", "-bool", "true"]) ?? ""
             }
             
+            //MARK: Disable SIP
+            if SIP {
+                _ = runCommandReturnString(binary: "/usr/bin/csrutil" , arguments: ["disable"]) ?? ""
+            }
+            
+            //MARK: Disable AR
+            if AR {
+                _ = runCommandReturnString(binary: "/usr/bin/csrutil" , arguments: ["authenticated-root", "disable"]) ?? ""
+            }
+            
             let installAsstBaseOS = "/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
             let installAsstFullOS = "/Volumes/bigmac2/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
 

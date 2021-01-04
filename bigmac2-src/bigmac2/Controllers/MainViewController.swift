@@ -65,7 +65,7 @@ class ViewController: NSViewController, URLSessionDelegate  {
     @IBOutlet weak var DisableSIP: NSButton!
     @IBOutlet weak var DisableAuthRoot: NSButton!
     @IBOutlet weak var preInstallSpinner: NSProgressIndicator!
-    
+
     //MARK: Tab Views
     @IBOutlet weak var tabViews: NSTabView!
     @IBOutlet weak var downloadsTab: NSTabViewItem!
