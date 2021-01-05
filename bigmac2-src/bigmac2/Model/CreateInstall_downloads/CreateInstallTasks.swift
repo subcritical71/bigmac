@@ -198,21 +198,22 @@ extension ViewController {
             //MARK: Make Preboot bootable and compatible with C-Key at boot time
             let rscFolder = "/\(tmp)/\(bigdata)"
             
-            if let bigFolder = Bundle.main.resourceURL?.path {
-                let burgerKing = bigmac2.volumeName
-                
-                let util = "/Volumes/\(burgerKing)/System/Installation/CDIS/Recovery Springboard.app/Contents/Resources/Utilities.plist"
-                let bk = "/Volumes/\(burgerKing)/Applications/bigmac2.app"
-                let rdm = "/Volumes/\(burgerKing)/Applications/RDM.app"
-                
-                try? fm.removeItem(atPath: util)
-                try? fm.removeItem(atPath: bk)
-                try? fm.removeItem(atPath: rdm)
-                
-                try? fm.copyItem(atPath: "\(rscFolder)/Utilities.plist", toPath: util)
-                try? fm.copyItem(atPath: "\(bigFolder)", toPath: bk)
-                try? fm.copyItem(atPath: "\(rscFolder)/RDM.app", toPath: rdm)
-            } 
+            let bigFolder = Bundle.main.bundlePath
+        
+            let burgerKing = bigmac2.volumeName
+            
+            let util = "/Volumes/\(burgerKing)/System/Installation/CDIS/Recovery Springboard.app/Contents/Resources/Utilities.plist"
+            let bk = "/Volumes/\(burgerKing)/Applications/bigmac2.app"
+            let rdm = "/Volumes/\(burgerKing)/Applications/RDM.app"
+            
+            try? fm.removeItem(atPath: util)
+            try? fm.removeItem(atPath: bk)
+            try? fm.removeItem(atPath: rdm)
+            
+            try? fm.copyItem(atPath: "\(rscFolder)/Utilities.plist", toPath: util)
+            try? fm.copyItem(atPath: "\(bigFolder)", toPath: bk)
+            try? fm.copyItem(atPath: "\(rscFolder)/RDM.app", toPath: rdm)
+     
         }
     }
     

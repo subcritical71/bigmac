@@ -46,11 +46,13 @@ class InstallViewController: NSViewController {
         var path = globalVolumeInfo.path + "/"
         
         if globalVolumeInfo.root {
-            bless = globalVolumeInfo.path + "/usr/sbin/bless"
+            bless = globalVolumeInfo.path + "usr/sbin/bless"
             path = globalVolumeInfo.path
         }
         
         _ = runCommandReturnString(binary: bless, arguments: ["--mount", "\(path)", "--folder", "\(path)System/Library/CoreServices", "--bootefi", "--label", globalVolumeInfo.displayName, "--setBoot", "--nextonly"])
+        
+        _ = runCommandReturnString(binary: "/sbin/reboot", arguments: [])
         
         dismiss(self)
 
