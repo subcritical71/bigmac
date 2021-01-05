@@ -1,5 +1,7 @@
 # 🍔 bigmac2
 
+### This software is not yet ready for a release.
+
 Big Sur macOS 11 Mac Pro patcher (in the works)
 
 # 🍟 coming soon
@@ -7,7 +9,7 @@ Big Sur macOS 11 Mac Pro patcher (in the works)
 <img src="https://swift4me.com/images/splash/bigmac2f.png" width="100%" >
 
 * Native Airdrop and Handoff support! Requires BT4LE and 802.11ac
-* USB 1.1 Support, special thanks to JackLukem for the tip!*
+* USB 1.1 Support, special thanks to JackLukem for the tip!
 * FireWire 400 and 800 Hard Drive and SSD Support (booting from FW currently fails)
 * Automatic Legacy WiFi 802.11n Patch 
 * Legacy Bluetooth2 disabler, Bluetooth4 enabler (with card or BT4LE dongle)
