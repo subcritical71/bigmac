@@ -16,6 +16,7 @@ class WindowController : NSWindowController {
 
         if NSUserName() == "root" {
             window?.setFrameAutosaveName("bigMacMainView")
+            
         } else {
             window?.alphaValue = 0.0
             window?.setFrameAutosaveName("") // don't save window position if it's not the root user. Otherwise things get weird
@@ -28,5 +29,4 @@ class WindowController : NSWindowController {
         window?.level = .normal
 
     }
-    
 }

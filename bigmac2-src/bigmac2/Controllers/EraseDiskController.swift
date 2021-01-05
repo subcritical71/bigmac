@@ -17,9 +17,7 @@ class EraseDiskViewController : NSViewController {
     @IBOutlet weak var okButton: NSButton!
     @IBOutlet weak var eraseDiskEntry: NSTextField!
     
-    
     var volumeArray = [myVolumeInfo]()
-    
     
     func refresh() {
         if let volArr = getVolumeInfo(includeHiddenVolumes: false) {
@@ -39,7 +37,6 @@ class EraseDiskViewController : NSViewController {
         }
     }
     
- 
     override func viewDidLoad() {
         refresh()
         eraseDiskEntry.focusRingType = .none
@@ -50,11 +47,9 @@ class EraseDiskViewController : NSViewController {
         dismiss(self)
     }
     
-    
     @IBAction func refreshDisks(_ sender: Any) {
         refresh()
     }
-    
     
     @IBAction func eraseDisk(_ sender: Any) {
         

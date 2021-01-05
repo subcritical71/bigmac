@@ -7,7 +7,38 @@
 
 import Cocoa
 
-class ViewController: NSViewController, URLSessionDelegate  {
+class ViewController: NSViewController, URLSessionDelegate {
+    
+    var rootMode = false
+    var isBaseSingleUser = false
+    var isBaseVerbose = false
+    var isSysSingleUser = false
+    var isSysVerbose = false
+    var bigmacDisk = "bigmac2.dmg"
+    var bigmac2Str = "bigmac2"
+    var tmpFolder = "/tmp/"
+    var bigDataDMG = "bigdata.dmg"
+    var bigDataStr = "bigdata"
+
+    var volumeInfo = myVolumeInfo(diskSlice: "", disk: "", displayName: "", volumeName: "", path: "", uuid: "", external: false, root: false, capacity: 0)
+
+    var ranHax3 = false
+    var bootedToBaseOS = false
+
+    var enableUSB = true
+    var disableBT2 = true
+    var amdMouSSE = true
+    var teleTrap = true
+    var VerboseBoot = false
+    var superDrive = true
+    var appStoreMacOS = true
+    var appleHDA = true
+    var hdmiAudio = false
+    var singleUser = false
+    var legacyWiFi = false
+    var installKCs = true
+    var blessSystem = true
+    var deleteSnaphots = true
     
     let setResX = "/Applications/RDM.app/Contents/MacOS/SetResX"
     let baseOS = "/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
@@ -26,10 +57,8 @@ class ViewController: NSViewController, URLSessionDelegate  {
     
     let applications = "Applications"
     let basesystem = "BaseSystem"
-    let appFolder = Bundle.main.resourceURL
-    let haxDylib = Bundle.main.resourceURL!.path + "/HaxDoNotSealNoAPFSROMCheck.dylib"
-    let hax = Bundle.main.resourceURL!.path + "/hax3"
-    
+    let haxDylib = "/HaxDoNotSealNoAPFSROMCheck.dylib"
+        
     let tempSystem = Bundle.main.resourceURL!.path + "/bm2tmp0.dmg"
     let macSoftwareUpdate = "com_apple_MobileAsset_MacSoftwareUpdate"
     var installBigSur = "Install macOS Big Sur.app"
@@ -118,8 +147,16 @@ class ViewController: NSViewController, URLSessionDelegate  {
     var blessSystemtl = String()
     var deleteSnaphotstl = String()
 
+    var bigdata = "bigdata"
+   
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+                
+        if NSUserName() == "root" {
+            mountBigData() //dmg for the app
+        }
+        
         parseBootArgs()
         disableSetResXButtonsCheck()
         bootedToBaseOS = checkForBaseOS()
@@ -128,18 +165,9 @@ class ViewController: NSViewController, URLSessionDelegate  {
         //if ( !bootedToBaseOS) {
            // tabViews.selectTabViewItem(preInstallTab)
         //}
-        print("1")
         refreshPatchDisks()
     }
-
 }
-
-
-
-
-
-
-
 
 //No need for this yet
 class TabView : NSTabView {
@@ -147,3 +175,4 @@ class TabView : NSTabView {
         
     }
 }
+

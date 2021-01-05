@@ -29,6 +29,17 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
         
+        _ = ViewController.save
+        
+       
+
+    }
+}
+
+extension ViewController {
+    
+    func save() {
+        //ToDo Switch to an array and loop over or a dictionary, could even use a Struct
         let defaults = UserDefaults.standard
         defaults.set(isBaseVerbose, forKey: "isBaseVerbose")
         defaults.set(isBaseSingleUser, forKey: "isBaseSingleUser")
@@ -46,7 +57,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         defaults.set(deleteSnaphots, forKey: "deleteSnaphots")
         defaults.set(singleUser, forKey: "singleUser")
         defaults.set(amdMouSSE, forKey: "amdMouSSE")
-
     }
+    
 }
 

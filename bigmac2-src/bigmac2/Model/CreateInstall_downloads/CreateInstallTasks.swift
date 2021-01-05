@@ -33,7 +33,7 @@ extension ViewController {
         //MARK: make temp dir SharedSupport
         _ = mkDir(arg: "/\(tmp)/\(sharedsupport)")
         
-        //MARK: mount disk idmage inside temp SharedSupport
+        //MARK: mount disk image inside temp SharedSupport
         _ = mountDiskImage(arg: ["mount", "-mountPoint", "/\(tmp)/\(sharedsupport)", "/\(applications)/\(installBigSur)/Contents/\(sharedsupport)/\(sharedsupport).dmg", "-noverify", "-noautoopen", "-noautofsck", "-nobrowse"])
         
         //MARK: Zip Extraction (retain base system disk image from DMG)

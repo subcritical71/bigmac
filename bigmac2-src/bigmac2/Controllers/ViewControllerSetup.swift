@@ -7,9 +7,6 @@
 
 import Cocoa
 
-
-
-
 //MARK: Main View Setup
 extension ViewController {
     
@@ -45,6 +42,8 @@ extension ViewController {
         hdmiAudio       = defaults.bool(forKey: "hdmiAudio")
         singleUser      = defaults.bool(forKey: "singleUser")
         legacyWiFi      = defaults.bool(forKey: "legacyWiFi")
+        
+        
         installKCs      = defaults.bool(forKey: "installKCs")
         blessSystem     = defaults.bool(forKey: "blessSystem")
         deleteSnaphots  = defaults.bool(forKey: "deleteSnaphots")
@@ -66,8 +65,6 @@ extension ViewController {
         installKCs      ? (updateBootSysKCs.state = .on)    : (updateBootSysKCs.state = .off)
         blessSystem     ? (BlessVolume.state = .on)         : (BlessVolume.state = .off)
         deleteSnaphots  ? (deleteAPFSSnapshotsButton.state = .on) : (deleteAPFSSnapshotsButton.state = .off)
-
-        print(blessSystem)
  
     }
 }

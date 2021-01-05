@@ -11,9 +11,8 @@ import Cocoa
 extension Notification.Name {
     static let EraseDisk = Notification.Name("EraseDisk")
     static let CreateDisk = Notification.Name("DownloadBigMacDisk")
-    static let RunAtRootRequest = Notification.Name("RunAtRootRequest")
+    static let RunAsRootRequest = Notification.Name("RunAsRootRequest")
     static let Runner = Notification.Name("Runner")
-
 }
 
 //MARK: Notfications Actions
@@ -59,11 +58,13 @@ extension ViewController {
      }
     
     //MARK: Phase 1.2
-    @objc func RunAtRootRequest(_ notification:Notification){
+    @objc func RunAsRootRequest(_ notification:Notification){
         
+        let pw = notification.object as! String //Store in a global
+
         //runs out app as root, pretty sweet
         let bigMacApp = Bundle.main.bundlePath
-        _ = runCommandReturnString(binary: "\(bigMacApp)/Contents/Resources/bm2" , arguments: ["\(bigMacApp)/Contents/MacOS/bigmac2", passWord]) ?? ""
+        _ = runCommandReturnString(binary: "\(bigMacApp)/Contents/Resources/bm2" , arguments: [ "\(bigMacApp)/Contents/MacOS/bigmac2", pw ]) ?? ""
         exit(0)
     }
 
@@ -78,7 +79,7 @@ extension ViewController {
 
         notifications.addObserver(self, selector: #selector(EraseDisk), name: .EraseDisk, object: nil)
         notifications.addObserver(self, selector: #selector(CreateDisk), name: .CreateDisk, object: nil)
-        notifications.addObserver(self, selector: #selector(RunAtRootRequest), name: .RunAtRootRequest, object: nil)
+        notifications.addObserver(self, selector: #selector(RunAsRootRequest), name: .RunAsRootRequest, object: nil)
         
         if NSUserName() != "root" {
             performSegue(withIdentifier: "userNamePassWord", sender: nil)

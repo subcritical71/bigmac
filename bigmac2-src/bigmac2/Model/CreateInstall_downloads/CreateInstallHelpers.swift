@@ -146,6 +146,13 @@ extension ViewController {
         return result
     }
     
+    //MARK: Make Directory - To do use File Manager (For alot of these future tasks)
+    internal func rmDir(bin: String = "/bin/rm", arg: String) -> String {
+        let result = runCommandReturnString(binary: bin , arguments: [arg]) ?? ""
+        return result
+    }
+    
+    
     
     
     //MARK: Make Rename Disk using diskutil

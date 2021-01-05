@@ -10,6 +10,10 @@ import AppKit
 
 class CredsViewController: NSViewController {
     
+    //MARK: Username and password is not save
+    fileprivate var userName = ""
+    fileprivate var passWord = ""
+    
     @IBOutlet weak var passWordLabel: NSSecureTextField!
     @IBOutlet weak var userNameLabel: NSTextField!
     @IBOutlet weak var progressBar: NSProgressIndicator!
@@ -27,23 +31,22 @@ class CredsViewController: NSViewController {
         progressBar.isHidden = true
         progressBar.stopAnimation(self)
     }
-       
+    
     func saveNames() {
         if !userNameLabel.stringValue.isEmpty {
             userName = userNameLabel.stringValue
         }
         
         if !passWordLabel.stringValue.isEmpty {
-           passWord = passWordLabel.stringValue
+            passWord = passWordLabel.stringValue
         }
     }
     
     @IBAction func cancelButton(_ sender: Any) {
-        saveNames()
+        //saveNames()
         dismiss(self)
         exit(0)
     }
-    
     
     override func viewDidLoad() {
         view.window?.titlebarAppearsTransparent = true
@@ -51,16 +54,16 @@ class CredsViewController: NSViewController {
         view.window?.title = "🍔 Big Mac 2.0"
         view.window?.level = .floating
         view.window?.styleMask = .borderless
-        
     }
+    
     @IBAction func okButton(_ sender: Any) {
         saveNames()
         progressBar.isHidden = false
-
-       DispatchQueue.main.async { [self] in
-                let script = "do shell script \"sudo echo /\" user name \"\(userName)\" password \"\(passWord)\" with administrator privileges" 
-                let result = performAppleScript(script: script)
-                if let a = result.text, a.contains("incorrect") {
+        
+        DispatchQueue.main.async { [self] in
+            let script = "do shell script \"sudo echo /\" user name \"\(userName)\" password \"\(passWord)\" with administrator privileges"
+            let result = performAppleScript(script: script)
+            if let a = result.text, a.contains("incorrect") {
                 passWordLabel.resignFirstResponder()
                 passWordLabel.shake(duration: 1)
                 progressBar.isHidden = true
@@ -68,28 +71,10 @@ class CredsViewController: NSViewController {
             } else {
                 progressBar.isHidden = true
                 dismiss(self)
-                NotificationCenter.default.post(name: .RunAtRootRequest, object: nil)
-
+                NotificationCenter.default.post(name: .RunAsRootRequest, object: passWord)
             }
         }
-    
     }
 }
-
-extension NSView {
-    func shake(duration: CFTimeInterval) {
-
-        let translation = CAKeyframeAnimation(keyPath: "transform.translation.x");
-        translation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
-        translation.values = [-5, 5, -5, 5, -3, 3, -2, 2, 0]
-
-        let shakeGroup: CAAnimationGroup = CAAnimationGroup()
-        shakeGroup.animations = [translation]
-        shakeGroup.duration = duration
-        self.layer?.add(shakeGroup, forKey: "shakeIt")
-        
-    }
-}
-
 
 
