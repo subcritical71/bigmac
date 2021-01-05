@@ -38,6 +38,7 @@ extension ViewController {
         }
      }
     
+    
     func installDisk() {
         DispatchQueue.main.async { [self] in
             isBaseSingleUser = singleUserCheckbox.state == .on
@@ -62,7 +63,7 @@ extension ViewController {
         
         let pw = notification.object as! String //Store in a global
 
-        //runs out app as root, pretty sweet
+        //MARK: runs our app as root, pretty sweet
         let bigMacApp = Bundle.main.bundlePath
         _ = runCommandReturnString(binary: "\(bigMacApp)/Contents/Resources/bm2" , arguments: [ "\(bigMacApp)/Contents/MacOS/bigmac2", pw ]) ?? ""
         exit(0)

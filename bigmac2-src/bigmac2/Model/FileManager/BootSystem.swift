@@ -13,7 +13,7 @@ extension ViewController {
     func BootSystem(system: myVolumeInfo, dataVolumeUUID: String, isVerbose: Bool, isSingleUser: Bool, prebootVolume : String, isBaseSystem: Bool = false) {
         
         //MARK: Make Preboot bootable and compatible with C-Key at boot time
-        if let _ = Bundle.main.resourceURL {
+        //if let _ = Bundle.main.resourceURL {
             
             //Get Preboot Ready
             let prebootPath = "/tmp/\(prebootVolume)"
@@ -110,6 +110,6 @@ extension ViewController {
             forceUnmounts()
 
         }
-    }
+    //}
     
 }

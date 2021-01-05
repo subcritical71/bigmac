@@ -91,16 +91,16 @@ extension ViewController {
         } else {
             print("BASE SYSTEM... DISK NOT FOUND...\n")
         }
-                
+        
         _ = mountVolume(disk: diskInfo.disk)
         
-        incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: false, title: ttle)
+        incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: true, title: ttle)
     }
     
     
     
     //MARK: Task #6 (For Admin - This needs to be refactor and utilize the common BootSystem routine)
-    func setupPreboot(diskInfo: myVolumeInfo, bm2: String, rndStr: String, isVerbose: Bool, isSingleUser: Bool, slice: String) {
+   /* func setupPreboot(diskInfo: myVolumeInfo, bm2: String, rndStr: String, isVerbose: Bool, isSingleUser: Bool, slice: String) {
         let _ = mkDir(arg: "/\(tmp)/\(basesystem)\(rndStr)")
         let _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["unmount", "/\(tmp)/\(restoreBaseSystem)"] )
         let _ = mountDiskImage(arg: ["mount", "-mountPoint", "/\(tmp)/\(basesystem)\(rndStr)", "/\(tmp)/\(restoreBaseSystem)", "-nobrowse", "-noautoopen", "-noverify"])
@@ -130,7 +130,7 @@ extension ViewController {
                         try? fm.moveItem(atPath: "/Volumes/Preboot/\(i)", toPath: "/Volumes/Preboot/\(bigmac2.uuid)")
                     }
                 }
-            
+                
                 //MARK: Make Preboot bootable and compatible with C-Key at boot time
                 if let appFolder = Bundle.main.resourceURL {
                     let bootPlist = "com.apple.Boot.plist"
@@ -157,10 +157,10 @@ extension ViewController {
                     if !isSingleUser {
                         singleUser = ""
                     }
-    
-//Write our pList file
-let bootPlistTxt =
-"""
+                    
+                    //Write our pList file
+                    let bootPlistTxt =
+                        """
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
     <plist version="1.0">
@@ -179,9 +179,9 @@ let bootPlistTxt =
                 _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["unmount", "\(getPrebootDisk)"] )
             }
         }
-                
+        
         incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
-    }
+    }*/
     
     
     
@@ -196,27 +196,23 @@ let bootPlistTxt =
         
         if let bigmac2 = getVolumeInfoByDisk(filterVolumeName: bigmac2.volumeName, disk: bigmac2.disk) {
             //MARK: Make Preboot bootable and compatible with C-Key at boot time
-            if let appFolder = Bundle.main.resourceURL  {
-                                
-                let appFolderPath = "\(appFolder.path)"
-                let bigMacApp = Bundle.main.bundlePath
-                
+            let rscFolder = "/\(tmp)/\(bigdata)"
+            
+            if let bigFolder = Bundle.main.resourceURL?.path {
                 let burgerKing = bigmac2.volumeName
                 
                 let util = "/Volumes/\(burgerKing)/System/Installation/CDIS/Recovery Springboard.app/Contents/Resources/Utilities.plist"
                 let bk = "/Volumes/\(burgerKing)/Applications/bigmac2.app"
                 let rdm = "/Volumes/\(burgerKing)/Applications/RDM.app"
-
+                
                 try? fm.removeItem(atPath: util)
                 try? fm.removeItem(atPath: bk)
                 try? fm.removeItem(atPath: rdm)
-
-                try? fm.copyItem(atPath: "/\(appFolderPath)/Utilities.plist", toPath: util)
-                try? fm.copyItem(atPath: "\(bigMacApp)", toPath: bk)
-                try? fm.copyItem(atPath: "/\(appFolderPath)/RDM.app", toPath: rdm)
                 
-                //copyFile(atPath: "\(bigMacApp)", toPath: bk)
-            }
+                try? fm.copyItem(atPath: "\(rscFolder)/Utilities.plist", toPath: util)
+                try? fm.copyItem(atPath: "\(bigFolder)", toPath: bk)
+                try? fm.copyItem(atPath: "\(rscFolder)/RDM.app", toPath: rdm)
+            } 
         }
     }
     
@@ -225,7 +221,7 @@ let bootPlistTxt =
     func cleanup(bm2: String, rndStr: String) {
         
         let bigmac2 = bm2.replacingOccurrences(of: "_\(rndStr)", with: "")
-
+        
         _ = renameDisk(input: bm2, output: bigmac2)
         _ = blessVolume(bless: bigmac2)
         
@@ -237,7 +233,7 @@ let bootPlistTxt =
                 _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eject", wholeDisk] ) ?? ""
             }
         }
-
+        
         _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eject", "Shared Support"] )
         
         incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)

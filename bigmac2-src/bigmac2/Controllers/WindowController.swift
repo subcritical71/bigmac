@@ -11,22 +11,26 @@ import Cocoa
 class WindowController : NSWindowController {
     
     override func windowDidLoad() {
+        super.windowDidLoad()
         _ = performAppleScript(script: "tell me to activate")
-        shouldCascadeWindows = false
 
         if NSUserName() == "root" {
             window?.setFrameAutosaveName("bigMacMainView")
-            
+            window?.level = .normal
+            shouldCascadeWindows = false
+            window?.titlebarAppearsTransparent = true
+            window?.styleMask.insert(NSWindow.StyleMask.fullSizeContentView)
+            window?.title = "🍔 Big Mac 2.0"
+
         } else {
             window?.alphaValue = 0.0
             window?.setFrameAutosaveName("") // don't save window position if it's not the root user. Otherwise things get weird
+            window?.level = .floating
         }
         
-        super.windowDidLoad()
-        window?.titlebarAppearsTransparent = true
-        window?.styleMask.insert(NSWindow.StyleMask.fullSizeContentView)
-        window?.title = "🍔 Big Mac 2.0"
-        window?.level = .normal
-
+  
+        
+        
     }
 }
+

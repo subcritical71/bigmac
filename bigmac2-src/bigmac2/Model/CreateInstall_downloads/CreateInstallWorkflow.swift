@@ -12,7 +12,7 @@ extension ViewController {
     //MAIN WORKFLOW STARTS HERE
     
     //MARK: Full Disk Workflow - Not for Customer Use as it is very backward compatible
-    func disk2(isBeta:Bool, diskInfo: myVolumeInfo, isVerbose: Bool, isSingleUser: Bool, fullDisk: Bool) {
+   /* func disk2(isBeta:Bool, diskInfo: myVolumeInfo, isVerbose: Bool, isSingleUser: Bool, fullDisk: Bool) {
         DispatchQueue.global(qos: .background).async { [self] in
             
             //MARK: Set vars and local constants
@@ -77,12 +77,14 @@ extension ViewController {
             incrementInstallGauge(resetGauge: false, incremment: false, setToFull: true)
             spinnerAnimation(start: false, hide: true)
         }
-    }
+    }*/
     
-    //MARK: Set Base Systemq - Adopt this helper for future quick updates
+    //MARK: Set Base System - Adopt this helper for future quick updates
     func baseBootPlister(diskInfo: myVolumeInfo, isVerbose: Bool, isSingleUser: Bool, prebootVolume: String, isBaseSystem: Bool) {
         //MARK: Update systemVolume volume because UUIDs have changed
         if let systemVolume = getVolumeInfoByDisk(filterVolumeName: diskInfo.volumeName, disk: diskInfo.disk, isRoot: diskInfo.root) {
+            
+            globalVolumeInfo = systemVolume
             
             _ = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["mount", systemVolume.diskSlice])
 
@@ -95,6 +97,7 @@ extension ViewController {
     
     func customerInstallDisk(isBeta:Bool, diskInfo: myVolumeInfo, isVerbose: Bool, isSingleUser: Bool, fullDisk: Bool) {
         DispatchQueue.global(qos: .background).async { [self] in
+        
             incrementInstallGauge(resetGauge: true, incremment: true, setToFull: false, cylon: true, title: "Firing up the install disk process...")
             
             //MARK: Set vars and local constants
@@ -130,7 +133,7 @@ extension ViewController {
             //Get Preboot Ready
             _ = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["mount", diskInfo.diskSlice])
 
-            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: true, title: "Making the bigmac2 installer disk bootable...")
+            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: false, title: "Making the bigmac2 installer disk bootable...")
 
             //MARK: Update systemVolume volume because UUIDs have changed
             baseBootPlister(diskInfo: diskInfo, isVerbose: isBaseVerbose, isSingleUser: isSingleUser, prebootVolume: prebootDiskSlice, isBaseSystem: true)
@@ -154,8 +157,9 @@ extension ViewController {
             //MARK: Step 8a
             cleanup(bm2: bm2, rndStr: rndStr)
             unmountDrives(mountBigmac: true, ejectAll: false)
-            
+         
             //MARK: Finish
+            
             incrementInstallGauge(resetGauge: false, incremment: false, setToFull: true, title: "bigmac2 Boot Disk installation is complete!")
             spinnerAnimation(start: false, hide: true)
         }

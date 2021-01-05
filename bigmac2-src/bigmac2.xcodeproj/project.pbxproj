@@ -36,6 +36,7 @@
 		2DC0952525A36E0B00C8FE85 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC0952425A36E0B00C8FE85 /* Notifications.swift */; };
 		2DD0647825A3776B00AF3216 /* bigdata.dmg in Resources */ = {isa = PBXBuildFile; fileRef = 2D522BA825A2E1DF00E25780 /* bigdata.dmg */; };
 		2DE42E3D25918F56005E10C6 /* CreateInstallHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE42E3C25918F56005E10C6 /* CreateInstallHelpers.swift */; };
+		2DFBD81E25A418B40098024C /* InstallerDiskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFBD81D25A418B40098024C /* InstallerDiskController.swift */; };
 		2DFE54FB25A2D7D500BE3AA0 /* bm2 in Resources */ = {isa = PBXBuildFile; fileRef = 2DFE54FA25A2D7D500BE3AA0 /* bm2 */; };
 		2DFE54FE25A2D7DE00BE3AA0 /* lax in Resources */ = {isa = PBXBuildFile; fileRef = 2DFE54FD25A2D7DE00BE3AA0 /* lax */; };
 /* End PBXBuildFile section */
@@ -74,6 +75,7 @@
 		2DAFF44B259AB7ED00D48E20 /* CreateInstallActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInstallActions.swift; sourceTree = "<group>"; };
 		2DC0952425A36E0B00C8FE85 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		2DE42E3C25918F56005E10C6 /* CreateInstallHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInstallHelpers.swift; sourceTree = "<group>"; };
+		2DFBD81D25A418B40098024C /* InstallerDiskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallerDiskController.swift; sourceTree = "<group>"; };
 		2DFE54FA25A2D7D500BE3AA0 /* bm2 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = bm2; sourceTree = "<group>"; };
 		2DFE54FD25A2D7DE00BE3AA0 /* lax */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = lax; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -183,6 +185,7 @@
 				2D522BAB25A35FA000E25780 /* WindowController.swift */,
 				2D02E03425945BD000E8E1CF /* EraseDiskController.swift */,
 				2D7787EE258F0BC700305EC3 /* CredsViewController.swift */,
+				2DFBD81D25A418B40098024C /* InstallerDiskController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -342,6 +345,7 @@
 				2D09EE43259C432C0054CF3A /* CreateInstallTasks.swift in Sources */,
 				2D8630FE25A234D3006DDFFC /* PostInstallWorkflow.swift in Sources */,
 				2D3E60F2259CFC6000DE6488 /* ParseBootArgs.swift in Sources */,
+				2DFBD81E25A418B40098024C /* InstallerDiskController.swift in Sources */,
 				2D02E03525945BD000E8E1CF /* EraseDiskController.swift in Sources */,
 				2D522BB525A36A5B00E25780 /* shakeView.swift in Sources */,
 				2D9BB503259EAC96007DE72A /* PreInstallActions.swift in Sources */,
@@ -366,6 +370,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -373,6 +379,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
@@ -387,7 +395,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = bigmac2/Info.plist;
@@ -419,7 +427,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 8;
+				CURRENT_PROJECT_VERSION = 9;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = bigmac2/Info.plist;
@@ -450,7 +458,7 @@
 				2D1A32AE258D959E009DCDFD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 		2D1A32AF258D959E009DCDFD /* Build configuration list for PBXNativeTarget "bigmac2" */ = {
 			isa = XCConfigurationList;
@@ -459,7 +467,7 @@
 				2D1A32B1258D959E009DCDFD /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Debug;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

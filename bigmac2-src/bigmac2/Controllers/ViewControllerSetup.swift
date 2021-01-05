@@ -12,8 +12,8 @@ extension ViewController {
     
     //MARK: View Will Appear
     override func viewWillAppear() {
-        super.viewDidAppear()
-    
+        super.viewWillAppear()
+                  
         progressBarDownload.doubleValue = 0 //set progressBar to 0 at star
         
         if NSUserName() == "root" {
@@ -23,7 +23,7 @@ extension ViewController {
         }
         
         installerFuelGauge.doubleValue = 0
-   
+        
         let defaults = UserDefaults.standard
 
         isBaseVerbose    = defaults.bool(forKey: "isBaseVerbose")
@@ -42,7 +42,6 @@ extension ViewController {
         hdmiAudio       = defaults.bool(forKey: "hdmiAudio")
         singleUser      = defaults.bool(forKey: "singleUser")
         legacyWiFi      = defaults.bool(forKey: "legacyWiFi")
-        
         
         installKCs      = defaults.bool(forKey: "installKCs")
         blessSystem     = defaults.bool(forKey: "blessSystem")

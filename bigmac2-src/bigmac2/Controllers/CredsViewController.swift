@@ -5,8 +5,7 @@
 //  Created by starplayrx on 12/19/20.
 //
 
-import Foundation
-import AppKit
+import Cocoa
 
 class CredsViewController: NSViewController {
     
@@ -25,6 +24,8 @@ class CredsViewController: NSViewController {
         if NSUserName() != "root" && !NSUserName().isEmpty {
             userNameLabel.stringValue = NSUserName()
         }
+        
+        //self.view.window?.center()
     }
     
     override func viewWillDisappear() {

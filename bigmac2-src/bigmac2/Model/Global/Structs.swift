@@ -7,6 +7,9 @@
 
 import Foundation
 
+var globalVolumeInfo : myVolumeInfo!
+
+
 //MARK: - VolumeInfo
 struct myVolumeInfo {
     var diskSlice, disk, displayName, volumeName, path, uuid: String

@@ -83,6 +83,9 @@ extension ViewController {
             if setToFull {
                 installerFuelGauge.doubleValue = installerFuelGauge.maxValue
                 sharedSupportProgressBar.doubleValue = sharedSupportProgressBar.maxValue
+                    
+                //MARK: Show done screen sheet
+                performSegue(withIdentifier: "installComplete", sender: nil)
             }
             
             if !title.isEmpty {

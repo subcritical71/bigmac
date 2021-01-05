@@ -20,3 +20,10 @@ extension NSView {
         self.layer?.add(shakeGroup, forKey: "shakeIt")
     }
 }
+
+extension String {
+    func deletingPrefix(_ prefix: String) -> String {
+        guard self.hasPrefix(prefix) else { return self }
+        return String(self.dropFirst(prefix.count))
+    }
+}
