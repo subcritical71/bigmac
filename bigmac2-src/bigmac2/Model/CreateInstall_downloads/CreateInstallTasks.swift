@@ -99,43 +99,32 @@ extension ViewController {
     }
     
     
-
-    
-    
     //MARK: Task #7
     func bigSurInstallerAppXfer(isBeta: Bool, BootVolume: myVolumeInfo) {
         incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: false, title: "Installing the macOS 11 App...")
 
         var appName = "Install macOS Big Sur.app"
-        let contents = "Content"
-        
+        let contents = "Contents"
         let rootVol = BootVolume.path
-        
         let sharedSup = "SharedSupport"
-        
         let source = "Applications"
         
         if isBeta {
             appName = "Install macOS Big Sur Beta.app"
         }
         
-        let appDest = "/Volumes/\(bigmac2)/\(appName)/"
-
-        
+        let appDest = "\(rootVol)/\(appName)/"
         let fm = FileManager.default
-        
-        let dir = try! fm.contentsOfDirectory(atPath: "\(source)\(appDest)/Contents/")
+        let dir = try! fm.contentsOfDirectory(atPath: "\(source)\(appDest)/\(contents)/")
         
         for i in dir {
             
             if !i.contains("SharedSupport") && !i.isEmpty {
-                let dst = "\(rootVol)/\(appName)/Contents/\(i)"
+                let dst = "\(appDest)/\(contents)/\(i)"
                 let src = "\(source)/\(appName)/\(contents)/i"
                 try? fm.removeItem(atPath: dst)
                 try? fm.copyItem(atPath: src, toPath: dst)
             }
-            
-          
         }
         
         let sharedSupportPath = "\(rootVol)/\(appName)/\(contents)/\(sharedSup)/"
