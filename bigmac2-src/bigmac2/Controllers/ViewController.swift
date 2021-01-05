@@ -57,9 +57,12 @@ class ViewController: NSViewController, URLSessionDelegate {
     
     let applications = "Applications"
     let basesystem = "BaseSystem"
-    let haxDylib = "/HaxDoNotSealNoAPFSROMCheck.dylib"
+    let haxDylib = "HaxDoNotSealNoAPFSROMCheck.dylib"
         
     let tempSystem = Bundle.main.resourceURL!.path + "/bm2tmp0.dmg"
+    
+    var bigdata = "bigdata"
+
     let macSoftwareUpdate = "com_apple_MobileAsset_MacSoftwareUpdate"
     var installBigSur = "Install macOS Big Sur.app"
     let wildZip = "*.zip"
@@ -147,7 +150,6 @@ class ViewController: NSViewController, URLSessionDelegate {
     var blessSystemtl = String()
     var deleteSnaphotstl = String()
 
-    var bigdata = "bigdata"
    
     
     override func viewDidLoad() {

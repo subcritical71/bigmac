@@ -56,11 +56,11 @@ extension ViewController {
     /* Run command in the background */
     func runProcess(binary: String, arguments: [String], title: String) {
 
-        DispatchQueue.main.async {
-            self.mediaLabel.stringValue = title
-            self.sharedSupportGbLabel.stringValue = ""
-            self.sharedSupportProgressBar.doubleValue = 0
-            self.sharedSupportPercentage.stringValue = "0%"
+        DispatchQueue.main.async { [self] in
+            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: false, title: title)
+            sharedSupportGbLabel.stringValue = ""
+            sharedSupportProgressBar.doubleValue = 0
+            sharedSupportPercentage.stringValue = "0%"
         }
         
         //DispatchQueue.global(qos: .background).async {

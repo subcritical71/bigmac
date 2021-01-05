@@ -29,7 +29,8 @@ extension ViewController {
         func macOS(installer: String) {
             if !ranHax3 {
                 ranHax3 = true
-                _ = runCommandReturnString(binary: "/bin/launchctl" , arguments: ["setenv", "DYLD_INSERT_LIBRARIES", haxDylib]) ?? ""
+                let hax = runCommandReturnString(binary: "/bin/launchctl" , arguments: ["setenv", "DYLD_INSERT_LIBRARIES", "/\(tmp)/\(bigdata)/\(haxDylib)"]) ?? ""
+                print(hax)
             }
             
             let bigMacApp = Bundle.main.bundlePath
@@ -76,8 +77,8 @@ extension ViewController {
             """
             let installAsstBaseOS = "/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
             let installAsstFullOS = "/Applications/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
-            let installAsstBootOS = "/Volumes/bigmac2/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
-
+           // let installAsstBootOS = "/Volumes/bigmac2/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
+            
             
             let fm = FileManager.default
             if fm.fileExists(atPath: installAsstBaseOS) {
@@ -88,11 +89,6 @@ extension ViewController {
                 
                 _ = performAppleScript(script: script)
                 macOS(installer: installAsstFullOS)
-                
-            } else if fm.fileExists(atPath: installAsstBootOS) {
-                
-                _ = performAppleScript(script: script)
-                macOS(installer: installAsstBootOS)
                 
             }
         }

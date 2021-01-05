@@ -81,6 +81,10 @@ extension ViewController {
     
     //MARK: Set Base System - Adopt this helper for future quick updates
     func baseBootPlister(diskInfo: myVolumeInfo, isVerbose: Bool, isSingleUser: Bool, prebootVolume: String, isBaseSystem: Bool) {
+        
+        incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: false, title: "Making the bigmac2 installer disk bootable...")
+
+        
         //MARK: Update systemVolume volume because UUIDs have changed
         if let systemVolume = getVolumeInfoByDisk(filterVolumeName: diskInfo.volumeName, disk: diskInfo.disk, isRoot: diskInfo.root) {
             
@@ -117,13 +121,10 @@ extension ViewController {
             unmountDrives(mountBigmac: false, ejectAll: true)
 
             //MARK: Step 2a
-            incrementInstallGauge(resetGauge: true, incremment: true, setToFull: false, cylon: true, title: "Updating Installer Package...")
             updateInstallerPkg()
 
             //MARK: Step 3a
-            incrementInstallGauge(resetGauge: true, incremment: true, setToFull: false, cylon: true, title: "Reformatting the \(diskInfo.displayName) AFPS volume...")
             reformatSelectedApfsDisk(diskInfo: diskInfo)
-            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: true)
 
             //MARK: Step 4a
             installBaseSystemII(diskInfo: diskInfo, baseSys: baseSys, bm2: bm2)
@@ -133,25 +134,20 @@ extension ViewController {
             //Get Preboot Ready
             _ = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["mount", diskInfo.diskSlice])
 
-            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: false, title: "Making the bigmac2 installer disk bootable...")
 
             //MARK: Update systemVolume volume because UUIDs have changed
             baseBootPlister(diskInfo: diskInfo, isVerbose: isBaseVerbose, isSingleUser: isSingleUser, prebootVolume: prebootDiskSlice, isBaseSystem: true)
                         
             //MARK: Step 5a
-            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, title: "Installing the Apple Emoji Font...")
             installEmojiFont(bm2: bm2)
         
             //MARK: Step 6a
-            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, title: "Installing the Big Mac 2 App...")
-            installTheApp(bigmac2: diskInfo)
+            let bootVol = installBigMacIIApp(bigmac2: diskInfo)
             
-            if fullDisk {
-                incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: false, title: "Installing the macOS 11 App...")
+            if let bootVol = bootVol, fullDisk {
                 
                 //MARK: Step 7a
-                bigSurInstallerAppXfer(rndStr: rndStr)
-                incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
+                bigSurInstallerAppXfer(isBeta: false, BootVolume: bootVol)
             }
             
             //MARK: Step 8a

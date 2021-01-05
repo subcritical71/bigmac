@@ -41,7 +41,8 @@ class InstallViewController: NSViewController {
     }
     
     @IBAction func okButton(_ sender: Any) {
-        
+        dismiss(self)
+
         var bless = globalVolumeInfo.path + "/usr/sbin/bless"
         var path = globalVolumeInfo.path + "/"
         
@@ -54,7 +55,6 @@ class InstallViewController: NSViewController {
         
         _ = runCommandReturnString(binary: "/sbin/reboot", arguments: [])
         
-        dismiss(self)
 
     }
     
