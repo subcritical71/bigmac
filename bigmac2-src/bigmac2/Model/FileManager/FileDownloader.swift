@@ -92,7 +92,6 @@ extension ViewController : URLSessionDownloadDelegate {
     }
     
     @objc func checkFileSize() {
-        DispatchQueue.main.async(execute: { [self] in
             let fileManager = FileManager.default
 
             let fileSize = try? fileManager.attributesOfItem(atPath: sourcePath!)[FileAttributeKey.size] as? Double
@@ -111,23 +110,33 @@ extension ViewController : URLSessionDownloadDelegate {
                 let percentageDouble = Double(gigsCopied / gigsTotal * 100)
                 let percentageInt = Int(gigsCopied / gigsTotal * 100)
 
-                sharedSupportProgressBar.doubleValue = percentageDouble
-                sharedSupportPercentage.stringValue = "\(percentageInt)%"
-                sharedSupportGbLabel.stringValue = "\(gigsCopied) GB / \(gigsTotal) GB"
+                DispatchQueue.main.async(execute: { [self] in
+
+                    sharedSupportProgressBar.doubleValue = percentageDouble
+                    sharedSupportPercentage.stringValue = "\(percentageInt)%"
+                    sharedSupportGbLabel.stringValue = "\(gigsCopied) GB / \(gigsTotal) GB"
+                
+                })
                 
                 if ( gigsCopied == gigsTotal && gigsCopied != 0.0 && gigsTotal != 0  ) {
                     timer?.invalidate()
-                    createInstallSpinner.stopAnimation(self)
-                    createInstallSpinner.isHidden = true
+                    
+                    DispatchQueue.main.async(execute: { [self] in
+
+                        createInstallSpinner.stopAnimation(self)
+                        createInstallSpinner.isHidden = true
+                    })
                 }
             }
-        })
     }
     
     
     func copyFile(atPath sourcePath: String?, toPath targetPath: String?) {
         DispatchQueue.main.async { [self] in
 
+            timer?.invalidate()
+            timer = nil
+            sleep(1)
             timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { [self] timer in
                 checkFileSize()
             }

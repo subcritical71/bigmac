@@ -49,11 +49,11 @@ extension ViewController {
     }
     
     //MARK: Install Emoji Font
-    internal func installEmojiFont(bm2: String) {
+    internal func installEmojiFont(diskInfo: myVolumeInfo) {
         incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, title: "Installing the Apple Emoji Font...")
 
         //DispatchQueue.global(qos: .background).async { [self] in
-            copyFile(atPath: "/System/Library/Fonts/Apple Color Emoji.ttc", toPath: "/Volumes/\(bm2)/System/Library/Fonts/Apple Color Emoji.ttc")
+            copyFile(atPath: "/System/Library/Fonts/Apple Color Emoji.ttc", toPath: "\(diskInfo.path)/System/Library/Fonts/Apple Color Emoji.ttc")
        // }
     }
     
@@ -304,6 +304,9 @@ extension ViewController {
     
     //UnmountDrives
     func unmountDrives(mountBigmac: Bool, ejectAll: Bool) {
+        
+        incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: true, title: "Unmounting Drives...")
+
         let binary = "/usr/sbin/diskutil"
         let unmount = "unmount"
         let eject = "eject"

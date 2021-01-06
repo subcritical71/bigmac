@@ -33,7 +33,7 @@ extension ViewController {
     
     func customerInstallDisk(isBeta:Bool, diskInfo: myVolumeInfo, isVerbose: Bool, isSingleUser: Bool, fullDisk: Bool) {
         DispatchQueue.global(qos: .background).async { [self] in
-        
+            spinnerAnimation(start: true, hide: false)
             incrementInstallGauge(resetGauge: true, incremment: true, setToFull: false, cylon: true, title: "Firing up the install disk process...")
             
             //MARK: Set vars and local constants
@@ -45,49 +45,48 @@ extension ViewController {
             let baseSys = "macOS Base System"
             let bm2 = bigmac2
             
-            //MARK: Step 1a
      
-            spinnerAnimation(start: true, hide: false)
             
-            //MARK: Step 2a
-            unmountDrives(mountBigmac: false, ejectAll: true)
-
-            //MARK: Step 2a
+            //MARK: Step 1
             updateInstallerPkg()
+            
+            //MARK: Step 2
+            //unmountDrives(mountBigmac: false, ejectAll: true)
 
-            //MARK: Step 3a
+            //MARK: Step 2
             reformatSelectedApfsDisk(diskInfo: diskInfo)
 
-            //MARK: Step 4a
+            
+            //MARK: Step 3
             installBaseSystemII(diskInfo: diskInfo, baseSys: baseSys, bm2: bm2)
             
             let prebootDiskSlice = getDisk(substr: "Preboot", usingDiskorSlice: diskInfo.disk, isSlice: false) ?? diskInfo.disk + "s2"
             
             //Get Preboot Ready
             _ = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["mount", diskInfo.diskSlice])
-
-
-            //MARK: Update systemVolume volume because UUIDs have changed
-            baseBootPlister(diskInfo: diskInfo, isVerbose: isBaseVerbose, isSingleUser: isSingleUser, prebootVolume: prebootDiskSlice, isBaseSystem: true)
-                        
-            //MARK: Step 5a
-            installEmojiFont(bm2: bm2)
         
-            //MARK: Step 6a
+            //MARK: Step 4
             let bootVol = installBigMacIIApp(bigmac2: diskInfo)
             
             if let bootVol = bootVol, fullDisk {
                 
-                //MARK: Step 7a
+                //MARK: Update systemVolume volume because UUIDs have changed
+                baseBootPlister(diskInfo: bootVol, isVerbose: isBaseVerbose, isSingleUser: isSingleUser, prebootVolume: prebootDiskSlice, isBaseSystem: true)
+                     
+                
+                //MARK: Step 5
+                installEmojiFont(diskInfo: bootVol)
+                
+                //MARK: Step 6
                 bigSurInstallerAppXfer(isBeta: false, BootVolume: bootVol)
+                
             }
             
-            //MARK: Step 8a
+            //MARK: Step 7
             cleanup(bm2: bm2, rndStr: rndStr)
             unmountDrives(mountBigmac: true, ejectAll: false)
          
             //MARK: Finish
-            
             incrementInstallGauge(resetGauge: false, incremment: false, setToFull: true, title: "bigmac2 Boot Disk installation is complete!")
             spinnerAnimation(start: false, hide: true)
         }
