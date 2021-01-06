@@ -4,7 +4,10 @@
 
 Big Sur macOS 11 Mac Pro patcher (in the works)
 
-# 🍟 public beta 01.21.21
+# Release Schedule
+# 🍟 public alpha 01.21.21
+# 🍔 public beta  02.14.21
+# 🍺 RC1          03.17.21
 
 <img src="https://swift4me.com/images/splash/bigmac2f.png" width="100%" >
 
