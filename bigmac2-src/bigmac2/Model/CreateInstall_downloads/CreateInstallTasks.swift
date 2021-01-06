@@ -143,10 +143,10 @@ extension ViewController {
             print(error)
         }
         
-        let sharedSupportPath = "\(rootVol)/\(appName)/\(contents)/\(sharedSup)/"
+        let sharedSupportPath = "\(rootVol)/\(appName)/\(contents)/\(sharedSup)"
         
         do {
-            try fm.removeItem(atPath: sharedSupportPath)
+            try? fm.removeItem(atPath: sharedSupportPath)
             try fm.createDirectory(atPath: sharedSupportPath, withIntermediateDirectories: false, attributes: nil)
         } catch {
             print(error)
