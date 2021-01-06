@@ -11,6 +11,7 @@
 		2D02E03525945BD000E8E1CF /* EraseDiskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D02E03425945BD000E8E1CF /* EraseDiskController.swift */; };
 		2D09EE40259C42C70054CF3A /* CreateInstallWorkflow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D09EE3F259C42C70054CF3A /* CreateInstallWorkflow.swift */; };
 		2D09EE43259C432C0054CF3A /* CreateInstallTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D09EE42259C432C0054CF3A /* CreateInstallTasks.swift */; };
+		2D0B8BC325A57DE4008313D3 /* Vars.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0B8BC225A57DE4008313D3 /* Vars.swift */; };
 		2D1A32A3258D959D009DCDFD /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1A32A2258D959D009DCDFD /* AppDelegate.swift */; };
 		2D1A32A5258D959D009DCDFD /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D1A32A4258D959D009DCDFD /* ViewController.swift */; };
 		2D1A32A7258D959E009DCDFD /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2D1A32A6258D959E009DCDFD /* Assets.xcassets */; };
@@ -46,6 +47,7 @@
 		2D02E03425945BD000E8E1CF /* EraseDiskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EraseDiskController.swift; sourceTree = "<group>"; };
 		2D09EE3F259C42C70054CF3A /* CreateInstallWorkflow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInstallWorkflow.swift; sourceTree = "<group>"; };
 		2D09EE42259C432C0054CF3A /* CreateInstallTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInstallTasks.swift; sourceTree = "<group>"; };
+		2D0B8BC225A57DE4008313D3 /* Vars.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Vars.swift; sourceTree = "<group>"; };
 		2D1A329F258D959D009DCDFD /* bigmac2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = bigmac2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D1A32A2258D959D009DCDFD /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2D1A32A4258D959D009DCDFD /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				2D522BB925A36AE100E25780 /* Structs.swift */,
+				2D0B8BC225A57DE4008313D3 /* Vars.swift */,
 				2D522BC225A36C2700E25780 /* PatchBools.swift */,
 			);
 			path = Global;
@@ -339,6 +342,7 @@
 				2D522BAC25A35FA000E25780 /* WindowController.swift in Sources */,
 				2D522BBD25A36B8D00E25780 /* BootSystem.swift in Sources */,
 				2D7787EF258F0BC700305EC3 /* CredsViewController.swift in Sources */,
+				2D0B8BC325A57DE4008313D3 /* Vars.swift in Sources */,
 				2D02E032259453D500E8E1CF /* VolumeInfo.swift in Sources */,
 				2DAFF44C259AB7ED00D48E20 /* CreateInstallActions.swift in Sources */,
 				2D99C49D259F2D280035669B /* PostInstallActions.swift in Sources */,
