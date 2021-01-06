@@ -4,7 +4,7 @@
 
 Big Sur macOS 11 Mac Pro patcher (in the works)
 
-# 🍟 coming soon as a public alpha
+# 🍟 coming soon as a public alpha January 21st
 
 <img src="https://swift4me.com/images/splash/bigmac2f.png" width="100%" >
 
