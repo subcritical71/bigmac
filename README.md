@@ -4,7 +4,10 @@
 
 Big Sur macOS 11 Mac Pro patcher (in the works)
 
-# 🍟 coming soon
+### Release Schedule
+* 🍟 01.21.21 Private Alpha
+* 🍔 02.14.21 Public Beta
+* 🍺 03.17.21 Release Candidate 1
 
 <img src="https://swift4me.com/images/splash/bigmac2f.png" width="100%" >
 
@@ -20,3 +23,4 @@ Big Sur macOS 11 Mac Pro patcher (in the works)
 * Ultra Fast Boot of a Full OS
 * Improved Boot Screen Support
 * Full GUI
+* Exclusive C Key booting!
