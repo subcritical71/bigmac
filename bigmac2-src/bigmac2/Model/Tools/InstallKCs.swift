@@ -85,8 +85,8 @@ extension ViewController {
          
          indicatorBump(updateProgBar: true)
 
-        _ = runCommandReturnString(binary: kcditto, arguments: [])
-        
+         let kcdittoTask = runCommandReturnString(binary: kcditto, arguments: [])
+         
          indicatorBump(updateProgBar: true)
 
      }
