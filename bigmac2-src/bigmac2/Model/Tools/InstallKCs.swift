@@ -38,49 +38,56 @@ extension ViewController {
          _ = runCommandReturnString(binary: touch, arguments: ["\(destVolume)\(libExt)"])
          _ = runCommandReturnString(binary: touch, arguments: ["\(destVolume)\(libDriveExt)"])
          
-         
+        indicatorBump(updateProgBar: true)
+
         //MARK: Updating All Kernel Extensions
          let kmArrA = ["install", "--update-all", "--check-rebuild", "--repository", "/\(sysLibExt)", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--repository", "/\(appleSysLibExt)", "--volume-root", "\(destVolume)"]
          runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title: "Updating All Kernel Extensions...")
          
-         indicatorBump(updateProgBar: true)
+            indicatorBump(updateProgBar: true)
 
          //MARK: Rechecking Extensions
          let kmArrRE = ["install", "--repository", "/\(sysLibExt)", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--repository", "/\(appleSysLibExt)", "--volume-root", "\(destVolume)"]
          runIndeterminateProcess(binary: kmutil, arguments: kmArrRE, title: "Rechecking Extensions...")
          
-         indicatorBump(updateProgBar: true)
+        indicatorBump(updateProgBar: true)
 
          //MARK: Updating Library Extensions
          let kmArrB = ["install", "--check-rebuild", "--repository", "/\(libExt)", "--repository", "/\(sysLibExt)", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--repository", "/\(appleSysLibExt)", "--volume-root", "\(destVolume)"]
          runIndeterminateProcess(binary: kmutil, arguments: kmArrB, title: "Updating Library Extensions...")
      
-         indicatorBump(updateProgBar: true)
 
          if appleSysLibExists {
-             
+            
+            indicatorBump(updateProgBar: true)
+
              if !appleSysLibPreKernelsExists {
                  _ = mkDir(arg: "\(destVolume)/\(appleSysLibPre)")
              }
              
              let kmArrA = ["create", "-n", "-boot", "--boot-path", "\(appleSysLibPre)", "-f", "'OSBundleRequired'=='Local-Root'", "--kernel", "/\(kernel)", "--repository", "/\(sysLibExt)", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--repository", "/\(appleSysLibExt)", "--volume-root", "\(destVolume)"]
              
-             runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title: "Updating Prelinked Kernel...")
+            _ = runCommandReturnString(binary: kmutil, arguments: kmArrA)
              
-             indicatorBump(updateProgBar: true)
 
          } else {
+            
+            indicatorBump(updateProgBar: true)
+
              
              let kmArrA = ["create", "-n", "-boot", "--boot-path", "/\(prelinkedkernel)", "-f", "'OSBundleRequired'=='Local-Root'", "--kernel", "/\(kernel)", "--repository", "/\(sysLibExt)", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--repository", "/\(appleSysLibExt)", "--volume-root", "\(destVolume)"]
              
-             runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title: "Updating Prelinked Kernel...")
+            _ = runCommandReturnString(binary: kmutil, arguments: kmArrA)
              
-             indicatorBump(updateProgBar: true)
 
              
          }
          
-         runIndeterminateProcess(binary: kcditto, arguments: [], title: "Running kcditto...")
          indicatorBump(updateProgBar: true)
+
+        _ = runCommandReturnString(binary: kcditto, arguments: [])
+        
+         indicatorBump(updateProgBar: true)
+
      }
 }

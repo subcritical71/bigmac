@@ -1261,7 +1261,7 @@ DQ
                                                 <levelIndicator verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="uX0-cz-cil">
                                                     <rect key="frame" x="17" y="121" width="472" height="18"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                    <levelIndicatorCell key="cell" alignment="left" maxValue="14" warningValue="8" criticalValue="4" id="wM0-0Y-uWc"/>
+                                                    <levelIndicatorCell key="cell" alignment="left" maxValue="16" warningValue="8" criticalValue="4" id="wM0-0Y-uWc"/>
                                                 </levelIndicator>
                                             </subviews>
                                         </view>

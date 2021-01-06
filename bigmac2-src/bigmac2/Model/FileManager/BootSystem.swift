@@ -19,7 +19,7 @@ extension ViewController {
             let prebootPath = "/tmp/\(prebootVolume)"
             
             func forceUnmounts() {
-                let unmounts = ["Preboot", prebootVolume, "Recovery", "Update"]
+                let unmounts = [prebootVolume, "Recovery", "Update"]
                 
                 for i in unmounts {
                     _ = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["unmount", "force", i])
