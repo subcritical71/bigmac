@@ -216,7 +216,6 @@ extension ViewController {
                 }
                 
                 runIndeterminateProcess(binary: bless, arguments: ["--folder", "\(path)System/Library/CoreServices" , "--bootefi", "--label", systemVolume.displayName, "--setBoot"], title: "Blessing System Volume \(systemVolume.displayName)", sleepForHeadings: true)
-                // }
             }
             
             indicatorBump(updateProgBar: true)

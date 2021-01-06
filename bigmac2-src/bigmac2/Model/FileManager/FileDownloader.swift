@@ -142,14 +142,12 @@ extension ViewController : URLSessionDownloadDelegate {
             }
         }
       
-        self.sourcePath = sourcePath
-        self.targetPath = targetPath
         
         let fileManager = FileManager.default
         
-        if fileManager.fileExists(atPath: self.targetPath ?? "") == true {
+        if fileManager.fileExists(atPath: targetPath ?? "") == true {
             do {
-                try fileManager.removeItem(atPath: self.targetPath ?? "")
+                try fileManager.removeItem(atPath: targetPath ?? "")
             } catch {
             }
         }

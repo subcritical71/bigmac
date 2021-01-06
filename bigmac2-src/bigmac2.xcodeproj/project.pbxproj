@@ -124,6 +124,7 @@
 		2D1A32A1258D959D009DCDFD /* bigmac2 */ = {
 			isa = PBXGroup;
 			children = (
+				2D3E60ED259CFB7D00DE6488 /* Global */,
 				2D7787F8258F1CDE00305EC3 /* Model */,
 				2D7787F7258F1CCC00305EC3 /* View */,
 				2D7787F4258F1C8C00305EC3 /* Controllers */,
@@ -137,8 +138,8 @@
 		2D3E60ED259CFB7D00DE6488 /* Global */ = {
 			isa = PBXGroup;
 			children = (
-				2D522BB925A36AE100E25780 /* Structs.swift */,
 				2D0B8BC225A57DE4008313D3 /* Vars.swift */,
+				2D522BB925A36AE100E25780 /* Structs.swift */,
 				2D522BC225A36C2700E25780 /* PatchBools.swift */,
 			);
 			path = Global;
@@ -206,7 +207,6 @@
 			isa = PBXGroup;
 			children = (
 				2D522BB725A36A6900E25780 /* Extensions */,
-				2D3E60ED259CFB7D00DE6488 /* Global */,
 				2DC0952825A36E4500C8FE85 /* FileManager */,
 				2DC0952725A36E1800C8FE85 /* Tools */,
 				2D3E60EE259CFB9400DE6488 /* Command */,
@@ -399,7 +399,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = bigmac2/Info.plist;
@@ -409,7 +409,7 @@
 				);
 				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = "-mmacosx-version-min=10.13";
-				PRODUCT_BUNDLE_IDENTIFIER = com.starplayrx.bigmac2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.starplayrx.bigmac2013;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -427,7 +427,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 11;
+				CURRENT_PROJECT_VERSION = 13;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = bigmac2/Info.plist;
@@ -437,7 +437,7 @@
 				);
 				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = "-mmacosx-version-min=10.13";
-				PRODUCT_BUNDLE_IDENTIFIER = com.starplayrx.bigmac2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.starplayrx.bigmac2013;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;

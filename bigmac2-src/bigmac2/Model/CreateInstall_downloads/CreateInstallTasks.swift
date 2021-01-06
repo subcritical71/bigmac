@@ -122,7 +122,6 @@ extension ViewController {
             //MARK: Remove Items
             for i in dir {
                 
-                let src = "/\(apps)/\(appName)/\(contents)/\(i)"
                 let dst = "\(root)\(contents)/\(i)"
                     
                 try? fm.removeItem(atPath: dst)
