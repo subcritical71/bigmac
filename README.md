@@ -4,7 +4,7 @@
 
 Big Sur macOS 11 Mac Pro patcher (in the works)
 
-# 🍟 coming soon
+# 🍟 coming soon as a public alpha
 
 <img src="https://swift4me.com/images/splash/bigmac2f.png" width="100%" >
 
@@ -20,3 +20,4 @@ Big Sur macOS 11 Mac Pro patcher (in the works)
 * Ultra Fast Boot of a Full OS
 * Improved Boot Screen Support
 * Full GUI
+* Exclusive C Key booting!
