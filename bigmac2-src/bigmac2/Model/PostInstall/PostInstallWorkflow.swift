@@ -112,7 +112,7 @@ extension ViewController {
             
             if teleTrap {
                 let kext = "telemetrap.kext"
-                _ = installKext(dest: dest, kext: kext, fold: slek, ttle: teleTraptl)
+                _ = installKext(dest: dest, kext: kext, fold: lext, ttle: teleTraptl)
                 
                 let plug = "com.apple.telemetry.plugin"
                 _ = installKext(dest: dest, kext: plug, fold: uepi, ttle: teleTraptl)
@@ -175,7 +175,7 @@ extension ViewController {
                 //MARK: Delete Snapshots
                 do {
                     
-                    if  let plistData: Data = plist.data(using: .utf8) {
+                    if let plistData: Data = plist.data(using: .utf8) {
                         print(plistData)
                         
                         let decoder = PropertyListDecoder()

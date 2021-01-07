@@ -40,19 +40,18 @@ extension ViewController {
         indicatorBump(updateProgBar: true)
 
         //MARK: Updating All Kernel Extensions
-         let kmArrA = ["install", "--update-all", "--check-rebuild", "--repository", "/\(sysLibExt)", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--repository", "/\(appleSysLibExt)", "--volume-root", "\(destVolume)"]
+        let kmArrA = ["install", "--update-all", "--check-rebuild", "--repository", "/\(sysLibExt)", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--repository", "/\(appleSysLibExt)", "--volume-root", "\(destVolume)"]
          runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title: "Updating All Kernel Extensions...")
          
             indicatorBump(updateProgBar: true)
 
          //MARK: Rechecking Extensions
-         let kmArrRE = ["install", "--repository", "/\(sysLibExt)", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--repository", "/\(appleSysLibExt)", "--volume-root", "\(destVolume)"]
-         runIndeterminateProcess(binary: kmutil, arguments: kmArrRE, title: "Rechecking Extensions...")
+         runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title: "Rechecking Extensions...")
          
         indicatorBump(updateProgBar: true)
 
          //MARK: Updating Library Extensions
-         let kmArrB = ["install", "--check-rebuild", "--repository", "/\(libExt)", "--repository", "/\(sysLibExt)", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--repository", "/\(appleSysLibExt)", "--volume-root", "\(destVolume)"]
+         let kmArrB = ["install", "--check-rebuild", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--volume-root", "\(destVolume)"]
          runIndeterminateProcess(binary: kmutil, arguments: kmArrB, title: "Updating Library Extensions...")
      
 
@@ -80,7 +79,7 @@ extension ViewController {
         
         
         let kcditto = "\(destVolume)usr/sbin/kcditto"
-        runIndeterminateProcess(binary: kcditto, arguments: [""], title: "Running kcDitto..")
+        runIndeterminateProcess(binary: kcditto, arguments: [], title: "Running kcDitto..")
         
         return
 

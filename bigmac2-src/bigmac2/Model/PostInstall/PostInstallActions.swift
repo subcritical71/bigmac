@@ -22,9 +22,9 @@ extension ViewController {
         DispatchQueue.global(qos: .background).async { [self] in
             PostInstall()
             
-            DispatchQueue.main.async { [self] in
+            //DispatchQueue.main.async { [self] in
                 //anything else?
-            }
+            //}
         }
     }
 
