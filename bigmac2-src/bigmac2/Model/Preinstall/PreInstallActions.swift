@@ -4,19 +4,7 @@
 //
 //  Created by starplayrx on 12/31/20.
 //
-
-import Foundation
-
-
-//
-//  PreInstallActions.swift
-//  bigmac2
-//
-//  Created by starplayrx on 12/31/20.
-//
-
-import Foundation
-
+import Cocoa
 
 extension ViewController {
     @IBAction func LaunchInstallerAction(_ sender: Any) {
@@ -89,10 +77,8 @@ extension ViewController {
                 
                 _ = performAppleScript(script: script)
                 macOS(installer: installAsstFullOS)
-                
             }
         }
-        
         preInstallRunner(libVal: libVal, SIP: SIP, AR: AR)
     }
 }

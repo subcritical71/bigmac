@@ -54,7 +54,7 @@ extension ViewController : URLSessionDownloadDelegate {
             if let savedURL = savedURL {
                 try? fileManager.moveItem(at: location, to: savedURL)
                 
-                if filename == bigmacDisk {
+                if filename == bigmacDMG {
                     NotificationCenter.default.post(name: .CreateDisk, object: nil)
                 }
             }
@@ -70,7 +70,6 @@ extension ViewController : URLSessionDownloadDelegate {
             task.resume()
         }
     }
-    
     
     func startCopy(sourcePath: String, targetPath: String) {
         let fileManager = FileManager.default
@@ -129,15 +128,10 @@ extension ViewController : URLSessionDownloadDelegate {
                     })
                 }
             }
-            
         } catch {
             print(error)
         }
-        
-        
-        
     }
-    
     
     func copyFile(atPath sourcePath: String, toPath targetPath: String) {
         DispatchQueue.main.async { [self] in
@@ -149,8 +143,7 @@ extension ViewController : URLSessionDownloadDelegate {
                 checkFileSize(sourcePath: sourcePath, targetPath: targetPath)
             }
         }
-        
-        
+    
         let fileManager = FileManager.default
         
         if fileManager.fileExists(atPath: targetPath) {
@@ -163,7 +156,6 @@ extension ViewController : URLSessionDownloadDelegate {
         }
         
         startCopy(sourcePath: sourcePath, targetPath: targetPath)
-        
     }
 }
 

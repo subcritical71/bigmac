@@ -21,11 +21,9 @@ class CredsViewController: NSViewController {
         super.viewDidAppear()
         progressBar.isHidden = true
         progressBar.startAnimation(self)
-        if NSUserName() != "root" && !NSUserName().isEmpty {
+        if NSUserName() != root && !NSUserName().isEmpty {
             userNameLabel.stringValue = NSUserName()
         }
-        
-        //self.view.window?.center()
     }
     
     override func viewWillDisappear() {

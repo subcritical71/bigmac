@@ -19,17 +19,15 @@ extension ViewController {
         postInstallSpinner.isHidden = false
         patchBool()
         
-        
         DispatchQueue.global(qos: .background).async { [self] in
             PostInstall()
             
             DispatchQueue.main.async { [self] in
-
+                //anything else?
             }
         }
     }
-    
-    
+
     @IBAction func legacyUSB_act(_ sender: Any) {
         enableUSB_btn.state == .on ? (enableUSB = true) : (enableUSB = false)
     }
@@ -85,7 +83,6 @@ extension ViewController {
     @IBAction func updateBootSystemKCs_act(_ sender: Any) {
         updateBootSysKCs.state == .on ? (installKCs = true) : (installKCs = false)
     }
-    
 }
 
 

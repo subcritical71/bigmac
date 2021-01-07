@@ -11,7 +11,6 @@ import AppKit
 
 class EraseDiskViewController : NSViewController {
     
-    
     @IBOutlet weak var volumePopup: NSPopUpButton!
     @IBOutlet weak var cancel: NSButton!
     @IBOutlet weak var okButton: NSButton!

@@ -19,7 +19,6 @@ extension ViewController {
         singleUserCheckbox.state == .on ? (isBaseSingleUser = true) : (isBaseSingleUser = false)
     }
  
-    
     @IBAction func downloadMacOSAction(_ sender: Any) {
         progressBarDownload.doubleValue = 0
         progressBarDownload.isIndeterminate = false
@@ -31,9 +30,6 @@ extension ViewController {
         //Erase a Disk first
         self.performSegue(withIdentifier: "eraseDisk", sender: self)
     }
-    
-    
-
 }
 
 

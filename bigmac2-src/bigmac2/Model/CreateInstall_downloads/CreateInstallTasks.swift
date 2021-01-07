@@ -71,9 +71,7 @@ extension ViewController {
     func installBaseSystem(diskInfo: myVolumeInfo, baseSys: String, bm2: String) {
         //MARK: Install Base System
         _ = addVolume(dmgPath: "/\(tmp)/\(restoreBaseSystem)", targetDisk: "/dev/r\(diskInfo.disk)", erase: false, title: "Installing Base System")
-        
         _ = mountDiskImage(arg: ["unmount", "/\(tmp)/\(restoreBaseSystem)", "-force"])
-        
         _ = mountVolume(disk: diskInfo.disk)
         _ = renameDisk(input: baseSys, output: bm2)
         
@@ -84,11 +82,11 @@ extension ViewController {
     func installBaseSystemII(diskInfo: myVolumeInfo, baseSys: String, bm2: String) {
         //MARK: Install Base System
         
-        let path = "/Users/shared/\(bigmacDisk)"
+        let path = "/Users/shared/\(bigmacDMG)"
         let ttle = "Installing the bigmac2 Boot Disk..."
         
         if checkIfFileExists(path: path) {
-            _ = addVolume(dmgPath: "/Users/shared/\(bigmacDisk)", targetDisk: "/dev/r\(diskInfo.disk)", erase: true, title: ttle)
+            _ = addVolume(dmgPath: "/Users/shared/\(bigmacDMG)", targetDisk: "/dev/r\(diskInfo.disk)", erase: true, title: ttle)
         } else {
             print("BASE SYSTEM... DISK NOT FOUND...\n")
         }
@@ -212,7 +210,7 @@ extension ViewController {
 
 
 
-//MARK: Task #6 (For Admin - This needs to be refactor and utilize the common BootSystem routine)
+//MARK: Task #6 (For Admin - This needs to be refactored and utilize the common BootSystem routine)
 /* func setupPreboot(diskInfo: myVolumeInfo, bm2: String, rndStr: String, isVerbose: Bool, isSingleUser: Bool, slice: String) {
  let _ = mkDir(arg: "/\(tmp)/\(basesystem)\(rndStr)")
  let _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["unmount", "/\(tmp)/\(restoreBaseSystem)"] )

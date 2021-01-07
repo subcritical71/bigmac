@@ -7,8 +7,10 @@
 
 import Foundation
 
-var globalVolumeInfo : myVolumeInfo!
+//MARK: TO DO -> Clean up
+var globalVolumeInfo = myVolumeInfo(diskSlice: "", disk: "", displayName: "", volumeName: "", path: "", uuid: "", external: false, root: false, capacity: 0)
 var rootMode = false
+var root = "root"
 var isBaseSingleUser = false
 var isBaseVerbose = false
 var isSysSingleUser = false
@@ -29,10 +31,6 @@ var legacyWiFi = false
 var installKCs = true
 var blessSystem = true
 var deleteSnaphots = true
-
-var sourcePathX = ""
-var targetPathX = ""
-
 var enableUSBtl = ""
 var disableBT2tl = ""
 var amdMouSSEtl = ""
@@ -47,20 +45,15 @@ var legacyWiFitl = ""
 var installKCstl = ""
 var blessSystemtl = ""
 var deleteSnaphotstl = ""
-
-let tempSystemX = Bundle.main.resourceURL!.path + "/bm2tmp0.dmg"
-
-var bigmacDisk = "bigmac2.dmg"
+var bigmacDMG = "bigmac2.dmg"
 var bigmac2Str = "bigmac2"
+var domain = "www.starplayrx.com"
 var tmpFolder = "/tmp/"
 var bigDataDMG = "bigdata.dmg"
 var bigDataStr = "bigdata"
 let setResX = "/Applications/RDM.app/Contents/MacOS/SetResX"
 let baseOS = "/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
-
-//get Home Folder
 let tempFolder = "/tmp"
-
 let tmp = "tmp"
 let sharedsupport = "SharedSupport"
 let bigmac2 = "bigmac2"
@@ -68,18 +61,12 @@ let tempDiskImage = "bm2tmp0"
 let applications = "Applications"
 let basesystem = "BaseSystem"
 let haxDylib = "HaxDoNotSealNoAPFSROMCheck.dylib"
-    
 var bigdata = "bigdata"
-
 let macSoftwareUpdate = "com_apple_MobileAsset_MacSoftwareUpdate"
 var installBigSur = "Install macOS Big Sur.app"
 let wildZip = "*.zip"
 let restoreBaseSystem = "AssetData/Restore/BaseSystem.dmg"
-
 var installerVolume = "/Volumes/bigmac2"
 let shared = "Shared/" //copy to shared directory
-
 let apfs = "/System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util"
-
-
 var driv = ""

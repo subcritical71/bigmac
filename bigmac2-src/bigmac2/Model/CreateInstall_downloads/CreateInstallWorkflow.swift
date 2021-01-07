@@ -16,7 +16,6 @@ extension ViewController {
         
         incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: false, title: "Making the bigmac2 installer disk bootable...")
 
-        
         //MARK: Update systemVolume volume because UUIDs have changed
         if let systemVolume = getVolumeInfoByDisk(filterVolumeName: diskInfo.volumeName, disk: diskInfo.disk, isRoot: diskInfo.root) {
             
@@ -29,7 +28,6 @@ extension ViewController {
             print("Bootable System Failure.")
         }
     }
-    
     
     func customerInstallDisk(isBeta:Bool, diskInfo: myVolumeInfo, isVerbose: Bool, isSingleUser: Bool, fullDisk: Bool) {
         DispatchQueue.global(qos: .background).async { [self] in
@@ -92,9 +90,6 @@ extension ViewController {
         }
     }
 }
-
-
-
 
 
 //MARK: Full Disk Workflow - Not for Customer Use as it is very backward compatible

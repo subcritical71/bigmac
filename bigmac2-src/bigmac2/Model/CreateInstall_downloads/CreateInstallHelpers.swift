@@ -24,7 +24,6 @@ extension ViewController {
         }
     }
     
-    
     //MARK: To do - Setup a variable
     func downloadBigMac2(dmg: String) {
         //Remove pre-existing file
@@ -40,7 +39,6 @@ extension ViewController {
         }
     }
     
-    
     //MARK: Install Shared Support DMG
     internal func installSharedSupportDMG2() {
         DispatchQueue.global(qos: .background).async { [self] in
@@ -52,11 +50,8 @@ extension ViewController {
     internal func installEmojiFont(diskInfo: myVolumeInfo) {
         incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, title: "Installing the Apple Emoji Font...")
 
-        //DispatchQueue.global(qos: .background).async { [self] in
-            copyFile(atPath: "/System/Library/Fonts/Apple Color Emoji.ttc", toPath: "\(diskInfo.path)/System/Library/Fonts/Apple Color Emoji.ttc")
-       // }
+        copyFile(atPath: "/System/Library/Fonts/Apple Color Emoji.ttc", toPath: "\(diskInfo.path)/System/Library/Fonts/Apple Color Emoji.ttc")
     }
-    
     
     //MARK: Increment Install Fuel Gauge
     internal func incrementInstallGauge(resetGauge: Bool, incremment: Bool, setToFull: Bool, cylon: Bool = false, title: String = "") {
@@ -105,8 +100,6 @@ extension ViewController {
         }
     }
     
-    
-    
     //MARK: Increment Install Fuel Gauge
     internal func setMediaLabelX(_ message: String) {
         
@@ -114,8 +107,6 @@ extension ViewController {
             mediaLabel.stringValue = message
         }
     }
-    
-    
     
     //MARK: Spinner Animation
     internal func spinnerAnimation (start: Bool, hide: Bool) {
@@ -133,38 +124,24 @@ extension ViewController {
                 createInstallSpinner.isHidden = false
             }
         }
-        
     }
-    
-    
     
     //MARK: Check for root user
     internal func checkForRootUser () -> Bool {
         rootMode || NSUserName() == "root" ? true : false
     }
     
-    
- 
-    
-    
-    
     //MARK: Make Rename Disk using diskutil
     internal func renameDisk(bin: String = "/usr/sbin/diskutil", input: String, output: String) -> String {
         let result = runCommandReturnString(binary: bin , arguments: ["rename", input, output]) ?? ""
         return result
     }
-    
-    
-    
-    //diskutil apfs deleteVolume /Volumes/bm2tmp0
-    
+        
     //MARK: Make Rename Disk using diskutil
     internal func removeApfsVolume(bin: String = "/usr/sbin/diskutil", remove: String) -> String {
         let result = runCommandReturnString(binary: bin , arguments: ["apfs", "deleteVolume", remove]) ?? ""
         return result
     }
-    
-    
     
     //MARK: Make Rename Disk using diskutil
     internal func blessVolume(bin: String = "/usr/sbin/bless", bless: String) -> String {
@@ -172,18 +149,11 @@ extension ViewController {
         return result
     }
     
-    
-
-   
-    
-    
     //MARK: Extract DMG from Zip file
     func extractDMGfromZip(bin: String = "/usr/bin/unzip", arg: [String] ) -> String {
         let result = runCommandReturnString(binary: bin , arguments: arg) ?? ""
         return result
     }
-    
-    
     
     //MARK: Add volume using ASR
     func addVolume(binStr: String = "/usr/sbin/asr", dmgPath: String, targetDisk: String, erase: Bool, title: String) -> String {
@@ -201,15 +171,11 @@ extension ViewController {
         return "Done"
     }
     
-    
-    
     //MARK: Erase Disk
     func eraseDisk(bin: String = "/usr/sbin/diskutil", diskSlice: String ) -> String {
         let result = runCommandReturnString(binary: bin, arguments: ["reformat", diskSlice]) ?? ""
         return result
     }
-    
-    
     
     //MARK: MountVolume
     func mountVolume(bin: String = "/usr/sbin/diskutil", disk: String) -> String {
@@ -218,8 +184,7 @@ extension ViewController {
         return result
     }
     
-    
-    
+
     //MARK: Get Disk Info by a single Disk with all volumes it contains, plus filtering specific disk and get its slice
     func getVolumeInfoByDisk (filterVolumeName: String, disk: String, isRoot: Bool = false) -> myVolumeInfo? {
         
@@ -234,8 +199,6 @@ extension ViewController {
             return d?.first ?? nil
         }
     }
-    
-    
     
     //MARK: Get APFS Physical Store Disk:
     func getApfsPhysicalStoreDisk(apfsDiskInfo: String ) -> String {
@@ -262,8 +225,6 @@ extension ViewController {
         }
     }
     
-    
-    
     //UnmountDrives
     func unmountDrives(mountBigmac: Bool, ejectAll: Bool) {
         
@@ -284,11 +245,9 @@ extension ViewController {
             }
         }
        
-        
         if mountBigmac {
             _ = runCommandReturnString( binary: binary, arguments: [ "mount", "bigmac2" ] ) ?? ""
         }
-
     }
 }
 

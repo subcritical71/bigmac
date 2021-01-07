@@ -47,9 +47,7 @@ extension ViewController {
             pass = !pass
         }
         
-
         return pass
     }
-
 }
 

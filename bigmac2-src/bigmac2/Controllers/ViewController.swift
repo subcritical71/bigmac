@@ -72,10 +72,6 @@ class ViewController: NSViewController, URLSessionDelegate {
 
     let fm = FileManager.default
     var timer: Timer?
-
-    
-
-   
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -96,10 +92,9 @@ class ViewController: NSViewController, URLSessionDelegate {
     }
 }
 
-//No need for this yet
+//No need for this yet (this can probably be removed whe its decoupled from the main storyboard
 class TabView : NSTabView {
     override func awakeFromNib() {
-        
     }
 }
 

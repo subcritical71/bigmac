@@ -4,10 +4,7 @@
 //
 //  Created by starplayrx on 1/1/21.
 //
-
 import Cocoa
-
-
 
 //MARK: Mount Big Data
 func mountBigData() {
@@ -36,7 +33,6 @@ func unmountBigData() {
     if checkIfFileExists(path: dir) {
         _ = rmDir(arg: "/\(tmp)/\(bigdata)")
     }
-    
 }
 
 
@@ -90,9 +86,6 @@ func parseRawText(_ str: String) -> String {
     return s
 }
 
-
-
-
 extension ViewController {
 
     // MARK: Get System Info
@@ -141,8 +134,6 @@ extension ViewController {
         _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1920", "-h", "1080", "-s", "2"])
     }
     
- 
-    
     func checkForBaseOS() -> Bool {
         if fm.fileExists(atPath: baseOS) {
             return true
@@ -177,7 +168,6 @@ extension ViewController {
         }
     }
     
-
     //MARK: This a better preboot routine
     func getDisk(substr: String, usingDiskorSlice: String, isSlice: Bool) -> String? {
         
@@ -195,10 +185,6 @@ extension ViewController {
                 }
             }
         }
-        
         return nil
-        
     }
-    
-
 }

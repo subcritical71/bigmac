@@ -22,11 +22,8 @@ class InstallViewController: NSViewController {
         if let url = URL(string: "https://www.paypal.com/donate?hosted_button_id=M3U48FLF87SXQ") {
             NSWorkspace.shared.open(url)
         }
-        
         dismiss(self)
-
     }
-    
     
     @IBAction func cancelButton(_ sender: Any) {
         dismiss(self)
@@ -54,9 +51,5 @@ class InstallViewController: NSViewController {
         _ = runCommandReturnString(binary: bless, arguments: ["--mount", "\(path)", "--folder", "\(path)System/Library/CoreServices", "--bootefi", "--label", globalVolumeInfo.displayName, "--setBoot", "--nextonly"])
         
         _ = runCommandReturnString(binary: "/sbin/reboot", arguments: [])
-        
-
     }
-    
-
 }

@@ -4,7 +4,6 @@
 //
 //  Created by starplayrx on 12/29/20.
 //
-
 import Foundation
 
 func txt2file(text: String, file: String) {
@@ -16,9 +15,6 @@ func txt2file(text: String, file: String) {
        print(error)
     }
 }
-
-
-
 
 //reading
 //do {

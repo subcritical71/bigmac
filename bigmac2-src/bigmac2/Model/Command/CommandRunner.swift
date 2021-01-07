@@ -34,8 +34,8 @@ func runCommandReturnString(binary: String, arguments: [String]) -> String? {
     }
     
     return ""
-    
 }
+
 
 /* May remove AppleScript, or keep if for non-root mode*/
 func performAppleScript (script: String) -> (text: String?, error: NSDictionary?) {
@@ -50,8 +50,8 @@ func performAppleScript (script: String) -> (text: String?, error: NSDictionary?
     
     print(text,error)
     return (text: text, error: error)
-
 }
+
 
 extension ViewController {
     
@@ -74,7 +74,7 @@ extension ViewController {
             process.standardOutput = pipe
             process.standardError = pipe
             
-            let handler =  { (file: FileHandle!) -> Void in
+            let handler =  { (file: FileHandle) -> Void in
                 let data = file.availableData
                 guard let output = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
                     else { return }
@@ -88,13 +88,9 @@ extension ViewController {
                             if x >= 0 && x <= 100 {
                                 self.sharedSupportProgressBar.doubleValue = Double(x)
                                 self.sharedSupportPercentage.stringValue = "\(x)%"
-
                             }
                         }
                     }
-                    
-                    //PSTT    0    100    start replicate
-                    //self.statusTextView.string = self.statusTextView.string + (output as String)
                 }
             }
             
@@ -111,30 +107,11 @@ extension ViewController {
             
             process.launch()
             process.waitUntilExit()
-       // }
     }
-    
-    //MARK: Pseudo Logger to estimate time stamp size
-    func fakeLogger(format: String, pname: String) -> String {
-        let fmt = DateFormatter()
-        fmt.dateFormat = "yyyy-MM-dd HH:mm:ss.SSS.mmm.mmmm"
-        let timestamp = fmt.string(from: NSDate() as Date)
-
-        let pinfo = ProcessInfo()
-        let pid = pinfo.processIdentifier
-        var tid = UInt64(0)
-        pthread_threadid_np(nil, &tid)
-
-        return "\(timestamp) \(pname)[\(pid):\(tid)]"
-    }
-    
+        
     /* Run command in the background */
     func runIndeterminateProcess(binary: String, arguments: [String], title: String, sleepForHeadings: Bool = false) {
         
-        //MARK: Used to get a count for kmutil prefix
-        ///Used to strip out time stamps from the GUI outout as it's not relevant and takes up a lot of real estate.
-        //let pre = fakeLogger(format: "", pname: "kmutil").count
-
         DispatchQueue.main.async { [self] in
             postInstallTask_label.stringValue = title
             postInstallDetails_label.stringValue = ""
@@ -155,7 +132,7 @@ extension ViewController {
             process.standardOutput = pipe
             process.standardError = pipe2
             
-            let handler =  { (file: FileHandle!) -> Void in
+            let handler =  { (file: FileHandle) -> Void in
                 let data = file.availableData
                 guard let output = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
                     else { return }
@@ -180,7 +157,7 @@ extension ViewController {
                 }
             }
         
-            let handler2 = { (file: FileHandle! ) -> Void in
+            let handler2 = { ( file: FileHandle ) -> Void in
                 let data = file.availableData
                 guard let output2 = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
                     else { return }
@@ -194,8 +171,6 @@ extension ViewController {
                         io = io.capitalizingFirstLetter()
                         self.postInstallDetails_label.stringValue = io as String
                     }
-                    
-                
                 }
             }
             
@@ -207,13 +182,9 @@ extension ViewController {
                 pipe.fileHandleForReading.readabilityHandler = nil
                 pipe2.fileHandleForReading.readabilityHandler = nil
             }
-        
-       
             process.launch()
             process.waitUntilExit()
-       // }
     }
-
 }
 
 

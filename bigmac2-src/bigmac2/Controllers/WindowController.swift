@@ -4,9 +4,7 @@
 //
 //  Created by starplayrx on 1/4/21.
 //
-
 import Cocoa
-
 
 class WindowController : NSWindowController {
     
@@ -14,7 +12,7 @@ class WindowController : NSWindowController {
         super.windowDidLoad()
         _ = performAppleScript(script: "tell me to activate")
 
-        if NSUserName() == "root" {
+        if NSUserName() == root {
             window?.setFrameAutosaveName("bigMacMainView")
             window?.level = .normal
             shouldCascadeWindows = false
@@ -29,7 +27,6 @@ class WindowController : NSWindowController {
             if let x = window?.frame.minX, let y = window?.frame.minX, let w = window?.minSize.width, let h = window?.minSize.height {
                 
                 window?.setFrame(NSRect(x:x, y: (h + y * 0.375),width: w, height: h), display: true)
-
             }
         }
     }

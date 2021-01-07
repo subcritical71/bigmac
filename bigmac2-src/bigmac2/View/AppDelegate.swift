@@ -10,7 +10,6 @@ import AppKit
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
     
- 
     func applicationShouldHandleReopen(_ sender: NSApplication, hasVisibleWindows flag: Bool) -> Bool {
         if flag == false {
 
@@ -29,10 +28,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     func applicationWillTerminate(_ aNotification: Notification) {
         // Insert code here to tear down your application
         
-        if NSUserName() == "root" {
+        if NSUserName() == root {
             unmountBigData() //dmg for the app
         }
-        
         
         func save() {
             //ToDo Switch to an array and loop over or a dictionary, could even use a Struct
@@ -56,8 +54,6 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         save()
-
-
     }
 }
 

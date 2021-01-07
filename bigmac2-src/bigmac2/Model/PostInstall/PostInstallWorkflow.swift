@@ -37,7 +37,6 @@ extension ViewController {
         
         DispatchQueue.global(qos: .background).async { [self] in
             
-                
             indicatorBump(updateProgBar: true)
             
             var isMatch = false
@@ -83,7 +82,6 @@ extension ViewController {
             let uepi = "System/Library/UserEventPlugins"
             let lext = "Library/Extensions"
             let ulib = "usr/local/lib"
-            
             
             indicatorBump(updateProgBar: true)
 
@@ -151,9 +149,7 @@ extension ViewController {
             }
             
             indicatorBump(updateProgBar: true)
-            
             BootSystem(system: systemVolume, dataVolumeUUID: dataVolumeUUID, isVerbose: VerboseBoot, isSingleUser: singleUser, prebootVolume: preboot)
-            
             
             var sysPath = systemVolume.path + "/"
             
@@ -168,8 +164,6 @@ extension ViewController {
                 indicatorBump(taskMsg: "Updating Kernel Collections and Prelinked Kernel...", updateProgBar: true)
                 updateMac11onMac11SystemCache(destVolume: sysPath)
             }
-            
-          
             
             //MARK: Delete Snapshots
             if deleteSnaphots {
@@ -207,7 +201,6 @@ extension ViewController {
             
             indicatorBump(updateProgBar: true)
 
-            
             if blessSystem {
                 
                 // if let app = appFolder  {
@@ -219,7 +212,7 @@ extension ViewController {
                     path = systemVolume.path
                 }
                 
-                runIndeterminateProcess(binary: bless, arguments: ["--folder", "\(path)System/Library/CoreServices" , "--bootefi", "--label", systemVolume.displayName, "--setBoot"], title: "Blessing the System Volume...")
+                runIndeterminateProcess(binary: bless, arguments: ["--folder", "\(path)System/Library/CoreServices" , "--bootefi", "--label", systemVolume.displayName, "--setBoot"], title: "String")
             }
             
             indicatorBump(updateProgBar: true)
@@ -233,8 +226,6 @@ extension ViewController {
                 postInstallSpinner.stopAnimation(self)
                 postInstallSpinner.isHidden = true
             }
-            
         }
-        
     }
 }

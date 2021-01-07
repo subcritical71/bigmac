@@ -25,7 +25,9 @@ extension ViewController {
         installerFuelGauge.doubleValue = 0
         
         let defaults = UserDefaults.standard
-
+        
+        var counter = 0
+        
         isBaseVerbose    = defaults.bool(forKey: "isBaseVerbose")
         isBaseSingleUser = defaults.bool(forKey: "isBaseSingleUser")
         isSysVerbose     = defaults.bool(forKey: "isSysVerbose")
@@ -46,30 +48,73 @@ extension ViewController {
         installKCs      = defaults.bool(forKey: "installKCs")
         blessSystem     = defaults.bool(forKey: "blessSystem")
         deleteSnaphots  = defaults.bool(forKey: "deleteSnaphots")
-        
+         
         isBaseSingleUser ? (singleUserCheckbox.state = .on) : (singleUserCheckbox.state = .off)
         isBaseVerbose    ? (verboseUserCheckbox.state = .on) : (verboseUserCheckbox.state = .off)
         
-        enableUSB       ? (enableUSB_btn.state = .on)       : (enableUSB_btn.state = .off)
-        disableBT2      ? (disableBT2_btn.state = .on)      : (disableBT2_btn.state = .off)
-        amdMouSSE       ? (amdMouSSE_btn.state = .on)       : (amdMouSSE_btn.state = .off)
-        teleTrap        ? (teleTrap_btn.state = .on)        : (teleTrap_btn.state = .off)
-        VerboseBoot     ? (VerboseBoot_btn.state = .on)     : (VerboseBoot_btn.state = .off)
-        superDrive      ? (superDrive_btn.state = .on)      : (superDrive_btn.state = .off)
-        appStoreMacOS   ? (appStoreMacOS_btn.state = .on)   : (appStoreMacOS_btn.state = .off)
-        appleHDA        ? (appleHDA_btn.state = .on)        : (appleHDA_btn.state = .off)
-        hdmiAudio       ? (hdmiAudio_btn.state = .on)       : (hdmiAudio_btn.state = .off)
-        singleUser      ? (singleUser_btn.state = .on)      : (singleUser_btn.state = .off)
-        legacyWiFi      ? (legacyWiFi_btn.state = .on)      : (legacyWiFi_btn.state = .off)
-        installKCs      ? (updateBootSysKCs.state = .on)    : (updateBootSysKCs.state = .off)
-        blessSystem     ? (BlessVolume.state = .on)         : (BlessVolume.state = .off)
-        deleteSnaphots  ? (deleteAPFSSnapshotsButton.state = .on) : (deleteAPFSSnapshotsButton.state = .off)
- 
+         _ =  enableUSB       ? (enableUSB_btn.state = .on,      counter += 1)         : (enableUSB_btn.state = .off, ())
+         _ =  disableBT2      ? (disableBT2_btn.state = .on,     counter += 1 )        : (disableBT2_btn.state = .off, ())
+         _ =  amdMouSSE       ? (amdMouSSE_btn.state = .on,      counter += 1 )        : (amdMouSSE_btn.state = .off, ())
+         _ =  teleTrap        ? (teleTrap_btn.state = .on,       counter += 1 )        : (teleTrap_btn.state = .off, ())
+         _ =  VerboseBoot     ? (VerboseBoot_btn.state = .on,    counter += 1 )        : (VerboseBoot_btn.state = .off, ())
+         _ =  superDrive      ? (superDrive_btn.state = .on,     counter += 1)         : (superDrive_btn.state = .off, ())
+         _ =  appStoreMacOS   ? (appStoreMacOS_btn.state = .on,  counter += 1)         : (appStoreMacOS_btn.state = .off, ())
+         _ =  appleHDA        ? (appleHDA_btn.state = .on,       counter += 1)         : (appleHDA_btn.state = .off, ())
+         _ =  hdmiAudio       ? (hdmiAudio_btn.state = .on,      counter += 1)         : (hdmiAudio_btn.state = .off, ())
+         _ =  singleUser      ? (singleUser_btn.state = .on,     counter += 1 )        : (singleUser_btn.state = .off, ())
+         _ =  legacyWiFi      ? (legacyWiFi_btn.state = .on,     counter += 1)         : (legacyWiFi_btn.state = .off, ())
+         _ =  installKCs      ? (updateBootSysKCs.state = .on,   counter += 1)         : (updateBootSysKCs.state = .off, ())
+         _ =  blessSystem     ? (BlessVolume.state = .on,        counter += 1)         : (BlessVolume.state = .off, ())
+         _ =  deleteSnaphots  ? (deleteAPFSSnapshotsButton.state = .on, counter += 1)  : (deleteAPFSSnapshotsButton.state = .off, ())
+            
+        //MARK: Maybe create a struct for the check selection and add on other things like last tab used
+        
+        //MARK: To Do Generate an AI that knows what should be checked for the User, Defaulting to Mac Pro 3,1 Generic Specs
+        if counter == 0 {
+            enableUSB = true
+            enableUSB_btn.state = .on
+            
+            disableBT2 = true
+            disableBT2_btn.state = .on
+            
+            amdMouSSE = true
+            amdMouSSE_btn.state = .on
+            
+            teleTrap = true
+            teleTrap_btn.state = .on
+            
+            VerboseBoot = false
+            VerboseBoot_btn.state = .off
+            
+            superDrive = true
+            superDrive_btn.state = .on
+            
+            appStoreMacOS = true
+            appStoreMacOS_btn.state = .on
+            
+            appleHDA = true
+            appleHDA_btn.state = .on
+            
+            hdmiAudio = false
+            hdmiAudio_btn.state = .off
+            
+            singleUser = false
+            singleUser_btn.state = .off
+            
+            legacyWiFi = false
+            legacyWiFi_btn.state = .off
+            
+            installKCs = true
+            updateBootSysKCs.state = .on
+            
+            blessSystem = true
+            BlessVolume.state = .on
+            
+            deleteSnaphots = true
+            deleteAPFSSnapshotsButton.state = .on
+        }
     }
 }
-
-
-
 
 //Backburner.. easier not ot use this
 

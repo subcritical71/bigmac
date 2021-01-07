@@ -4,7 +4,6 @@
 //
 //  Created by starplayrx on 12/23/20.
 //
-
 import Foundation
 
 func getVolumeInfo(includeHiddenVolumes: Bool, includeRootVol: Bool = false, includePrebootVol: Bool = false) -> [myVolumeInfo]? {
@@ -43,7 +42,6 @@ func getVolumeInfo(includeHiddenVolumes: Bool, includeRootVol: Bool = false, inc
                         let desc = NSDictionary(dictionary : desc)
                         newVolume.disk = "\(diskString)\(desc[DAMediaBSDUnit] ?? emptyString )"
                     }
-                    
                     
                     if let info = try? disk.resourceValues(forKeys: Set(URLResourceKeys)) {
                         newVolume.capacity = info.volumeTotalCapacity ?? 0

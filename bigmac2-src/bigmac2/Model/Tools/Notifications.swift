@@ -20,19 +20,16 @@ extension ViewController {
     
      //MARK: Phase 1.1
      @objc func EraseDisk(_ notification:Notification){
-        
-         volumeInfo = notification.object as! myVolumeInfo //Store in a global
-
-        // permission to erase a disk, proceed with download of BigMacII disk then Create disk workflow
-        
+        volumeInfo = notification.object as? myVolumeInfo ?? myVolumeInfo(diskSlice: "", disk: "", displayName: "", volumeName: "", path: "", uuid: "", external: false, root: false, capacity: 0)
+      
         DispatchQueue.main.async { [self] in
             spinnerAnimation(start: true, hide: false)
         }
         
-        let path = "/Users/shared/\(bigmacDisk)"
+        let path = "/Users/shared/\(bigmacDMG)"
         
         if !checkIfFileExists(path: path) {
-            downloadBigMac2(dmg:"https://www.starplayrx.com/bigmac2/bigmac2.dmg")
+            downloadBigMac2(dmg:"https://\(domain)/\(bigmac2)/\(bigmacDMG)")
         } else {
             installDisk()
         }
@@ -61,7 +58,7 @@ extension ViewController {
     //MARK: Phase 1.2
     @objc func RunAsRootRequest(_ notification:Notification){
         
-        let pw = notification.object as! String //Store in a global
+        let pw = notification.object as? String ?? ""
 
         //MARK: runs our app as root, pretty sweet
         let bigMacApp = Bundle.main.bundlePath
@@ -82,7 +79,7 @@ extension ViewController {
         notifications.addObserver(self, selector: #selector(CreateDisk), name: .CreateDisk, object: nil)
         notifications.addObserver(self, selector: #selector(RunAsRootRequest), name: .RunAsRootRequest, object: nil)
         
-        if NSUserName() != "root" {
+        if NSUserName() != root {
             performSegue(withIdentifier: "userNamePassWord", sender: nil)
         }
     }
