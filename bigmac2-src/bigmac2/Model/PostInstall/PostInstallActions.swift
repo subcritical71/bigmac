@@ -19,7 +19,14 @@ extension ViewController {
         postInstallSpinner.isHidden = false
         patchBool()
         
-        PostInstall()
+        
+        DispatchQueue.global(qos: .background).async { [self] in
+            PostInstall()
+            
+            DispatchQueue.main.async { [self] in
+
+            }
+        }
     }
     
     

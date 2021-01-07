@@ -70,60 +70,9 @@ class ViewController: NSViewController, URLSessionDelegate {
     @IBOutlet weak var updateBootSysKCs: NSButton!
     @IBOutlet weak var patchDisk_btn: NSButton!
 
-    var enableUSBtl = String()
-    var disableBT2tl = String()
-    var amdMouSSEtl = String()
-    var teleTraptl = String()
-    var VerboseBoottl = String()
-    var superDrivetl = String()
-    var appStoreMacOStl = String()
-    var appleHDAtl = String()
-    var hdmiAudiotl = String()
-    var singleUsertl = String()
-    var legacyWiFitl = String()
-    var installKCstl = String()
-    var blessSystemtl = String()
-    var deleteSnaphotstl = String()
-
-    
-    var bigmacDisk = "bigmac2.dmg"
-    var bigmac2Str = "bigmac2"
-    var tmpFolder = "/tmp/"
-    var bigDataDMG = "bigdata.dmg"
-    var bigDataStr = "bigdata"
-    let setResX = "/Applications/RDM.app/Contents/MacOS/SetResX"
-    let baseOS = "/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
-
-    //get Home Folder
-    let tempFolder = "/tmp"
-    var sourcePath: String?
-    var targetPath: String?
-
     let fm = FileManager.default
-    let tmp = "tmp"
-    let sharedsupport = "SharedSupport"
-    let bigmac2 = "bigmac2"
-    let tempDiskImage = "bm2tmp0"
-    let applications = "Applications"
-    let basesystem = "BaseSystem"
-    let haxDylib = "HaxDoNotSealNoAPFSROMCheck.dylib"
-        
-    var bigdata = "bigdata"
-
-    let macSoftwareUpdate = "com_apple_MobileAsset_MacSoftwareUpdate"
-    var installBigSur = "Install macOS Big Sur.app"
-    let wildZip = "*.zip"
-    let restoreBaseSystem = "AssetData/Restore/BaseSystem.dmg"
-
-    var installerVolume = "/Volumes/bigmac2"
     var timer: Timer?
-    let shared = "Shared/" //copy to shared directory
 
-    let apfs = "/System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util"
-
-    let tempSystem = Bundle.main.resourceURL!.path + "/bm2tmp0.dmg"
-
-    var driv = String()
     
 
    

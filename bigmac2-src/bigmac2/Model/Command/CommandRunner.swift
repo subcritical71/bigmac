@@ -29,6 +29,7 @@ func runCommandReturnString(binary: String, arguments: [String]) -> String? {
     let data = pipe.fileHandleForReading.readDataToEndOfFile()
     
     if let output = String(data: data, encoding: String.Encoding.utf8), !output.isEmpty {
+        print(output)
         return output
     }
     
@@ -47,6 +48,7 @@ func performAppleScript (script: String) -> (text: String?, error: NSDictionary?
         text = result.stringValue
     }
     
+    print(text,error)
     return (text: text, error: error)
 
 }
@@ -131,7 +133,7 @@ extension ViewController {
         
         //MARK: Used to get a count for kmutil prefix
         ///Used to strip out time stamps from the GUI outout as it's not relevant and takes up a lot of real estate.
-        let pre = fakeLogger(format: "", pname: "kmutil").count
+        //let pre = fakeLogger(format: "", pname: "kmutil").count
 
         DispatchQueue.main.async { [self] in
             postInstallTask_label.stringValue = title
@@ -170,6 +172,7 @@ extension ViewController {
                     str = str.replacingOccurrences(of: "    ", with: " ")
                     str = str.replacingOccurrences(of: "   ", with: " ")
                     str = str.replacingOccurrences(of: "  ", with: " ")
+                    str = str.capitalized
 
                     if (!str.isEmpty || str.count > 6 || str != "") && !str.contains("  ") {
                         self.postInstallTask_label.stringValue = str as String
@@ -183,14 +186,16 @@ extension ViewController {
                     else { return }
                 
                 DispatchQueue.main.async { [self] in
-                    var fix = String(output2) as String
-                    fix = String(fix.prefix(pre))
-                    let io = String(output2).deletingPrefix(fix)
-                                        
-                    if !String(io).isEmpty && !String(io).contains("kmutil") && (String(io).contains("alidating") || String(io).contains("riting")) {
+                    var io = String(output2) as String
+                  
+                    if io.contains("ting") {
+                        io = io.stringAfter("]")
+                        io = io.stringAfter(" ")
+                        io = io.capitalizingFirstLetter()
                         self.postInstallDetails_label.stringValue = io as String
                     }
                     
+                
                 }
             }
             
@@ -200,13 +205,10 @@ extension ViewController {
             //Finish the Job
             process.terminationHandler = { (task: Process?) -> () in
                 pipe.fileHandleForReading.readabilityHandler = nil
-                
-                DispatchQueue.main.async { [self] in
-                    postInstallFuelGauge.doubleValue += 1
-                    postInstallProgressIndicator.doubleValue += 1
-                }
+                pipe2.fileHandleForReading.readabilityHandler = nil
             }
-            
+        
+       
             process.launch()
             process.waitUntilExit()
        // }

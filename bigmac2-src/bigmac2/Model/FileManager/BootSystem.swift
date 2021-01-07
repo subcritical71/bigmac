@@ -62,48 +62,54 @@ extension ViewController {
     </dict>
 </plist>
 """
+            let sysVolPre = "System/Volumes/Preboot"
+            let sysLibCor = "System/Library/CoreServices"
+            let libPreSyC = "Library/Preferences/SystemConfiguration"
+            let sysLibTmD = "System/Library/Templates/Data"
+            let restoreDk = "restore"
+        
             //MARK: Delete Items
             if system.root {
                 
                 if !isBaseSystem {
-                    try? fm.removeItem(atPath: "\(system.path)Library/Preferences/SystemConfiguration/\(bootPlist)")
-                    try? fm.removeItem(atPath: "\(system.path)System/Volumes/Preboot/\(dataVolumeUUID)/Library/Preferences/SystemConfiguration/\(bootPlist)")
-                    try? fm.removeItem(atPath: "\(system.path)System/Volumes/Preboot/\(dataVolumeUUID)/System/Library/CoreServices/\(platformPlist)") //Causes more trouble
-                    try? fm.removeItem(atPath: "\(system.path)System/Volumes/Preboot/\(dataVolumeUUID)/restore/\(buildManifestPlist)") //Causes more trouble
+                    try? fm.removeItem(atPath: "\(system.path)\(libPreSyC)/\(bootPlist)")
+                    try? fm.removeItem(atPath: "\(system.path)\(sysVolPre)/\(dataVolumeUUID)/\(libPreSyC)/\(bootPlist)")
+                    try? fm.removeItem(atPath: "\(system.path)\(sysVolPre)/\(dataVolumeUUID)/\(sysLibCor)/\(platformPlist)") //Causes more trouble
+                    try? fm.removeItem(atPath: "\(system.path)\(sysVolPre)/\(dataVolumeUUID)/\(restoreDk)/\(buildManifestPlist)") //Causes more trouble
                 }
                 
-                try? fm.removeItem(atPath: "\(system.path)System/Library/Templates/Data/Library/Preferences/SystemConfiguration/\(bootPlist)")
-                try? fm.removeItem(atPath: "\(system.path)System/Library/CoreServices/\(platformPlist)") //Causes more trouble
+                try? fm.removeItem(atPath: "\(system.path)\(sysLibTmD)/\(libPreSyC)/\(bootPlist)")
+                try? fm.removeItem(atPath: "\(system.path)\(sysLibCor)/\(platformPlist)") //Causes more trouble
 
             } else {
                 if !isBaseSystem {
-                    try? fm.removeItem(atPath: "\(system.path)/Library/Preferences/SystemConfiguration/\(bootPlist)")
+                    try? fm.removeItem(atPath: "\(system.path)/\(libPreSyC)/\(bootPlist)")
                 }
                 
-                try? fm.removeItem(atPath: "\(system.path)/System/Library/Templates/Data/Library/Preferences/SystemConfiguration/\(bootPlist)")
-                try? fm.removeItem(atPath: "\(system.path)/System/Library/CoreServices/\(platformPlist)") //Causes more trouble
-                try? fm.removeItem(atPath: "\(prebootPath)/\(dataVolumeUUID)/Library/Preferences/SystemConfiguration/\(bootPlist)")
-                try? fm.removeItem(atPath: "\(prebootPath)/\(dataVolumeUUID)/System/Library/CoreServices/\(platformPlist)") //Causes more trouble
-                try? fm.removeItem(atPath: "\(prebootPath)/\(dataVolumeUUID)/restore/\(buildManifestPlist)") //Causes more trouble
+                try? fm.removeItem(atPath: "\(system.path)/\(sysLibTmD)/\(libPreSyC)/\(bootPlist)")
+                try? fm.removeItem(atPath: "\(system.path)/\(sysLibCor)/\(platformPlist)") //Causes more trouble
+                try? fm.removeItem(atPath: "\(prebootPath)/\(dataVolumeUUID)/\(libPreSyC)/\(bootPlist)")
+                try? fm.removeItem(atPath: "\(prebootPath)/\(dataVolumeUUID)/\(sysLibCor)/\(platformPlist)") //Causes more trouble
+                try? fm.removeItem(atPath: "\(prebootPath)/\(dataVolumeUUID)/\(restoreDk)/\(buildManifestPlist)") //Causes more trouble
             }
             
             //MARK: write boot plist items back
             if system.root {
                 
                 if !isBaseSystem {
-                    txt2file(text: bootPlistTxt, file: "\(system.path)Library/Preferences/SystemConfiguration/\(bootPlist)")
+                    txt2file(text: bootPlistTxt, file: "\(system.path)\(libPreSyC)/\(bootPlist)")
                 }
                 
-                txt2file(text: bootPlistTxt, file:  "\(system.path)System/Library/Templates/Data/Library/Preferences/SystemConfiguration/\(bootPlist)")
-                txt2file(text: bootPlistTxt, file:  "\(system.path)System/Volumes/Preboot/\(dataVolumeUUID)/Library/Preferences/SystemConfiguration/\(bootPlist)")
+                txt2file(text: bootPlistTxt, file:  "\(system.path)\(sysLibTmD)/\(libPreSyC)/\(bootPlist)")
+                txt2file(text: bootPlistTxt, file:  "\(system.path)\(sysVolPre)/\(dataVolumeUUID)/\(libPreSyC)/\(bootPlist)")
             } else {
                 
                 if !isBaseSystem {
-                    txt2file(text: bootPlistTxt, file:  "\(system.path)/Library/Preferences/SystemConfiguration/\(bootPlist)")
+                    txt2file(text: bootPlistTxt, file:  "\(system.path)/\(libPreSyC)/\(bootPlist)")
                 }
                 
-                txt2file(text: bootPlistTxt, file:  "\(system.path)/System/Library/Templates/Data/Library/Preferences/SystemConfiguration/\(bootPlist)")
-                txt2file(text: bootPlistTxt, file:  "\(prebootPath)/\(dataVolumeUUID)/Library/Preferences/SystemConfiguration/\(bootPlist)")
+                txt2file(text: bootPlistTxt, file:  "\(system.path)/\(sysLibTmD)/\(libPreSyC)/\(bootPlist)")
+                txt2file(text: bootPlistTxt, file:  "\(prebootPath)/\(dataVolumeUUID)/\(libPreSyC)/\(bootPlist)")
                 
             }
             

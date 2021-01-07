@@ -21,7 +21,7 @@
 		2D3E60F2259CFC6000DE6488 /* ParseBootArgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3E60F1259CFC6000DE6488 /* ParseBootArgs.swift */; };
 		2D3E60FE259D430C00DE6488 /* ViewControllerSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3E60FD259D430C00DE6488 /* ViewControllerSetup.swift */; };
 		2D522BAC25A35FA000E25780 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D522BAB25A35FA000E25780 /* WindowController.swift */; };
-		2D522BB525A36A5B00E25780 /* shakeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D522BB425A36A5B00E25780 /* shakeView.swift */; };
+		2D522BB525A36A5B00E25780 /* Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D522BB425A36A5B00E25780 /* Exts.swift */; };
 		2D522BBA25A36AE100E25780 /* Structs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D522BB925A36AE100E25780 /* Structs.swift */; };
 		2D522BBD25A36B8D00E25780 /* BootSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D522BBC25A36B8D00E25780 /* BootSystem.swift */; };
 		2D522BC025A36BDD00E25780 /* InstallKCs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D522BBF25A36BDD00E25780 /* InstallKCs.swift */; };
@@ -61,7 +61,7 @@
 		2D522BA825A2E1DF00E25780 /* bigdata.dmg */ = {isa = PBXFileReference; lastKnownFileType = file; path = bigdata.dmg; sourceTree = "<group>"; };
 		2D522BA925A2E20000E25780 /* bm2tmp0.dmg */ = {isa = PBXFileReference; lastKnownFileType = file; path = bm2tmp0.dmg; sourceTree = "<group>"; };
 		2D522BAB25A35FA000E25780 /* WindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WindowController.swift; sourceTree = "<group>"; };
-		2D522BB425A36A5B00E25780 /* shakeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = shakeView.swift; sourceTree = "<group>"; };
+		2D522BB425A36A5B00E25780 /* Exts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Exts.swift; sourceTree = "<group>"; };
 		2D522BB925A36AE100E25780 /* Structs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Structs.swift; sourceTree = "<group>"; };
 		2D522BBC25A36B8D00E25780 /* BootSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootSystem.swift; sourceTree = "<group>"; };
 		2D522BBF25A36BDD00E25780 /* InstallKCs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallKCs.swift; sourceTree = "<group>"; };
@@ -157,7 +157,7 @@
 		2D522BB725A36A6900E25780 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				2D522BB425A36A5B00E25780 /* shakeView.swift */,
+				2D522BB425A36A5B00E25780 /* Exts.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -351,7 +351,7 @@
 				2D3E60F2259CFC6000DE6488 /* ParseBootArgs.swift in Sources */,
 				2DFBD81E25A418B40098024C /* InstallerDiskController.swift in Sources */,
 				2D02E03525945BD000E8E1CF /* EraseDiskController.swift in Sources */,
-				2D522BB525A36A5B00E25780 /* shakeView.swift in Sources */,
+				2D522BB525A36A5B00E25780 /* Exts.swift in Sources */,
 				2D9BB503259EAC96007DE72A /* PreInstallActions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -399,7 +399,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = bigmac2/Info.plist;
@@ -427,7 +427,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 13;
+				CURRENT_PROJECT_VERSION = 14;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = bigmac2/Info.plist;

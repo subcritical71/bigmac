@@ -144,19 +144,7 @@ extension ViewController {
     }
     
     
-    
-    //MARK: Make Directory - To do use File Manager (For alot of these future tasks)
-    internal func mkDir(bin: String = "/bin/mkdir", arg: String) -> String {
-        let result = runCommandReturnString(binary: bin , arguments: [arg]) ?? ""
-        return result
-    }
-    
-    //MARK: Make Directory - To do use File Manager (For alot of these future tasks)
-    internal func rmDir(bin: String = "/bin/rm", arg: String) -> String {
-        let result = runCommandReturnString(binary: bin , arguments: [arg]) ?? ""
-        return result
-    }
-    
+ 
     
     
     
@@ -185,34 +173,8 @@ extension ViewController {
     }
     
     
-    
-    //MARK: File String
-    func parseRawText(_ str: String) -> String {
-        
-        var s = str
-        
-        s = s.replacingOccurrences(of: "\t", with: " ")
-        
-        for _ in 1...3 {
-            s = s.replacingOccurrences(of: "     ", with: " ")
-            s = s.replacingOccurrences(of: "    ", with: " ")
-            s = s.replacingOccurrences(of: "   ", with: " ")
-            s = s.replacingOccurrences(of: "  ", with: " ")
-        }
-        
-        return s
-    }
-    
-    
-    //MARK: Mount diskimage and parse disk#s#
-    internal func mountDiskImage(bin: String = "/usr/bin/hdiutil", arg: [String]) -> String {
-        
-        var mountedDisk = runCommandReturnString(binary: bin , arguments: arg) ?? ""
-        mountedDisk = parseRawText(mountedDisk)
-        
-        return mountedDisk
-    }
-    
+
+   
     
     
     //MARK: Extract DMG from Zip file

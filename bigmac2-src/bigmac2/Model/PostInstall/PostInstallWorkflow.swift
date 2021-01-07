@@ -37,13 +37,16 @@ extension ViewController {
         
         DispatchQueue.global(qos: .background).async { [self] in
             
-            
+                
             indicatorBump(updateProgBar: true)
             
             var isMatch = false
             var systemVolume : myVolumeInfo!
             
             systemVolume = getVolumeInfoByDisk(filterVolumeName: driv, disk: "")
+            
+            //MARK: Mount Disk RW
+            _ = runCommandReturnString(binary: "/sbin/mount", arguments: ["-uw", systemVolume.path])
             
             //MARK: Confirm we have a match
             ///This is a good practice and should be used when checking disks in the downloads areas
@@ -65,11 +68,8 @@ extension ViewController {
                 return
             }
             
-            
             let preboot = getDisk(substr: "Preboot", usingDiskorSlice: systemVolume.disk, isSlice: false) ?? systemVolume.disk + "s2"
-            
             let dataSlice = getDisk(substr: "Data", usingDiskorSlice: systemVolume.disk, isSlice: false) ?? systemVolume.disk + "s1"
-            
             var apfsUtil = "\(systemVolume.path)\(apfs)"
             
             if systemVolume.root {
@@ -84,10 +84,9 @@ extension ViewController {
             let lext = "Library/Extensions"
             let ulib = "usr/local/lib"
             
-            _ = runCommandReturnString(binary: "/sbin/mount", arguments: ["-uw", systemVolume.path])
             
             indicatorBump(updateProgBar: true)
-            
+
             if enableUSB {
                 let kext = "IOHIDFamily.kext"
                 _ = installKext(dest: dest, kext: kext, fold: slek, ttle: enableUSBtl)
@@ -162,6 +161,7 @@ extension ViewController {
                 sysPath = systemVolume.path
             }
             
+            print(sysPath)
             
             //MARK Update Boot, System Caches
             if installKCs {
@@ -169,6 +169,7 @@ extension ViewController {
                 updateMac11onMac11SystemCache(destVolume: sysPath)
             }
             
+          
             
             //MARK: Delete Snapshots
             if deleteSnaphots {
@@ -181,13 +182,15 @@ extension ViewController {
                 do {
                     
                     if  let plistData: Data = plist.data(using: .utf8) {
+                        print(plistData)
+                        
                         let decoder = PropertyListDecoder()
                         let snapshots = try decoder.decode(Snapshots.self, from: plistData).snapshots
                         
                         for s in snapshots {
-                            
-                            runIndeterminateProcess(binary: "/usr/sbin/diskutil", arguments: ["apfs", "deletesnapshot", "-xid", "\(s.snapshotXID)"], title: "Deleting Snapshot \(s.snapshotName)", sleepForHeadings: false)
-                            
+                            _ = runCommandReturnString(binary: "/sbin/mount", arguments: ["-uw", systemVolume.path])
+                            runIndeterminateProcess(binary: "/usr/sbin/diskutil", arguments: ["apfs", "deleteSnapshot", systemVolume.diskSlice, "-xid", "\(s.snapshotXID)"], title: "Deleting APFS Snapshot...")
+                            //_ = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["apfs", "deleteVolumeSnapshot",  systemVolume.path, "-xid", "\(s.snapshotXID)"])
                         }
                         
                         indicatorBump()
@@ -203,6 +206,7 @@ extension ViewController {
             }
             
             indicatorBump(updateProgBar: true)
+
             
             if blessSystem {
                 
@@ -215,7 +219,7 @@ extension ViewController {
                     path = systemVolume.path
                 }
                 
-                runIndeterminateProcess(binary: bless, arguments: ["--folder", "\(path)System/Library/CoreServices" , "--bootefi", "--label", systemVolume.displayName, "--setBoot"], title: "Blessing System Volume \(systemVolume.displayName)", sleepForHeadings: true)
+                runIndeterminateProcess(binary: bless, arguments: ["--folder", "\(path)System/Library/CoreServices" , "--bootefi", "--label", systemVolume.displayName, "--setBoot"], title: "Blessing the System Volume...")
             }
             
             indicatorBump(updateProgBar: true)

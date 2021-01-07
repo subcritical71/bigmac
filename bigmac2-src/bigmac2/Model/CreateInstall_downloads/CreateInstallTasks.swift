@@ -51,7 +51,7 @@ extension ViewController {
     
     
     //MARK: Task #4
-    func createDirectory(diskInfo: myVolumeInfo, disk: String, rndStr: String) {
+   /* func createDirectory(diskInfo: myVolumeInfo, disk: String, rndStr: String) {
         
         for _ in 1...3 {
             let result = addVolume(dmgPath: tempSystem, targetDisk: "/dev/r\(diskInfo.disk)", erase: true, title: "Creating Directory")
@@ -63,7 +63,7 @@ extension ViewController {
         let _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["mount", disk] )
         sleep(2)
         let _ = renameDisk(input: disk, output: "\(disk)_\(rndStr)")
-    }
+    }*/
     
     
     

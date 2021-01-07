@@ -26,7 +26,6 @@ extension ViewController {
          //MARK: Commands
          let touch =         "\(destVolume)usr/bin/touch"
          let kmutil =        "\(destVolume)usr/bin/kmutil"
-         let kcditto =       "\(destVolume)usr/sbin/kcditto"
                  
          let appleSysLibExists               = checkIfFileExists(path: "\(destVolume)\(appleSysLib)")
          let appleSysLibPreKernelsExists     = checkIfFileExists(path: "\(destVolume)\(appleSysLibPre)")
@@ -64,30 +63,27 @@ extension ViewController {
              if !appleSysLibPreKernelsExists {
                  _ = mkDir(arg: "\(destVolume)/\(appleSysLibPre)")
              }
+        
+             let kmArrA = ["create", "-n", "boot", "--boot-path", "/\(appleSysLibPre)/prelinkedkernel", "-f", "'OSBundleRequired'=='Local-Root'", "--kernel", "/\(kernel)", "--repository", "/\(sysLibExt)", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--repository", "/\(appleSysLibExt)", "--volume-root", "\(destVolume)"]
              
-             let kmArrA = ["create", "-n", "-boot", "--boot-path", "\(appleSysLibPre)", "-f", "'OSBundleRequired'=='Local-Root'", "--kernel", "/\(kernel)", "--repository", "/\(sysLibExt)", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--repository", "/\(appleSysLibExt)", "--volume-root", "\(destVolume)"]
-             
-            _ = runCommandReturnString(binary: kmutil, arguments: kmArrA)
+            runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title: "Creating Prelinked Kernel...")
              
 
          } else {
             
             indicatorBump(updateProgBar: true)
-
+             let kmArrA = ["create", "-n", "boot", "--boot-path", "/\(prelinkedkernel)", "-f", "'OSBundleRequired'=='Local-Root'", "--kernel", "/\(kernel)", "--repository", "/\(sysLibExt)", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--repository", "/\(appleSysLibExt)", "--volume-root", "\(destVolume)"]
              
-             let kmArrA = ["create", "-n", "-boot", "--boot-path", "/\(prelinkedkernel)", "-f", "'OSBundleRequired'=='Local-Root'", "--kernel", "/\(kernel)", "--repository", "/\(sysLibExt)", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--repository", "/\(appleSysLibExt)", "--volume-root", "\(destVolume)"]
-             
-            _ = runCommandReturnString(binary: kmutil, arguments: kmArrA)
-             
-
-             
+            runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title: "Creating Prelinked Kernel...")
          }
          
-         indicatorBump(updateProgBar: true)
+        
+        
+        let kcditto = "\(destVolume)usr/sbin/kcditto"
+        runIndeterminateProcess(binary: kcditto, arguments: [""], title: "Running kcDitto..")
+        
+        return
 
-         _ = runCommandReturnString(binary: kcditto, arguments: [])
-         
-         indicatorBump(updateProgBar: true)
 
      }
 }
