@@ -73,35 +73,28 @@ extension ViewController {
         process.standardOutput = pipe
         process.standardError = pipe
         
-        let handler =  { (file: FileHandle) -> Void in
-            let data = file.availableData
-            guard let output = NSString(data: data, encoding: String.Encoding.utf8.rawValue)
-            else { return }
-            
-            DispatchQueue.main.async {
-                let t = output.components(separatedBy: "\t")
+        pipe.fileHandleForReading.readabilityHandler = { pipe in
+            if let io = String(data: pipe.availableData, encoding: .utf8) {
+                let t = io.components(separatedBy: "\t")
                 
                 if t.count >= 4 && t.count <= 5 {
                     
                     if let x = Int(t[1]) {
                         if x >= 0 && x <= 100 {
-                            self.sharedSupportProgressBar.doubleValue = Double(x)
-                            self.sharedSupportPercentage.stringValue = "\(x)%"
+                            DispatchQueue.main.async { [self] in
+                                
+                                sharedSupportProgressBar.doubleValue = Double(x)
+                                sharedSupportPercentage.stringValue = "\(x)%"
+                            }
                         }
                     }
                 }
             }
         }
         
-        pipe.fileHandleForReading.readabilityHandler = handler
-        
         //Finish the Job
         process.terminationHandler = { (task: Process?) -> () in
             pipe.fileHandleForReading.readabilityHandler = nil
-            
-            DispatchQueue.main.async {
-                //do something
-            }
         }
         
         process.launch()
@@ -109,15 +102,11 @@ extension ViewController {
     }
     
     /* Run command in the background */
-    func runIndeterminateProcess(binary: String, arguments: [String], title: String, sleepForHeadings: Bool = false) {
+    func runIndeterminateProcess(binary: String, arguments: [String], title: String) {
         
         DispatchQueue.main.async { [self] in
             postInstallTask_label.stringValue = title
             postInstallDetails_label.stringValue = ""
-        }
-        
-        if sleepForHeadings {
-            sleep(2)
         }
         
         //DispatchQueue.global(qos: .background).async {
@@ -126,64 +115,38 @@ extension ViewController {
         process.arguments = arguments
         
         let pipe = Pipe()
-        let pipe2 = Pipe()
         
         process.standardOutput = pipe
-        process.standardError = pipe2
-  
-        let outHandle  = pipe.fileHandleForReading
-        let outHandle2 = pipe2.fileHandleForReading
+        process.standardError = pipe
         
-        outHandle.readabilityHandler = { pipe in
-            if var str = String(data: pipe.availableData, encoding: .utf8) {
-                
-                str = str.replacingOccurrences(of: "\t", with: "")
-                str = str.replacingOccurrences(of: "\r", with: "")
-                str = str.replacingOccurrences(of: "\n", with: " ")
-                str = str.replacingOccurrences(of: "      ", with: " ")
-                str = str.replacingOccurrences(of: "     ", with: " ")
-                str = str.replacingOccurrences(of: "    ", with: " ")
-                str = str.replacingOccurrences(of: "   ", with: " ")
-                str = str.replacingOccurrences(of: "  ", with: " ")
-                str = str.capitalized
-                
-                
-                DispatchQueue.main.async { [self] in
-                    if (!str.isEmpty) {
-                        self.postInstallTask_label.stringValue = str as String
-                    }
-                }
-            }
-        }
-        
-        outHandle2.readabilityHandler = { pipe2 in
-            if var io = String(data: pipe2.availableData, encoding: .utf8) {
-                
+        pipe.fileHandleForReading.readabilityHandler = { pipe in
+            if var io = String(data: pipe.availableData, encoding: .utf8) {
                 if io.contains("ting") {
-                    io = io.stringAfter("]")
+                    io = io.stringAfter(":")
+                    io = io.stringAfter(":")
+                    io = io.stringAfter(":")
                     io = io.stringAfter(" ")
                     io = io.capitalizingFirstLetter()
+                    
                     if (!io.isEmpty) {
-                        
                         DispatchQueue.main.async { [self] in
                             self.postInstallDetails_label.stringValue = io as String
+                            
+                            if io.starts(with: "Writing") {
+                                postInstallProgressIndicator.doubleValue += 1
+                            }
                         }
                     }
                 }
-                
-                
             }
         }
-        
         
         //Finish the Job
         process.terminationHandler = { (task: Process?) -> () in
             pipe.fileHandleForReading.readabilityHandler = nil
-            pipe.fileHandleForReading.readabilityHandler = nil
-            
         }
         
-        process.qualityOfService = .userInteractive
+        process.qualityOfService = .default
         process.launch()
         process.waitUntilExit()
     }

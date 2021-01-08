@@ -11,7 +11,7 @@ extension ViewController {
     
     @IBAction func patchDiskExec_action(_ sender: Any) {
 
-        postInstallTask_label.stringValue = "Installing Selected Kexts..."
+        postInstallTask_label.stringValue = "Starting Post Install Process..."
         postInstallDetails_label.stringValue = ""
         postInstallFuelGauge.doubleValue = 0
         postInstallProgressIndicator.doubleValue = 1

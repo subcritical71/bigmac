@@ -161,7 +161,7 @@ extension ViewController {
             
             //MARK Update Boot, System Caches
             if installKCs {
-                indicatorBump(taskMsg: "Updating Kernel Collections and Prelinked Kernel...", updateProgBar: true)
+                indicatorBump(updateProgBar: true)
                 updateMac11onMac11SystemCache(destVolume: sysPath)
             }
             
@@ -181,16 +181,16 @@ extension ViewController {
                         let decoder = PropertyListDecoder()
                         let snapshots = try decoder.decode(Snapshots.self, from: plistData).snapshots
                         
+                        _ = runCommandReturnString(binary: "/sbin/mount", arguments: ["-uw", systemVolume.path])
+
                         for s in snapshots {
-                            _ = runCommandReturnString(binary: "/sbin/mount", arguments: ["-uw", systemVolume.path])
-                            runIndeterminateProcess(binary: "/usr/sbin/diskutil", arguments: ["apfs", "deleteSnapshot", systemVolume.diskSlice, "-xid", "\(s.snapshotXID)"], title: "Deleting APFS Snapshot...")
-                            //_ = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["apfs", "deleteVolumeSnapshot",  systemVolume.path, "-xid", "\(s.snapshotXID)"])
+                            indicatorBump(taskMsg: "Deleting snapshot: \(s.snapshotName)...", updateProgBar: true)
+                            _ = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["apfs", "deleteSnapshot", systemVolume.diskSlice, "-xid", "\(s.snapshotXID)"])
                         }
                         
-                        indicatorBump()
                         
                     } else {
-                        indicatorBump(taskMsg: "No Snapshots found")
+                        indicatorBump(taskMsg: "No Snapshots found.", updateProgBar: true)
                     }
                     
                 } catch {
@@ -212,15 +212,14 @@ extension ViewController {
                     path = systemVolume.path
                 }
                 
-                runIndeterminateProcess(binary: bless, arguments: ["--folder", "\(path)System/Library/CoreServices" , "--bootefi", "--label", systemVolume.displayName, "--setBoot"], title: "String")
+                indicatorBump(taskMsg: "Blessing \(systemVolume.displayName)...", detailMsg: "", updateProgBar: true)
+                _ = runCommandReturnString(binary: bless, arguments: ["--folder", "\(path)System/Library/CoreServices" , "--bootefi", "--label", systemVolume.displayName, "--setBoot"])
             }
             
             indicatorBump(updateProgBar: true)
             
             DispatchQueue.main.async { [self] in
-                indicatorBump(taskMsg: "Completed the selected patches...", detailMsg: "", updateProgBar: true)
-                postInstallProgressIndicator.doubleValue += 1
-                postInstallFuelGauge.doubleValue += 1
+                indicatorBump(taskMsg: "Completed the selected patches...", detailMsg: "")
                 postInstallFuelGauge.doubleValue = postInstallFuelGauge.maxValue
                 postInstallProgressIndicator.doubleValue = postInstallProgressIndicator.maxValue
                 postInstallSpinner.stopAnimation(self)

@@ -38,51 +38,46 @@ extension ViewController {
          _ = runCommandReturnString(binary: touch, arguments: ["\(destVolume)\(libDriveExt)"])
          
         indicatorBump(updateProgBar: true)
-
-        //MARK: Updating All Kernel Extensions
+        DispatchQueue.global(qos: .background).async { [self] in
+            runIndeterminateProcess(binary: kmutil, arguments: ["log", "stream"], title: "Updating Boot and System Kernel Extensions...")
+        }
+        
         let kmArrA = ["install", "--update-all", "--check-rebuild", "--repository", "/\(sysLibExt)", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--repository", "/\(appleSysLibExt)", "--volume-root", "\(destVolume)"]
-         runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title: "Updating All Kernel Extensions...")
-         
-            indicatorBump(updateProgBar: true)
-
+        _ = runCommandReturnString(binary: kmutil, arguments: kmArrA)
+        
          //MARK: Rechecking Extensions
-         runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title: "Rechecking Extensions...")
+        indicatorBump(taskMsg: "Verifying Boot and System Kernel Extensions...", detailMsg: "", updateProgBar: true)
+        _ = runCommandReturnString(binary: kmutil, arguments: kmArrA)
          
-        indicatorBump(updateProgBar: true)
-
          //MARK: Updating Library Extensions
-         let kmArrB = ["install", "--check-rebuild", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--volume-root", "\(destVolume)"]
-         runIndeterminateProcess(binary: kmutil, arguments: kmArrB, title: "Updating Library Extensions...")
-     
-
+        indicatorBump(taskMsg: "Updating Auxiliary Kernel Extensions...", detailMsg: "", updateProgBar: true)
+        let kmArrC = ["create", "-n", "aux", "--repository", "/\(libExt)", "--volume-root", "\(destVolume)"]
+        _ = runCommandReturnString(binary: kmutil, arguments: kmArrC)
+        
+        
+        indicatorBump(taskMsg: "Creating Prelinked Kernel...", detailMsg: "", updateProgBar: true)
          if appleSysLibExists {
-            
             indicatorBump(updateProgBar: true)
-
              if !appleSysLibPreKernelsExists {
                  _ = mkDir(arg: "\(destVolume)/\(appleSysLibPre)")
              }
-        
              let kmArrA = ["create", "-n", "boot", "--boot-path", "/\(appleSysLibPre)/prelinkedkernel", "-f", "'OSBundleRequired'=='Local-Root'", "--kernel", "/\(kernel)", "--repository", "/\(sysLibExt)", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--repository", "/\(appleSysLibExt)", "--volume-root", "\(destVolume)"]
-             
-            runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title: "Creating Prelinked Kernel...")
-             
-
+            _ = runCommandReturnString(binary: kmutil, arguments: kmArrA)
          } else {
-            
             indicatorBump(updateProgBar: true)
              let kmArrA = ["create", "-n", "boot", "--boot-path", "/\(prelinkedkernel)", "-f", "'OSBundleRequired'=='Local-Root'", "--kernel", "/\(kernel)", "--repository", "/\(sysLibExt)", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--repository", "/\(appleSysLibExt)", "--volume-root", "\(destVolume)"]
              
-            runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title: "Creating Prelinked Kernel...")
+            _ = runCommandReturnString(binary: kmutil, arguments: kmArrA)
          }
          
-        
-        
+    
+        indicatorBump(taskMsg: "Creating Prelinked Kernel...", detailMsg: "Copying Kernel Collections to Preboot Volume...", updateProgBar: true)
         let kcditto = "\(destVolume)usr/sbin/kcditto"
-        runIndeterminateProcess(binary: kcditto, arguments: [], title: "Running kcDitto..")
+        _ = runCommandReturnString(binary: kcditto, arguments: [])
         
+        //MARK: Stop kernel process
+        _ = runCommandReturnString(binary: "/usr/bin/killall", arguments: ["kmutil"])
+
         return
-
-
      }
 }
