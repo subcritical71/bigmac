@@ -60,17 +60,18 @@ class CredsViewController: NSViewController {
         progressBar.isHidden = false
         
         DispatchQueue.main.async { [self] in
-            let script = "do shell script \"sudo echo /\" user name \"\(userName)\" password \"\(passWord)\" with administrator privileges"
+            let codeword = "starplayrx"
+            let script = "do shell script \"sudo echo \(codeword)\" user name \"\(userName)\" password \"\(passWord)\" with administrator privileges"
             let result = performAppleScript(script: script)
-            if let a = result.text, a.contains("incorrect") {
+            if result.text == "starplayrx" {
+                progressBar.isHidden = true
+                dismiss(self)
+                NotificationCenter.default.post(name: .RunAsRootRequest, object: passWord)
+            } else {
                 passWordLabel.resignFirstResponder()
                 passWordLabel.shake(duration: 1)
                 progressBar.isHidden = true
                 passWordLabel.stringValue = ""
-            } else {
-                progressBar.isHidden = true
-                dismiss(self)
-                NotificationCenter.default.post(name: .RunAsRootRequest, object: passWord)
             }
         }
     }

@@ -35,6 +35,7 @@
 		2D9BB503259EAC96007DE72A /* PreInstallActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9BB502259EAC96007DE72A /* PreInstallActions.swift */; };
 		2DAFF44C259AB7ED00D48E20 /* CreateInstallActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAFF44B259AB7ED00D48E20 /* CreateInstallActions.swift */; };
 		2DC0952525A36E0B00C8FE85 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC0952425A36E0B00C8FE85 /* Notifications.swift */; };
+		2DCEAF6E25A7F6EF0064A9B6 /* PostInstallController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCEAF6D25A7F6EF0064A9B6 /* PostInstallController.swift */; };
 		2DD0647825A3776B00AF3216 /* bigdata.dmg in Resources */ = {isa = PBXBuildFile; fileRef = 2D522BA825A2E1DF00E25780 /* bigdata.dmg */; };
 		2DE42E3D25918F56005E10C6 /* CreateInstallHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DE42E3C25918F56005E10C6 /* CreateInstallHelpers.swift */; };
 		2DFBD81E25A418B40098024C /* InstallerDiskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFBD81D25A418B40098024C /* InstallerDiskController.swift */; };
@@ -76,6 +77,7 @@
 		2D9BB502259EAC96007DE72A /* PreInstallActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreInstallActions.swift; sourceTree = "<group>"; };
 		2DAFF44B259AB7ED00D48E20 /* CreateInstallActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInstallActions.swift; sourceTree = "<group>"; };
 		2DC0952425A36E0B00C8FE85 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		2DCEAF6D25A7F6EF0064A9B6 /* PostInstallController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInstallController.swift; sourceTree = "<group>"; };
 		2DE42E3C25918F56005E10C6 /* CreateInstallHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInstallHelpers.swift; sourceTree = "<group>"; };
 		2DFBD81D25A418B40098024C /* InstallerDiskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallerDiskController.swift; sourceTree = "<group>"; };
 		2DFE54FA25A2D7D500BE3AA0 /* bm2 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = bm2; sourceTree = "<group>"; };
@@ -190,6 +192,7 @@
 				2D02E03425945BD000E8E1CF /* EraseDiskController.swift */,
 				2D7787EE258F0BC700305EC3 /* CredsViewController.swift */,
 				2DFBD81D25A418B40098024C /* InstallerDiskController.swift */,
+				2DCEAF6D25A7F6EF0064A9B6 /* PostInstallController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -344,6 +347,7 @@
 				2D7787EF258F0BC700305EC3 /* CredsViewController.swift in Sources */,
 				2D0B8BC325A57DE4008313D3 /* Vars.swift in Sources */,
 				2D02E032259453D500E8E1CF /* VolumeInfo.swift in Sources */,
+				2DCEAF6E25A7F6EF0064A9B6 /* PostInstallController.swift in Sources */,
 				2DAFF44C259AB7ED00D48E20 /* CreateInstallActions.swift in Sources */,
 				2D99C49D259F2D280035669B /* PostInstallActions.swift in Sources */,
 				2D09EE43259C432C0054CF3A /* CreateInstallTasks.swift in Sources */,
@@ -399,7 +403,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = bigmac2/Info.plist;
@@ -427,7 +431,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 17;
+				CURRENT_PROJECT_VERSION = 18;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = bigmac2/Info.plist;

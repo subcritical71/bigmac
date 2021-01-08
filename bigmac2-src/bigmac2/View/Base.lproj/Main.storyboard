@@ -1416,6 +1416,7 @@ DQ
                         <segue destination="30y-Mz-E5P" kind="sheet" identifier="userNamePassWord" id="2iv-7c-Fbr"/>
                         <segue destination="QRq-n9-edl" kind="sheet" identifier="eraseDisk" id="NKC-y8-uH7"/>
                         <segue destination="wD8-II-vQd" kind="sheet" identifier="installComplete" id="YFF-se-A7Y"/>
+                        <segue destination="L1U-Jb-R8J" kind="sheet" identifier="postInstall" id="LdO-bp-hIe"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1680,6 +1681,114 @@ Gw
             </objects>
             <point key="canvasLocation" x="674" y="994"/>
         </scene>
+        <!--Post Install View Controller-->
+        <scene sceneID="J47-Aw-6O6">
+            <objects>
+                <viewController id="L1U-Jb-R8J" customClass="PostInstallViewController" customModule="bigmac2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="Tq6-9n-tLh">
+                        <rect key="frame" x="0.0" y="0.0" width="337" height="292"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JWv-9A-8fD">
+                                <rect key="frame" x="20" y="20" width="297" height="20"/>
+                                <subviews>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TjB-Ww-MrJ">
+                                        <rect key="frame" x="-7" y="-7" width="97" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Thank you" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cb3-VQ-q8X">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                        </buttonCell>
+                                    </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="o85-PX-HYz">
+                                        <rect key="frame" x="88" y="-7" width="78" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Donate" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="i62-C4-BQq">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                        </buttonCell>
+                                    </button>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="geV-iO-yth">
+                                        <rect key="frame" x="164" y="-7" width="140" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Bless and Reboot" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0Dh-2g-Sho">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                            <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                        </buttonCell>
+                                    </button>
+                                </subviews>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v8p-01-bOY">
+                                <rect key="frame" x="54" y="262" width="228" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="The Post Install has been completed" id="uOY-Uq-P2d">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="aXD-7c-mAA">
+                                <rect key="frame" x="56" y="238" width="225" height="16"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="Thank you for choosing Big Mac 2.0" id="xfs-Uo-pjX">
+                                    <font key="font" metaFont="system"/>
+                                    <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <scrollView fixedFrame="YES" horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t0E-dt-qO2">
+                                <rect key="frame" x="20" y="57" width="297" height="171"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <clipView key="contentView" drawsBackground="NO" id="mzX-Za-yTH">
+                                    <rect key="frame" x="1" y="1" width="295" height="169"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <textView importsGraphics="NO" richText="NO" verticallyResizable="YES" spellingCorrection="YES" smartInsertDelete="YES" id="XLN-pY-HQW">
+                                            <rect key="frame" x="0.0" y="0.0" width="295" height="169"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                            <size key="minSize" width="295" height="169"/>
+                                            <size key="maxSize" width="297" height="10000000"/>
+                                            <color key="insertionPointColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                        </textView>
+                                    </subviews>
+                                </clipView>
+                                <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" horizontal="YES" id="Zkz-cV-ZDZ">
+                                    <rect key="frame" x="-100" y="-100" width="240" height="16"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                                <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" horizontal="NO" id="Vhz-qG-Vnx">
+                                    <rect key="frame" x="280" y="1" width="16" height="169"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </scroller>
+                            </scrollView>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="creditsTextView" destination="XLN-pY-HQW" id="wry-Hp-Meu"/>
+                    </connections>
+                </viewController>
+                <customObject id="wYi-qT-OyH" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-374" y="1400"/>
+        </scene>
         <!--Installer Disk Complete-->
         <scene sceneID="zY9-3n-Rr8">
             <objects>
@@ -1825,7 +1934,7 @@ DQ
                 </viewController>
                 <customObject id="2es-xO-UPa" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="71" y="1352"/>
+            <point key="canvasLocation" x="71" y="1410"/>
         </scene>
     </scenes>
     <resources>

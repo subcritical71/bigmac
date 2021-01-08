@@ -10,6 +10,7 @@ import Foundation
 extension ViewController {
     
     @IBAction func patchDiskExec_action(_ sender: Any) {
+        //performSegue(withIdentifier: "postInstall", sender: nil)
 
         postInstallTask_label.stringValue = "Starting Post Install Process..."
         postInstallDetails_label.stringValue = ""
