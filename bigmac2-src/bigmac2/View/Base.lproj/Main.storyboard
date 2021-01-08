@@ -1701,6 +1701,9 @@ Gw
 Gw
 </string>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="ThankYou:" target="L1U-Jb-R8J" id="NoI-Oz-GCA"/>
+                                        </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="o85-PX-HYz">
                                         <rect key="frame" x="88" y="-7" width="78" height="32"/>
@@ -1711,6 +1714,9 @@ Gw
 Gw
 </string>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="Donate:" target="L1U-Jb-R8J" id="LMZ-dg-xCL"/>
+                                        </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="geV-iO-yth">
                                         <rect key="frame" x="164" y="-7" width="140" height="32"/>
@@ -1721,6 +1727,9 @@ Gw
 DQ
 </string>
                                         </buttonCell>
+                                        <connections>
+                                            <action selector="blessAndBoot:" target="L1U-Jb-R8J" id="CSY-NL-uZb"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <visibilityPriorities>
