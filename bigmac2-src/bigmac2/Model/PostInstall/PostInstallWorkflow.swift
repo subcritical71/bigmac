@@ -42,30 +42,10 @@ extension ViewController {
             var isMatch = false
             var systemVolume : myVolumeInfo!
             
-            systemVolume = getVolumeInfoByDisk(filterVolumeName: driv, disk: "")
+            systemVolume = getVolumeInfoByDisk(filterVolumeName: driv, disk: "", isRoot: true)
             
             //MARK: Mount Disk RW
             _ = runCommandReturnString(binary: "/sbin/mount", arguments: ["-uw", systemVolume.path])
-            
-            //MARK: Confirm we have a match
-            ///This is a good practice and should be used when checking disks in the downloads areas
-            if systemVolume == nil  {
-                systemVolume = getVolumeInfoByDisk(filterVolumeName: "/", disk: "", isRoot: true)
-                
-                if systemVolume != nil {
-                    if systemVolume.displayName == driv {
-                        isMatch = true
-                    }
-                }
-                
-            } else if systemVolume.volumeName == driv {
-                isMatch = true
-            }
-            
-            //MARK: Decided what to do because things are not right
-            if systemVolume == nil || !isMatch {
-                return
-            }
             
             let preboot = getDisk(substr: "Preboot", usingDiskorSlice: systemVolume.disk, isSlice: false) ?? systemVolume.disk + "s2"
             let dataSlice = getDisk(substr: "Data", usingDiskorSlice: systemVolume.disk, isSlice: false) ?? systemVolume.disk + "s1"

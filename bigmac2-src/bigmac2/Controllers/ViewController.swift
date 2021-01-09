@@ -71,7 +71,9 @@ class ViewController: NSViewController, URLSessionDelegate {
     @IBOutlet weak var patchDisk_btn: NSButton!
 
     @IBAction func patchDiskAction(_ sender: Any) {
-        globalVolumeInfo = getSystemInfo(availablePatchDisks.title)
+        if let disk = getVolumeInfoByDisk(filterVolumeName: availablePatchDisks.title, disk: "", isRoot: true) {
+            globalVolumeInfo = disk
+        }
     }
     
     let fm = FileManager.default

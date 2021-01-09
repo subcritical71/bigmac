@@ -127,7 +127,7 @@ extension ViewController {
     }
     
     //MARK: Check for root user
-    internal func checkForRootUser () -> Bool {
+    internal func checkForRootUser() -> Bool {
         rootMode || NSUserName() == "root" ? true : false
     }
     
@@ -185,21 +185,7 @@ extension ViewController {
     }
     
 
-    //MARK: Get Disk Info by a single Disk with all volumes it contains, plus filtering specific disk and get its slice
-    func getVolumeInfoByDisk (filterVolumeName: String, disk: String, isRoot: Bool = false) -> myVolumeInfo? {
-        
-        let volInfo = getVolumeInfo(includeHiddenVolumes: true, includeRootVol: isRoot )
-        
-        if disk != "" {
-            let disks = volInfo?.filter { $0.disk == disk }
-            let d = disks?.filter { $0.volumeName == filterVolumeName }
-            return d?.first ?? nil
-        } else {
-            let d = volInfo?.filter { $0.volumeName == filterVolumeName }
-            return d?.first ?? nil
-        }
-    }
-    
+ 
     //MARK: Get APFS Physical Store Disk:
     func getApfsPhysicalStoreDisk(apfsDiskInfo: String ) -> String {
         

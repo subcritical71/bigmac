@@ -5,6 +5,31 @@
 //  Created by starplayrx on 1/1/21.
 //
 import Cocoa
+
+//MARK: Get Disk Info by a single Disk with all volumes it contains, plus filtering specific disk and get its slice
+func getVolumeInfoByDisk(filterVolumeName: String, disk: String, isRoot: Bool = true) -> myVolumeInfo? {
+    
+    let volInfo = getVolumeInfo(includeHiddenVolumes: true, includeRootVol: isRoot )
+    
+    if isRoot {
+        let d = volInfo?.filter { $0.displayName == filterVolumeName }
+        let r = d?.first ?? nil
+        
+        if r != nil { return r }
+    }
+    
+    if disk != "" {
+        let disks = volInfo?.filter { $0.disk == disk }
+        let d = disks?.filter { $0.volumeName == filterVolumeName }
+        return d?.first ?? nil
+    } else {
+        let d = volInfo?.filter { $0.volumeName == filterVolumeName }
+        return d?.first ?? nil
+    }
+}
+
+
+
 //MARK: Donate to BigMac
 func donate2BigMac() {
     if let url = URL(string: "https://www.paypal.com/donate?hosted_button_id=M3U48FLF87SXQ") {
