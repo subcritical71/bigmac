@@ -79,23 +79,21 @@ func checkIfFileExists(path: String) -> Bool {
 
 //MARK: Mount diskimage and parse disk#s#
 func mountDiskImage(bin: String = "/usr/bin/hdiutil", arg: [String]) -> String {
-    
-    var mountedDisk = runCommandReturnString(binary: bin , arguments: arg) ?? ""
+    var mountedDisk = runCommandReturnStr(binary: bin , arguments: arg) ?? ""
     mountedDisk = parseRawText(mountedDisk)
-    
     return mountedDisk
 }
 
 
 //MARK: Make Directory - To do use File Manager (For alot of these future tasks)
  func mkDir(bin: String = "/bin/mkdir", arg: String) -> String {
-    let result = runCommandReturnString(binary: bin , arguments: [arg]) ?? ""
+    let result = runCommandReturnStr(binary: bin , arguments: [arg]) ?? ""
     return result
 }
 
 //MARK: Make Directory - To do use File Manager (For alot of these future tasks)
  func rmDir(bin: String = "/bin/rm", arg: String) -> String {
-    let result = runCommandReturnString(binary: bin , arguments: [arg]) ?? ""
+    let result = runCommandReturnStr(binary: bin , arguments: [arg]) ?? ""
     return result
 }
 
@@ -154,17 +152,17 @@ extension ViewController {
     }
     
     @IBAction func LoRes_720(_ sender: Any) {
-        _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1280", "-h", "720", "-s", "1"])
+        runCommand(binary: setResX, arguments: ["-w", "1280", "-h", "720", "-s", "1"])
     }
     @IBAction func HiRes_720(_ sender: Any) {
-        _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1280", "-h", "720", "-s", "2"])
+        runCommand(binary: setResX, arguments: ["-w", "1280", "-h", "720", "-s", "2"])
     }
     @IBAction func LoRes_1080(_ sender: Any) {
-        _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1920", "-h", "1080", "-s", "1"])
+        runCommand(binary: setResX, arguments: ["-w", "1920", "-h", "1080", "-s", "1"])
     }
     
     @IBAction func HiRes_1080(_ sender: Any) {
-        _ = runCommandReturnString(binary: setResX, arguments: ["-w", "1920", "-h", "1080", "-s", "2"])
+        runCommand(binary: setResX, arguments: ["-w", "1920", "-h", "1080", "-s", "2"])
     }
     
     func checkForBaseOS() -> Bool {
@@ -201,23 +199,26 @@ extension ViewController {
         }
     }
     
-    //MARK: This a better preboot routine
+    //MARK: This a better preboot routine - to do: See if we can return plist or XML
     func getDisk(substr: String, usingDiskorSlice: String, isSlice: Bool) -> String? {
         
-        let pb = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["list", usingDiskorSlice]) ?? ""
-        let pbArray = pb.components(separatedBy: "\n")
-        
-        for i in pbArray {
-            if i.contains(substr) {
-                if isSlice {
-                    let prebootVolume = String(i.suffix(usingDiskorSlice.count))
-                    return prebootVolume
-                } else {
-                    let prebootVolume = String(i.suffix(usingDiskorSlice.count + 2))
-                    return prebootVolume
+        if let pb = runCommandReturnStr(binary: "/usr/sbin/diskutil", arguments: ["list", usingDiskorSlice]) {
+            let pbArray = pb.components(separatedBy: "\n")
+            
+            for i in pbArray {
+                if i.contains(substr) {
+                    if isSlice {
+                        let prebootVolume = String(i.suffix(usingDiskorSlice.count))
+                        return prebootVolume
+                    } else {
+                        let prebootVolume = String(i.suffix(usingDiskorSlice.count + 2))
+                        return prebootVolume
+                    }
                 }
             }
         }
         return nil
+
     }
+    
 }

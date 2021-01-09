@@ -39,13 +39,12 @@ extension ViewController {
             
             indicatorBump(updateProgBar: true)
             
-            var isMatch = false
             var systemVolume : myVolumeInfo!
             
             systemVolume = getVolumeInfoByDisk(filterVolumeName: driv, disk: "", isRoot: true)
             
             //MARK: Mount Disk RW
-            _ = runCommandReturnString(binary: "/sbin/mount", arguments: ["-uw", systemVolume.path])
+            runCommand(binary: "/sbin/mount", arguments: ["-uw", systemVolume.path])
             
             let preboot = getDisk(substr: "Preboot", usingDiskorSlice: systemVolume.disk, isSlice: false) ?? systemVolume.disk + "s2"
             let dataSlice = getDisk(substr: "Data", usingDiskorSlice: systemVolume.disk, isSlice: false) ?? systemVolume.disk + "s1"
@@ -55,7 +54,7 @@ extension ViewController {
                 apfsUtil = apfs
             }
             
-            let dataVolumeUUID = runCommandReturnString(binary: apfsUtil, arguments: ["-k", dataSlice]) ?? ""
+            let dataVolumeUUID = runCommandReturnStr(binary: apfsUtil, arguments: ["-k", dataSlice]) ?? ""
             
             let dest = systemVolume.path
             let slek = "System/Library/Extensions"
@@ -148,9 +147,9 @@ extension ViewController {
             //MARK: Delete Snapshots
             if deleteSnaphots {
                 
-                indicatorBump(updateProgBar: true)
+                indicatorBump(taskMsg: "Looking for APFS Snapshots...", updateProgBar: true)
                 
-                let plist = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["apfs", "listsnapshots", "-plist", systemVolume.diskSlice]) ?? ""
+                let plist = runCommandReturnStr(binary: "/usr/sbin/diskutil", arguments: ["apfs", "listsnapshots", "-plist", systemVolume.diskSlice]) ?? ""
                 
                 //MARK: Delete Snapshots
                 do {
@@ -161,11 +160,12 @@ extension ViewController {
                         let decoder = PropertyListDecoder()
                         let snapshots = try decoder.decode(Snapshots.self, from: plistData).snapshots
                         
-                        _ = runCommandReturnString(binary: "/sbin/mount", arguments: ["-uw", systemVolume.path])
+                        runCommand(binary: "/sbin/mount", arguments: ["-uw", systemVolume.path])
 
                         for s in snapshots {
-                            indicatorBump(taskMsg: "Deleting snapshot: \(s.snapshotName)...", updateProgBar: true)
-                            _ = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["apfs", "deleteSnapshot", systemVolume.diskSlice, "-xid", "\(s.snapshotXID)"])
+                            indicatorBump(taskMsg: "Deleting snapshot...", detailMsg: "\(s.snapshotName)", updateProgBar: true)
+                            let result = runCommandReturnStr(binary: "/usr/sbin/diskutil", arguments: ["apfs", "deleteSnapshot", systemVolume.diskSlice, "-xid", "\(s.snapshotXID)"])
+                            print(result)
                         }
                         
                         
@@ -179,8 +179,6 @@ extension ViewController {
                 }
             }
             
-            indicatorBump(updateProgBar: true)
-
             if blessSystem {
                 
                 // if let app = appFolder  {
@@ -191,12 +189,13 @@ extension ViewController {
                     bless = systemVolume.path + "/usr/sbin/bless"
                     path = systemVolume.path
                 }
-                
+
                 indicatorBump(taskMsg: "Blessing \(systemVolume.displayName)...", detailMsg: "", updateProgBar: true)
-                _ = runCommandReturnString(binary: bless, arguments: ["--folder", "\(path)System/Library/CoreServices" , "--bootefi", "--label", systemVolume.displayName, "--setBoot"])
+                let blessYou = runCommandReturnStr(binary: bless, arguments: ["--folder", "\(path)System/Library/CoreServices" , "--bootefi", "--label", globalVolumeInfo.displayName, "--setBoot"]) ?? ""
+                print(blessYou as String)
+
             }
             
-            indicatorBump(updateProgBar: true)
             
             DispatchQueue.main.async { [self] in
                 indicatorBump(taskMsg: "Completed the selected patches...", detailMsg: "")
@@ -204,7 +203,6 @@ extension ViewController {
                 postInstallProgressIndicator.doubleValue = postInstallProgressIndicator.maxValue
                 postInstallSpinner.stopAnimation(self)
                 postInstallSpinner.isHidden = true
-                
                 globalVolumeInfo = systemVolume
                 performSegue(withIdentifier: "postInstall", sender: nil)
             }

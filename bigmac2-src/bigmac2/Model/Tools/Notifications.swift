@@ -62,7 +62,7 @@ extension ViewController {
 
         //MARK: runs our app as root, pretty sweet
         let bigMacApp = Bundle.main.bundlePath
-        _ = runCommandReturnString(binary: "\(bigMacApp)/Contents/Resources/bm2" , arguments: [ "\(bigMacApp)/Contents/MacOS/bigmac2", pw ]) ?? ""
+        runCommand(binary: "\(bigMacApp)/Contents/Resources/bm2" , arguments: [ "\(bigMacApp)/Contents/MacOS/bigmac2", pw ])
         exit(0)
     }
 

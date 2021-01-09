@@ -17,11 +17,11 @@ extension ViewController {
         func macOS(installer: String) {
             if !ranHax3 {
                 ranHax3 = true
-                _ = runCommandReturnString(binary: "/bin/launchctl" , arguments: ["setenv", "DYLD_INSERT_LIBRARIES", "/\(tmp)/\(bigdata)/\(haxDylib)"]) ?? ""
+                runCommand(binary: "/bin/launchctl" , arguments: ["setenv", "DYLD_INSERT_LIBRARIES", "/\(tmp)/\(bigdata)/\(haxDylib)"])
             }
             
             let bigMacApp = Bundle.main.bundlePath
-            _ = runCommandReturnString(binary: "\(bigMacApp)/Contents/Resources/lax" , arguments: [installer]) ?? ""
+            runCommand(binary: "\(bigMacApp)/Contents/Resources/lax" , arguments: [installer])
              
             DispatchQueue.global(qos: .background).async {
                 for i in 1...6 {
@@ -56,33 +56,33 @@ extension ViewController {
                 bootArgs = bootArgs + "srv=1"
             }
 
-            _ = runCommandReturnString(binary: "/usr/sbin/nvram" , arguments: ["boot-args=\(bootArgs)"]) ?? ""
+            runCommand(binary: "/usr/sbin/nvram" , arguments: ["boot-args=\(bootArgs)"])
             
             if libVal {
-                _ = runCommandReturnString(binary: "/usr/bin/defaults" , arguments: ["write", "/Library/Preferences/com.apple.security.libraryvalidation.plist", "DisableLibraryValidation", "-bool", "true"]) ?? ""
+                runCommand(binary: "/usr/bin/defaults" , arguments: ["write", "/Library/Preferences/com.apple.security.libraryvalidation.plist", "DisableLibraryValidation", "-bool", "true"])
             }
             
             //MARK: Disable SIP
             if SIP {
-                _ = runCommandReturnString(binary: "/usr/bin/csrutil" , arguments: ["disable"]) ?? ""
+                runCommand(binary: "/usr/bin/csrutil" , arguments: ["disable"])
             }
             
             //MARK: Disable AR
             if AR {
-                _ = runCommandReturnString(binary: "/usr/bin/csrutil" , arguments: ["authenticated-root", "disable"]) ?? ""
+                runCommand(binary: "/usr/bin/csrutil" , arguments: ["authenticated-root", "disable"])
             }
             
             //MARK: Disable GateKeeper
             if GK {
-                _ = runCommandReturnString(binary: "/usr/sbin/spctl" , arguments: ["--master-disable"]) ?? ""
+                runCommand(binary: "/usr/sbin/spctl" , arguments: ["--master-disable"])
             }
-            
             
             let script = """
             
             display dialog "Only clean installs from Mac OS Extended Journaled (JHFS+) volumes are supported from a full OS. To install or upgrade directly to APFS disks, boot from the bigmac2 Installation Disk. Hint try rebooting and hold down the C key. Note: installing to JHFS+ will be converted to APFS during the install." buttons {"OK"} default button 1 with icon 1
             
             """
+            
             let installAsstBaseOS = "/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
             let installAsstFullOS = "/Applications/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
            // let installAsstBootOS = "/Volumes/bigmac2/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"

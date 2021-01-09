@@ -30,12 +30,12 @@ extension ViewController {
          let appleSysLibExists               = checkIfFileExists(path: "\(destVolume)\(appleSysLib)")
          let appleSysLibPreKernelsExists     = checkIfFileExists(path: "\(destVolume)\(appleSysLibPre)")
 
-         _ = runCommandReturnString(binary: touch, arguments: ["\(destVolume)\(appleSysLib)"])
-         _ = runCommandReturnString(binary: touch, arguments: ["\(destVolume)\(appleSysLibExt)"])
-         _ = runCommandReturnString(binary: touch, arguments: ["\(destVolume)\(sysLibExt)"])
-         _ = runCommandReturnString(binary: touch, arguments: ["\(destVolume)\(sysLibDriverExt)"])
-         _ = runCommandReturnString(binary: touch, arguments: ["\(destVolume)\(libExt)"])
-         _ = runCommandReturnString(binary: touch, arguments: ["\(destVolume)\(libDriveExt)"])
+         runCommand(binary: touch, arguments: ["\(destVolume)\(appleSysLib)"])
+         runCommand(binary: touch, arguments: ["\(destVolume)\(appleSysLibExt)"])
+         runCommand(binary: touch, arguments: ["\(destVolume)\(sysLibExt)"])
+         runCommand(binary: touch, arguments: ["\(destVolume)\(sysLibDriverExt)"])
+         runCommand(binary: touch, arguments: ["\(destVolume)\(libExt)"])
+         runCommand(binary: touch, arguments: ["\(destVolume)\(libDriveExt)"])
          
         indicatorBump(updateProgBar: true)
         

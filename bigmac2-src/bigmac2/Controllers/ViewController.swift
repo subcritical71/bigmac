@@ -72,11 +72,7 @@ class ViewController: NSViewController, URLSessionDelegate {
     @IBOutlet weak var updateBootSysKCs: NSButton!
     @IBOutlet weak var patchDisk_btn: NSButton!
 
-    @IBAction func patchDiskAction(_ sender: Any) {
-        if let disk = getVolumeInfoByDisk(filterVolumeName: availablePatchDisks.title, disk: "", isRoot: true) {
-            globalVolumeInfo = disk
-        }
-    }
+
     
     let fm = FileManager.default
     var timer: Timer?

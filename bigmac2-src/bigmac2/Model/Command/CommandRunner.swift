@@ -9,7 +9,25 @@
 
 import Foundation
 
-func runCommandReturnString(binary: String, arguments: [String]) -> String? {
+func runCommand(binary: String, arguments: [String]) {
+        
+    let process = Process()
+    
+    if #available(OSX 10.13, *) {
+        process.executableURL = URL(string: "file://" + binary)
+    } else {
+        // Fallback on earlier versions
+        process.launchPath = binary
+    }
+    
+    process.arguments = arguments
+    process.qualityOfService = .background
+    process.launch()
+    process.waitUntilExit()
+}
+
+
+func runCommandReturnStr(binary: String, arguments: [String]) -> String? {
         
     let process = Process()
     

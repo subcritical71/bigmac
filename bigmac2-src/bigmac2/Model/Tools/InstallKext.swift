@@ -30,14 +30,14 @@ extension ViewController {
         //MARK: To do add check if directory exists
         
         if kext.contains("lib") {
-            _ = runCommandReturnString(binary: "/bin/mkdir", arguments: [mdir])
+            runCommand(binary: "/bin/mkdir", arguments: [mdir])
         }
         
         //MARK: Sour is used as a special prefix for the source file incase the name is different.
-        strg = runCommandReturnString(binary: "/usr/bin/ditto", arguments: ["-v", "\(source)/\(prfx)\(kext)", destiny]) ?? fail
-        _ = runCommandReturnString(binary: "/usr/sbin/chown", arguments: ["-R", "0:0", destiny])
-        _ = runCommandReturnString(binary: "/bin/chmod", arguments: ["-R", "755", destiny])
-        _ = runCommandReturnString(binary: "/usr/bin/touch", arguments: [destiny])
+        strg = runCommandReturnStr(binary: "/usr/bin/ditto", arguments: ["-v", "\(source)/\(prfx)\(kext)", destiny]) ?? fail
+        runCommand(binary: "/usr/sbin/chown", arguments: ["-R", "0:0", destiny])
+        runCommand(binary: "/bin/chmod", arguments: ["-R", "755", destiny])
+        runCommand(binary: "/usr/bin/touch", arguments: [destiny])
         
         strg = strg.replacingOccurrences(of: "\n", with: "")
         strg = strg.replacingOccurrences(of: "\r", with: "")

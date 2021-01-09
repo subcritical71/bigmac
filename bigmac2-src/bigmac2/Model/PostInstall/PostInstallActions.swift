@@ -23,9 +23,15 @@ extension ViewController {
         DispatchQueue.global(qos: .background).async { [self] in
             PostInstall()
             
-            DispatchQueue.main.async { [self] in
+            DispatchQueue.main.async { //[self] in
                 //performSegue(withIdentifier: "postInstall", sender: nil)
             }
+        }
+    }
+    
+    @IBAction func patchDiskAction(_ sender: Any) {
+        if let disk = getVolumeInfoByDisk(filterVolumeName: availablePatchDisks.title, disk: "", isRoot: true) {
+            globalVolumeInfo = disk
         }
     }
     

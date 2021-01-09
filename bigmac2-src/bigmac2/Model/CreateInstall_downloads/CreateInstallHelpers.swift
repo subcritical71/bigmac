@@ -12,8 +12,8 @@ extension ViewController {
     //MARK: To do - Setup a variable
     func downloadPkg() {
         //Remove pre-existing file
-        _ = runCommandReturnString(binary: "/bin/rm", arguments: ["-Rf","/Users/shared/InstallAssistant.pkg"]) //Future check if it's complete and has right checksum
-        _ = runCommandReturnString(binary: "/bin/rm", arguments: ["-Rf","/tmp/InstallAssistant.pkg"]) //Future check if it's complete and has right checksum
+        runCommand(binary: "/bin/rm", arguments: ["-Rf","/Users/shared/InstallAssistant.pkg"]) //Future check if it's complete and has right checksum
+        runCommand(binary: "/bin/rm", arguments: ["-Rf","/tmp/InstallAssistant.pkg"]) //Future check if it's complete and has right checksum
         
         DispatchQueue.main.async { [self] in
             downloadLabel.stringValue = "macOS 11.1"
@@ -27,8 +27,8 @@ extension ViewController {
     //MARK: To do - Setup a variable
     func downloadBigMac2(dmg: String) {
         //Remove pre-existing file
-        _ = runCommandReturnString(binary: "/bin/rm", arguments: ["-Rf","/Users/shared/bigmac2.dmg"]) //Future check if it's complete and has right checksum
-        _ = runCommandReturnString(binary: "/bin/rm", arguments: ["-Rf","/tmp/bigmac2.dmg"]) //Future check if it's complete and has right checksum
+        runCommand(binary: "/bin/rm", arguments: ["-Rf","/Users/shared/bigmac2.dmg"]) //Future check if it's complete and has right checksum
+        runCommand(binary: "/bin/rm", arguments: ["-Rf","/tmp/bigmac2.dmg"]) //Future check if it's complete and has right checksum
         
         DispatchQueue.main.async { [self] in
             downloadLabel.stringValue = "Fetching boot disk"
@@ -133,25 +133,25 @@ extension ViewController {
     
     //MARK: Make Rename Disk using diskutil
     internal func renameDisk(bin: String = "/usr/sbin/diskutil", input: String, output: String) -> String {
-        let result = runCommandReturnString(binary: bin , arguments: ["rename", input, output]) ?? ""
+        let result = runCommandReturnStr(binary: bin , arguments: ["rename", input, output]) ?? ""
         return result
     }
         
     //MARK: Make Rename Disk using diskutil
     internal func removeApfsVolume(bin: String = "/usr/sbin/diskutil", remove: String) -> String {
-        let result = runCommandReturnString(binary: bin , arguments: ["apfs", "deleteVolume", remove]) ?? ""
+        let result = runCommandReturnStr(binary: bin , arguments: ["apfs", "deleteVolume", remove]) ?? ""
         return result
     }
     
     //MARK: Make Rename Disk using diskutil
     internal func blessVolume(bin: String = "/usr/sbin/bless", bless: String) -> String {
-        let result = runCommandReturnString(binary: bin , arguments: ["--mount", "/Volumes/\(bless)", "--label", bless]) ?? ""
+        let result = runCommandReturnStr(binary: bin , arguments: ["--mount", "/Volumes/\(bless)", "--label", bless]) ?? ""
         return result
     }
     
     //MARK: Extract DMG from Zip file
     func extractDMGfromZip(bin: String = "/usr/bin/unzip", arg: [String] ) -> String {
-        let result = runCommandReturnString(binary: bin , arguments: arg) ?? ""
+        let result = runCommandReturnStr(binary: bin , arguments: arg) ?? ""
         return result
     }
     
@@ -173,14 +173,14 @@ extension ViewController {
     
     //MARK: Erase Disk
     func eraseDisk(bin: String = "/usr/sbin/diskutil", diskSlice: String ) -> String {
-        let result = runCommandReturnString(binary: bin, arguments: ["reformat", diskSlice]) ?? ""
+        let result = runCommandReturnStr(binary: bin, arguments: ["reformat", diskSlice]) ?? ""
         return result
     }
     
     //MARK: MountVolume
     func mountVolume(bin: String = "/usr/sbin/diskutil", disk: String) -> String {
         //diskutil mountDisk disk9
-        let result = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["mountDisk", disk]) ?? ""
+        let result = runCommandReturnStr(binary: "/usr/sbin/diskutil", arguments: ["mountDisk", disk]) ?? ""
         return result
     }
     
@@ -222,17 +222,17 @@ extension ViewController {
         let disks = ["Preboot","Recovery"]
         
         for disk in disks {
-            _ = runCommandReturnString( binary: binary, arguments: [ unmount, disk ] ) ?? ""
+            runCommand( binary: binary, arguments: [ unmount, disk ] )
         }
         
         if ejectAll {
             for disk in disks {
-                _ = runCommandReturnString( binary: binary, arguments: [ eject, disk ] ) ?? ""
+                runCommand( binary: binary, arguments: [ eject, disk ] )
             }
         }
        
         if mountBigmac {
-            _ = runCommandReturnString( binary: binary, arguments: [ "mount", "bigmac2" ] ) ?? ""
+            runCommand( binary: binary, arguments: [ "mount", "bigmac2" ] )
         }
     }
 }

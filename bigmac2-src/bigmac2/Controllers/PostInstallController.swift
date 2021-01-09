@@ -25,9 +25,9 @@ class PostInstallViewController : NSViewController {
         }
         
         //MARK: Bless and set boot
-        _ = runCommandReturnString(binary: bless, arguments: ["--folder", "\(path)System/Library/CoreServices" , "--bootefi", "--label", globalVolumeInfo.displayName, "--setBoot"])
+        runCommand(binary: bless, arguments: ["--mount", path, "--label", globalVolumeInfo.displayName, "--setBoot"])
         //MARK: Reboot
-        _ = runCommandReturnString(binary: "/sbin/reboot", arguments: [])
+        runCommand(binary: "/sbin/reboot", arguments: [])
         dismiss(self)
     }
     

@@ -22,8 +22,7 @@ extension ViewController {
                 let unmounts = [prebootVolume, "Recovery", "Update"]
                 
                 for i in unmounts {
-                    _ = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["unmount", "force", i])
-
+                    runCommand(binary: "/usr/sbin/diskutil", arguments: ["unmount", "force", i])
                 }
             }
           
@@ -31,7 +30,7 @@ extension ViewController {
             
             if !system.root {
                 _ = mkDir(arg:prebootPath)
-                _ = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["mount", "-mountPoint", prebootPath, prebootVolume])
+                runCommand(binary: "/usr/sbin/diskutil", arguments: ["mount", "-mountPoint", prebootPath, prebootVolume])
             }
             
             // diskutil mount -mountPoint /tmp/disk4s2 disk4s2

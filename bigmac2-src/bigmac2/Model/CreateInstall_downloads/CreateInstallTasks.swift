@@ -13,7 +13,7 @@ extension ViewController {
     //MARK: Task #1
     func updateInstallerPkg(){
         incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: true, title: "Updating Installer Package...")
-        _ = runCommandReturnString(binary: "/usr/sbin/installer" , arguments: ["-allowUntrusted", "-pkg", "/Users/Shared/InstallAssistant.pkg", "-target", "/" ]) ?? ""
+        runCommand(binary: "/usr/sbin/installer" , arguments: ["-allowUntrusted", "-pkg", "/Users/Shared/InstallAssistant.pkg", "-target", "/" ])
         
     }
     
@@ -194,15 +194,15 @@ extension ViewController {
         _ = blessVolume(bless: bigmac2)
         
         if let getBaseSystemDisk = getVolumeInfoByDisk(filterVolumeName: "/private/\(tmp)/\(basesystem)\(rndStr)", disk: "") {
-            let infoDisc = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["apfs", "list", "\(getBaseSystemDisk.disk)"] ) ?? ""
+            let infoDisc = runCommandReturnStr(binary: "/usr/sbin/diskutil" , arguments: ["apfs", "list", "\(getBaseSystemDisk.disk)"] ) ?? ""
             
             if !infoDisc.isEmpty {
                 let wholeDisk = getApfsPhysicalStoreDisk(apfsDiskInfo: infoDisc)
-                _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eject", wholeDisk] ) ?? ""
+                runCommand(binary: "/usr/sbin/diskutil" , arguments: ["eject", wholeDisk] )
             }
         }
         
-        _ = runCommandReturnString(binary: "/usr/sbin/diskutil" , arguments: ["eject", "Shared Support"] )
+        runCommand(binary: "/usr/sbin/diskutil" , arguments: ["eject", "Shared Support"] )
         
         incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false)
     }

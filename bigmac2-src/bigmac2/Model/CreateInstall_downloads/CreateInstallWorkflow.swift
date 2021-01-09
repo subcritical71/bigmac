@@ -21,7 +21,7 @@ extension ViewController {
             
             globalVolumeInfo = systemVolume
             
-            _ = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["mount", systemVolume.diskSlice])
+            runCommand(binary: "/usr/sbin/diskutil", arguments: ["mount", systemVolume.diskSlice])
 
             BootSystem(system: systemVolume, dataVolumeUUID: systemVolume.uuid, isVerbose: isBaseVerbose, isSingleUser: isBaseSingleUser, prebootVolume: prebootVolume, isBaseSystem: true)
         } else {
@@ -61,7 +61,7 @@ extension ViewController {
             let prebootDiskSlice = getDisk(substr: "Preboot", usingDiskorSlice: diskInfo.disk, isSlice: false) ?? diskInfo.disk + "s2"
             
             //Get Preboot Ready
-            _ = runCommandReturnString(binary: "/usr/sbin/diskutil", arguments: ["mount", diskInfo.diskSlice])
+            runCommand(binary: "/usr/sbin/diskutil", arguments: ["mount", diskInfo.diskSlice])
         
             //MARK: Step 4
             let bootVol = installBigMacIIApp(bigmac2: diskInfo)

@@ -46,8 +46,8 @@ class InstallViewController: NSViewController {
             path = globalVolumeInfo.path
         }
         
-        _ = runCommandReturnString(binary: bless, arguments: ["--mount", "\(path)", "--folder", "\(path)System/Library/CoreServices", "--bootefi", "--label", globalVolumeInfo.displayName, "--setBoot", "--nextonly"])
+        runCommand(binary: bless, arguments: ["--mount", "\(path)", "--folder", "\(path)System/Library/CoreServices", "--bootefi", "--label", globalVolumeInfo.displayName, "--setBoot", "--nextonly"])
         
-        _ = runCommandReturnString(binary: "/sbin/reboot", arguments: [])
+        runCommand(binary: "/sbin/reboot", arguments: [])
     }
 }
