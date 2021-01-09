@@ -9,8 +9,6 @@ import Cocoa
 
 class PostInstallViewController : NSViewController {
     
-    
-    
     @IBOutlet var creditsTextView: NSTextView!
     
     @IBAction func blessAndBoot(_ sender: Any) {
@@ -39,8 +37,6 @@ class PostInstallViewController : NSViewController {
     @IBAction func ThankYou(_ sender: Any) {
         dismiss(self)
     }
-    
-    
     
     override func viewDidLoad() {
         var font1 = NSFont(name:"Menlo",size:12)
@@ -83,17 +79,17 @@ class PostInstallViewController : NSViewController {
         nameB.addAttributes(green, range: NSRange(location: 0, length: name2.count + 1))
         creditsTextView.textStorage?.append(nameB)
         
-        let name3 = "\n🍏 ASentientBot - Hax3 & USB 1.1\n"
+        let name3 = "\n🍏 ASentientBot - Hax3 Installer\n"
         let nameC = NSMutableAttributedString(string: name3)
         nameC.addAttributes(green, range: NSRange(location: 0, length: name3.count + 1))
         creditsTextView.textStorage?.append(nameC)
         
-        let name4 = "\n🍓 BarryKN      - Hax3 Updates\n"
+        let name4 = "\n🍓 BarryKN      - Hax3 APFS Support\n"
         let nameD = NSMutableAttributedString(string: name4)
         nameD.addAttributes(green, range: NSRange(location: 0, length: name4.count + 1))
         creditsTextView.textStorage?.append(nameD)
         
-        let name4a = "\n🍇 JackLuke     - USB Consulting\n"
+        let name4a = "\n🍇 JackLuke     - USB 1.1\n"
         let nameH = NSMutableAttributedString(string: name4a)
         nameH.addAttributes(green, range: NSRange(location: 0, length: name4a.count + 1))
         creditsTextView.textStorage?.append(nameH)
@@ -133,15 +129,11 @@ class PostInstallViewController : NSViewController {
         nameO.addAttributes(green, range: NSRange(location: 0, length: name10.count + 1))
         creditsTextView.textStorage?.append(nameO)
         
-        let name4d = "\n🍑 ParrotGeek   - Org USB Injector\n"
-        let nameM = NSMutableAttributedString(string: name4d)
-        nameM.addAttributes(green, range: NSRange(location: 0, length: name4d.count + 1))
-        creditsTextView.textStorage?.append(nameM)
-        
         let sep3 = "—————————————————————————————–––––––––\n"
         let separate3 = NSMutableAttributedString(string: sep3)
         separate3.addAttributes(orange, range: NSRange(location: 0, length: sep3.count))
         creditsTextView.textStorage?.append(separate3)
+        
         /*   creditsTextView.string =
          """
          Credits:
@@ -155,7 +147,6 @@ class PostInstallViewController : NSViewController {
          • Syncretic    - Teletrap
          • JackLuke     - Hax3
          • CorpNewt     - Hax3
-         
          ———————————————————————————————
          
          """

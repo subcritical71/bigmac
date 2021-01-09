@@ -1857,7 +1857,7 @@ DQ
                 </viewController>
                 <customObject id="wYi-qT-OyH" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-374" y="1400"/>
+            <point key="canvasLocation" x="-374.5" y="1400"/>
         </scene>
         <!--Installer Disk Complete-->
         <scene sceneID="zY9-3n-Rr8">
