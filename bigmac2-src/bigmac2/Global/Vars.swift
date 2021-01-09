@@ -7,6 +7,7 @@
 
 import Foundation
 
+var kmMonitor = false
 //MARK: TO DO -> Clean up
 var volumeInfo = myVolumeInfo(diskSlice: "", disk: "", displayName: "", volumeName: "", path: "", uuid: "", external: false, root: false, capacity: 0)
 

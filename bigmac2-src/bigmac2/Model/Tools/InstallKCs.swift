@@ -38,10 +38,15 @@ extension ViewController {
          _ = runCommandReturnString(binary: touch, arguments: ["\(destVolume)\(libDriveExt)"])
          
         indicatorBump(updateProgBar: true)
-        DispatchQueue.global(qos: .background).async { [self] in
-            runIndeterminateProcess(binary: kmutil, arguments: ["log", "stream"], title: "Updating Boot and System Kernel Extensions...")
-        }
         
+        //Run this only once
+        if !kmMonitor {
+            DispatchQueue.global(qos: .background).async { [self] in
+                runIndeterminateProcess(binary: kmutil, arguments: ["log", "stream"], title: "Updating Boot and System Kernel Extensions...")
+                kmMonitor = true
+            }
+        }
+       
         let kmArrA = ["install", "--update-all", "--check-rebuild", "--repository", "/\(sysLibExt)", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--repository", "/\(appleSysLibExt)", "--volume-root", "\(destVolume)"]
         runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title: "Updating Boot and System Kernel Extensions...")
         
@@ -53,7 +58,6 @@ extension ViewController {
         indicatorBump(taskMsg: "Updating Auxiliary Kernel Extensions...", detailMsg: "", updateProgBar: true)
         let kmArrC = ["create", "-n", "aux", "--repository", "/\(libExt)", "--volume-root", "\(destVolume)"]
         runIndeterminateProcess(binary: kmutil, arguments: kmArrC, title: "Verifying Boot and System Kernel Extensions...")
-        
         
         indicatorBump(taskMsg: "Creating Prelinked Kernel...", detailMsg: "", updateProgBar: true)
          if appleSysLibExists {
@@ -69,16 +73,8 @@ extension ViewController {
              
             runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title:"Creating Prelinked Kernel...")
          }
-         
-        //MARK: Stop kernel process
-        runIndeterminateProcess(binary: "/usr/bin/killall", arguments: ["kmutil"], title: "Stopping kmutil monitor...")
-        
-        sleep(2)
+
         let kcditto = "\(destVolume)usr/sbin/kcditto"
         runIndeterminateProcess(binary: kcditto, arguments: [], title: "Updating Preboot Volume...")
-        
-    
-
-        return
      }
 }

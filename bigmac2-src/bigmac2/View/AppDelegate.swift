@@ -54,6 +54,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         }
         
         save()
+        
+        //MARK: Stop kernel process
+        _ = runCommandReturnString(binary: "/usr/bin/killall", arguments: ["kmutil"])
     }
 }
 
