@@ -58,7 +58,7 @@ extension ViewController {
 <plist version="1.0">
     <dict>
         <key>Kernel Flags</key>
-        <string>\(singleUser)\(verbose)-no_compat_check -amfi_get_out_of_my_way=1</string>
+        <string>\(singleUser)\(verbose)-no_compat_check amfi_get_out_of_my_way=1</string>
     </dict>
 </plist>
 """

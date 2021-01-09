@@ -9,16 +9,15 @@ import Cocoa
 extension ViewController {
     @IBAction func LaunchInstallerAction(_ sender: Any) {
         
-        let bootArgs = bootArgsField.stringValue
         let libVal = DisableLibraryValidation.state == .on
         let SIP = DisableSIP.state == .on
         let AR = DisableAuthRoot.state == .on
-        
+        let GK = DisableGateKeeper.state == .on
+
         func macOS(installer: String) {
             if !ranHax3 {
                 ranHax3 = true
-                let hax = runCommandReturnString(binary: "/bin/launchctl" , arguments: ["setenv", "DYLD_INSERT_LIBRARIES", "/\(tmp)/\(bigdata)/\(haxDylib)"]) ?? ""
-                print(hax)
+                _ = runCommandReturnString(binary: "/bin/launchctl" , arguments: ["setenv", "DYLD_INSERT_LIBRARIES", "/\(tmp)/\(bigdata)/\(haxDylib)"]) ?? ""
             }
             
             let bigMacApp = Bundle.main.bundlePath
@@ -29,19 +28,35 @@ extension ViewController {
                     sleep(1)
                     DispatchQueue.main.async { [self] in
                         preInstallSpinner.doubleValue = Double(i)
-                        if i > 5 {
-                            exit(0)
-                        }
                     }
                 }
             }
         }
         
         func preInstallRunner(libVal: Bool, SIP: Bool, AR: Bool) {
+            var bootArgs = ""
+            
+            if suGlobalBootArgs.state == .on {
+                bootArgs = bootArgs + "-s "
+            }
+            
+            if verboseGlobalBootArgs.state == .on {
+                bootArgs = bootArgs + "-v "
+            }
+            
+            if amfiGlobalBootArgs.state == .on {
+                bootArgs = bootArgs + "amfi_get_out_of_my_way=1 "
+            }
+            
+            if amfiGlobalBootArgs.state == .on {
+                bootArgs = bootArgs + "-no_compat_check "
+            }
             
             if !bootArgs.isEmpty {
-                _ = runCommandReturnString(binary: "/usr/sbin/nvram" , arguments: ["boot-args=\(bootArgs)"]) ?? ""
+                bootArgs = bootArgs + "srv=1"
             }
+
+            _ = runCommandReturnString(binary: "/usr/sbin/nvram" , arguments: ["boot-args=\(bootArgs)"]) ?? ""
             
             if libVal {
                 _ = runCommandReturnString(binary: "/usr/bin/defaults" , arguments: ["write", "/Library/Preferences/com.apple.security.libraryvalidation.plist", "DisableLibraryValidation", "-bool", "true"]) ?? ""
@@ -55,6 +70,11 @@ extension ViewController {
             //MARK: Disable AR
             if AR {
                 _ = runCommandReturnString(binary: "/usr/bin/csrutil" , arguments: ["authenticated-root", "disable"]) ?? ""
+            }
+            
+            //MARK: Disable GateKeeper
+            if GK {
+                _ = runCommandReturnString(binary: "/usr/sbin/spctl" , arguments: ["--master-disable"]) ?? ""
             }
             
             
@@ -79,6 +99,7 @@ extension ViewController {
                 macOS(installer: installAsstFullOS)
             }
         }
+      
         preInstallRunner(libVal: libVal, SIP: SIP, AR: AR)
     }
 }

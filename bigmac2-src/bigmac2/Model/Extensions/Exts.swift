@@ -26,9 +26,7 @@ extension String {
         guard self.hasPrefix(prefix) else { return self }
         return String(self.dropFirst(prefix.count))
     }
-}
-
-extension String {
+    
     func stringBefore(_ delimiter: Character) -> String {
         if let index = firstIndex(of: delimiter) {
             return String(prefix(upTo: index))
@@ -44,9 +42,7 @@ extension String {
             return ""
         }
     }
-}
-
-extension String {
+    
     func capitalizingFirstLetter() -> String {
         return prefix(1).capitalized + dropFirst()
     }
@@ -55,4 +51,3 @@ extension String {
         self = self.capitalizingFirstLetter()
     }
 }
- 

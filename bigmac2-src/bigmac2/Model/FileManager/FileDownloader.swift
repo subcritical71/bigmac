@@ -158,5 +158,3 @@ extension ViewController : URLSessionDownloadDelegate {
         startCopy(sourcePath: sourcePath, targetPath: targetPath)
     }
 }
-
-

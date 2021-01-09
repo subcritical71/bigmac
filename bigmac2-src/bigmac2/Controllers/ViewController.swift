@@ -21,19 +21,22 @@ class ViewController: NSViewController, URLSessionDelegate {
     @IBOutlet weak var installerFuelGauge: NSLevelIndicator!
     @IBOutlet weak var sharedSupportProgressBar: NSProgressIndicator!
     @IBOutlet weak var downloadLabel: NSTextField!
-    
     @IBOutlet weak var sharedSupportPercentage: NSTextField!
     @IBOutlet weak var sharedSupportGbLabel: NSTextField!
     @IBOutlet weak var singleUserCheckbox: NSButton!
     @IBOutlet weak var verboseUserCheckbox: NSButton!
     
     //MARK: Preinstall Tab -- Outlets
-    @IBOutlet weak var bootArgsField: NSTextField!
     @IBOutlet weak var DisableLibraryValidation: NSButton!
     @IBOutlet weak var DisableSIP: NSButton!
     @IBOutlet weak var DisableAuthRoot: NSButton!
+    @IBOutlet weak var DisableGateKeeper: NSButton!
     @IBOutlet weak var preInstallSpinner: NSProgressIndicator!
-
+    @IBOutlet weak var verboseGlobalBootArgs: NSButton!
+    @IBOutlet weak var amfiGlobalBootArgs: NSButton!
+    @IBOutlet weak var nccGlobalBootArgs: NSButton!
+    @IBOutlet weak var suGlobalBootArgs: NSButton!
+  
     //MARK: Tab Views
     @IBOutlet weak var downloadsTab: NSTabViewItem!
     @IBOutlet weak var preInstallTab: NSTabViewItem!
@@ -59,7 +62,6 @@ class ViewController: NSViewController, URLSessionDelegate {
     @IBOutlet weak var singleUser_btn: NSButton!
     @IBOutlet weak var deleteAPFSSnapshotsButton: NSButton!
     @IBOutlet weak var BlessVolume: NSButton!
-    
     @IBOutlet weak var postInstallFuelGauge: NSLevelIndicator!
     @IBOutlet weak var postInstallProgressIndicator: NSProgressIndicator!
     @IBOutlet weak var availablePatchDisks: NSPopUpButton!
@@ -86,7 +88,6 @@ class ViewController: NSViewController, URLSessionDelegate {
             mountBigData() //dmg for the app
         }
         
-        parseBootArgs()
         disableSetResXButtonsCheck()
         bootedToBaseOS = checkForBaseOS()
         

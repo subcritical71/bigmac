@@ -11,29 +11,35 @@ import Foundation
 
 func runCommandReturnString(binary: String, arguments: [String]) -> String? {
     
-    let task = Process()
+    var output = ""
+    
+    let process = Process()
     if #available(OSX 10.13, *) {
-        task.executableURL = URL(string: "file://" + binary)
+        process.executableURL = URL(string: "file://" + binary)
     } else {
         // Fallback on earlier versions
-        task.launchPath = binary
+        process.launchPath = binary
         
     }
-    task.arguments = arguments
+    process.arguments = arguments
     
     let pipe = Pipe()
-    task.standardOutput = pipe
-    task.standardError = pipe
-    task.launch()
-    task.waitUntilExit()
-    let data = pipe.fileHandleForReading.readDataToEndOfFile()
+    process.standardOutput = pipe
+    process.standardError = pipe
+    process.launch()
+    process.waitUntilExit()
     
-    if let output = String(data: data, encoding: String.Encoding.utf8), !output.isEmpty {
-        print(output)
-        return output
+    process.terminationHandler = { (process: Process?) -> () in
+        pipe.fileHandleForReading.readabilityHandler = nil
+    }
+        
+    pipe.fileHandleForReading.readabilityHandler = { pipe in
+        if let io = String(data: pipe.availableData, encoding: .utf8) {
+            output = output + io
+        }
     }
     
-    return ""
+    return output
 }
 
 
@@ -93,7 +99,7 @@ extension ViewController {
         }
         
         //Finish the Job
-        process.terminationHandler = { (task: Process?) -> () in
+        process.terminationHandler = { (process: Process?) -> () in
             pipe.fileHandleForReading.readabilityHandler = nil
         }
         
@@ -142,7 +148,7 @@ extension ViewController {
         }
         
         //Finish the Job
-        process.terminationHandler = { (task: Process?) -> () in
+        process.terminationHandler = { (process: Process?) -> () in
             pipe.fileHandleForReading.readabilityHandler = nil
         }
         

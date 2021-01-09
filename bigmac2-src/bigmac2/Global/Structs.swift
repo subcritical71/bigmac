@@ -13,8 +13,6 @@ struct myVolumeInfo {
     var capacity: Int
 }
 
-var volumeInfo = myVolumeInfo(diskSlice: "", disk: "", displayName: "", volumeName: "", path: "", uuid: "", external: false, root: false, capacity: 0)
-
 
 // MARK: - Snapshots
 struct Snapshots: Codable {

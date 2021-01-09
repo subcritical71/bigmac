@@ -55,6 +55,4 @@ extension ViewController {
         
         driv            = availablePatchDisks.title
     }
-    
-    
 }

@@ -71,10 +71,10 @@ extension ViewController {
                 //MARK: Update systemVolume volume because UUIDs have changed
                 baseBootPlister(diskInfo: bootVol, isVerbose: isBaseVerbose, isSingleUser: isSingleUser, prebootVolume: prebootDiskSlice, isBaseSystem: true)
                      
-                
+                sleep(2)
                 //MARK: Step 5
                 installEmojiFont(diskInfo: bootVol)
-                
+                sleep(2)
                 //MARK: Step 6
                 bigSurInstallerAppXfer(isBeta: false, BootVolume: bootVol)
                 

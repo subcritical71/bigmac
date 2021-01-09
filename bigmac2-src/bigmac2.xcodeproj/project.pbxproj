@@ -18,7 +18,6 @@
 		2D1A32AA258D959E009DCDFD /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2D1A32A8258D959E009DCDFD /* Main.storyboard */; };
 		2D23BF64258EA04B0019BD90 /* CommandRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D23BF63258EA04B0019BD90 /* CommandRunner.swift */; };
 		2D2E4E1E259C03930088999C /* FileWriter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D2E4E1D259C03930088999C /* FileWriter.swift */; };
-		2D3E60F2259CFC6000DE6488 /* ParseBootArgs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3E60F1259CFC6000DE6488 /* ParseBootArgs.swift */; };
 		2D3E60FE259D430C00DE6488 /* ViewControllerSetup.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D3E60FD259D430C00DE6488 /* ViewControllerSetup.swift */; };
 		2D522BAC25A35FA000E25780 /* WindowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D522BAB25A35FA000E25780 /* WindowController.swift */; };
 		2D522BB525A36A5B00E25780 /* Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D522BB425A36A5B00E25780 /* Exts.swift */; };
@@ -58,7 +57,6 @@
 		2D1A32AB258D959E009DCDFD /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2D23BF63258EA04B0019BD90 /* CommandRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandRunner.swift; sourceTree = "<group>"; };
 		2D2E4E1D259C03930088999C /* FileWriter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileWriter.swift; sourceTree = "<group>"; };
-		2D3E60F1259CFC6000DE6488 /* ParseBootArgs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseBootArgs.swift; sourceTree = "<group>"; };
 		2D3E60FD259D430C00DE6488 /* ViewControllerSetup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerSetup.swift; sourceTree = "<group>"; };
 		2D522BA825A2E1DF00E25780 /* bigdata.dmg */ = {isa = PBXFileReference; lastKnownFileType = file; path = bigdata.dmg; sourceTree = "<group>"; };
 		2D522BA925A2E20000E25780 /* bm2tmp0.dmg */ = {isa = PBXFileReference; lastKnownFileType = file; path = bm2tmp0.dmg; sourceTree = "<group>"; };
@@ -152,7 +150,6 @@
 		2D3E60EE259CFB9400DE6488 /* Command */ = {
 			isa = PBXGroup;
 			children = (
-				2D3E60F1259CFC6000DE6488 /* ParseBootArgs.swift */,
 				2D23BF63258EA04B0019BD90 /* CommandRunner.swift */,
 			);
 			path = Command;
@@ -356,7 +353,6 @@
 				2D99C49D259F2D280035669B /* PostInstallActions.swift in Sources */,
 				2D09EE43259C432C0054CF3A /* CreateInstallTasks.swift in Sources */,
 				2D8630FE25A234D3006DDFFC /* PostInstallWorkflow.swift in Sources */,
-				2D3E60F2259CFC6000DE6488 /* ParseBootArgs.swift in Sources */,
 				2DFBD81E25A418B40098024C /* InstallerDiskController.swift in Sources */,
 				2D02E03525945BD000E8E1CF /* EraseDiskController.swift in Sources */,
 				2D522BB525A36A5B00E25780 /* Exts.swift in Sources */,
@@ -407,7 +403,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = bigmac2/Info.plist;
@@ -435,7 +431,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 20;
+				CURRENT_PROJECT_VERSION = 21;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = bigmac2/Info.plist;
