@@ -5,14 +5,14 @@
 //  Created by starplayrx on 1/1/21.
 //
 
-import Foundation
+import Cocoa
 
 extension ViewController {
     
+    
     @IBAction func patchDiskExec_action(_ sender: Any) {
-       // performSegue(withIdentifier: "postInstall", sender: nil)
-
-       postInstallTask_label.stringValue = "Starting Post Install Process..."
+        
+        postInstallTask_label.stringValue = "Starting Post Install Process..."
         postInstallDetails_label.stringValue = ""
         postInstallFuelGauge.doubleValue = 0
         postInstallProgressIndicator.doubleValue = 1
@@ -23,12 +23,12 @@ extension ViewController {
         DispatchQueue.global(qos: .background).async { [self] in
             PostInstall()
             
-            //DispatchQueue.main.async { [self] in
-                //anything else?
-            //}
+            DispatchQueue.main.async { [self] in
+                //performSegue(withIdentifier: "postInstall", sender: nil)
+            }
         }
     }
-
+    
     @IBAction func legacyUSB_act(_ sender: Any) {
         enableUSB_btn.state == .on ? (enableUSB = true) : (enableUSB = false)
     }

@@ -7,15 +7,30 @@
 
 import Cocoa
 
-class PostInstallViewController : InstallViewController {
+class PostInstallViewController : NSViewController {
     
     @IBOutlet var creditsTextView: NSTextView!
     
     @IBAction func blessAndBoot(_ sender: Any) {
+        
+        // if let app = appFolder  {
+        var bless = globalVolumeInfo.path + "/usr/sbin/bless"
+        var path = globalVolumeInfo.path + "/"
+        
+        if globalVolumeInfo.root {
+            bless = globalVolumeInfo.path + "/usr/sbin/bless"
+            path = globalVolumeInfo.path
+        }
+        
+        //MARK: Bless and set boot
+        _ = runCommandReturnString(binary: bless, arguments: ["--folder", "\(path)System/Library/CoreServices" , "--bootefi", "--label", globalVolumeInfo.displayName, "--setBoot"])
+        //MARK: Reboot
+        _ = runCommandReturnString(binary: "/sbin/reboot", arguments: [])
         dismiss(self)
     }
     
     @IBAction func Donate(_ sender: Any) {
+        donate2BigMac()
         dismiss(self)
     }
     
@@ -23,29 +38,21 @@ class PostInstallViewController : InstallViewController {
         dismiss(self)
     }
     
+    
+    
     override func viewDidLoad() {
-        /*  if #available(OSX 10.15, *) {
-         creditsTextView.font = .monospacedSystemFont(ofSize: 12, weight: NSFont.Weight.regular)
-         } else {
-         // Fallback on earlier versions
-         creditsTextView.font = .monospacedDigitSystemFont(ofSize: 12, weight: NSFont.Weight.regular)
-         
-         }
-         creditsTextView.textColor = .secondaryLabelColor*/
-        
         var font1 = NSFont(name:"Menlo",size:12)
         var font2 = NSFont(name:"Menlo",size:13)
 
         if #available(OSX 10.15, *) {
             font1 = NSFont.monospacedSystemFont(ofSize: 12, weight: NSFont.Weight.regular)
             font2 = NSFont.monospacedSystemFont(ofSize: 13, weight: NSFont.Weight.regular)
-
         }
     
         creditsTextView.isRichText = true
         creditsTextView.isEditable = false
         creditsTextView.isSelectable = false
-        
+    
         let orange: [NSAttributedString.Key: Any] = [.font: font1!, .foregroundColor: NSColor.systemOrange]
         let green: [NSAttributedString.Key: Any] = [.font: font2!, .foregroundColor: NSColor.systemGreen]
         
@@ -54,7 +61,7 @@ class PostInstallViewController : InstallViewController {
         separate1.addAttributes(orange, range: NSRange(location: 0, length: sep1.count))
         creditsTextView.textStorage?.append(separate1)
         
-        let credits = "🍺 Big Mac Hall of Fame"
+        let credits = "🍺 Big Mac      - Wall of Fame"
         let creditsText = NSMutableAttributedString(string: credits)
         creditsText.addAttributes(green, range: NSRange(location: 0, length: credits.count + 1))
         creditsTextView.textStorage?.append(creditsText)
@@ -84,15 +91,55 @@ class PostInstallViewController : InstallViewController {
         nameD.addAttributes(green, range: NSRange(location: 0, length: name4.count + 1))
         creditsTextView.textStorage?.append(nameD)
         
-        let name5 = "\n🫐 Czo          - SUVMMFaker\n"
+        let name4a = "\n🍇 JackLuke     - USB Consulting\n"
+        let nameH = NSMutableAttributedString(string: name4a)
+        nameH.addAttributes(green, range: NSRange(location: 0, length: name4a.count + 1))
+        creditsTextView.textStorage?.append(nameH)
+        
+        let name4b = "\n🥥 CorpNewt     - USB Map\n"
+        let nameI = NSMutableAttributedString(string: name4b)
+        nameI.addAttributes(green, range: NSRange(location: 0, length: name4b.count + 1))
+        creditsTextView.textStorage?.append(nameI)
+    
+        let nameBL = "\n🫐 StarPlayrX   - BT2.0 Disabler\n"
+        let nameP = NSMutableAttributedString(string: nameBL)
+        nameP.addAttributes(green, range: NSRange(location: 0, length: nameBL.count + 1))
+        creditsTextView.textStorage?.append(nameP)
+        
+        let name5 = "\n🍒 Czo          - SUVMMFaker\n"
         let nameE = NSMutableAttributedString(string: name5)
         nameE.addAttributes(green, range: NSRange(location: 0, length: name5.count + 1))
         creditsTextView.textStorage?.append(nameE)
         
+        let name6 = "\n🍋 Syncretic    - SSE4.2 MouSSE\n"
+        let nameF = NSMutableAttributedString(string: name6)
+        nameF.addAttributes(green, range: NSRange(location: 0, length: name6.count + 1))
+        creditsTextView.textStorage?.append(nameF)
         
+        let name7 = "\n🥭 Syncretic    - Teletrap\n"
+        let nameG = NSMutableAttributedString(string: name7)
+        nameG.addAttributes(green, range: NSRange(location: 0, length: name7.count + 1))
+        creditsTextView.textStorage?.append(nameG)
         
+        let name9 = "\n🍍 Exvision     - HDMI Audio\n"
+        let nameL = NSMutableAttributedString(string: name9)
+        nameL.addAttributes(green, range: NSRange(location: 0, length: name9.count + 1))
+        creditsTextView.textStorage?.append(nameL)
         
+        let name10 = "\n🍉 StarPlayrX   - Snapshot Delete\n"
+        let nameO = NSMutableAttributedString(string: name10)
+        nameO.addAttributes(green, range: NSRange(location: 0, length: name10.count + 1))
+        creditsTextView.textStorage?.append(nameO)
         
+        let name4d = "\n🍑 ParrotGeek   - Org USB Injector\n"
+        let nameM = NSMutableAttributedString(string: name4d)
+        nameM.addAttributes(green, range: NSRange(location: 0, length: name4d.count + 1))
+        creditsTextView.textStorage?.append(nameM)
+        
+        let sep3 = "—————————————————————————————–––––––––\n"
+        let separate3 = NSMutableAttributedString(string: sep3)
+        separate3.addAttributes(orange, range: NSRange(location: 0, length: sep3.count))
+        creditsTextView.textStorage?.append(separate3)
         /*   creditsTextView.string =
          """
          Credits:
@@ -102,7 +149,11 @@ class PostInstallViewController : InstallViewController {
          • ASentientBot - Hax3
          • BarryKN      - Hax3 Updates
          • Czo          - SUVMMFaker
-         •
+         • Syncretic    - MouSSE
+         • Syncretic    - Teletrap
+         • JackLuke     - Hax3
+         • CorpNewt     - Hax3
+         
          ———————————————————————————————
          
          """

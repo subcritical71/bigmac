@@ -43,16 +43,16 @@ extension ViewController {
         }
         
         let kmArrA = ["install", "--update-all", "--check-rebuild", "--repository", "/\(sysLibExt)", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--repository", "/\(appleSysLibExt)", "--volume-root", "\(destVolume)"]
-        _ = runCommandReturnString(binary: kmutil, arguments: kmArrA)
+        runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title: "Updating Boot and System Kernel Extensions...")
         
          //MARK: Rechecking Extensions
         indicatorBump(taskMsg: "Verifying Boot and System Kernel Extensions...", detailMsg: "", updateProgBar: true)
-        _ = runCommandReturnString(binary: kmutil, arguments: kmArrA)
+        runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title: "Verifying Boot and System Kernel Extensions...")
          
          //MARK: Updating Library Extensions
         indicatorBump(taskMsg: "Updating Auxiliary Kernel Extensions...", detailMsg: "", updateProgBar: true)
         let kmArrC = ["create", "-n", "aux", "--repository", "/\(libExt)", "--volume-root", "\(destVolume)"]
-        _ = runCommandReturnString(binary: kmutil, arguments: kmArrC)
+        runIndeterminateProcess(binary: kmutil, arguments: kmArrC, title: "Verifying Boot and System Kernel Extensions...")
         
         
         indicatorBump(taskMsg: "Creating Prelinked Kernel...", detailMsg: "", updateProgBar: true)
@@ -62,21 +62,22 @@ extension ViewController {
                  _ = mkDir(arg: "\(destVolume)/\(appleSysLibPre)")
              }
              let kmArrA = ["create", "-n", "boot", "--boot-path", "/\(appleSysLibPre)/prelinkedkernel", "-f", "'OSBundleRequired'=='Local-Root'", "--kernel", "/\(kernel)", "--repository", "/\(sysLibExt)", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--repository", "/\(appleSysLibExt)", "--volume-root", "\(destVolume)"]
-            _ = runCommandReturnString(binary: kmutil, arguments: kmArrA)
+            runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title: "Creating Prelinked Kernel...")
          } else {
             indicatorBump(updateProgBar: true)
              let kmArrA = ["create", "-n", "boot", "--boot-path", "/\(prelinkedkernel)", "-f", "'OSBundleRequired'=='Local-Root'", "--kernel", "/\(kernel)", "--repository", "/\(sysLibExt)", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--repository", "/\(appleSysLibExt)", "--volume-root", "\(destVolume)"]
              
-            _ = runCommandReturnString(binary: kmutil, arguments: kmArrA)
+            runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title:"Creating Prelinked Kernel...")
          }
          
-    
-        indicatorBump(taskMsg: "Creating Prelinked Kernel...", detailMsg: "Copying Kernel Collections to Preboot Volume...", updateProgBar: true)
-        let kcditto = "\(destVolume)usr/sbin/kcditto"
-        _ = runCommandReturnString(binary: kcditto, arguments: [])
-        
         //MARK: Stop kernel process
-        _ = runCommandReturnString(binary: "/usr/bin/killall", arguments: ["kmutil"])
+        runIndeterminateProcess(binary: "/usr/bin/killall", arguments: ["kmutil"], title: "Stopping kmutil monitor...")
+        
+        sleep(2)
+        let kcditto = "\(destVolume)usr/sbin/kcditto"
+        runIndeterminateProcess(binary: kcditto, arguments: [], title: "Updating Preboot Volume...")
+        
+    
 
         return
      }

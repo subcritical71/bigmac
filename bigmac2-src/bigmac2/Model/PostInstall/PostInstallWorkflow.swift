@@ -224,6 +224,9 @@ extension ViewController {
                 postInstallProgressIndicator.doubleValue = postInstallProgressIndicator.maxValue
                 postInstallSpinner.stopAnimation(self)
                 postInstallSpinner.isHidden = true
+                
+                globalVolumeInfo = systemVolume
+                performSegue(withIdentifier: "postInstall", sender: nil)
             }
         }
     }

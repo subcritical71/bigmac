@@ -5,6 +5,12 @@
 //  Created by starplayrx on 1/1/21.
 //
 import Cocoa
+//MARK: Donate to BigMac
+func donate2BigMac() {
+    if let url = URL(string: "https://www.paypal.com/donate?hosted_button_id=M3U48FLF87SXQ") {
+        NSWorkspace.shared.open(url)
+    }
+}
 
 //MARK: Mount Big Data
 func mountBigData() {
@@ -86,6 +92,8 @@ func parseRawText(_ str: String) -> String {
     return s
 }
 
+
+
 extension ViewController {
 
     // MARK: Get System Info
@@ -107,7 +115,7 @@ extension ViewController {
                 print(error)
             }
         }
-    
+
         return nil
     }
     

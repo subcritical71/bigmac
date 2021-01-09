@@ -70,6 +70,10 @@ class ViewController: NSViewController, URLSessionDelegate {
     @IBOutlet weak var updateBootSysKCs: NSButton!
     @IBOutlet weak var patchDisk_btn: NSButton!
 
+    @IBAction func patchDiskAction(_ sender: Any) {
+        globalVolumeInfo = getSystemInfo(availablePatchDisks.title)
+    }
+    
     let fm = FileManager.default
     var timer: Timer?
     

@@ -1151,6 +1151,9 @@ DQ
                                                             </items>
                                                         </menu>
                                                     </popUpButtonCell>
+                                                    <connections>
+                                                        <action selector="patchDiskAction:" target="XfG-lQ-9wD" id="pjS-6N-Qbh"/>
+                                                    </connections>
                                                 </popUpButton>
                                                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="9" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="XTi-Aa-BUh">
                                                     <rect key="frame" x="37" y="154" width="186" height="166"/>

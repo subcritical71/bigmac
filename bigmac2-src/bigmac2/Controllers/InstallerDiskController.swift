@@ -19,9 +19,7 @@ class InstallViewController: NSViewController {
     }
     
     @IBAction func donateButton_Action(_ sender: Any) {
-        if let url = URL(string: "https://www.paypal.com/donate?hosted_button_id=M3U48FLF87SXQ") {
-            NSWorkspace.shared.open(url)
-        }
+        donate2BigMac()
         dismiss(self)
     }
     
