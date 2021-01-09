@@ -10,36 +10,33 @@
 import Foundation
 
 func runCommandReturnString(binary: String, arguments: [String]) -> String? {
-    
-    var output = ""
-    
+        
     let process = Process()
+    
     if #available(OSX 10.13, *) {
         process.executableURL = URL(string: "file://" + binary)
     } else {
         // Fallback on earlier versions
         process.launchPath = binary
-        
     }
+    
     process.arguments = arguments
     
     let pipe = Pipe()
     process.standardOutput = pipe
     process.standardError = pipe
+    process.qualityOfService = .userInteractive
     process.launch()
     process.waitUntilExit()
     
-    process.terminationHandler = { (process: Process?) -> () in
-        pipe.fileHandleForReading.readabilityHandler = nil
-    }
-        
-    pipe.fileHandleForReading.readabilityHandler = { pipe in
-        if let io = String(data: pipe.availableData, encoding: .utf8) {
-            output = output + io
-        }
-    }
+    let data = pipe.fileHandleForReading.readDataToEndOfFile()
+     
+     if let output = String(data: data, encoding: String.Encoding.utf8), !output.isEmpty {
+         process.terminate()
+         return output
+     }
     
-    return output
+    return ""
 }
 
 
@@ -72,7 +69,14 @@ extension ViewController {
         
         //DispatchQueue.global(qos: .background).async {
         let process = Process()
-        process.launchPath = binary
+        
+        if #available(OSX 10.13, *) {
+            process.executableURL = URL(string: "file://" + binary)
+        } else {
+            // Fallback on earlier versions
+            process.launchPath = binary
+        }
+
         process.arguments = arguments
         
         let pipe = Pipe()
@@ -103,6 +107,7 @@ extension ViewController {
             pipe.fileHandleForReading.readabilityHandler = nil
         }
         
+        process.qualityOfService = .userInteractive
         process.launch()
         process.waitUntilExit()
     }
@@ -115,9 +120,14 @@ extension ViewController {
             postInstallDetails_label.stringValue = ""
         }
         
-        //DispatchQueue.global(qos: .background).async {
         let process = Process()
-        process.launchPath = binary
+        
+        if #available(OSX 10.13, *) {
+            process.executableURL = URL(string: "file://" + binary)
+        } else {
+            // Fallback on earlier versions
+            process.launchPath = binary
+        }
         process.arguments = arguments
         
         let pipe = Pipe()
@@ -152,7 +162,7 @@ extension ViewController {
             pipe.fileHandleForReading.readabilityHandler = nil
         }
         
-        process.qualityOfService = .default
+        process.qualityOfService = .userInteractive
         process.launch()
         process.waitUntilExit()
     }
