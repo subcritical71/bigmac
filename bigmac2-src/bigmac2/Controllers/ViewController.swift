@@ -25,7 +25,8 @@ class ViewController: NSViewController, URLSessionDelegate {
     @IBOutlet weak var sharedSupportGbLabel: NSTextField!
     @IBOutlet weak var singleUserCheckbox: NSButton!
     @IBOutlet weak var verboseUserCheckbox: NSButton!
-    
+    @IBOutlet weak var apfsRomPatcher: NSButton!
+   
     //MARK: Preinstall Tab -- Outlets
     @IBOutlet weak var DisableLibraryValidation: NSButton!
     @IBOutlet weak var DisableSIP: NSButton!

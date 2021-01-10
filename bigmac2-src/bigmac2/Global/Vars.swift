@@ -49,6 +49,8 @@ var installKCstl = ""
 var blessSystemtl = ""
 var deleteSnaphotstl = ""
 var bigmacDMG = "bigmac2.dmg"
+var dosDude1DMG = "dosdude1.dmg"
+
 var bigmac2Str = "bigmac2"
 var domain = "www.starplayrx.com"
 var tmpFolder = "/tmp/"

@@ -56,6 +56,9 @@ extension ViewController : URLSessionDownloadDelegate {
                 
                 if filename == bigmacDMG {
                     NotificationCenter.default.post(name: .CreateDisk, object: nil)
+                } else if filename == dosDude1DMG {
+                    let mnt = mountDiskImage(arg: ["mount", "/Users/Shared/\(dosDude1DMG)", "-noverify", "-noautofsck", "-autoopen"])
+                    print(mnt)
                 }
             }
         }

@@ -100,8 +100,8 @@
 			children = (
 				2DE42E3C25918F56005E10C6 /* CreateInstallHelpers.swift */,
 				2D09EE42259C432C0054CF3A /* CreateInstallTasks.swift */,
-				2DAFF44B259AB7ED00D48E20 /* CreateInstallActions.swift */,
 				2D09EE3F259C42C70054CF3A /* CreateInstallWorkflow.swift */,
+				2DAFF44B259AB7ED00D48E20 /* CreateInstallActions.swift */,
 			);
 			path = CreateInstall_downloads;
 			sourceTree = "<group>";

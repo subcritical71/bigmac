@@ -829,28 +829,20 @@
                                                     </subviews>
                                                 </customView>
                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="556-P5-2ue">
-                                                    <rect key="frame" x="17" y="17" width="336" height="46"/>
+                                                    <rect key="frame" x="17" y="1" width="242" height="66"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
-                                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Od-GF-iHL">
-                                                            <rect key="frame" x="-7" y="19" width="156" height="32"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                            <buttonCell key="cell" type="push" title="APFS ROM Patcher" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Nab-de-NU4">
-                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
-                                                                <font key="font" metaFont="system"/>
-                                                            </buttonCell>
-                                                        </button>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8r8-CA-8z3">
-                                                            <rect key="frame" x="-2" y="0.0" width="340" height="15"/>
+                                                            <rect key="frame" x="-2" y="2" width="194" height="35"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                                            <textFieldCell key="cell" lineBreakMode="clipping" title="for native APFS boot support on Mac Pro 3,1 and Xserve 2,1" id="4Fv-gb-UHD">
-                                                                <font key="font" metaFont="cellTitle"/>
+                                                            <textFieldCell key="cell" title="For native APFS boot support on Penryn and Core2Duo Macs." id="4Fv-gb-UHD">
+                                                                <font key="font" metaFont="system" size="11"/>
                                                                 <color key="textColor" name="secondaryLabelColor" catalog="System" colorSpace="catalog"/>
                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                         </textField>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="RFY-t2-czT">
-                                                            <rect key="frame" x="152" y="29" width="72" height="14"/>
+                                                            <rect key="frame" x="152" y="49" width="72" height="14"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <textFieldCell key="cell" lineBreakMode="clipping" title="by Dosdude1" id="wrQ-Wn-YKG">
                                                                 <font key="font" metaFont="smallSystem"/>
@@ -858,6 +850,17 @@
                                                                 <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                                             </textFieldCell>
                                                         </textField>
+                                                        <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="6Od-GF-iHL">
+                                                            <rect key="frame" x="-7" y="39" width="156" height="32"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                            <buttonCell key="cell" type="push" title="APFS ROM Patcher" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="Nab-de-NU4">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="apfsRomDownload:" target="XfG-lQ-9wD" id="GYe-sd-nP4"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                 </customView>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ahL-hY-ZTg">
@@ -1435,6 +1438,7 @@ DQ
                         <outlet property="VerboseBoot_btn" destination="vt6-hs-Whx" id="JgZ-h7-sbw"/>
                         <outlet property="amdMouSSE_btn" destination="W3i-15-mCO" id="dpk-8K-l4h"/>
                         <outlet property="amfiGlobalBootArgs" destination="Bgw-qI-tPD" id="GIY-B9-9On"/>
+                        <outlet property="apfsRomPatcher" destination="6Od-GF-iHL" id="Vbc-rb-tC0"/>
                         <outlet property="appStoreMacOS_btn" destination="JFS-1h-7p0" id="rmc-15-LyP"/>
                         <outlet property="appleHDA_btn" destination="FId-UD-oKk" id="AN7-MW-st1"/>
                         <outlet property="availablePatchDisks" destination="yHl-mb-wuL" id="GjX-e0-Sya"/>
@@ -1616,7 +1620,7 @@ DQ
                 </viewController>
                 <customObject id="NQ2-IZ-hIF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="663.5" y="450"/>
+            <point key="canvasLocation" x="678" y="579"/>
         </scene>
         <!--🍔 Big Mac 2.0 Helper-->
         <scene sceneID="59O-qf-fCR">
@@ -1740,7 +1744,7 @@ Gw
                 </viewController>
                 <customObject id="f1U-dM-v9t" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="674" y="994"/>
+            <point key="canvasLocation" x="677" y="958"/>
         </scene>
         <!--Post Install View Controller-->
         <scene sceneID="J47-Aw-6O6">
@@ -1857,7 +1861,7 @@ DQ
                 </viewController>
                 <customObject id="wYi-qT-OyH" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-374.5" y="1400"/>
+            <point key="canvasLocation" x="-380" y="1425"/>
         </scene>
         <!--Installer Disk Complete-->
         <scene sceneID="zY9-3n-Rr8">
@@ -1940,8 +1944,8 @@ DQ
                                 <rect key="frame" x="49" y="64" width="307" height="141"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bES-Pb-Uew">
-                                        <rect key="frame" x="-2" y="124" width="267" height="18"/>
-                                        <buttonCell key="cell" type="check" title="Hold down C to boot bigmac2 [ YMMV ]" bezelStyle="regularSquare" imagePosition="left" refusesFirstResponder="YES" state="on" inset="2" id="K8K-nR-ZbT">
+                                        <rect key="frame" x="-2" y="124" width="260" height="18"/>
+                                        <buttonCell key="cell" type="check" title="Hold down C to boot bigmac2 (YMMV)" bezelStyle="regularSquare" imagePosition="left" refusesFirstResponder="YES" state="on" inset="2" id="K8K-nR-ZbT">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
@@ -2004,7 +2008,7 @@ DQ
                 </viewController>
                 <customObject id="2es-xO-UPa" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="71" y="1410"/>
+            <point key="canvasLocation" x="151" y="1425"/>
         </scene>
     </scenes>
     <resources>

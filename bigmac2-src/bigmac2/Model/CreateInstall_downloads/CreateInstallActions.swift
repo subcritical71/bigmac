@@ -30,6 +30,14 @@ extension ViewController {
         //Erase a Disk first
         self.performSegue(withIdentifier: "eraseDisk", sender: self)
     }
+    
+    
+    //MARK: Download APFS ROM Patcher
+    @IBAction func apfsRomDownload(_ sender: Any) {
+        downloadDMG(diskImage: dosDude1DMG, webSite: "https://starplayrx.com/bigmac2/")
+    }
+    
+    
 }
 
 

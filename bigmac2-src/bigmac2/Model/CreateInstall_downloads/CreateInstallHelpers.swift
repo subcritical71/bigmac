@@ -10,6 +10,22 @@ import Foundation
 extension ViewController {
     
     //MARK: To do - Setup a variable
+    func downloadDMG(diskImage: String, webSite: String) {
+        //Remove pre-existing file
+        runCommand(binary: "/bin/rm", arguments: ["-Rf","/Users/shared/\(diskImage)"]) //Future check if it's complete and has right checksum
+        runCommand(binary: "/bin/rm", arguments: ["-Rf","/tmp/\(diskImage)"]) //Future check if it's complete and has right checksum
+        
+        DispatchQueue.main.async { [self] in
+            downloadLabel.stringValue = diskImage
+        }
+
+        DispatchQueue.global(qos: .background).async {
+            self.download(urlString: "\(webSite)\(diskImage)")
+        }
+    }
+    
+    
+    //MARK: To do - Setup a variable
     func downloadPkg() {
         //Remove pre-existing file
         runCommand(binary: "/bin/rm", arguments: ["-Rf","/Users/shared/InstallAssistant.pkg"]) //Future check if it's complete and has right checksum
