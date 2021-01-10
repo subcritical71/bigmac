@@ -1944,8 +1944,8 @@ DQ
                                 <rect key="frame" x="49" y="64" width="307" height="141"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bES-Pb-Uew">
-                                        <rect key="frame" x="-2" y="124" width="260" height="18"/>
-                                        <buttonCell key="cell" type="check" title="Hold down C to boot bigmac2 (YMMV)" bezelStyle="regularSquare" imagePosition="left" refusesFirstResponder="YES" state="on" inset="2" id="K8K-nR-ZbT">
+                                        <rect key="frame" x="-2" y="124" width="299" height="18"/>
+                                        <buttonCell key="cell" type="check" title="Hold down C to boot bigmac2 (Experimental)" bezelStyle="regularSquare" imagePosition="left" refusesFirstResponder="YES" state="on" inset="2" id="K8K-nR-ZbT">
                                             <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
