@@ -746,7 +746,7 @@
                                                             </textFieldCell>
                                                         </textField>
                                                         <progressIndicator fixedFrame="YES" maxValue="100" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="5Lr-xQ-MWE">
-                                                            <rect key="frame" x="0.0" y="2" width="471" height="20"/>
+                                                            <rect key="frame" x="0.0" y="4" width="471" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         </progressIndicator>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DFd-ov-bag">
@@ -776,7 +776,7 @@
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <progressIndicator fixedFrame="YES" maxValue="100" indeterminate="YES" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="MkA-uU-q1I">
-                                                            <rect key="frame" x="0.0" y="1" width="471" height="20"/>
+                                                            <rect key="frame" x="0.0" y="-1" width="471" height="20"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                         </progressIndicator>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="syK-06-F8B">
@@ -829,7 +829,7 @@
                                                     </subviews>
                                                 </customView>
                                                 <customView fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="556-P5-2ue">
-                                                    <rect key="frame" x="17" y="1" width="242" height="66"/>
+                                                    <rect key="frame" x="17" y="3" width="242" height="66"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8r8-CA-8z3">
@@ -864,7 +864,7 @@
                                                     </subviews>
                                                 </customView>
                                                 <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ahL-hY-ZTg">
-                                                    <rect key="frame" x="16" y="145" width="135" height="16"/>
+                                                    <rect key="frame" x="16" y="147" width="135" height="16"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                     <textFieldCell key="cell" lineBreakMode="clipping" title="Installer Boot Options" id="IVF-7J-YYB">
                                                         <font key="font" metaFont="system"/>
@@ -873,7 +873,7 @@
                                                     </textFieldCell>
                                                 </textField>
                                                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="10" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="hE1-Fe-K3l">
-                                                    <rect key="frame" x="30" y="90" width="240" height="42"/>
+                                                    <rect key="frame" x="30" y="94" width="240" height="42"/>
                                                     <subviews>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="LFa-gw-qF8">
                                                             <rect key="frame" x="-2" y="25" width="242" height="18"/>

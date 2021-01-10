@@ -40,25 +40,37 @@ extension ViewController : URLSessionDownloadDelegate {
                     downloadTask: URLSessionDownloadTask,
                     didFinishDownloadingTo location: URL) {
         
-        let fileManager = FileManager.default
+        let fm = FileManager.default
         
-        let documentsURL = try?
-            fileManager.url(for: .userDirectory,
-                            in: .allDomainsMask,
-                            appropriateFor: nil,
-                            create: false)
-        if let filename  = downloadTask.currentRequest?.url?.lastPathComponent {
-            let savedURL = documentsURL?.appendingPathComponent (
-                shared + filename)
+        
+        if let filename = downloadTask.currentRequest?.url?.lastPathComponent {
             
-            if let savedURL = savedURL {
-                try? fileManager.moveItem(at: location, to: savedURL)
+            if filename == dosDude1DMG {
+               // let test = applicat
+                let resourceURL = Bundle.main.resourceURL
+                if let savedURL = resourceURL?.appendingPathComponent ( filename) {
+                    do {
+                        try fm.moveItem(at: location, to: savedURL)
+
+                    } catch {
+                            print(error)
+                        }
+               
+                    if filename == bigmacDMG {
+                        NotificationCenter.default.post(name: .CreateDisk, object: nil)
+                    }
+                    _ = mountDiskImage(arg: ["mount", "\(savedURL.path)", "-noverify", "-noautofsck", "-autoopen"])
+                }
+              
+            } else {
+                let documentsURL = try? fm.url(for: .userDirectory, in: .allDomainsMask, appropriateFor: nil, create: false)
+                let savedURL = documentsURL?.appendingPathComponent ( shared + filename)
                 
-                if filename == bigmacDMG {
-                    NotificationCenter.default.post(name: .CreateDisk, object: nil)
-                } else if filename == dosDude1DMG {
-                    let mnt = mountDiskImage(arg: ["mount", "/Users/Shared/\(dosDude1DMG)", "-noverify", "-noautofsck", "-autoopen"])
-                    print(mnt)
+                if let savedURL = savedURL {
+                    try? fm.moveItem(at: location, to: savedURL)
+                    if filename == bigmacDMG {
+                        NotificationCenter.default.post(name: .CreateDisk, object: nil)
+                    }
                 }
             }
         }
