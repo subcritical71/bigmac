@@ -51,14 +51,17 @@ extension ViewController {
         runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title: "Updating Boot and System Kernel Extensions...")
         
          //MARK: Rechecking Extensions
-        indicatorBump(taskMsg: "Verifying Boot and System Kernel Extensions...", detailMsg: "", updateProgBar: true)
+        indicatorBump(updateProgBar: true)
         runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title: "Verifying Boot and System Kernel Extensions...")
          
          //MARK: Updating Library Extensions
-        indicatorBump(taskMsg: "Updating Auxiliary Kernel Extensions...", detailMsg: "", updateProgBar: true)
-        let kmArrC = ["create", "-n", "aux", "--repository", "/\(libExt)", "--volume-root", "\(destVolume)"]
-        runIndeterminateProcess(binary: kmutil, arguments: kmArrC, title: "Verifying Boot and System Kernel Extensions...")
+        indicatorBump(updateProgBar: true)
+        let kmArrC = ["create", "-n", "aux", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--volume-root", "--volume-root", "\(destVolume)"]
+        runIndeterminateProcess(binary: kmutil, arguments: kmArrC, title: "Updating Auxiliary Kernel Extensions...")
         
+        let kmArrD = ["install", "--check-rebuild", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--volume-root", "\(destVolume)"]
+        runIndeterminateProcess(binary: kmutil, arguments: kmArrD, title: "Checking Auxiliary Kernel Extensions...")
+    
         indicatorBump(taskMsg: "Creating Prelinked Kernel...", detailMsg: "", updateProgBar: true)
          if appleSysLibExists {
             indicatorBump(updateProgBar: true)

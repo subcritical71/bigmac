@@ -72,11 +72,11 @@ extension ViewController {
                 let list = "Info.plist"
                 let prfx = "usb3"
                 
-                let usb3fix = installKext(dest: dest, kext: list, fold: fold, prfx: prfx, ttle: "AS Media USB 3.1 Fix...")
+                let usb3fix = installKext(dest: dest, kext: list, fold: fold, prfx: prfx, ttle: "USB 3.1 Fix...")
                 print(usb3fix)
                 
-                let kext2 = "ASMedia.kext"
-                _ = installKext(dest: dest, kext: kext2, fold: lext, ttle: "AS Media USB 3.1 Kext...")
+                //let kext2 = "ASMedia.kext"
+               // _ = installKext(dest: dest, kext: kext2, fold: lext, ttle: "AS Media USB 3.1 Kext...")
             }
             
             if appleHDA {
@@ -174,8 +174,7 @@ extension ViewController {
 
                         for s in snapshots {
                             indicatorBump(taskMsg: "Deleting snapshot...", detailMsg: "\(s.snapshotName)", updateProgBar: true)
-                            let result = runCommandReturnStr(binary: "/usr/sbin/diskutil", arguments: ["apfs", "deleteSnapshot", systemVolume.diskSlice, "-xid", "\(s.snapshotXID)"])
-                            print(result)
+                            _ = runCommandReturnStr(binary: "/usr/sbin/diskutil", arguments: ["apfs", "deleteSnapshot", systemVolume.diskSlice, "-xid", "\(s.snapshotXID)"])
                         }
                         
                         
