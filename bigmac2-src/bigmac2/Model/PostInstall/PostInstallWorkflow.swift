@@ -67,6 +67,16 @@ extension ViewController {
             if enableUSB {
                 let kext = "IOHIDFamily.kext"
                 _ = installKext(dest: dest, kext: kext, fold: slek, ttle: enableUSBtl)
+                
+                let fold = "System/Library/Extensions/IOUSBHostFamily.kext/Contents/PlugIns/AppleUSBXHCIPCI.kext/Contents"
+                let list = "Info.plist"
+                let prfx = "usb3"
+                
+                let usb3fix = installKext(dest: dest, kext: list, fold: fold, prfx: prfx, ttle: "AS Media USB 3.1 Fix...")
+                print(usb3fix)
+                
+                let kext2 = "ASMedia.kext"
+                _ = installKext(dest: dest, kext: kext2, fold: lext, ttle: "AS Media USB 3.1 Kext...")
             }
             
             if appleHDA {
@@ -191,7 +201,7 @@ extension ViewController {
                 }
 
                 indicatorBump(taskMsg: "Blessing \(systemVolume.displayName)...", detailMsg: "", updateProgBar: true)
-                let blessYou = runCommandReturnStr(binary: bless, arguments: ["--folder", "\(path)System/Library/CoreServices" , "--bootefi", "--label", globalVolumeInfo.displayName, "--setBoot"]) ?? ""
+                let blessYou = runCommandReturnStr(binary: bless, arguments: ["--folder", "\(path)System/Library/CoreServices" , "--bootefi", "--label", systemVolume.displayName, "--setBoot"]) ?? ""
                 print(blessYou as String)
 
             }
