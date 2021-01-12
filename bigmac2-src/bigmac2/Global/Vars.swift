@@ -7,10 +7,9 @@
 
 import Foundation
 
-var kmMonitor = false
 //MARK: TO DO -> Clean up
+var kmMonitor = false
 var volumeInfo = myVolumeInfo(diskSlice: "", disk: "", displayName: "", volumeName: "", path: "", uuid: "", external: false, root: false, capacity: 0)
-
 var globalVolumeInfo = myVolumeInfo(diskSlice: "", disk: "", displayName: "", volumeName: "", path: "", uuid: "", external: false, root: false, capacity: 0)
 var rootMode = false
 var root = "root"
@@ -34,6 +33,7 @@ var legacyWiFi = false
 var installKCs = true
 var blessSystem = true
 var deleteSnaphots = true
+
 var enableUSBtl = ""
 var disableBT2tl = ""
 var amdMouSSEtl = ""
@@ -50,7 +50,6 @@ var blessSystemtl = ""
 var deleteSnaphotstl = ""
 var bigmacDMG = "bigmac2.dmg"
 var dosDude1DMG = "dosdude1.dmg"
-
 var bigmac2Str = "bigmac2"
 var domain = "www.starplayrx.com"
 var tmpFolder = "/tmp/"

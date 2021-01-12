@@ -34,7 +34,9 @@ extension ViewController {
     
     //MARK: Download APFS ROM Patcher
     @IBAction func apfsRomDownload(_ sender: Any) {
-        downloadDMG(diskImage: dosDude1DMG, webSite: "https://starplayrx.com/bigmac2/")
+        let apfsRomWorkItem = DispatchWorkItem { [self] in downloadDMG(diskImage: dosDude1DMG, webSite: "https://starplayrx.com/bigmac2/") }
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0, execute: apfsRomWorkItem)
+        apfsRomWorkItem.perform()
     }
     
     
