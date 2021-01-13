@@ -679,7 +679,7 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="15" y="-45"/>
+            <point key="canvasLocation" x="-495" y="650"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -703,31 +703,67 @@
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="71" y="249"/>
+            <point key="canvasLocation" x="71" y="296"/>
         </scene>
-        <!--View Controller-->
+        <!--Task In Prog Controller-->
         <scene sceneID="5y8-ky-WfG">
             <objects>
-                <viewController id="rb6-eV-umK" sceneMemberID="viewController">
+                <viewController id="rb6-eV-umK" customClass="TaskInProgController" customModule="bigmac2" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="urR-0b-kMg">
-                        <rect key="frame" x="0.0" y="0.0" width="449" height="300"/>
+                        <rect key="frame" x="0.0" y="0.0" width="339" height="141"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
-                            <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NFi-I8-git">
-                                <rect key="frame" x="72" y="264" width="306" height="16"/>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eGt-Tc-n9n">
+                                <rect key="frame" x="162" y="13" width="164" height="32"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <textFieldCell key="cell" lineBreakMode="clipping" alignment="center" title="A task is in session, please wait for it to complete" id="cXD-xp-J4d">
-                                    <font key="font" usesAppearanceFont="YES"/>
+                                <buttonCell key="cell" type="push" title="Continue" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="5tt-Oq-sSJ">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="continueTask:" target="rb6-eV-umK" id="oAp-k4-HSM"/>
+                                </connections>
+                            </button>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" fixedFrame="YES" textCompletion="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXN-f4-0KR">
+                                <rect key="frame" x="18" y="76" width="303" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <textFieldCell key="cell" truncatesLastVisibleLine="YES" selectable="YES" allowsUndo="NO" alignment="center" title="A task named ________ is in session, please wait for it to complete" id="IOI-5c-fNT">
+                                    <font key="font" metaFont="system"/>
                                     <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                     <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                 </textFieldCell>
                             </textField>
+                            <progressIndicator fixedFrame="YES" maxValue="100" indeterminate="YES" style="bar" translatesAutoresizingMaskIntoConstraints="NO" id="7Bp-sn-73G">
+                                <rect key="frame" x="20" y="56" width="299" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                            </progressIndicator>
+                            <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ErF-xC-vV3">
+                                <rect key="frame" x="13" y="13" width="133" height="32"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <buttonCell key="cell" type="push" title="Cancel" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="ZH3-Vm-aYa">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+Gw
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="cancelTask:" target="rb6-eV-umK" id="OVq-Nz-hjF"/>
+                                </connections>
+                            </button>
                         </subviews>
                     </view>
+                    <connections>
+                        <outlet property="taskBar" destination="7Bp-sn-73G" id="LHg-IL-Owt"/>
+                        <outlet property="taskLabel" destination="LXN-f4-0KR" id="sFn-wc-OKx"/>
+                    </connections>
                 </viewController>
                 <customObject id="6oY-v3-UUa" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-533.5" y="846"/>
+            <point key="canvasLocation" x="-376.5" y="1262.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
@@ -1506,6 +1542,7 @@ DQ
                         <segue destination="QRq-n9-edl" kind="sheet" identifier="eraseDisk" id="NKC-y8-uH7"/>
                         <segue destination="wD8-II-vQd" kind="sheet" identifier="installComplete" id="YFF-se-A7Y"/>
                         <segue destination="L1U-Jb-R8J" kind="sheet" identifier="postInstall" id="LdO-bp-hIe"/>
+                        <segue destination="rb6-eV-umK" kind="sheet" identifier="namedTask" id="TU6-Sa-DCP"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1644,7 +1681,7 @@ DQ
                 </viewController>
                 <customObject id="NQ2-IZ-hIF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="678" y="579"/>
+            <point key="canvasLocation" x="630" y="610"/>
         </scene>
         <!--🍔 Big Mac 2.0 Helper-->
         <scene sceneID="59O-qf-fCR">
@@ -1768,7 +1805,7 @@ Gw
                 </viewController>
                 <customObject id="f1U-dM-v9t" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="677" y="958"/>
+            <point key="canvasLocation" x="631" y="958"/>
         </scene>
         <!--Post Install View Controller-->
         <scene sceneID="J47-Aw-6O6">
@@ -1885,7 +1922,7 @@ DQ
                 </viewController>
                 <customObject id="wYi-qT-OyH" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-235" y="1374"/>
+            <point key="canvasLocation" x="14" y="1338"/>
         </scene>
         <!--Installer Disk Complete-->
         <scene sceneID="zY9-3n-Rr8">
@@ -2032,7 +2069,7 @@ DQ
                 </viewController>
                 <customObject id="2es-xO-UPa" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="189" y="1364"/>
+            <point key="canvasLocation" x="442" y="1328"/>
         </scene>
     </scenes>
     <resources>

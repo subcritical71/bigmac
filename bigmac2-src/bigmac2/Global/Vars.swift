@@ -8,9 +8,28 @@
 import Foundation
 
 //MARK: TO DO -> Clean up
+var globalVolumeInfo = myVolumeInfo(diskSlice: "", disk: "", displayName: "", volumeName: "", path: "", uuid: "", external: false, root: false, capacity: 0)
+var globalWorkItem : DispatchWorkItem?
+var globalDispatch : DispatchQueue?
+
+func globalCompletedTask() {
+    
+    if let _ = globalWorkItem {
+        globalWorkItem = nil
+    } else {
+        globalWorkItem?.cancel()
+    }
+    
+    if let _ = globalDispatch {
+        globalDispatch = nil
+    } else {
+        globalDispatch?.suspend()
+    }
+}
+
 var kmMonitor = false
 var volumeInfo = myVolumeInfo(diskSlice: "", disk: "", displayName: "", volumeName: "", path: "", uuid: "", external: false, root: false, capacity: 0)
-var globalVolumeInfo = myVolumeInfo(diskSlice: "", disk: "", displayName: "", volumeName: "", path: "", uuid: "", external: false, root: false, capacity: 0)
+
 var rootMode = false
 var root = "root"
 var isBaseSingleUser = false

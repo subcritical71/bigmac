@@ -73,6 +73,8 @@ class ViewController: NSViewController, URLSessionDelegate {
     @IBOutlet weak var updateBootSysKCs: NSButton!
     @IBOutlet weak var patchDisk_btn: NSButton!
     
+    
+    
     let fm = FileManager.default
     var timer: Timer?
     

@@ -60,6 +60,8 @@ extension ViewController : URLSessionDownloadDelegate {
                         NotificationCenter.default.post(name: .CreateDisk, object: nil)
                     }
                     _ = mountDiskImage(arg: ["mount", "\(savedURL.path)", "-noverify", "-noautofsck", "-autoopen"])
+                    
+                    globalCompletedTask()
                 }
               
             } else {

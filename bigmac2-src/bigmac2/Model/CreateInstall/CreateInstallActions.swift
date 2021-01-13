@@ -29,16 +29,25 @@ extension ViewController {
     @IBAction func createInstallDisk(_ sender: Any) {
         //Erase a Disk first
         self.performSegue(withIdentifier: "eraseDisk", sender: self)
+        
     }
     
     
     //MARK: Download APFS ROM Patcher
     @IBAction func apfsRomDownload(_ sender: Any) {
-        let apfsRomWorkItem = DispatchWorkItem { [self] in downloadDMG(diskImage: dosDude1DMG, webSite: "https://starplayrx.com/bigmac2/") }
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0, execute: apfsRomWorkItem)
-        apfsRomWorkItem.perform()
+        guard globalDispatch == nil && globalWorkItem == nil else {
+            performSegue(withIdentifier: "namedTask", sender: self)
+            return
+        }
+        
+        globalWorkItem = DispatchWorkItem { [self] in downloadDMG(diskImage: dosDude1DMG, webSite: "https://starplayrx.com/bigmac2/") }
+        globalDispatch = DispatchQueue(label: "Downloading APFS ROM Patcher")
+        
+        if let d = globalDispatch, let w = globalWorkItem {
+            d.async(execute: w)
+        }
+      
     }
-    
     
 }
 
