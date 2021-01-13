@@ -27,6 +27,8 @@ func globalCompletedTask() {
     }
 }
 
+var globalWebsite = "https://starplayrx.com/bigmac2/"
+
 var kmMonitor = false
 var volumeInfo = myVolumeInfo(diskSlice: "", disk: "", displayName: "", volumeName: "", path: "", uuid: "", external: false, root: false, capacity: 0)
 
@@ -68,6 +70,7 @@ var installKCstl = ""
 var blessSystemtl = ""
 var deleteSnaphotstl = ""
 var bigmacDMG = "bigmac2.dmg"
+var bigdataDMG = "bigdata.dmg"
 var dosDude1DMG = "dosdude1.dmg"
 var bigmac2Str = "bigmac2"
 var domain = "www.starplayrx.com"

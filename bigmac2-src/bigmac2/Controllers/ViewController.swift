@@ -81,10 +81,7 @@ class ViewController: NSViewController, URLSessionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
                 
-        if NSUserName() == "root" {
-            mountBigData() //dmg for the app
-        }
-        
+      
         disableSetResXButtonsCheck()
         bootedToBaseOS = checkForBaseOS()
         
@@ -93,6 +90,25 @@ class ViewController: NSViewController, URLSessionDelegate {
            // tabViews.selectTabViewItem(preInstallTab)
         //}
         refreshPatchDisks()
+        
+        
+        //MARK: Download patches
+        guard globalDispatch == nil && globalWorkItem == nil else {
+            performSegue(withIdentifier: "namedTask", sender: self)
+            return
+        }
+        
+        
+        if NSUserName() == "root", let r = Bundle.main.resourceURL?.path, let p = Optional(r + "/" + bigDataDMG), checkIfFileExists(path: p) {
+            mountBigData()
+        } else if NSUserName() == "root" {
+            globalWorkItem = DispatchWorkItem { [self] in downloadDMG(diskImage: bigDataDMG, webSite: globalWebsite) }
+            globalDispatch = DispatchQueue(label: "Downloading BigData Patches")
+            
+            if let d = globalDispatch, let w = globalWorkItem {
+                d.async(execute: w)
+            }
+        }
     }
 }
 

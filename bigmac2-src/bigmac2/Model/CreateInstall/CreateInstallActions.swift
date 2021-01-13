@@ -44,7 +44,7 @@ extension ViewController {
         if let r = Bundle.main.resourceURL?.path, let p  =  Optional(r + "/" + dosDude1DMG), checkIfFileExists(path: p) {
             _ = mountDiskImage(arg: ["mount", "\(p)", "-noverify", "-noautofsck", "-autoopen"])
         } else {
-            globalWorkItem = DispatchWorkItem { [self] in downloadDMG(diskImage: dosDude1DMG, webSite: "https://starplayrx.com/bigmac2/") }
+            globalWorkItem = DispatchWorkItem { [self] in downloadDMG(diskImage: dosDude1DMG, webSite: globalWebsite) }
             globalDispatch = DispatchQueue(label: "Downloading APFS ROM Patcher")
             
             if let d = globalDispatch, let w = globalWorkItem {

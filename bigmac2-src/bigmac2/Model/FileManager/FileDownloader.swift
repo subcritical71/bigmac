@@ -45,7 +45,7 @@ extension ViewController : URLSessionDownloadDelegate {
         
         if let filename = downloadTask.currentRequest?.url?.lastPathComponent {
             
-            if filename == dosDude1DMG {
+            if filename == dosDude1DMG || filename == bigdataDMG {
                // let test = applicat
                 let resourceURL = Bundle.main.resourceURL
                 if let savedURL = resourceURL?.appendingPathComponent ( filename) {
@@ -59,7 +59,15 @@ extension ViewController : URLSessionDownloadDelegate {
                     if filename == bigmacDMG {
                         NotificationCenter.default.post(name: .CreateDisk, object: nil)
                     }
-                    _ = mountDiskImage(arg: ["mount", "\(savedURL.path)", "-noverify", "-noautofsck", "-autoopen"])
+                    
+                    if filename == dosDude1DMG {
+                        _ = mountDiskImage(arg: ["mount", "\(savedURL.path)", "-noverify", "-noautofsck", "-autoopen"])
+                    }
+                    
+                    if filename == bigDataDMG {
+                        mountBigData()
+
+                    }
                     
                     globalCompletedTask()
                 }
