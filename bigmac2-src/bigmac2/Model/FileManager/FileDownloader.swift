@@ -11,28 +11,28 @@ import Cocoa
 extension ViewController : URLSessionDownloadDelegate {
     
     public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) -> Void {
+                    
+        let a = round (Float(totalBytesWritten) / 1000 / 1000 / 10 ) / 100
+        let b = round (Float(totalBytesExpectedToWrite) / 1000 / 1000 / 10 ) / 100
         
-        let x = round (Float(totalBytesWritten) / 1000 / 1000 / 10 ) / 100
+        if ( a / b ).isNaN || ( a / b ).isInfinite { return }
+
+        let a2 = round (Float(totalBytesWritten) / 1000  / 10 ) / 100
+        let b2 = round (Float(totalBytesExpectedToWrite) / 1000 / 10 ) / 100
         
-        if x != downloadProgress {
-            
-            let a = round (Float(totalBytesWritten) / 1000 / 1000 / 10 ) / 100
-            let b = round (Float(totalBytesExpectedToWrite) / 1000 / 1000 / 10 ) / 100
-            
-            if ( a / b ).isNaN || ( a / b ).isInfinite { return }
-            
-            let percentageDouble = Double ( a / b * 100 )
-            
-            let percentageInt = Int ( a / b * 100 )
-            
-            DispatchQueue.main.async { [self] in
+        let percentageDouble = Double ( a / b * 100 )
+        let percentageInt = Int ( a / b * 100 )
+        
+        DispatchQueue.main.async { [self] in
+            if b > 0.99 {
                 gbLabel.stringValue = "\(a) GB / \(b) GB"
-                progressBarDownload.doubleValue = percentageDouble
-                percentageLabel.stringValue = "\(percentageInt)%"
+            } else {
+                gbLabel.stringValue = "\(a2) MB / \(b2) MB"
+
             }
             
-            
-            downloadProgress = x
+            progressBarDownload.doubleValue = percentageDouble
+            percentageLabel.stringValue = "\(percentageInt)%"
         }
         
         if globalWorkItem == nil || globalDispatch == nil {
