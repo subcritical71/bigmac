@@ -42,19 +42,13 @@ extension ViewController {
             let rndStr = ""
             let baseSys = "macOS Base System"
             let bm2 = bigmac2
-            
-     
-            
+        
             //MARK: Step 1
             updateInstallerPkg()
-            
-            //MARK: Step 2
-            //unmountDrives(mountBigmac: false, ejectAll: true)
-
+ 
             //MARK: Step 2
             reformatSelectedApfsDisk(diskInfo: diskInfo)
 
-            
             //MARK: Step 3
             installBaseSystemII(diskInfo: diskInfo, baseSys: baseSys, bm2: bm2)
             
@@ -87,6 +81,8 @@ extension ViewController {
             //MARK: Finish
             incrementInstallGauge(resetGauge: false, incremment: false, setToFull: true, title: "bigmac2 Boot Disk installation is complete!")
             spinnerAnimation(start: false, hide: true)
+            
+            currentWorkflowEnded()
         }
     }
 }

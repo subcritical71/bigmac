@@ -12,8 +12,6 @@ extension ViewController : URLSessionDownloadDelegate {
     
     public func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didWriteData bytesWritten: Int64, totalBytesWritten: Int64, totalBytesExpectedToWrite: Int64) -> Void {
         
-        
-    
         let a = round (Float(totalBytesWritten) / 1000 / 1000 / 10 ) / 100
         let b = round (Float(totalBytesExpectedToWrite) / 1000 / 1000 / 10 ) / 100
         
@@ -35,7 +33,6 @@ extension ViewController : URLSessionDownloadDelegate {
                 
                 progressBarDownload.doubleValue = percentageDouble
                 percentageLabel.stringValue = "\(percentageInt)%"
-                
             }
         }
         
@@ -46,7 +43,6 @@ extension ViewController : URLSessionDownloadDelegate {
             updateScreen()
         }
        
-        
         if globalWorkItem == nil || globalDispatch == nil {
             downloadTask.cancel()
             session.invalidateAndCancel()
@@ -54,12 +50,9 @@ extension ViewController : URLSessionDownloadDelegate {
     }
     
     //to do add error handling
-    func urlSession(_ session: URLSession,
-                    downloadTask: URLSessionDownloadTask,
-                    didFinishDownloadingTo location: URL) {
+    func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask, didFinishDownloadingTo location: URL) {
         
         let fm = FileManager.default
-        
         
         if let filename = downloadTask.currentRequest?.url?.lastPathComponent {
             
@@ -84,7 +77,6 @@ extension ViewController : URLSessionDownloadDelegate {
                     
                     if filename == bigDataDMG {
                         mountBigData()
-
                     }
                     
                     globalCompletedTask()
@@ -97,9 +89,11 @@ extension ViewController : URLSessionDownloadDelegate {
                 if let savedURL = savedURL {
                     try? fm.moveItem(at: location, to: savedURL)
                     if filename == bigmacDMG {
+                        globalCompletedTask()
                         NotificationCenter.default.post(name: .CreateDisk, object: nil)
                     }
                 }
+                
             }
         }
     }
@@ -135,7 +129,6 @@ extension ViewController : URLSessionDownloadDelegate {
     @objc func checkFileSize(sourcePath: String, targetPath: String ) {
         let fileManager = FileManager.default
         
-        
         do {
             let fileSize = try fileManager.attributesOfItem(atPath: sourcePath)[FileAttributeKey.size] as? Double
             let fileSizeTarget = try fileManager.attributesOfItem(atPath: targetPath)[FileAttributeKey.size] as? Double
@@ -158,7 +151,6 @@ extension ViewController : URLSessionDownloadDelegate {
                     sharedSupportProgressBar.doubleValue = percentageDouble
                     sharedSupportPercentage.stringValue = "\(percentageInt)%"
                     sharedSupportGbLabel.stringValue = "\(gigsCopied) GB / \(gigsTotal) GB"
-                    
                 })
                 
                 if ( gigsCopied == gigsTotal && gigsCopied != 0.0 && gigsTotal != 0  ) {

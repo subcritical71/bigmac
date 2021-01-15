@@ -12,7 +12,11 @@ extension ViewController {
     
     func cancelTask() -> Bool {
         guard globalDispatch == nil && globalWorkItem == nil else {
-            performSegue(withIdentifier: "namedTask", sender: self)
+            
+            DispatchQueue.main.async { [self] in
+                performSegue(withIdentifier: "namedTask", sender: self)
+            }
+            
             return true
         }
         
@@ -63,9 +67,7 @@ extension ViewController {
     
     
      //MARK: Phase 1.1
-     @objc func EraseDisk(_ notification:Notification){
-
-
+     @objc func EraseDisk(_ notification:Notification) {
         volumeInfo = notification.object as? myVolumeInfo ?? myVolumeInfo(diskSlice: "", disk: "", displayName: "", volumeName: "", path: "", uuid: "", external: false, root: false, capacity: 0)
       
         DispatchQueue.main.async { [self] in
@@ -88,6 +90,8 @@ extension ViewController {
     
     
     func installDisk() {
+        if cancelTask() { return }
+
         DispatchQueue.main.async { [self] in
             isBaseSingleUser = singleUserCheckbox.state == .on
             isBaseVerbose = verboseUserCheckbox.state == .on
@@ -97,14 +101,36 @@ extension ViewController {
         //MARK: Internal - To do (Cleanup so it can be used as a backup)
         //disk2(isBeta: false, diskInfo: volumeInfo, isVerbose: isBaseVerbose, isSingleUser: isBaseSingleUser, fullDisk: false) //to do add 3 Xtra steps for production
         
-        //Customer
-        customerInstallDisk(isBeta: false, diskInfo: volumeInfo, isVerbose: isBaseVerbose, isSingleUser: isBaseSingleUser, fullDisk: true) //not fulldisk is for internal testing
+        //MARK: Customer Create Install Disk Workflow (More compatible and less steps)
+        let function: () = customerInstallDisk(isBeta: false, diskInfo: volumeInfo, isVerbose: isBaseVerbose, isSingleUser: isBaseSingleUser, fullDisk: true).self //not fulldisk is for internal testing
+
+        que(label: "Creating Install Media", function: function)
+        
     }
     
      //MARK: Phase 1.2
      @objc func CreateDisk(_ notification:Notification){
         installDisk()
      }
+    
+    
+    func currentWorkflowEnded() {
+        if let _ = globalWorkItem {
+            globalWorkItem?.cancel()
+        }
+        
+        if let _ = globalDispatch {
+            globalDispatch?.suspend()
+        }
+        
+        if let _ = globalWorkItem {
+            globalWorkItem = nil
+        }
+        
+        if let _ = globalDispatch {
+            globalDispatch = nil
+        }
+    }
         
 }
 
