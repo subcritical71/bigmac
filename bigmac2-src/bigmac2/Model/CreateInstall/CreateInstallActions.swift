@@ -20,9 +20,17 @@ extension ViewController {
     }
  
     @IBAction func downloadMacOSAction(_ sender: Any) {
+     
+        guard globalDispatch == nil && globalWorkItem == nil else {
+            performSegue(withIdentifier: "namedTask", sender: self)
+            return
+        }
+
         progressBarDownload.doubleValue = 0
         progressBarDownload.isIndeterminate = false
-        downloadPkg()
+        
+        //MARK: To Do - connect this a backend where we can possibly choose the download OR always download the latest
+        downloadMacOSTask(label: "Downloading macOS", urlString: "http://swcdn.apple.com/content/downloads/00/55/001-86606-A_9SF1TL01U7/5duug9lar1gypwunjfl96dza0upa854qgg/InstallAssistant.pkg")
     }
 
     //MARK: Phase 1.0
@@ -35,22 +43,7 @@ extension ViewController {
     
     //MARK: Download APFS ROM Patcher
     @IBAction func apfsRomDownload(_ sender: Any) {
-        guard globalDispatch == nil && globalWorkItem == nil else {
-            performSegue(withIdentifier: "namedTask", sender: self)
-            return
-        }
-        
-        
-        if let r = Bundle.main.resourceURL?.path, let p  =  Optional(r + "/" + dosDude1DMG), checkIfFileExists(path: p) {
-            _ = mountDiskImage(arg: ["mount", "\(p)", "-noverify", "-noautofsck", "-autoopen"])
-        } else {
-            globalWorkItem = DispatchWorkItem { [self] in downloadDMG(diskImage: dosDude1DMG, webSite: globalWebsite) }
-            globalDispatch = DispatchQueue(label: "Downloading APFS ROM Patcher")
-            
-            if let d = globalDispatch, let w = globalWorkItem {
-                d.async(execute: w)
-            }
-        }
+        dosDude1inProgressTask(label: "Downloading APFS ROM Patcher", dmg: dosDude1DMG)
     }
     
 }

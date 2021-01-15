@@ -31,8 +31,14 @@ extension ViewController : URLSessionDownloadDelegate {
                 percentageLabel.stringValue = "\(percentageInt)%"
             }
             
+            
             downloadProgress = x
-        }  
+        }
+        
+        if globalWorkItem == nil || globalDispatch == nil {
+            downloadTask.cancel()
+            session.invalidateAndCancel()
+        }
     }
     
     //to do add error handling

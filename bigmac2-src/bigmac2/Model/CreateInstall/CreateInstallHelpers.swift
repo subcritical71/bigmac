@@ -26,7 +26,7 @@ extension ViewController {
     
     
     //MARK: To do - Setup a variable
-    func downloadPkg() {
+    func downloadPkg(pkgString: String = "http://swcdn.apple.com/content/downloads/00/55/001-86606-A_9SF1TL01U7/5duug9lar1gypwunjfl96dza0upa854qgg/InstallAssistant.pkg") {
         //Remove pre-existing file
         runCommand(binary: "/bin/rm", arguments: ["-Rf","/Users/shared/InstallAssistant.pkg"]) //Future check if it's complete and has right checksum
         runCommand(binary: "/bin/rm", arguments: ["-Rf","/tmp/InstallAssistant.pkg"]) //Future check if it's complete and has right checksum
@@ -36,7 +36,7 @@ extension ViewController {
         }
 
         DispatchQueue.global(qos: .background).async {
-            self.download(urlString: "http://swcdn.apple.com/content/downloads/00/55/001-86606-A_9SF1TL01U7/5duug9lar1gypwunjfl96dza0upa854qgg/InstallAssistant.pkg")
+            self.download(urlString: pkgString)
         }
     }
     
