@@ -1,4 +1,4 @@
-# 🍔 bigmac2
+# 🍔 bigmac2 alpha 24
 
 ### This software is not yet ready for a release.
 
