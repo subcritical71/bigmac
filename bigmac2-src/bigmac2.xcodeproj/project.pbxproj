@@ -234,11 +234,11 @@
 		2DC0952725A36E1800C8FE85 /* Tools */ = {
 			isa = PBXGroup;
 			children = (
-				2D99C499259F27210035669B /* Utilities.swift */,
 				2DB7DEB525B0FB2900DEA688 /* InProgressTasks.swift */,
+				2DC0952425A36E0B00C8FE85 /* Notifications.swift */,
+				2D99C499259F27210035669B /* Utilities.swift */,
 				2D522BC525A36C8400E25780 /* InstallKext.swift */,
 				2D522BBF25A36BDD00E25780 /* InstallKCs.swift */,
-				2DC0952425A36E0B00C8FE85 /* Notifications.swift */,
 			);
 			path = Tools;
 			sourceTree = "<group>";

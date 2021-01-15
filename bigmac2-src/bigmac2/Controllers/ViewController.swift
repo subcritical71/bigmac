@@ -73,8 +73,6 @@ class ViewController: NSViewController, URLSessionDelegate {
     @IBOutlet weak var updateBootSysKCs: NSButton!
     @IBOutlet weak var patchDisk_btn: NSButton!
     
-    
-    
     let fm = FileManager.default
     var timer: Timer?
     
@@ -93,22 +91,9 @@ class ViewController: NSViewController, URLSessionDelegate {
         
         
         //MARK: Download patches
-        guard globalDispatch == nil && globalWorkItem == nil else {
-            performSegue(withIdentifier: "namedTask", sender: self)
-            return
-        }
-        
-        
-        if NSUserName() == "root", let r = Bundle.main.resourceURL?.path, let p = Optional(r + "/" + bigDataDMG), checkIfFileExists(path: p) {
-            mountBigData()
-        } else if NSUserName() == "root" {
-            globalWorkItem = DispatchWorkItem { [self] in downloadDMG(diskImage: bigDataDMG, webSite: globalWebsite) }
-            globalDispatch = DispatchQueue(label: "Downloading BigData Patches")
-            
-            if let d = globalDispatch, let w = globalWorkItem {
-                d.async(execute: w)
-            }
-        }
+        //if cancelTask() { return }
+
+        bigMacDataPatchDMG()
     }
 }
 

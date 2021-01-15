@@ -6,9 +6,6 @@
 //
 import Cocoa
 
-
-
-
 //MARK: Get Disk Info by a single Disk with all volumes it contains, plus filtering specific disk and get its slice
 func getVolumeInfoByDisk(filterVolumeName: String, disk: String, isRoot: Bool = true) -> myVolumeInfo? {
     
@@ -30,8 +27,6 @@ func getVolumeInfoByDisk(filterVolumeName: String, disk: String, isRoot: Bool = 
         return d?.first ?? nil
     }
 }
-
-
 
 //MARK: Donate to BigMac
 func donate2BigMac() {
@@ -117,8 +112,6 @@ func parseRawText(_ str: String) -> String {
     
     return s
 }
-
-
 
 extension ViewController {
 
@@ -221,7 +214,6 @@ extension ViewController {
             }
         }
         return nil
-
     }
     
 }

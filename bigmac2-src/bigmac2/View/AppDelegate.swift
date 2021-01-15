@@ -56,7 +56,15 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         save()
         
         //MARK: Stop kernel process
-        runCommand(binary: "/usr/bin/killall", arguments: ["kmutil"])
+        runCommand(binary: "/usr/bin/killall", arguments: ["kmutil"]) //to do: capture its pid and kill it by its pid
+        
+        let fm = FileManager.default
+        
+        if let bd = Bundle.main.resourceURL?.path {
+            try? fm.removeItem(atPath: bd + "/" + bigdataDMG)
+            try? fm.removeItem(atPath: bd + "/" + dosDude1DMG)
+        }
+
     }
 }
 
