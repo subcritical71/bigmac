@@ -115,20 +115,9 @@ extension ViewController {
     
     
     func currentWorkflowEnded() {
-        if let _ = globalWorkItem {
-            globalWorkItem?.cancel()
-        }
-        
-        if let _ = globalDispatch {
-            globalDispatch?.suspend()
-        }
-        
-        if let _ = globalWorkItem {
-            globalWorkItem = nil
-        }
-        
-        if let _ = globalDispatch {
+        if let _ = globalDispatch, let _ = globalWorkItem {
             globalDispatch = nil
+            globalWorkItem = nil
         }
     }
         

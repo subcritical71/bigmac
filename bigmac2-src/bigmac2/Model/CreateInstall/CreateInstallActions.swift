@@ -28,6 +28,7 @@ extension ViewController {
 
     //MARK: Phase 1.0
     @IBAction func createInstallDisk(_ sender: Any) {
+        if cancelTask() { return }
 
         //Erase a Disk first
         self.performSegue(withIdentifier: "eraseDisk", sender: self)
