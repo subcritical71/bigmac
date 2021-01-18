@@ -11,12 +11,65 @@ import Foundation
 extension ViewController {
     
     //MARK: Task #1
-    func updateInstallerPkg(){
-        incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: true, title: "Updating Installer Package...")
-        runCommand(binary: "/usr/sbin/installer" , arguments: ["-allowUntrusted", "-pkg", "/Users/Shared/InstallAssistant.pkg", "-target", "/" ])
+    func updateInstallerPkg(installBigSurApp: String) ->  (result: String, installed: Bool) {
         
+        var vet = (result: "Updating the disk failed", installed: false)
+        
+        let InstallAsst = "/Users/Shared/InstallAssistant.pkg"
+        let InstallApp = "/Applications/\(installBigSur)"
+
+        if checkIfFileExists(path: InstallAsst) && !checkIfFileExists(path: InstallApp) {
+            incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: true, title: "Updating Installer Package...")
+            vet.result = runCommandReturnStr(binary: "/usr/sbin/installer" , arguments: ["-allowUntrusted", "-pkg", InstallAsst, "-target", "/" ]) ?? ""
+            vet.installed = true
+        }
+        
+        return vet
     }
     
+    
+    func createDiskEnded(completed: Bool) {
+        //MARK: Step 7
+        cleanup(bigmac2: bigmac2)
+        unmountDrives(mountBigmac: true, ejectAll: false)
+     
+        //MARK: Finish
+        
+        if completed {
+            incrementInstallGauge(resetGauge: false, incremment: false, setToFull: true, title: "bigmac2 Boot Disk installation is complete!")
+        } else {
+            incrementInstallGauge(resetGauge: true, incremment: false, setToFull: false, title: "bigmac2 Boot Diks installation has failed!")
+        }
+        
+        spinnerAnimation(start: false, hide: true)
+        
+        currentWorkflowEnded()
+    }
+    
+    
+    //MARK: Task #1.5
+    func installBigSurCheckPoint(installBigSurApp: String) -> Bool? {
+        var pass = true
+        
+        let applications = "Applications"
+        let checkForInstallApp = "/\(applications)/\(installBigSurApp)"
+        
+        if !checkIfFileExists(path: checkForInstallApp) {
+            pass = false
+            
+            createDiskEnded(completed: pass)
+            
+            globalError = "This operation cannot continue without \(checkForInstallApp). Please either place the \(installBigSurApp) inside your \(applications) folder or download a new macOS Big Sur Installer disk."
+    
+            DispatchQueue.main.async { [self] in
+                performSegue(withIdentifier: "displayErrMsg", sender: self)
+            }
+            
+        }
+     
+        return pass
+    }
+
     
     
     //MARK: Task #2
@@ -99,7 +152,7 @@ extension ViewController {
     //MARK: Task #7
     func bigSurInstallerAppXfer(isBeta: Bool, BootVolume: myVolumeInfo) {
         incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: false, title: "Installing the macOS 11 App...")
-        
+
         var appName = "Install macOS Big Sur.app"
         let contents = "Contents"
         let rootVol = BootVolume.path
@@ -154,46 +207,36 @@ extension ViewController {
     }
     
     
-    func installBigMacIIApp(bigmac2: myVolumeInfo) -> myVolumeInfo? {
+    func installBigMacIIApp(bigmac2: myVolumeInfo) {
         incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, title: "Installing the Big Mac 2 App...")
         
-        if let bigmac2 = getVolumeInfoByDisk(filterVolumeName: bigmac2.volumeName, disk: bigmac2.disk) {
-            //MARK: Make Preboot bootable and compatible with C-Key at boot time
-            let rscFolder = "/\(tmp)/\(bigdata)"
-            
-            let bigFolder = Bundle.main.bundlePath
-            
-            let burgerKing = bigmac2.volumeName
-            
-            let util = "/Volumes/\(burgerKing)/System/Installation/CDIS/Recovery Springboard.app/Contents/Resources/Utilities.plist"
-            
-            let bk = "/Volumes/\(burgerKing)/Applications/bigmac2.app"
-            let rdm = "/Volumes/\(burgerKing)/Applications/RDM.app"
-            
-            try? fm.removeItem(atPath: util)
-            try? fm.removeItem(atPath: bk)
-            try? fm.removeItem(atPath: rdm)
-            
-            try? fm.copyItem(atPath: "\(rscFolder)/Utilities.plist", toPath: util)
-            try? fm.copyItem(atPath: "\(bigFolder)", toPath: bk)
-            try? fm.copyItem(atPath: "\(rscFolder)/RDM.app", toPath: rdm)
-            
-            return bigmac2
-        }
+        //MARK: Make Preboot bootable and compatible with C-Key at boot time (currently works with PCIe SSDs)
+        let rscFolder = "/\(tmp)/\(bigdata)"
         
-        return nil
+        let bigFolder = Bundle.main.bundlePath
+        
+        let burgerKing = bigmac2.volumeName
+        
+        let util = "/Volumes/\(burgerKing)/System/Installation/CDIS/Recovery Springboard.app/Contents/Resources/Utilities.plist"
+        
+        let bk = "/Volumes/\(burgerKing)/Applications/bigmac2.app"
+        let rdm = "/Volumes/\(burgerKing)/Applications/RDM.app"
+        
+        removePath(atPath: util)
+        //removePath(atPath: bk)
+        //removePath(atPath: rdm)
+        
+        copyPath(atPath: "\(rscFolder)/Utilities.plist", toPath: util)
+        copyPath(atPath: "\(bigFolder)", toPath: bk)
+        copyPath(atPath: "\(rscFolder)/RDM.app", toPath: rdm)
     }
     
     
     //MARK: Task #8
-    func cleanup(bm2: String, rndStr: String) {
-        
-        let bigmac2 = bm2.replacingOccurrences(of: "_\(rndStr)", with: "")
-        
-        _ = renameDisk(input: bm2, output: bigmac2)
+    func cleanup(bigmac2: String) {
         _ = blessVolume(bless: bigmac2)
         
-        if let getBaseSystemDisk = getVolumeInfoByDisk(filterVolumeName: "/private/\(tmp)/\(basesystem)\(rndStr)", disk: "") {
+        if let getBaseSystemDisk = getVolumeInfoByDisk(filterVolumeName: "/private/\(tmp)/\(basesystem)", disk: "") {
             let infoDisc = runCommandReturnStr(binary: "/usr/sbin/diskutil" , arguments: ["apfs", "list", "\(getBaseSystemDisk.disk)"] ) ?? ""
             
             if !infoDisc.isEmpty {

@@ -9,6 +9,25 @@ import Foundation
 
 extension ViewController {
     
+    //MARK: Set Base System - Adopt this helper for future quick updates
+    func baseBootPlister(diskInfo: myVolumeInfo, isVerbose: Bool, isSingleUser: Bool, prebootVolume: String, isBaseSystem: Bool) {
+        
+        incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: false, title: "Making the bigmac2 installer disk bootable...")
+
+        //MARK: Update systemVolume volume because UUIDs have changed
+        if let systemVolume = getVolumeInfoByDisk(filterVolumeName: diskInfo.volumeName, disk: diskInfo.disk, isRoot: diskInfo.root) {
+            
+            globalVolumeInfo = systemVolume
+            
+            runCommand(binary: "/usr/sbin/diskutil", arguments: ["mount", systemVolume.diskSlice])
+
+            BootSystem(system: systemVolume, dataVolumeUUID: systemVolume.uuid, isVerbose: isBaseVerbose, isSingleUser: isBaseSingleUser, prebootVolume: prebootVolume, isBaseSystem: true)
+        } else {
+            print("Bootable System Failure.")
+        }
+    }
+    
+    
     //MARK: To do - Setup a variable
     func downloadDMG(diskImage: String, webSite: String) {
         //Remove pre-existing file
@@ -19,8 +38,8 @@ extension ViewController {
             downloadLabel.stringValue = diskImage
         }
 
-        DispatchQueue.global(qos: .background).async {
-            self.download(urlString: "\(webSite)\(diskImage)")
+        DispatchQueue.global(qos: .background).async { [self] in
+            download(urlString: "\(webSite)\(diskImage)")
         }
     }
     
@@ -65,7 +84,7 @@ extension ViewController {
     //MARK: Install Emoji Font
     internal func installEmojiFont(diskInfo: myVolumeInfo) {
         incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, title: "Installing the Apple Emoji Font...")
-
+        sleep(2)
         copyFile(atPath: "/System/Library/Fonts/Apple Color Emoji.ttc", toPath: "\(diskInfo.path)/System/Library/Fonts/Apple Color Emoji.ttc")
     }
     

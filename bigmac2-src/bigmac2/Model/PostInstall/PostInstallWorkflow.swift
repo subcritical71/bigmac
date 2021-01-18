@@ -17,6 +17,7 @@ extension ViewController {
             if updateProgBar {
                 postInstallProgressIndicator.doubleValue += 1
             }
+            
             if !taskLabel.contains(taskMsg) {
                 postInstallFuelGauge.doubleValue += 1
             }
@@ -40,8 +41,22 @@ extension ViewController {
             indicatorBump(updateProgBar: true)
             
             var systemVolume : myVolumeInfo!
-            
+        
             systemVolume = getVolumeInfoByDisk(filterVolumeName: driv, disk: "", isRoot: true)
+            
+            guard systemVolume != nil
+            
+            else {
+                print("Cannot find the selected system disk.")
+                return
+            }
+            
+            guard systemVolume.displayName != "bigmac2"
+            
+            else {
+                _ = performAppleScript(script: "display dialog \"We cannot find a drive to perform these patches to.\"")
+                return
+            }
             
             //MARK: Mount Disk RW
             runCommand(binary: "/sbin/mount", arguments: ["-uw", systemVolume.path])

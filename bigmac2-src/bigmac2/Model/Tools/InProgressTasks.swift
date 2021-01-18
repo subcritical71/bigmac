@@ -23,6 +23,7 @@ extension ViewController {
         return false
     }
 
+    
     func que(label: String, function: () ) {
         
         globalWorkItem = DispatchWorkItem { function }
@@ -33,10 +34,11 @@ extension ViewController {
         }
     }
    
+    
     func dosDude1inProgressTask(label: String, dmg: String) {
         if cancelTask() { return }
         
-        if let r = Bundle.main.resourceURL?.path, let p  =  Optional(r + "/" + dmg), checkIfFileExists(path: p) {
+        if let r = Bundle.main.resourceURL?.path, let p = Optional(r + "/" + dmg), checkIfFileExists(path: p) {
             _ = mountDiskImage(arg: ["mount", "\(p)", "-noverify", "-noautofsck", "-autoopen"])
         } else {
             let function: () = downloadDMG(diskImage: dmg, webSite: globalWebsite).self
@@ -102,7 +104,7 @@ extension ViewController {
         //disk2(isBeta: false, diskInfo: volumeInfo, isVerbose: isBaseVerbose, isSingleUser: isBaseSingleUser, fullDisk: false) //to do add 3 Xtra steps for production
         
         //MARK: Customer Create Install Disk Workflow (More compatible and less steps)
-        let function: () = customerInstallDisk(isBeta: false, diskInfo: volumeInfo, isVerbose: isBaseVerbose, isSingleUser: isBaseSingleUser, fullDisk: true).self //not fulldisk is for internal testing
+        let function: () = customerInstallDisk(isBeta: false, diskInfo: volumeInfo, isVerbose: isBaseVerbose, isSingleUser: isBaseSingleUser).self //not fulldisk is for internal testing
 
         que(label: "Creating Install Media", function: function)
         

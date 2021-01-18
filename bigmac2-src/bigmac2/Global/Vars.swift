@@ -2,28 +2,32 @@
 //  Vars.swift
 //  bigmac2
 //
-//  Created by starplayrx on 1/6/21.
-//
-
+//  Created by starplayrx on 1/6/21.SE
 import Foundation
 
 //MARK: TO DO -> Clean up
 var globalVolumeInfo = myVolumeInfo(diskSlice: "", disk: "", displayName: "", volumeName: "", path: "", uuid: "", external: false, root: false, capacity: 0)
 var globalWorkItem : DispatchWorkItem?
 var globalDispatch : DispatchQueue?
+var globalError    = "Unknown Error"
 
 func globalCompletedTask() {
     
     if let _ = globalWorkItem {
         globalWorkItem = nil
-    } else {
-        globalWorkItem?.cancel()
     }
     
+  
     if let _ = globalDispatch {
         globalDispatch = nil
-    } else {
-        globalDispatch?.suspend()
+    }
+    
+    if globalWorkItem != nil {
+        globalWorkItem = nil
+    }
+    
+    if globalDispatch != nil {
+        globalDispatch = nil
     }
 }
 
@@ -95,4 +99,4 @@ let restoreBaseSystem = "AssetData/Restore/BaseSystem.dmg"
 var installerVolume = "/Volumes/bigmac2"
 let shared = "Shared/" //copy to shared directory
 let apfs = "/System/Library/Filesystems/apfs.fs/Contents/Resources/apfs.util"
-var driv = ""
+var driv = "/"

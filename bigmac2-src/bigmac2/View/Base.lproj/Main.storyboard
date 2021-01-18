@@ -679,7 +679,7 @@
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-495" y="650"/>
+            <point key="canvasLocation" x="-489" y="524"/>
         </scene>
         <!--Window Controller-->
         <scene sceneID="R2V-B0-nI4">
@@ -763,7 +763,59 @@ Gw
                 </viewController>
                 <customObject id="6oY-v3-UUa" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-376.5" y="1262.5"/>
+            <point key="canvasLocation" x="-498" y="974"/>
+        </scene>
+        <!--Error Msg Controller-->
+        <scene sceneID="xbv-Rb-8De">
+            <objects>
+                <viewController id="BuC-Ii-hRU" customClass="ErrorMsgController" customModule="bigmac2" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="2Rf-7f-nSa">
+                        <rect key="frame" x="0.0" y="0.0" width="480" height="150"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" translatesAutoresizingMaskIntoConstraints="NO" id="4KT-sZ-Lh8">
+                                <rect key="frame" x="18" y="60" width="444" height="70"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="70" id="5hf-rv-qk3"/>
+                                </constraints>
+                                <textFieldCell key="cell" selectable="YES" title="We are sorry but the following error as occurred and cannot continue:" id="DHG-zs-Gaw">
+                                    <font key="font" usesAppearanceFont="YES"/>
+                                    <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                </textFieldCell>
+                            </textField>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="B5F-oS-Xii">
+                                <rect key="frame" x="174" y="13" width="133" height="32"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="119" id="Zqc-hp-eDt"/>
+                                </constraints>
+                                <buttonCell key="cell" type="push" title="OK" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="DrA-tA-8Pp">
+                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                    <string key="keyEquivalent" base64-UTF8="YES">
+DQ
+</string>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="okButton:" target="BuC-Ii-hRU" id="6tF-Al-E6K"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="4KT-sZ-Lh8" firstAttribute="top" secondItem="2Rf-7f-nSa" secondAttribute="top" constant="20" symbolic="YES" id="QQH-ii-laU"/>
+                            <constraint firstAttribute="bottom" secondItem="B5F-oS-Xii" secondAttribute="bottom" constant="20" symbolic="YES" id="SDx-Ll-rjD"/>
+                            <constraint firstItem="4KT-sZ-Lh8" firstAttribute="leading" secondItem="2Rf-7f-nSa" secondAttribute="leading" constant="20" symbolic="YES" id="c5U-Vw-TUm"/>
+                            <constraint firstAttribute="trailing" secondItem="4KT-sZ-Lh8" secondAttribute="trailing" constant="20" symbolic="YES" id="gjz-Cc-W1B"/>
+                            <constraint firstItem="4KT-sZ-Lh8" firstAttribute="centerX" secondItem="B5F-oS-Xii" secondAttribute="centerX" id="ykh-00-uGW"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="errMsgLabel" destination="4KT-sZ-Lh8" id="NG2-0r-6p5"/>
+                    </connections>
+                </viewController>
+                <customObject id="qVe-cc-Jqu" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="707" y="980"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="hIz-AP-VOD">
@@ -1543,6 +1595,7 @@ DQ
                         <segue destination="wD8-II-vQd" kind="sheet" identifier="installComplete" id="YFF-se-A7Y"/>
                         <segue destination="L1U-Jb-R8J" kind="sheet" identifier="postInstall" id="LdO-bp-hIe"/>
                         <segue destination="rb6-eV-umK" kind="sheet" identifier="namedTask" id="TU6-Sa-DCP"/>
+                        <segue destination="BuC-Ii-hRU" kind="sheet" identifier="displayErrMsg" id="TIV-nt-8PL"/>
                     </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
@@ -1681,7 +1734,7 @@ DQ
                 </viewController>
                 <customObject id="NQ2-IZ-hIF" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="630" y="610"/>
+            <point key="canvasLocation" x="662" y="420"/>
         </scene>
         <!--🍔 Big Mac 2.0 Helper-->
         <scene sceneID="59O-qf-fCR">
@@ -1805,7 +1858,7 @@ Gw
                 </viewController>
                 <customObject id="f1U-dM-v9t" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="631" y="958"/>
+            <point key="canvasLocation" x="606" y="1369"/>
         </scene>
         <!--Post Install View Controller-->
         <scene sceneID="J47-Aw-6O6">
@@ -1922,7 +1975,7 @@ DQ
                 </viewController>
                 <customObject id="wYi-qT-OyH" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="14" y="1338"/>
+            <point key="canvasLocation" x="-398" y="1417"/>
         </scene>
         <!--Installer Disk Complete-->
         <scene sceneID="zY9-3n-Rr8">
@@ -2069,7 +2122,7 @@ DQ
                 </viewController>
                 <customObject id="2es-xO-UPa" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="442" y="1328"/>
+            <point key="canvasLocation" x="151" y="1407"/>
         </scene>
     </scenes>
     <resources>

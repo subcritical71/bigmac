@@ -35,6 +35,7 @@
 		2D9BB503259EAC96007DE72A /* PreInstallActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9BB502259EAC96007DE72A /* PreInstallActions.swift */; };
 		2DAFF44C259AB7ED00D48E20 /* CreateInstallActions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DAFF44B259AB7ED00D48E20 /* CreateInstallActions.swift */; };
 		2DB7DEB625B0FB2900DEA688 /* InProgressTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB7DEB525B0FB2900DEA688 /* InProgressTasks.swift */; };
+		2DB7DEE025B3B5CF00DEA688 /* ErrorMsgController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB7DEDF25B3B5CF00DEA688 /* ErrorMsgController.swift */; };
 		2DC0952525A36E0B00C8FE85 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DC0952425A36E0B00C8FE85 /* Notifications.swift */; };
 		2DCEAF6E25A7F6EF0064A9B6 /* PostInstallController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DCEAF6D25A7F6EF0064A9B6 /* PostInstallController.swift */; };
 		2DCEAF7325A80B9F0064A9B6 /* Menlo.ttc in Resources */ = {isa = PBXBuildFile; fileRef = 2DCEAF7225A80B900064A9B6 /* Menlo.ttc */; };
@@ -77,6 +78,7 @@
 		2D9BB502259EAC96007DE72A /* PreInstallActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreInstallActions.swift; sourceTree = "<group>"; };
 		2DAFF44B259AB7ED00D48E20 /* CreateInstallActions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateInstallActions.swift; sourceTree = "<group>"; };
 		2DB7DEB525B0FB2900DEA688 /* InProgressTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InProgressTasks.swift; sourceTree = "<group>"; };
+		2DB7DEDF25B3B5CF00DEA688 /* ErrorMsgController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMsgController.swift; sourceTree = "<group>"; };
 		2DC0952425A36E0B00C8FE85 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		2DCEAF6D25A7F6EF0064A9B6 /* PostInstallController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostInstallController.swift; sourceTree = "<group>"; };
 		2DCEAF7225A80B900064A9B6 /* Menlo.ttc */ = {isa = PBXFileReference; lastKnownFileType = file; path = Menlo.ttc; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 			isa = PBXGroup;
 			children = (
 				2D1A32A4258D959D009DCDFD /* ViewController.swift */,
+				2DB7DEDF25B3B5CF00DEA688 /* ErrorMsgController.swift */,
 				2D6CEC3A25AE77F60055CDD1 /* TaskInProgress.swift */,
 				2D3E60FD259D430C00DE6488 /* ViewControllerSetup.swift */,
 				2D522BAB25A35FA000E25780 /* WindowController.swift */,
@@ -347,6 +350,7 @@
 				2D522BC625A36C8400E25780 /* InstallKext.swift in Sources */,
 				2D23BF64258EA04B0019BD90 /* CommandRunner.swift in Sources */,
 				2D522BAC25A35FA000E25780 /* WindowController.swift in Sources */,
+				2DB7DEE025B3B5CF00DEA688 /* ErrorMsgController.swift in Sources */,
 				2D522BBD25A36B8D00E25780 /* BootSystem.swift in Sources */,
 				2D7787EF258F0BC700305EC3 /* CredsViewController.swift in Sources */,
 				2D0B8BC325A57DE4008313D3 /* Vars.swift in Sources */,

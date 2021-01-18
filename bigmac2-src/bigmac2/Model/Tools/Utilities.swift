@@ -114,7 +114,23 @@ func parseRawText(_ str: String) -> String {
 }
 
 extension ViewController {
-
+    
+    func removePath(atPath: String) {
+        do {
+            try fm.removeItem(atPath: atPath)
+        } catch  {
+            print(error)
+        }
+    }
+    
+    func copyPath(atPath: String, toPath:String) {
+        do {
+            try fm.copyItem(atPath: atPath, toPath: toPath)
+        } catch  {
+            print(error)
+        }
+    }
+    
     // MARK: Get System Info
     func getSystemInfo(drive:String) -> systemInfoCodable?   {
         
