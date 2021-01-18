@@ -41,16 +41,11 @@ extension ViewController {
             
             let prebootDiskSlice = getDisk(substr: "Preboot", usingDiskorSlice: diskInfo.disk, isSlice: false) ?? diskInfo.disk + "s2"
 
-            let diskInfo = getVolumeInfoByDisk(filterVolumeName: diskInfo.volumeName, disk: diskInfo.disk) ?? diskInfo
+            let diskInfo = getVolumeInfoByDisk(filterVolumeName: bigmac2Str, disk: diskInfo.disk) ?? diskInfo
 
-            
-            //Get Preboot Ready
-            //runCommand(binary: "/usr/sbin/diskutil", arguments: ["mount", diskInfo.diskSlice])
-        
             //MARK: Step 4
             installBigMacIIApp(bigmac2: diskInfo)
-            
-            
+                        
             //MARK: Update systemVolume volume because UUIDs have changed
             baseBootPlister(diskInfo: diskInfo, isVerbose: isBaseVerbose, isSingleUser: isSingleUser, prebootVolume: prebootDiskSlice, isBaseSystem: true)
                  

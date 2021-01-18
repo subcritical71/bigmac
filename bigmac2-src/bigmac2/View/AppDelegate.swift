@@ -58,6 +58,10 @@ class AppDelegate: NSObject, NSApplicationDelegate {
         //MARK: Stop kernel process
         runCommand(binary: "/usr/bin/killall", arguments: ["kmutil"]) //to do: capture its pid and kill it by its pid
         
+        runCommand(binary: "/usr/sbin/diskutil", arguments: ["unmount", bigDataStr])
+
+        runCommand(binary: "/usr/sbin/diskutil", arguments: ["eject", bigDataStr])
+
         let fm = FileManager.default
         
         if let bd = Bundle.main.resourceURL?.path {
