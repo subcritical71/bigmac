@@ -52,10 +52,12 @@ extension ViewController {
                 bootArgs = bootArgs + "-no_compat_check "
             }
             
-            if !bootArgs.isEmpty {
-                bootArgs = bootArgs + "srv=1"
-            }
-
+            #if arch(x86_64)
+                if !bootArgs.isEmpty {
+                    bootArgs = bootArgs + "arch=x86_64"
+                }
+            #endif
+            
             runCommand(binary: "/usr/sbin/nvram" , arguments: ["boot-args=\(bootArgs)"])
             
             if libVal {
@@ -72,10 +74,12 @@ extension ViewController {
                 runCommand(binary: "/usr/bin/csrutil" , arguments: ["authenticated-root", "disable"])
             }
             
-            //MARK: Disable GateKeeper
-            if GK {
+            //MARK: Disable GateKeeper (REMOVED HIGH PROBABILITY THIS INFLICTS HARM WHEN BUILDING KCs) May have caused Serialization Error #71
+            /* if GK {
                 runCommand(binary: "/usr/sbin/spctl" , arguments: ["--master-disable"])
-            }
+            } else {
+                runCommand(binary: "/usr/sbin/spctl" , arguments: ["--master-enable"])
+            } */
             
             let script = """
             

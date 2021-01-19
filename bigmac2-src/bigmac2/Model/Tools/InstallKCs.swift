@@ -51,8 +51,8 @@ extension ViewController {
         runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title: "Updating Boot and System Kernel Extensions...")
         
          //MARK: Rechecking Extensions
-        indicatorBump(updateProgBar: true)
-        runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title: "Verifying Boot and System Kernel Extensions...")
+        //indicatorBump(updateProgBar: true)
+        //runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title: "Verifying Boot and System Kernel Extensions...")
          
          //MARK: Updating Library Extensions
         indicatorBump(updateProgBar: true)
