@@ -42,26 +42,14 @@ extension ViewController {
         //Run this only once
         if !kmMonitor {
             DispatchQueue.global(qos: .background).async { [self] in
-                runIndeterminateProcess(binary: kmutil, arguments: ["log", "stream"], title: "Updating Boot and System Kernel Extensions...")
+                runIndeterminateProcess(binary: kmutil, arguments: ["log", "stream"], title: "Updating All Kernel Extensions...")
                 kmMonitor = true
             }
         }
        
         let kmArrA = ["install", "--update-all", "--check-rebuild", "--repository", "/\(sysLibExt)", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--repository", "/\(appleSysLibExt)", "--volume-root", "\(destVolume)"]
-        runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title: "Updating Boot and System Kernel Extensions...")
+        runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title: "Updating All Kernel Extensions...")
         
-         //MARK: Rechecking Extensions
-        //indicatorBump(updateProgBar: true)
-        //runIndeterminateProcess(binary: kmutil, arguments: kmArrA, title: "Verifying Boot and System Kernel Extensions...")
-         
-         //MARK: Updating Library Extensions
-        indicatorBump(updateProgBar: true)
-        let kmArrC = ["create", "-n", "aux", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--volume-root", "--volume-root", "\(destVolume)"]
-        runIndeterminateProcess(binary: kmutil, arguments: kmArrC, title: "Updating Auxiliary Kernel Extensions...")
-        
-        let kmArrD = ["install", "--check-rebuild", "--repository", "/\(libExt)", "--repository", "/\(sysLibDriverExt)", "--repository", "/\(libDriveExt)", "--volume-root", "\(destVolume)"]
-        runIndeterminateProcess(binary: kmutil, arguments: kmArrD, title: "Checking Auxiliary Kernel Extensions...")
-    
         indicatorBump(taskMsg: "Creating Prelinked Kernel...", detailMsg: "", updateProgBar: true)
          if appleSysLibExists {
             indicatorBump(updateProgBar: true)

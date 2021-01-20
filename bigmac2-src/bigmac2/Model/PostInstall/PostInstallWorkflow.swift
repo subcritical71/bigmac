@@ -71,7 +71,12 @@ extension ViewController {
             
             let dataVolumeUUID = runCommandReturnStr(binary: apfsUtil, arguments: ["-k", dataSlice]) ?? ""
             
-            let dest = systemVolume.path
+            var dest = systemVolume.path
+            
+            if systemVolume.root {
+                dest = ""
+            }
+            
             let slek = "System/Library/Extensions"
             let uepi = "System/Library/UserEventPlugins"
             let lext = "Library/Extensions"
@@ -87,7 +92,7 @@ extension ViewController {
                 let list = "Info.plist"
                 let prfx = "usb3"
                 
-                let usb3fix = installKext(dest: dest, kext: list, fold: fold, prfx: prfx, ttle: "USB 3.1 Fix...")
+                let usb3fix = installKext(dest: dest, kext: list, fold: fold, prfx: prfx, ttle: "Potential USB 3.1 Fix...")
                 print(usb3fix)
                 
                 //let kext2 = "ASMedia.kext"
@@ -158,7 +163,7 @@ extension ViewController {
             var sysPath = systemVolume.path + "/"
             
             if systemVolume.root {
-                sysPath = systemVolume.path
+                sysPath = "/"
             }
             
             print(sysPath)
