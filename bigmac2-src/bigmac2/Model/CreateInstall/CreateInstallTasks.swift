@@ -13,7 +13,7 @@ extension ViewController {
     //MARK: Task #1
     func updateInstallerPkg(installBigSurApp: String) ->  (result: String, installed: Bool) {
         
-        var vet = (result: "Updating the disk failed", installed: false)
+        var vet = (result: "Updating the disk failed!", installed: false)
         
         let InstallAsst = "/Users/Shared/InstallAssistant.pkg"
         let InstallApp = "/Applications/\(installBigSur)"
@@ -38,7 +38,7 @@ extension ViewController {
         if completed {
             incrementInstallGauge(resetGauge: false, incremment: false, setToFull: true, title: "bigmac2 Boot Disk installation is complete!")
         } else {
-            incrementInstallGauge(resetGauge: true, incremment: false, setToFull: false, title: "bigmac2 Boot Diks installation has failed!")
+            incrementInstallGauge(resetGauge: true, incremment: false, setToFull: false, title: "bigmac2 Boot Disk installation failed!")
         }
         
         spinnerAnimation(start: false, hide: true)

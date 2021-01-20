@@ -1350,7 +1350,7 @@ DQ
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="W3i-15-mCO">
                                                             <rect key="frame" x="-2" y="74" width="187" height="18"/>
-                                                            <buttonCell key="cell" type="check" title="AMD GPU SSE4.2 MouSSE" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="FpY-HT-NK3">
+                                                            <buttonCell key="cell" type="check" title="AMD GPU SSE4.2 MouSSE" bezelStyle="regularSquare" imagePosition="left" inset="2" id="FpY-HT-NK3">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
@@ -1566,6 +1566,7 @@ DQ
                         <outlet property="postInstallSpinner" destination="d5Q-mA-6g6" id="wxy-NA-PDh"/>
                         <outlet property="postInstallTab" destination="O2m-ec-BUk" id="NI6-Fb-qzU"/>
                         <outlet property="postInstallTask_label" destination="hO9-BU-vgp" id="Gl9-hU-tAU"/>
+                        <outlet property="preInstaLaunchBtn" destination="dmX-Q4-ikD" id="EW2-ex-eMR"/>
                         <outlet property="preInstallSpinner" destination="pZk-UF-Xb5" id="743-Mz-gGj"/>
                         <outlet property="preInstallTab" destination="5mC-sQ-iCM" id="616-Hl-r05"/>
                         <outlet property="progressBarDownload" destination="5Lr-xQ-MWE" id="W6L-fI-SjD"/>
@@ -1634,7 +1635,7 @@ DQ
                                 </textFieldCell>
                             </textField>
                             <button fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WgU-A4-doc">
-                                <rect key="frame" x="325" y="236.5" width="21.5" height="28"/>
+                                <rect key="frame" x="325" y="237" width="22" height="28"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <buttonCell key="cell" type="square" bezelStyle="shadowlessSquare" image="NSRefreshTemplate" imagePosition="only" alignment="center" imageScaling="proportionallyUpOrDown" inset="2" id="eZy-GZ-4ft">
                                     <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
@@ -1859,10 +1860,10 @@ Gw
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JWv-9A-8fD">
-                                <rect key="frame" x="20" y="20" width="297" height="20"/>
+                                <rect key="frame" x="20" y="20" width="298" height="20"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="TjB-Ww-MrJ">
-                                        <rect key="frame" x="-7" y="-7" width="97" height="32"/>
+                                        <rect key="frame" x="-7" y="-7" width="98" height="32"/>
                                         <buttonCell key="cell" type="push" title="Thank you" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="cb3-VQ-q8X">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -1875,7 +1876,7 @@ Gw
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="o85-PX-HYz">
-                                        <rect key="frame" x="88" y="-7" width="78" height="32"/>
+                                        <rect key="frame" x="89" y="-7" width="78" height="32"/>
                                         <buttonCell key="cell" type="push" title="Donate" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="i62-C4-BQq">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -1888,7 +1889,7 @@ Gw
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="geV-iO-yth">
-                                        <rect key="frame" x="164" y="-7" width="140" height="32"/>
+                                        <rect key="frame" x="165" y="-7" width="140" height="32"/>
                                         <buttonCell key="cell" type="push" title="Bless and Reboot" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="0Dh-2g-Sho">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>
@@ -1976,7 +1977,7 @@ DQ
                         <autoresizingMask key="autoresizingMask"/>
                         <subviews>
                             <stackView distribution="fill" orientation="horizontal" alignment="top" spacing="13" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u22-fE-uZS">
-                                <rect key="frame" x="20" y="20" width="353" height="20"/>
+                                <rect key="frame" x="20" y="20" width="354" height="20"/>
                                 <subviews>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="r0s-kh-FaE">
                                         <rect key="frame" x="-7" y="-7" width="98" height="32"/>
@@ -2002,7 +2003,7 @@ Gw
                                         </connections>
                                     </button>
                                     <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="GCx-kG-7Nt">
-                                        <rect key="frame" x="167" y="-7" width="193" height="32"/>
+                                        <rect key="frame" x="167" y="-7" width="194" height="32"/>
                                         <buttonCell key="cell" type="push" title="Boot the bigmac2 Installer" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="AgX-Pt-3v4">
                                             <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                             <font key="font" metaFont="system"/>

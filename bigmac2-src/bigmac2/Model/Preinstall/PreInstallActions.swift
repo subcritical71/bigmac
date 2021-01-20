@@ -9,15 +9,17 @@ import Cocoa
 extension ViewController {
     @IBAction func LaunchInstallerAction(_ sender: Any) {
         
+        preInstaLaunchBtn.isEnabled = false
+        
         let libVal = DisableLibraryValidation.state == .on
         let SIP = DisableSIP.state == .on
         let AR = DisableAuthRoot.state == .on
-        let GK = DisableGateKeeper.state == .on
+        //let GK = DisableGateKeeper.state == .on
 
         func macOS(installer: String) {
             if !ranHax3 {
                 ranHax3 = true
-                runCommand(binary: "/bin/launchctl" , arguments: ["setenv", "DYLD_INSERT_LIBRARIES", "/\(tmp)/\(bigdata)/\(haxDylib)"])
+                runCommand(binary: "/bin/launchctl", arguments: ["setenv", "DYLD_INSERT_LIBRARIES", "/\(tmp)/\(bigdata)/\(haxDylib)"])
             }
             
             let bigMacApp = Bundle.main.bundlePath
@@ -28,8 +30,14 @@ extension ViewController {
                     sleep(1)
                     DispatchQueue.main.async { [self] in
                         preInstallSpinner.doubleValue = Double(i)
+                        
+                        if i >= 5 {
+                            preInstaLaunchBtn.isEnabled = true
+                        }
                     }
                 }
+                
+
             }
         }
         

@@ -386,7 +386,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -395,7 +395,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				MACOSX_DEPLOYMENT_TARGET = 10.13;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
@@ -411,7 +411,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = bigmac2/Info.plist;
@@ -421,7 +421,7 @@
 				);
 				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = "-mmacosx-version-min=10.13";
-				PRODUCT_BUNDLE_IDENTIFIER = com.starplayrx.bigmac2017;
+				PRODUCT_BUNDLE_IDENTIFIER = com.starplayrx.bigmac2025;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -439,7 +439,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 24;
+				CURRENT_PROJECT_VERSION = 25;
 				DEVELOPMENT_TEAM = 469UCUB275;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = bigmac2/Info.plist;
@@ -449,7 +449,7 @@
 				);
 				MARKETING_VERSION = 2.0;
 				OTHER_LDFLAGS = "-mmacosx-version-min=10.13";
-				PRODUCT_BUNDLE_IDENTIFIER = com.starplayrx.bigmac2017;
+				PRODUCT_BUNDLE_IDENTIFIER = com.starplayrx.bigmac2025;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
