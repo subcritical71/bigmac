@@ -34,6 +34,7 @@ extension ViewController {
         }
     }
     
+    
     func PostInstall() {
         
         DispatchQueue.global(qos: .background).async { [self] in
@@ -160,10 +161,10 @@ extension ViewController {
             indicatorBump(updateProgBar: true)
             BootSystem(system: systemVolume, dataVolumeUUID: dataVolumeUUID, isVerbose: VerboseBoot, isSingleUser: singleUser, prebootVolume: preboot)
             
-            var sysPath = systemVolume.path + "/"
+            var sysPath = systemVolume.path
             
             if systemVolume.root {
-                sysPath = "/"
+                sysPath = ""
             }
             
             print(sysPath)
@@ -190,8 +191,6 @@ extension ViewController {
                         let decoder = PropertyListDecoder()
                         let snapshots = try decoder.decode(Snapshots.self, from: plistData).snapshots
                         
-                        runCommand(binary: "/sbin/mount", arguments: ["-uw", systemVolume.path])
-
                         for s in snapshots {
                             indicatorBump(taskMsg: "Deleting snapshot...", detailMsg: "\(s.snapshotName)", updateProgBar: true)
                             _ = runCommandReturnStr(binary: "/usr/sbin/diskutil", arguments: ["apfs", "deleteSnapshot", systemVolume.diskSlice, "-xid", "\(s.snapshotXID)"])
@@ -220,7 +219,7 @@ extension ViewController {
                 }
 
                 indicatorBump(taskMsg: "Blessing \(systemVolume.displayName)...", detailMsg: "", updateProgBar: true)
-                let blessYou = runCommandReturnStr(binary: bless, arguments: ["--folder", "\(path)System/Library/CoreServices" , "--bootefi", "--label", systemVolume.displayName, "--setBoot"]) ?? ""
+                let blessYou = runCommandReturnStr(binary: bless, arguments: ["--folder", "\(path)System/Library/CoreServices" , "--bootefi", "--label", systemVolume.displayName, "--setBoot --create-snapshot"]) ?? ""
                 print(blessYou as String)
 
             }

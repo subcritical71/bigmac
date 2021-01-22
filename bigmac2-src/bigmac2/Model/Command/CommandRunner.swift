@@ -149,9 +149,10 @@ extension ViewController {
         process.arguments = arguments
         
         let pipe = Pipe()
-        
+        let pipe2 = Pipe()
+
         process.standardOutput = pipe
-        process.standardError = pipe
+        process.standardError = pipe2
         
         pipe.fileHandleForReading.readabilityHandler = { pipe in
             if var io = String(data: pipe.availableData, encoding: .utf8) {
