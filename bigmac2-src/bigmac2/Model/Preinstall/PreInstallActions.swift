@@ -14,7 +14,7 @@ extension ViewController {
         let libVal = DisableLibraryValidation.state == .on
         let SIP = DisableSIP.state == .on
         let AR = DisableAuthRoot.state == .on
-        //let GK = DisableGateKeeper.state == .on
+        let GK = DisableGateKeeper.state == .on
 
         func macOS(installer: String) {
             if !ranHax3 {
@@ -37,8 +37,6 @@ extension ViewController {
                         }
                     }
                 }
-                
-
             }
         }
         
@@ -83,12 +81,12 @@ extension ViewController {
                 runCommand(binary: "/usr/bin/csrutil" , arguments: ["authenticated-root", "disable"])
             }
             
-            //MARK: Disable GateKeeper (REMOVED HIGH PROBABILITY THIS INFLICTS HARM WHEN BUILDING KCs) May have caused Serialization Error #71
-            /* if GK {
+            //MARK: Disable GateKeeper
+            if GK {
                 runCommand(binary: "/usr/sbin/spctl" , arguments: ["--master-disable"])
             } else {
                 runCommand(binary: "/usr/sbin/spctl" , arguments: ["--master-enable"])
-            } */
+            }
             
             let script = """
             

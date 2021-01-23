@@ -1026,8 +1026,15 @@ DQ
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                             <subviews>
                                                 <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="19" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oT8-gl-BjV">
-                                                    <rect key="frame" x="36" y="147" width="192" height="86"/>
+                                                    <rect key="frame" x="36" y="112" width="192" height="121"/>
                                                     <subviews>
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="9ja-NT-WDi">
+                                                            <rect key="frame" x="-2" y="104" width="146" height="18"/>
+                                                            <buttonCell key="cell" type="check" title="Disable GateKeeper" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="Eh1-xx-8xU">
+                                                                <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                        </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="DYc-Ys-UxX">
                                                             <rect key="frame" x="-2" y="69" width="180" height="18"/>
                                                             <buttonCell key="cell" type="check" title="Disable Library Validation" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="eTi-1D-LUr">
@@ -1054,8 +1061,10 @@ DQ
                                                         <integer value="1000"/>
                                                         <integer value="1000"/>
                                                         <integer value="1000"/>
+                                                        <integer value="1000"/>
                                                     </visibilityPriorities>
                                                     <customSpacing>
+                                                        <real value="3.4028234663852886e+38"/>
                                                         <real value="3.4028234663852886e+38"/>
                                                         <real value="3.4028234663852886e+38"/>
                                                         <real value="3.4028234663852886e+38"/>
@@ -1531,6 +1540,7 @@ DQ
                     <connections>
                         <outlet property="BlessVolume" destination="Rxd-wm-kl7" id="0V0-Ez-lty"/>
                         <outlet property="DisableAuthRoot" destination="2hw-ui-YuN" id="V2Y-eh-QCe"/>
+                        <outlet property="DisableGateKeeper" destination="9ja-NT-WDi" id="0tw-dC-CWb"/>
                         <outlet property="DisableLibraryValidation" destination="DYc-Ys-UxX" id="US9-Ta-lWL"/>
                         <outlet property="DisableSIP" destination="M0Z-5v-afG" id="lSN-cb-V6u"/>
                         <outlet property="HiRes_1080" destination="tyJ-MQ-GFN" id="64S-be-hW5"/>
