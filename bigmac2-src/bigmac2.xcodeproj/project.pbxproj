@@ -43,7 +43,8 @@
 		2DFBD81E25A418B40098024C /* InstallerDiskController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DFBD81D25A418B40098024C /* InstallerDiskController.swift */; };
 		2DFE54FB25A2D7D500BE3AA0 /* bm2 in Resources */ = {isa = PBXBuildFile; fileRef = 2DFE54FA25A2D7D500BE3AA0 /* bm2 */; };
 		2DFE54FE25A2D7DE00BE3AA0 /* lax in Resources */ = {isa = PBXBuildFile; fileRef = 2DFE54FD25A2D7DE00BE3AA0 /* lax */; };
-		6F6AA8C425BA6CBB002FF64F /* kmu in Resources */ = {isa = PBXBuildFile; fileRef = 6F6AA8C325BA6CBB002FF64F /* kmu */; };
+		6F6AA8CD25BB98C6002FF64F /* kmu in Resources */ = {isa = PBXBuildFile; fileRef = 6F6AA8CC25BB98C6002FF64F /* kmu */; };
+		6F6AA8D225BB9B67002FF64F /* BootSystemII.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F6AA8D125BB9B67002FF64F /* BootSystemII.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -87,7 +88,8 @@
 		2DFBD81D25A418B40098024C /* InstallerDiskController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallerDiskController.swift; sourceTree = "<group>"; };
 		2DFE54FA25A2D7D500BE3AA0 /* bm2 */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = bm2; sourceTree = "<group>"; };
 		2DFE54FD25A2D7DE00BE3AA0 /* lax */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = lax; sourceTree = "<group>"; };
-		6F6AA8C325BA6CBB002FF64F /* kmu */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = kmu; sourceTree = "<group>"; };
+		6F6AA8CC25BB98C6002FF64F /* kmu */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.executable"; path = kmu; sourceTree = "<group>"; };
+		6F6AA8D125BB9B67002FF64F /* BootSystemII.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BootSystemII.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,9 +174,9 @@
 		2D538EFD259008730066D908 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				6F6AA8C325BA6CBB002FF64F /* kmu */,
 				2DCEAF7225A80B900064A9B6 /* Menlo.ttc */,
 				2D522BA925A2E20000E25780 /* bm2tmp0.dmg */,
+				6F6AA8CC25BB98C6002FF64F /* kmu */,
 				2DFE54FA25A2D7D500BE3AA0 /* bm2 */,
 				2DFE54FD25A2D7DE00BE3AA0 /* lax */,
 			);
@@ -256,6 +258,7 @@
 				2D993A65258DCA79003A5553 /* FileDownloader.swift */,
 				2D2E4E1D259C03930088999C /* FileWriter.swift */,
 				2D522BBC25A36B8D00E25780 /* BootSystem.swift */,
+				6F6AA8D125BB9B67002FF64F /* BootSystemII.swift */,
 			);
 			path = FileManager;
 			sourceTree = "<group>";
@@ -322,10 +325,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6F6AA8CD25BB98C6002FF64F /* kmu in Resources */,
 				2DFE54FE25A2D7DE00BE3AA0 /* lax in Resources */,
 				2DCEAF7325A80B9F0064A9B6 /* Menlo.ttc in Resources */,
 				2DFE54FB25A2D7D500BE3AA0 /* bm2 in Resources */,
-				6F6AA8C425BA6CBB002FF64F /* kmu in Resources */,
 				2D1A32A7258D959E009DCDFD /* Assets.xcassets in Resources */,
 				2D1A32AA258D959E009DCDFD /* Main.storyboard in Resources */,
 			);
@@ -362,6 +365,7 @@
 				2DCEAF6E25A7F6EF0064A9B6 /* PostInstallController.swift in Sources */,
 				2DAFF44C259AB7ED00D48E20 /* CreateInstallActions.swift in Sources */,
 				2D99C49D259F2D280035669B /* PostInstallActions.swift in Sources */,
+				6F6AA8D225BB9B67002FF64F /* BootSystemII.swift in Sources */,
 				2D09EE43259C432C0054CF3A /* CreateInstallTasks.swift in Sources */,
 				2D8630FE25A234D3006DDFFC /* PostInstallWorkflow.swift in Sources */,
 				2DFBD81E25A418B40098024C /* InstallerDiskController.swift in Sources */,

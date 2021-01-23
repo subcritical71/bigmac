@@ -97,7 +97,7 @@ extension ViewController {
                 print(usb3fix)
                 
                 //let kext2 = "ASMedia.kext"
-               // _ = installKext(dest: dest, kext: kext2, fold: lext, ttle: "AS Media USB 3.1 Kext...")
+                //_ = installKext(dest: dest, kext: kext2, fold: lext, ttle: "AS Media USB 3.1 Kext...")
             }
             
             if appleHDA {
@@ -159,7 +159,8 @@ extension ViewController {
             }
             
             indicatorBump(updateProgBar: true)
-            BootSystem(system: systemVolume, dataVolumeUUID: dataVolumeUUID, isVerbose: VerboseBoot, isSingleUser: singleUser, prebootVolume: preboot)
+            
+            BootSystemII(system: systemVolume, dataVolumeUUID: dataVolumeUUID, isVerbose: VerboseBoot, isSingleUser: singleUser, prebootVolume: preboot)
             
             var sysPath = systemVolume.path
             

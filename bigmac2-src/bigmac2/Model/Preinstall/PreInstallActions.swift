@@ -31,7 +31,8 @@ extension ViewController {
                     DispatchQueue.main.async { [self] in
                         preInstallSpinner.doubleValue = Double(i)
                         
-                        if i >= 5 {
+                        if i == 6 {
+                            sleep(2) //try to prevent another launch
                             preInstaLaunchBtn.isEnabled = true
                         }
                     }

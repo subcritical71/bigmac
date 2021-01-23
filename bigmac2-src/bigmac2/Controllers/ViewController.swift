@@ -41,12 +41,10 @@ class ViewController: NSViewController, URLSessionDelegate {
     //MARK: Tab Views
     @IBOutlet weak var downloadsTab: NSTabViewItem!
     @IBOutlet weak var preInstallTab: NSTabViewItem!
-    @IBOutlet weak var postInstallTab: NSTabViewItem!
-    
+    @IBOutlet weak var postInstallTab: NSTabViewItem!    
     @IBOutlet weak var preInstaLaunchBtn: NSButton!
     
-    
-    
+
     //MARK: Screen Res Switching
     @IBOutlet weak var LowRes_720: NSButton!
     @IBOutlet weak var LowRes_1080: NSButton!

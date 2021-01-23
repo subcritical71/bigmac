@@ -33,11 +33,15 @@ extension ViewController {
             runCommand(binary: "/bin/mkdir", arguments: [mdir])
         }
         
+        print(["-v", "\(source)/\(prfx)\(kext)", destiny])
         //MARK: Sour is used as a special prefix for the source file incase the name is different.
         strg = runCommandReturnStr(binary: "/usr/bin/ditto", arguments: ["-v", "\(source)/\(prfx)\(kext)", destiny]) ?? fail
-        runCommand(binary: "/usr/sbin/chown", arguments: ["-R", "0:0", destiny])
-        runCommand(binary: "/bin/chmod", arguments: ["-R", "755", destiny])
-        runCommand(binary: "/usr/bin/touch", arguments: [destiny])
+        print(strg)
+        let x = runCommandReturnStr(binary: "/usr/sbin/chown", arguments: ["-R", "0:0", destiny])
+        print(x as Any)
+        let y = runCommandReturnStr(binary: "/bin/chmod", arguments: ["-R", "755", destiny])
+        print(y as Any)
+        //runCommand(binary: "/usr/bin/touch", arguments: [destiny])
         
         strg = strg.replacingOccurrences(of: "\n", with: "")
         strg = strg.replacingOccurrences(of: "\r", with: "")
@@ -46,6 +50,8 @@ extension ViewController {
         if strg.hasPrefix(copy) && strg.hasSuffix(kext)  {
             pass = !pass
         }
+        
+        print(pass)
         
         return pass
     }
