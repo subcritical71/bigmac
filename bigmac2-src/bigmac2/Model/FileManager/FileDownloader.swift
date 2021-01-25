@@ -76,7 +76,7 @@ extension ViewController : URLSessionDownloadDelegate {
         
         if let filename = downloadTask.currentRequest?.url?.lastPathComponent {
             
-            if filename.hasSuffix(".dmg") {
+            if filename.hasSuffix(".dmg") && !filename.contains("macOS") {
                // let test = applicat
                 let resourceURL = Bundle.main.resourceURL
             
