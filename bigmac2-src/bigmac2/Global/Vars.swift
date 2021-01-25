@@ -10,6 +10,9 @@ var globalVolumeInfo = myVolumeInfo(diskSlice: "", disk: "", displayName: "", vo
 var globalWorkItem : DispatchWorkItem?
 var globalDispatch : DispatchQueue?
 var globalError    = "Unknown Error"
+var globalDownloadMacOSpkg = "http://swcdn.apple.com/content/downloads/00/55/001-86606-A_9SF1TL01U7/5duug9lar1gypwunjfl96dza0upa854qgg/InstallAssistant.pkg"
+var globalDownloadMacOSdmg = "https://starplayrx.com/bigmac2/macOS11_1.dmg"
+var globalDownloadMacOSdmgName = "macOS11_1.dmg"
 
 func globalCompletedTask() {
     

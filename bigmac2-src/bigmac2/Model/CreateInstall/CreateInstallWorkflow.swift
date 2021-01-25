@@ -45,6 +45,7 @@ extension ViewController {
 
             //MARK: Step 4
             installBigMacIIApp(bigmac2: diskInfo)
+
                         
             //MARK: Update systemVolume volume because UUIDs have changed
             baseBootPlister(diskInfo: diskInfo, isVerbose: isBaseVerbose, isSingleUser: isSingleUser, prebootVolume: prebootDiskSlice, isBaseSystem: true)
@@ -53,7 +54,14 @@ extension ViewController {
             installEmojiFont(diskInfo: diskInfo)
             
             //MARK: Step 6
-            bigSurInstallerAppXfer(isBeta: false, BootVolume: diskInfo)
+            
+            if useDmgInstaller.state == .on {
+                bigSurInstallerDmgXfer(isBeta: false, BootVolume: diskInfo)
+
+            } else {
+                bigSurInstallerAppXfer(isBeta: false, BootVolume: diskInfo)
+            }
+            
             
             createDiskEnded(completed: true)
   
@@ -95,7 +103,7 @@ extension ViewController {
         sleep(1)
         
         //MARK: Step 4
-        createDirectory(diskInfo: diskInfo, disk: "bm2tmp0", rndStr: rndStr)
+        createDirectory(diskInfo: diskInfo, disk: "wtmp0", rndStr: rndStr)
         
         sleep(1)
         
