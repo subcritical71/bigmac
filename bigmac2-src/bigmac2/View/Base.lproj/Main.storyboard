@@ -1017,6 +1017,14 @@ DQ
                                                         <real value="3.4028234663852886e+38"/>
                                                     </customSpacing>
                                                 </stackView>
+                                                <button verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="87U-zU-Fhc">
+                                                    <rect key="frame" x="313" y="119" width="176" height="18"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                                    <buttonCell key="cell" type="check" title="Use Disk Image Installer" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="jsG-of-cS3">
+                                                        <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                                        <font key="font" metaFont="system"/>
+                                                    </buttonCell>
+                                                </button>
                                             </subviews>
                                         </view>
                                     </tabViewItem>
@@ -1589,6 +1597,7 @@ DQ
                         <outlet property="superDrive_btn" destination="VPt-hA-tNG" id="a4M-CW-nqM"/>
                         <outlet property="teleTrap_btn" destination="mAO-Pd-4vQ" id="MXv-lD-zaa"/>
                         <outlet property="updateBootSysKCs" destination="hG2-oA-ihQ" id="zpY-It-kiu"/>
+                        <outlet property="useDmgInstaller" destination="87U-zU-Fhc" id="g3g-wW-Olh"/>
                         <outlet property="verboseGlobalBootArgs" destination="Ess-bw-4Dt" id="5mq-zg-L9D"/>
                         <outlet property="verboseUserCheckbox" destination="woR-0I-Jr3" id="Vbv-U2-Nyj"/>
                         <segue destination="30y-Mz-E5P" kind="sheet" identifier="userNamePassWord" id="2iv-7c-Fbr"/>

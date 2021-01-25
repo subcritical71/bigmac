@@ -26,7 +26,8 @@ class ViewController: NSViewController, URLSessionDelegate {
     @IBOutlet weak var singleUserCheckbox: NSButton!
     @IBOutlet weak var verboseUserCheckbox: NSButton!
     @IBOutlet weak var apfsRomPatcher: NSButton!
-   
+    @IBOutlet weak var useDmgInstaller: NSButton!
+
     //MARK: Preinstall Tab -- Outlets
     @IBOutlet weak var DisableLibraryValidation: NSButton!
     @IBOutlet weak var DisableSIP: NSButton!
@@ -37,7 +38,7 @@ class ViewController: NSViewController, URLSessionDelegate {
     @IBOutlet weak var amfiGlobalBootArgs: NSButton!
     @IBOutlet weak var nccGlobalBootArgs: NSButton!
     @IBOutlet weak var suGlobalBootArgs: NSButton!
-  
+    
     //MARK: Tab Views
     @IBOutlet weak var downloadsTab: NSTabViewItem!
     @IBOutlet weak var preInstallTab: NSTabViewItem!

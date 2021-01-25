@@ -16,6 +16,7 @@ extension ViewController {
         let AR = DisableAuthRoot.state == .on
         let GK = DisableGateKeeper.state == .on
 
+
         func macOS(installer: String) {
             if !ranHax3 {
                 ranHax3 = true
@@ -88,30 +89,38 @@ extension ViewController {
                 runCommand(binary: "/usr/sbin/spctl" , arguments: ["--master-enable"])
             }
             
-            let script = """
             
-            display dialog "Only clean installs from Mac OS Extended Journaled (JHFS+) volumes are supported from a full OS. To install or upgrade directly to APFS disks, boot from the bigmac2 Installation Disk. Hint try rebooting and hold down the C key. Note: installing to JHFS+ will be converted to APFS during the install." buttons {"OK"} default button 1 with icon 1
-            
-            """
-            
-            let installAsstBaseOS = "/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
-            let installAsstFullOS = "/Applications/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
-           // let installAsstBootOS = "/Volumes/bigmac2/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
-            
-            
-            let fm = FileManager.default
-            if fm.fileExists(atPath: installAsstBaseOS) {
+            //If using alternative method
+            if useDmgInstaller.state == .on {
                 
-                macOS(installer: installAsstBaseOS)
-               
-            } else if fm.fileExists(atPath: installAsstFullOS) {
-                
-                _ = performAppleScript(script: script)
-                macOS(installer: installAsstFullOS)
+            } else {
+                let installAsstBaseOS = "/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
+                let installAsstFullOS = "/Applications/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
+
+                let fm = FileManager.default
+                if fm.fileExists(atPath: installAsstBaseOS) {
+                    
+                    macOS(installer: installAsstBaseOS)
+                   
+                } else if fm.fileExists(atPath: installAsstFullOS) {
+                    globalError = "Only clean installs from Mac OS Extended Journaled (JHFS+) volumes are supported from a full version of macOS. To install or upgrade directly to APFS disks, boot from the bigmac2 Installation Disk. If you have a boot screen, reboot using the option key. Note: installing to JHFS+ will be converted to APFS during the clean install."
+                    
+                    performSegue(withIdentifier: "displayErrMsg", sender: self)
+                    
+                    macOS(installer: installAsstFullOS)
+                } else {
+                    globalError = "It does not appear that you have downloaded macOS 11.x Big Sur yet. Please go to the Downloads tab and download Big Sur or obtain a fresh install of Big Sur from Apple."
+                    
+                    performSegue(withIdentifier: "displayErrMsg", sender: self)
+                    preInstaLaunchBtn.isEnabled = true
+                }
             }
+        
         }
-      
+        
         preInstallRunner(libVal: libVal, SIP: SIP, AR: AR)
+
+      
     }
 }
 

@@ -208,7 +208,7 @@ extension ViewController {
                 }
 
                 indicatorBump(taskMsg: "Blessing \(systemVolume.displayName)...", detailMsg: "", updateProgBar: true)
-                let blessYou = runCommandReturnStr(binary: bless, arguments: ["--folder", "\(path)System/Library/CoreServices" , "--bootefi", "--label", systemVolume.displayName, "--setBoot --create-snapshot"]) ?? ""
+                _ = runCommandReturnStr(binary: bless, arguments: ["--folder", "\(path)System/Library/CoreServices" , "--bootefi", "--label", systemVolume.displayName, "--setBoot"]) ?? ""
 
             }
             

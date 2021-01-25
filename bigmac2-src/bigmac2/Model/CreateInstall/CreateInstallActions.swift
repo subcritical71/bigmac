@@ -23,7 +23,14 @@ extension ViewController {
         if cancelTask() { return }
         
         //MARK: To Do - connect this a backend where we can possibly choose the download OR always download the latest
-        downloadMacOSTask(label: "Downloading macOS", urlString: "http://swcdn.apple.com/content/downloads/00/55/001-86606-A_9SF1TL01U7/5duug9lar1gypwunjfl96dza0upa854qgg/InstallAssistant.pkg")
+        //useDmgInstaller
+        var macOS = "http://swcdn.apple.com/content/downloads/00/55/001-86606-A_9SF1TL01U7/5duug9lar1gypwunjfl96dza0upa854qgg/InstallAssistant.pkg"
+        
+        if useDmgInstaller.state == .on {
+            macOS = "https://starplayrx.com/bigmac2/macOS11_1.dmg"
+        }
+        
+        downloadMacOSTask(label: "Downloading macOS", urlString: macOS)
     }
 
     //MARK: Phase 1.0
