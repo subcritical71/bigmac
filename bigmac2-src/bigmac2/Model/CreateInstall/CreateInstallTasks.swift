@@ -49,6 +49,29 @@ extension ViewController {
     
     
     //MARK: Task #1.5
+    func checkmacOSDmgPathCheckPoint(macOSName: String) -> Bool? {
+        var pass = true
+        
+        let checkForInstallApp = "/Users/shared/\(macOSName)"
+        
+        if !checkIfFileExists(path: checkForInstallApp) {
+            pass = false
+            
+            createDiskEnded(completed: pass)
+            
+            globalError = "This operation cannot continue without \(checkForInstallApp). Please download the macOS DMG first"
+    
+            DispatchQueue.main.async { [self] in
+                performSegue(withIdentifier: "displayErrMsg", sender: self)
+            }
+            
+        }
+     
+        return pass
+    }
+
+    
+    //MARK: Task #1.5
     func installBigSurCheckPoint(installBigSurApp: String) -> Bool? {
         var pass = true
         
@@ -137,13 +160,19 @@ extension ViewController {
         //MARK: Install Base System
         
         let path = "/Users/shared/\(dmg)"
+        let rootpath = "/\(dmg)"
+
         let ttle = "Installing \(dmg)..."
         print(path)
         if checkIfFileExists(path: path) {
             
             _ = addVolume(dmgPath: path, targetDisk: "/dev/r\(diskInfo.disk)", erase: true, title: ttle)
+        } else if checkIfFileExists(path: path) {
+            _ = addVolume(dmgPath: rootpath, targetDisk: "/dev/r\(diskInfo.disk)", erase: true, title: ttle)
         } else {
-            print("MISSING DMG... DISK NOT FOUND...\n")
+            _ = performAppleScript(script: """
+                display dialog "Please download the macOS dmg first."
+            """)
         }
         
         _ = mountVolume(disk: diskInfo.disk)
@@ -167,7 +196,7 @@ extension ViewController {
         try? fm.removeItem(atPath: app)
 
         //MARK: Copy the big shared support dmg
-        copyFile(atPath: "/Users/shared/\(globalDownloadMacOSdmgName)", toPath: "\(rootVol)/\(globalDownloadMacOSdmgName)")
+        copyFile(atPath: "/Users/shared/\(globalDownloadMacOSdmgName)", toPath: "\(rootVol)\(globalDownloadMacOSdmgName)")
     }
     
     //MARK: Task #7

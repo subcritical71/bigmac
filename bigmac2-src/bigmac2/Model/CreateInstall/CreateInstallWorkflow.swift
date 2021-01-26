@@ -11,6 +11,15 @@ extension ViewController {
     
     //MAIN WORKFLOW STARTS HERE
     func customerInstallDisk(isBeta:Bool, diskInfo: myVolumeInfo, isVerbose: Bool, isSingleUser: Bool) {
+        
+        var useDmgInstallMethod = false
+        
+        DispatchQueue.main.async { [self] in
+            if useDmgInstaller.state == .on {
+                useDmgInstallMethod = true
+            }
+        }
+        
         DispatchQueue.global(qos: .background).async { [self] in
             spinnerAnimation(start: true, hide: false)
             incrementInstallGauge(resetGauge: true, incremment: true, setToFull: false, cylon: true, title: "Firing up the install disk process...")
@@ -22,22 +31,22 @@ extension ViewController {
             
             let baseSys = "macOS Base System"
             let bm2 = bigmac2
-        
+            let dmg = bigmacDMG
+            
             //MARK: Step 1
-            let updated = updateInstallerPkg(installBigSurApp: installBigSur)
             
-            print(updated.result, updated.installed)
             
-            //MARK: Step 1.5 (Check the Big Sur app is ready)
-            guard let pass = installBigSurCheckPoint(installBigSurApp: installBigSur), pass == true else {
-                return
+            if useDmgInstallMethod {
+                _ = updateInstallerPkg(installBigSurApp: installBigSur)
+                
+                //MARK: Step 1.5 (Check the Big Sur app is ready)
+                guard let pass = installBigSurCheckPoint(installBigSurApp: installBigSur), pass == true else {
+                    return
+                }
             }
-      
-            //MARK: Step 2
-            reformatSelectedApfsDisk(diskInfo: diskInfo)
-
+           
             //MARK: Step 3
-            installDMGviaASR(diskInfo: diskInfo, baseSys: baseSys, bm2: bm2, dmg: bigmacDMG)
+            installDMGviaASR(diskInfo: diskInfo, baseSys: baseSys, bm2: bm2, dmg: dmg)
             
             let prebootDiskSlice = getDisk(substr: "Preboot", usingDiskorSlice: diskInfo.disk, isSlice: false) ?? diskInfo.disk + "s2"
 
@@ -46,7 +55,6 @@ extension ViewController {
             //MARK: Step 4
             installBigMacIIApp(bigmac2: diskInfo)
 
-                        
             //MARK: Update systemVolume volume because UUIDs have changed
             baseBootPlister(diskInfo: diskInfo, isVerbose: isBaseVerbose, isSingleUser: isSingleUser, prebootVolume: prebootDiskSlice, isBaseSystem: true)
                  
@@ -54,14 +62,11 @@ extension ViewController {
             installEmojiFont(diskInfo: diskInfo)
             
             //MARK: Step 6
-            
-            if useDmgInstaller.state == .on {
+            if useDmgInstallMethod {
                 bigSurInstallerDmgXfer(isBeta: false, BootVolume: diskInfo)
-
             } else {
                 bigSurInstallerAppXfer(isBeta: false, BootVolume: diskInfo)
             }
-            
             
             createDiskEnded(completed: true)
   
@@ -82,6 +87,8 @@ extension ViewController {
             reformatSelectedApfsDisk(diskInfo: diskInfo)
 
             //MARK: Step 3
+            
+            
             installDMGviaASR(diskInfo: diskInfo, baseSys: baseSys, bm2: bm2, dmg: globalDownloadMacOSdmgName)
             
             let prebootDiskSlice = getDisk(substr: "Preboot", usingDiskorSlice: diskInfo.disk, isSlice: false) ?? diskInfo.disk + "s2"
