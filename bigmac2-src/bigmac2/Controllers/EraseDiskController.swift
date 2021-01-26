@@ -58,7 +58,11 @@ class EraseDiskViewController : NSViewController {
             let int = Int(volumePopup.indexOfSelectedItem)
             let selectedDisk = volumeArray[int]
             
-            NotificationCenter.default.post(name: .EraseDisk, object: selectedDisk)
+            if globalInstalldmg {
+                NotificationCenter.default.post(name: .EraseInstallDisk, object: selectedDisk)
+            } else {
+                NotificationCenter.default.post(name: .EraseDisk, object: selectedDisk)
+            }
             
         } else {
             eraseDiskEntry.shake(duration: 1)

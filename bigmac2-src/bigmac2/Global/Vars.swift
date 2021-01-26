@@ -13,6 +13,7 @@ var globalError    = "Unknown Error"
 var globalDownloadMacOSpkg = "http://swcdn.apple.com/content/downloads/00/55/001-86606-A_9SF1TL01U7/5duug9lar1gypwunjfl96dza0upa854qgg/InstallAssistant.pkg"
 var globalDownloadMacOSdmg = "https://starplayrx.com/bigmac2/macOS11_1.dmg"
 var globalDownloadMacOSdmgName = "macOS11_1.dmg"
+var globalInstalldmg = false
 
 func globalCompletedTask() {
     
@@ -90,6 +91,7 @@ let tempFolder = "/tmp"
 let tmp = "tmp"
 let sharedsupport = "SharedSupport"
 let bigmac2 = "bigmac2"
+let macOS = "macOS"
 let tempDiskImage = "bm2tmp0"
 let applications = "Applications"
 let basesystem = "BaseSystem"

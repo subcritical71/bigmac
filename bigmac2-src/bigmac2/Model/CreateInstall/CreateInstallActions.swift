@@ -19,6 +19,13 @@ extension ViewController {
         singleUserCheckbox.state == .on ? (isBaseSingleUser = true) : (isBaseSingleUser = false)
     }
  
+    @IBAction func diskImageCleanInstall(_ sender: Any) {
+        globalInstalldmg = true
+        if cancelTask() { return }
+        //Erase a Disk first
+        self.performSegue(withIdentifier: "eraseDisk", sender: self)
+    }
+    
     @IBAction func downloadMacOSAction(_ sender: Any) {
         if cancelTask() { return }
         
@@ -35,8 +42,8 @@ extension ViewController {
 
     //MARK: Phase 1.0
     @IBAction func createInstallDisk(_ sender: Any) {
+        globalInstalldmg = false
         if cancelTask() { return }
-
         //Erase a Disk first
         self.performSegue(withIdentifier: "eraseDisk", sender: self)
     }

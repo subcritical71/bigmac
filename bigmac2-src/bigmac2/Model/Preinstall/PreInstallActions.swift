@@ -91,9 +91,9 @@ extension ViewController {
             
             
             //If using alternative method
-            if useDmgInstaller.state == .on {
+            //if useDmgInstaller.state == .on {
                 
-            } else {
+            //} else {
                 let installAsstBaseOS = "/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
                 let installAsstFullOS = "/Applications/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
 
@@ -114,7 +114,7 @@ extension ViewController {
                     performSegue(withIdentifier: "displayErrMsg", sender: self)
                     preInstaLaunchBtn.isEnabled = true
                 }
-            }
+            //}
         
         }
         

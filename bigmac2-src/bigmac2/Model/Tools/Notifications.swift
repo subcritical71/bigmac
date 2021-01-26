@@ -10,6 +10,7 @@ import Cocoa
 //MARK: Notification Extensions
 extension Notification.Name {
     static let EraseDisk = Notification.Name("EraseDisk")
+    static let EraseInstallDisk = Notification.Name("EraseInstallDisk")
     static let CreateDisk = Notification.Name("DownloadBigMacDisk")
     static let RunAsRootRequest = Notification.Name("RunAsRootRequest")
     static let Runner = Notification.Name("Runner")
@@ -39,6 +40,7 @@ extension ViewController {
         let notifications = NotificationCenter.default
 
         notifications.addObserver(self, selector: #selector(EraseDisk), name: .EraseDisk, object: nil)
+        notifications.addObserver(self, selector: #selector(EraseInstallDisk), name: .EraseInstallDisk, object: nil)
         notifications.addObserver(self, selector: #selector(CreateDisk), name: .CreateDisk, object: nil)
         notifications.addObserver(self, selector: #selector(RunAsRootRequest), name: .RunAsRootRequest, object: nil)
         

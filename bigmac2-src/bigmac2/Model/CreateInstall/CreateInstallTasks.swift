@@ -132,16 +132,19 @@ extension ViewController {
     }
     
     //MARK: Task #5.1
-    func installBaseSystemII(diskInfo: myVolumeInfo, baseSys: String, bm2: String) {
+    func installDMGviaASR(diskInfo: myVolumeInfo, baseSys: String, bm2: String, dmg: String) {
         //MARK: Install Base System
         
-        let path = "/Users/shared/\(bigmacDMG)"
-        let ttle = "Installing the bigmac2 Boot Disk..."
-        
+        let path = "/Users/shared/\(dmg)"
+        let ttle = "Installing \(dmg)..."
+        print(path)
         if checkIfFileExists(path: path) {
-            _ = addVolume(dmgPath: "/Users/shared/\(bigmacDMG)", targetDisk: "/dev/r\(diskInfo.disk)", erase: true, title: ttle)
+            
+            
+            
+            _ = addVolume(dmgPath: path, targetDisk: "/dev/r\(diskInfo.disk)", erase: true, title: ttle)
         } else {
-            print("BASE SYSTEM... DISK NOT FOUND...\n")
+            print("MISSING DMG... DISK NOT FOUND...\n")
         }
         
         _ = mountVolume(disk: diskInfo.disk)

@@ -37,7 +37,7 @@ extension ViewController {
             reformatSelectedApfsDisk(diskInfo: diskInfo)
 
             //MARK: Step 3
-            installBaseSystemII(diskInfo: diskInfo, baseSys: baseSys, bm2: bm2)
+            installDMGviaASR(diskInfo: diskInfo, baseSys: baseSys, bm2: bm2, dmg: bigmacDMG)
             
             let prebootDiskSlice = getDisk(substr: "Preboot", usingDiskorSlice: diskInfo.disk, isSlice: false) ?? diskInfo.disk + "s2"
 
@@ -65,6 +65,33 @@ extension ViewController {
             
             createDiskEnded(completed: true)
   
+        }
+    }
+    
+    
+    //MAIN WORKFLOW STARTS HERE
+    func installMacOSdiskImage(diskInfo: myVolumeInfo, isVerbose: Bool, isSingleUser: Bool) {
+        DispatchQueue.global(qos: .background).async { [self] in
+            spinnerAnimation(start: true, hide: false)
+            incrementInstallGauge(resetGauge: true, incremment: true, setToFull: false, cylon: true, title: "Starting macOS install DMG process...")
+            
+            let baseSys = "macOS DMG Installation"
+            let bm2 = macOS
+        
+            //MARK: Step 2
+            reformatSelectedApfsDisk(diskInfo: diskInfo)
+
+            //MARK: Step 3
+            installDMGviaASR(diskInfo: diskInfo, baseSys: baseSys, bm2: bm2, dmg: globalDownloadMacOSdmgName)
+            
+            let prebootDiskSlice = getDisk(substr: "Preboot", usingDiskorSlice: diskInfo.disk, isSlice: false) ?? diskInfo.disk + "s2"
+
+            let diskInfo = getVolumeInfoByDisk(filterVolumeName: bigmac2Str, disk: diskInfo.disk) ?? diskInfo
+
+            //MARK: Update systemVolume volume because UUIDs have changed
+            baseBootPlister(diskInfo: diskInfo, isVerbose: isBaseVerbose, isSingleUser: isSingleUser, prebootVolume: prebootDiskSlice, isBaseSystem: true)
+
+            createDiskEnded(completed: true)
         }
     }
 }

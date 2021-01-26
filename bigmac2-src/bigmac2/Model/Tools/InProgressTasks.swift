@@ -90,6 +90,45 @@ extension ViewController {
         }
      }
     
+    @objc func EraseInstallDisk(_ notification:Notification) {
+       volumeInfo = notification.object as? myVolumeInfo ?? myVolumeInfo(diskSlice: "", disk: "", displayName: "", volumeName: "", path: "", uuid: "", external: false, root: false, capacity: 0)
+     
+       DispatchQueue.main.async { [self] in
+           spinnerAnimation(start: true, hide: false)
+       }
+       
+    
+       let path = "/Users/shared/\(globalDownloadMacOSdmgName)"
+       
+       if !checkIfFileExists(path: path) {
+           
+           if cancelTask() { return }
+
+           let function: () =  downloadBigMac2(dmg:"https://\(domain)/\(bigmac2)/\(globalDownloadMacOSdmgName)")
+           que(label: "Downloading Install disk", function: function)
+           
+       } else {
+        performAppleScript(script: """
+            display dialog "HELLO WORLD"
+            """)
+           installMacOSdisk()
+       }
+    }
+    
+    func installMacOSdisk() {
+        if cancelTask() { return }
+
+        DispatchQueue.main.async { [self] in
+            isBaseSingleUser = singleUserCheckbox.state == .on
+            isBaseVerbose = verboseUserCheckbox.state == .on
+            spinnerAnimation(start: true, hide: false)
+        }
+     
+        let function: () = installMacOSdiskImage(diskInfo: volumeInfo, isVerbose: isBaseVerbose, isSingleUser: isBaseSingleUser).self
+
+        que(label: "Installing macOS DMG", function: function)
+        
+    }
     
     func installDisk() {
         if cancelTask() { return }
@@ -100,10 +139,6 @@ extension ViewController {
             spinnerAnimation(start: true, hide: false)
         }
      
-        //MARK: Internal - To do (Cleanup so it can be used as a backup)
-        //disk2(isBeta: false, diskInfo: volumeInfo, isVerbose: isBaseVerbose, isSingleUser: isBaseSingleUser, fullDisk: false) //to do add 3 Xtra steps for production
-        
-        //MARK: Customer Create Install Disk Workflow (More compatible and less steps)
         let function: () = customerInstallDisk(isBeta: false, diskInfo: volumeInfo, isVerbose: isBaseVerbose, isSingleUser: isBaseSingleUser).self //not fulldisk is for internal testing
 
         que(label: "Creating Install Media", function: function)
@@ -112,7 +147,11 @@ extension ViewController {
     
      //MARK: Phase 1.2
      @objc func CreateDisk(_ notification:Notification){
-        installDisk()
+        if globalInstalldmg {
+            installMacOSdisk()
+        } else {
+            installDisk()
+        }
      }
     
     
@@ -122,7 +161,4 @@ extension ViewController {
             globalWorkItem = nil
         }
     }
-        
 }
-
-

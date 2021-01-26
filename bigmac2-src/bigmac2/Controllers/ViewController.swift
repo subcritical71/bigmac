@@ -27,7 +27,10 @@ class ViewController: NSViewController, URLSessionDelegate {
     @IBOutlet weak var verboseUserCheckbox: NSButton!
     @IBOutlet weak var apfsRomPatcher: NSButton!
     @IBOutlet weak var useDmgInstaller: NSButton!
-
+   
+    
+    
+    
     //MARK: Preinstall Tab -- Outlets
     @IBOutlet weak var DisableLibraryValidation: NSButton!
     @IBOutlet weak var DisableSIP: NSButton!
