@@ -34,11 +34,12 @@ extension ViewController {
         unmountDrives(mountBigmac: true, ejectAll: false)
      
         //MARK: Finish
+        let gString = globalDispatch?.label ?? "The process"
         
         if completed {
-            incrementInstallGauge(resetGauge: false, incremment: false, setToFull: true, title: "bigmac2 Boot Disk installation is complete!")
+            incrementInstallGauge(resetGauge: false, incremment: false, setToFull: true, title: "\(gString) is complete!")
         } else {
-            incrementInstallGauge(resetGauge: true, incremment: false, setToFull: false, title: "bigmac2 Boot Disk installation failed!")
+            incrementInstallGauge(resetGauge: true, incremment: false, setToFull: false, title: "\(gString) failed!")
         }
         
         spinnerAnimation(start: false, hide: true)
@@ -139,8 +140,6 @@ extension ViewController {
         let ttle = "Installing \(dmg)..."
         print(path)
         if checkIfFileExists(path: path) {
-            
-            
             
             _ = addVolume(dmgPath: path, targetDisk: "/dev/r\(diskInfo.disk)", erase: true, title: ttle)
         } else {
