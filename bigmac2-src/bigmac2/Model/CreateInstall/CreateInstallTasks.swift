@@ -163,7 +163,6 @@ extension ViewController {
         let rootpath = "/\(dmg)"
 
         let ttle = "Installing \(dmg)..."
-        print(path)
         if checkIfFileExists(path: path) {
             _ = addVolume(dmgPath: path, targetDisk: "/dev/r\(diskInfo.disk)", erase: true, title: ttle)
         } else if checkIfFileExists(path: rootpath) {

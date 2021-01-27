@@ -28,6 +28,10 @@ class ViewController: NSViewController, URLSessionDelegate {
     @IBOutlet weak var apfsRomPatcher: NSButton!
     @IBOutlet weak var useDmgInstaller: NSButton!
    
+    @IBOutlet weak var cleanInstallViaDmg: NSButton!
+    @IBOutlet weak var upgradeViaDmg: NSButton!
+    
+
     
     
     
@@ -84,7 +88,18 @@ class ViewController: NSViewController, URLSessionDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
                 
-      
+        upgradeViaDmg.isEnabled = false
+        
+        let dmg = globalDownloadMacOSdmgName
+        let path = "/Users/shared/\(dmg)"
+        let rootpath = "/\(dmg)"
+
+        if checkIfFileExists(path: path) ||  checkIfFileExists(path: rootpath) {
+            cleanInstallViaDmg.isEnabled = true
+        } else {
+            cleanInstallViaDmg.isEnabled = false
+        }
+
         disableSetResXButtonsCheck()
         bootedToBaseOS = checkForBaseOS()
         

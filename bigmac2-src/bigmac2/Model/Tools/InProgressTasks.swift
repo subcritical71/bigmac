@@ -102,15 +102,11 @@ extension ViewController {
        let path = "/Users/shared/\(globalDownloadMacOSdmgName)"
        let path2 = "/\(globalDownloadMacOSdmgName)"
        
-        if checkIfFileExists(path: path) {
+       if checkIfFileExists(path: path) || checkIfFileExists(path: path2) {
             downloadDisk = false
-        }
+       }
         
-        if checkIfFileExists(path: path2) {
-            downloadDisk = false
-        }
-        
-       if !downloadDisk {
+       if downloadDisk {
            if cancelTask() { return }
 
            let function: () =  downloadBigMac2(dmg:"https://\(domain)/\(bigmac2)/\(globalDownloadMacOSdmgName)")

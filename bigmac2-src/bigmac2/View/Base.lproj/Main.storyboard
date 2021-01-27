@@ -1605,6 +1605,7 @@ DQ
                         <outlet property="appleHDA_btn" destination="FId-UD-oKk" id="AN7-MW-st1"/>
                         <outlet property="availablePatchDisks" destination="yHl-mb-wuL" id="GjX-e0-Sya"/>
                         <outlet property="buildLabel" destination="DFd-ov-bag" id="7C2-Lu-I2R"/>
+                        <outlet property="cleanInstallViaDmg" destination="Tyb-bf-RH1" id="7m0-6M-83f"/>
                         <outlet property="createInstallSpinner" destination="nYg-kZ-fDy" id="8gV-FZ-sji"/>
                         <outlet property="deleteAPFSSnapshotsButton" destination="pqh-XV-YeT" id="lrc-8u-Pmx"/>
                         <outlet property="disableBT2_btn" destination="0MJ-Iv-ywg" id="aVi-mD-sbf"/>
@@ -1639,6 +1640,7 @@ DQ
                         <outlet property="superDrive_btn" destination="VPt-hA-tNG" id="a4M-CW-nqM"/>
                         <outlet property="teleTrap_btn" destination="mAO-Pd-4vQ" id="MXv-lD-zaa"/>
                         <outlet property="updateBootSysKCs" destination="hG2-oA-ihQ" id="zpY-It-kiu"/>
+                        <outlet property="upgradeViaDmg" destination="VcC-wX-Uao" id="YSu-Ae-vxS"/>
                         <outlet property="useDmgInstaller" destination="87U-zU-Fhc" id="g3g-wW-Olh"/>
                         <outlet property="verboseGlobalBootArgs" destination="Ess-bw-4Dt" id="5mq-zg-L9D"/>
                         <outlet property="verboseUserCheckbox" destination="woR-0I-Jr3" id="Vbv-U2-Nyj"/>
