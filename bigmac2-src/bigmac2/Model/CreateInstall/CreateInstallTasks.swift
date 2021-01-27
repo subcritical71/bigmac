@@ -165,9 +165,8 @@ extension ViewController {
         let ttle = "Installing \(dmg)..."
         print(path)
         if checkIfFileExists(path: path) {
-            
             _ = addVolume(dmgPath: path, targetDisk: "/dev/r\(diskInfo.disk)", erase: true, title: ttle)
-        } else if checkIfFileExists(path: path) {
+        } else if checkIfFileExists(path: rootpath) {
             _ = addVolume(dmgPath: rootpath, targetDisk: "/dev/r\(diskInfo.disk)", erase: true, title: ttle)
         } else {
             _ = performAppleScript(script: """
@@ -196,7 +195,9 @@ extension ViewController {
         try? fm.removeItem(atPath: app)
 
         //MARK: Copy the big shared support dmg
-        copyFile(atPath: "/Users/shared/\(globalDownloadMacOSdmgName)", toPath: "\(rootVol)\(globalDownloadMacOSdmgName)")
+        copyFile(atPath: "/Users/shared/\(globalDownloadMacOSdmgName)", toPath: "\(rootVol)/\(globalDownloadMacOSdmgName)")
+        
+        
     }
     
     //MARK: Task #7

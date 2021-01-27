@@ -32,10 +32,7 @@ extension ViewController {
             let baseSys = "macOS Base System"
             let bm2 = bigmac2
             let dmg = bigmacDMG
-            
-            //MARK: Step 1
-            
-            
+        
             if useDmgInstallMethod {
                 _ = updateInstallerPkg(installBigSurApp: installBigSur)
                 

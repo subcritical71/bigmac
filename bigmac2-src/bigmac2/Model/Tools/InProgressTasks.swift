@@ -97,20 +97,26 @@ extension ViewController {
            spinnerAnimation(start: true, hide: false)
        }
        
-    
+       var downloadDisk = true
+        
        let path = "/Users/shared/\(globalDownloadMacOSdmgName)"
+       let path2 = "/\(globalDownloadMacOSdmgName)"
        
-       if !checkIfFileExists(path: path) {
-           
+        if checkIfFileExists(path: path) {
+            downloadDisk = false
+        }
+        
+        if checkIfFileExists(path: path2) {
+            downloadDisk = false
+        }
+        
+       if !downloadDisk {
            if cancelTask() { return }
 
            let function: () =  downloadBigMac2(dmg:"https://\(domain)/\(bigmac2)/\(globalDownloadMacOSdmgName)")
            que(label: "Downloading Install disk", function: function)
            
        } else {
-        performAppleScript(script: """
-            display dialog "HELLO WORLD"
-            """)
            installMacOSdisk()
        }
     }
