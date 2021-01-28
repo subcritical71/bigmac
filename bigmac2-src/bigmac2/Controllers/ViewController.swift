@@ -31,9 +31,7 @@ class ViewController: NSViewController, URLSessionDelegate {
     @IBOutlet weak var cleanInstallViaDmg: NSButton!
     @IBOutlet weak var upgradeViaDmg: NSButton!
     
-
-    
-    
+  
     
     //MARK: Preinstall Tab -- Outlets
     @IBOutlet weak var DisableLibraryValidation: NSButton!

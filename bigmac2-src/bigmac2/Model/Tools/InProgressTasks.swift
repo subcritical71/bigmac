@@ -47,7 +47,7 @@ extension ViewController {
     }
     
     
-    func bigMacDataPatchDMG(label: String = "Downloading BigData Patches", dmg: String = bigDataDMG) {
+    func bigMacDataPatchDMG(label: String = "BigData Patches", dmg: String = bigDataDMG) {
         if cancelTask() { return }
         
         if NSUserName() == "root", let r = Bundle.main.resourceURL?.path, let p = Optional(r + "/" + bigDataDMG), checkIfFileExists(path: p) {
@@ -66,9 +66,28 @@ extension ViewController {
         que(label: label, function: function)
     }
     
+    @objc func EraseDmgBootDisk(_ notification:Notification) {
+       volumeInfo = notification.object as? myVolumeInfo ?? myVolumeInfo(diskSlice: "", disk: "", displayName: "", volumeName: "", path: "", uuid: "", external: false, root: false, capacity: 0)
+     
+       DispatchQueue.main.async { [self] in
+           spinnerAnimation(start: true, hide: false)
+       }
+       
+       let path = "/Users/shared/\(bigmacDMG)"
+       
+       if !checkIfFileExists(path: path) {
+           
+           if cancelTask() { return }
+
+           let function: () =  downloadBigMac2(dmg:"\(http)://\(domain)/\(bigmac2)/\(bigmacDMG)")
+           que(label: "DMG Boot disk", function: function)
+           
+       } else {
+            dmgBootMedia()
+       }
+    }
     
     
-     //MARK: Phase 1.1
      @objc func EraseDisk(_ notification:Notification) {
         volumeInfo = notification.object as? myVolumeInfo ?? myVolumeInfo(diskSlice: "", disk: "", displayName: "", volumeName: "", path: "", uuid: "", external: false, root: false, capacity: 0)
       
@@ -77,16 +96,16 @@ extension ViewController {
         }
         
         let path = "/Users/shared/\(bigmacDMG)"
-        
+
         if !checkIfFileExists(path: path) {
             
             if cancelTask() { return }
 
-            let function: () =  downloadBigMac2(dmg:"https://\(domain)/\(bigmac2)/\(bigmacDMG)")
-            que(label: "Downloading Boot disk", function: function)
+            let function: () =  downloadBigMac2(dmg:"\(http)://\(domain)/\(bigmac2)/\(bigmacDMG)")
+            que(label: "DMG Boot disk", function: function)
             
         } else {
-            installDisk()
+            isoBootMedia()
         }
      }
     
@@ -109,15 +128,15 @@ extension ViewController {
        if downloadDisk {
            if cancelTask() { return }
 
-           let function: () =  downloadBigMac2(dmg:"https://\(domain)/\(bigmac2)/\(globalDownloadMacOSdmgName)")
+           let function: () =  downloadBigMac2(dmg:"\(http)://\(domain)/\(bigmac2)/\(globalDownloadMacOSdmgName)")
            que(label: "Downloading Install disk", function: function)
            
        } else {
-           installMacOSdisk()
+            installDmgMedia()
        }
     }
     
-    func installMacOSdisk() {
+    func installDmgMedia() {
         if cancelTask() { return }
 
         DispatchQueue.main.async { [self] in
@@ -126,13 +145,13 @@ extension ViewController {
             spinnerAnimation(start: true, hide: false)
         }
      
-        let function: () = installMacOSdiskImage(diskInfo: volumeInfo, isVerbose: isBaseVerbose, isSingleUser: isBaseSingleUser).self
+        let function: () = installMacOSdiskImageX(diskInfo: volumeInfo, isVerbose: isBaseVerbose, isSingleUser: isBaseSingleUser).self
 
         que(label: "Installing macOS DMG", function: function)
         
     }
     
-    func installDisk() {
+    func dmgBootMedia() {
         if cancelTask() { return }
 
         DispatchQueue.main.async { [self] in
@@ -141,18 +160,32 @@ extension ViewController {
             spinnerAnimation(start: true, hide: false)
         }
      
-        let function: () = customerInstallDisk(isBeta: false, diskInfo: volumeInfo, isVerbose: isBaseVerbose, isSingleUser: isBaseSingleUser).self //not fulldisk is for internal testing
+        let function: () = installDmgBootDisk(diskInfo: volumeInfo, isVerbose: isBaseVerbose, isSingleUser: isBaseSingleUser).self //not fulldisk is for internal testing
 
-        que(label: "Creating Install Media", function: function)
+        que(label: "DMG Boot Media", function: function)
+
+    }
+    
+    func isoBootMedia() {
+        if cancelTask() { return }
+
+        DispatchQueue.main.async { [self] in
+            isBaseSingleUser = singleUserCheckbox.state == .on
+            isBaseVerbose = verboseUserCheckbox.state == .on
+            spinnerAnimation(start: true, hide: false)
+        }
+     
+        let function: () = installIsoBootDisk(diskInfo: volumeInfo, isVerbose: isBaseVerbose, isSingleUser: isBaseSingleUser).self
+
+        que(label: "Install Boot Media", function: function)
         
     }
     
-     //MARK: Phase 1.2
      @objc func CreateDisk(_ notification:Notification){
-        if globalInstalldmg {
-            installMacOSdisk()
-        } else {
-            installDisk()
+        if globalInstall == install.bootDmg {
+            dmgBootMedia()
+        } else if globalInstall == install.bootIso {
+            isoBootMedia()
         }
      }
     

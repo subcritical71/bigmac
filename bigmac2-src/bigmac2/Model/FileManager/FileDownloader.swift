@@ -125,6 +125,7 @@ extension ViewController : URLSessionDownloadDelegate {
         
         if let url = NSURL(string: urlString) {
             let task = session.downloadTask(with: url as URL)
+            
             task.resume()
         }
     }

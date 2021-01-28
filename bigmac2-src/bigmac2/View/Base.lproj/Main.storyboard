@@ -1018,11 +1018,11 @@ DQ
                                                         <real value="3.4028234663852886e+38"/>
                                                     </customSpacing>
                                                 </stackView>
-                                                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="14" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vj4-HS-Bd5">
-                                                    <rect key="frame" x="295" y="48" width="193" height="114"/>
+                                                <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="15" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" fixedFrame="YES" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vj4-HS-Bd5">
+                                                    <rect key="frame" x="295" y="10" width="193" height="152"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="mtg-Y9-uNN">
-                                                            <rect key="frame" x="-2" y="98" width="197" height="16"/>
+                                                            <rect key="frame" x="-2" y="136" width="197" height="16"/>
                                                             <textFieldCell key="cell" lineBreakMode="clipping" title="2008 MP 3,1 Xserve 2,1 Options" id="wKE-U5-syN">
                                                                 <font key="font" metaFont="system"/>
                                                                 <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
@@ -1030,28 +1030,41 @@ DQ
                                                             </textFieldCell>
                                                         </textField>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="87U-zU-Fhc">
-                                                            <rect key="frame" x="-2" y="67" width="145" height="18"/>
+                                                            <rect key="frame" x="-2" y="104" width="145" height="18"/>
                                                             <buttonCell key="cell" type="check" title="Disk Image Installer" bezelStyle="regularSquare" imagePosition="left" inset="2" id="jsG-of-cS3">
                                                                 <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                         </button>
+                                                        <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="c3I-zd-Ldn">
+                                                            <rect key="frame" x="-7" y="63" width="160" height="32"/>
+                                                            <buttonCell key="cell" type="push" title="Create DMG Installer" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="9e5-Yl-Vq2">
+                                                                <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                                <font key="font" metaFont="system"/>
+                                                            </buttonCell>
+                                                            <connections>
+                                                                <action selector="createDmgInstaller:" target="XfG-lQ-9wD" id="N9U-Tv-LKO"/>
+                                                            </connections>
+                                                        </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Tyb-bf-RH1">
-                                                            <rect key="frame" x="-7" y="27" width="164" height="32"/>
+                                                            <rect key="frame" x="-7" y="28" width="164" height="32"/>
                                                             <buttonCell key="cell" type="push" title="Clean Install via DMG" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="zQk-Bp-lKP">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
                                                             <connections>
-                                                                <action selector="diskImageCleanInstall:" target="XfG-lQ-9wD" id="OeL-vg-qxI"/>
+                                                                <action selector="cleanInstallViaDmg:" target="XfG-lQ-9wD" id="hTz-0U-9yC"/>
                                                             </connections>
                                                         </button>
                                                         <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="VcC-wX-Uao">
-                                                            <rect key="frame" x="-7" y="-7" width="164" height="32"/>
-                                                            <buttonCell key="cell" type="push" title="   Upgrade via DMG   " bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6Ab-HX-LxC">
+                                                            <rect key="frame" x="-7" y="-7" width="142" height="32"/>
+                                                            <buttonCell key="cell" type="push" title="Upgrade via DMG" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6Ab-HX-LxC">
                                                                 <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
                                                                 <font key="font" metaFont="system"/>
                                                             </buttonCell>
+                                                            <connections>
+                                                                <action selector="upgradeViaDmg:" target="XfG-lQ-9wD" id="rbO-OT-ViB"/>
+                                                            </connections>
                                                         </button>
                                                     </subviews>
                                                     <visibilityPriorities>
@@ -1059,8 +1072,10 @@ DQ
                                                         <integer value="1000"/>
                                                         <integer value="1000"/>
                                                         <integer value="1000"/>
+                                                        <integer value="1000"/>
                                                     </visibilityPriorities>
                                                     <customSpacing>
+                                                        <real value="3.4028234663852886e+38"/>
                                                         <real value="3.4028234663852886e+38"/>
                                                         <real value="3.4028234663852886e+38"/>
                                                         <real value="3.4028234663852886e+38"/>

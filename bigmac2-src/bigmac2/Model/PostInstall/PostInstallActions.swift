@@ -47,6 +47,9 @@ extension ViewController {
         legacyWiFi_btn.state == .on ? (legacyWiFi = true) : (legacyWiFi = false)
     }
     
+    
+    
+    
     @IBAction func mouSSE_Action_act(_ sender: Any) {
         amdMouSSE_btn.state == .on ? (amdMouSSE = true) : (amdMouSSE = false)
     }

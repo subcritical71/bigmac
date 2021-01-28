@@ -58,10 +58,12 @@ class EraseDiskViewController : NSViewController {
             let int = Int(volumePopup.indexOfSelectedItem)
             let selectedDisk = volumeArray[int]
             
-            if globalInstalldmg {
+            if globalInstall == install.installDmg {
                 NotificationCenter.default.post(name: .EraseInstallDisk, object: selectedDisk)
-            } else {
+            } else if globalInstall == install.bootIso {
                 NotificationCenter.default.post(name: .EraseDisk, object: selectedDisk)
+            } else if globalInstall == install.bootDmg {
+                NotificationCenter.default.post(name: .EraseDmgBootDisk, object: selectedDisk)
             }
             
         } else {

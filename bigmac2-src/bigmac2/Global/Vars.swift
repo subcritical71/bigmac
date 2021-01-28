@@ -11,9 +11,17 @@ var globalWorkItem : DispatchWorkItem?
 var globalDispatch : DispatchQueue?
 var globalError    = "Unknown Error"
 var globalDownloadMacOSpkg = "http://swcdn.apple.com/content/downloads/00/55/001-86606-A_9SF1TL01U7/5duug9lar1gypwunjfl96dza0upa854qgg/InstallAssistant.pkg"
-var globalDownloadMacOSdmg = "https://starplayrx.com/bigmac2/macOS11_1.dmg"
+var globalDownloadMacOSdmg = "http://starplayrx.com/bigmac2/macOS11_1.dmg"
 var globalDownloadMacOSdmgName = "macOS11_1.dmg"
-var globalInstalldmg = false
+var globalInstall = install.bootIso
+
+enum install {
+    case bootIso
+    case bootDmg
+    case installDmg
+    case upgradeDmg
+    case installIso
+}
 
 func globalCompletedTask() {
     
@@ -35,11 +43,12 @@ func globalCompletedTask() {
     }
 }
 
-var globalWebsite = "https://starplayrx.com/bigmac2/"
+var globalWebsite = "http://starplayrx.com/bigmac2/"
 
 var kmMonitor = false
 var volumeInfo = myVolumeInfo(diskSlice: "", disk: "", displayName: "", volumeName: "", path: "", uuid: "", external: false, root: false, capacity: 0)
 
+var http = "http"
 var rootMode = false
 var root = "root"
 var isBaseSingleUser = false

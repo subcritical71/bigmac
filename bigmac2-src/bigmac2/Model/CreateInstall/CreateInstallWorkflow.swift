@@ -10,61 +10,35 @@ import Foundation
 extension ViewController {
     
     //MAIN WORKFLOW STARTS HERE
-    func customerInstallDisk(isBeta:Bool, diskInfo: myVolumeInfo, isVerbose: Bool, isSingleUser: Bool) {
-        
-        var useDmgInstallMethod = false
-        
-        DispatchQueue.main.async { [self] in
-            if useDmgInstaller.state == .on {
-                useDmgInstallMethod = true
-            }
-        }
+    func installIsoBootDisk(diskInfo: myVolumeInfo, isVerbose: Bool, isSingleUser: Bool) {
         
         DispatchQueue.global(qos: .background).async { [self] in
             spinnerAnimation(start: true, hide: false)
             incrementInstallGauge(resetGauge: true, incremment: true, setToFull: false, cylon: true, title: "Firing up the install disk process...")
-            
-            //MARK: Set vars and local constants
-            if isBeta {
-                installBigSur = "Install macOS Big Sur Beta.app" //Not currently implemented
-            }
-            
+          
             let baseSys = "macOS Base System"
             let bm2 = bigmac2
             let dmg = bigmacDMG
         
-            if useDmgInstallMethod {
-                _ = updateInstallerPkg(installBigSurApp: installBigSur)
-                
-                //MARK: Step 1.5 (Check the Big Sur app is ready)
-                guard let pass = installBigSurCheckPoint(installBigSurApp: installBigSur), pass == true else {
-                    return
-                }
+            _ = updateInstallerPkg(installBigSurApp: installBigSur)
+            
+            //MARK: Check the Big Sur app is ready
+            guard let pass = installBigSurCheckPoint(installBigSurApp: installBigSur), pass == true else {
+                return
             }
-           
-            //MARK: Step 3
+       
             installDMGviaASR(diskInfo: diskInfo, baseSys: baseSys, bm2: bm2, dmg: dmg)
             
             let prebootDiskSlice = getDisk(substr: "Preboot", usingDiskorSlice: diskInfo.disk, isSlice: false) ?? diskInfo.disk + "s2"
-
             let diskInfo = getVolumeInfoByDisk(filterVolumeName: bigmac2Str, disk: diskInfo.disk) ?? diskInfo
 
-            //MARK: Step 4
             installBigMacIIApp(bigmac2: diskInfo)
 
             //MARK: Update systemVolume volume because UUIDs have changed
             baseBootPlister(diskInfo: diskInfo, isVerbose: isBaseVerbose, isSingleUser: isSingleUser, prebootVolume: prebootDiskSlice, isBaseSystem: true)
                  
-            //MARK: Step 5
             installEmojiFont(diskInfo: diskInfo)
-            
-            //MARK: Step 6
-            if useDmgInstallMethod {
-                bigSurInstallerDmgXfer(isBeta: false, BootVolume: diskInfo)
-            } else {
-                bigSurInstallerAppXfer(isBeta: false, BootVolume: diskInfo)
-            }
-            
+            bigSurInstallerAppXfer(isBeta: false, BootVolume: diskInfo)
             createDiskEnded(completed: true)
   
         }
@@ -72,7 +46,36 @@ extension ViewController {
     
     
     //MAIN WORKFLOW STARTS HERE
-    func installMacOSdiskImage(diskInfo: myVolumeInfo, isVerbose: Bool, isSingleUser: Bool) {
+    func installDmgBootDisk(diskInfo: myVolumeInfo, isVerbose: Bool, isSingleUser: Bool) {
+        
+        DispatchQueue.global(qos: .background).async { [self] in
+            spinnerAnimation(start: true, hide: false)
+            incrementInstallGauge(resetGauge: true, incremment: true, setToFull: false, cylon: true, title: "Firing up the install disk process...")
+            
+            let baseSys = "macOS Base System"
+            let bm2 = bigmac2
+            let dmg = bigmacDMG
+        
+            installDMGviaASR(diskInfo: diskInfo, baseSys: baseSys, bm2: bm2, dmg: dmg)
+            
+            let prebootDiskSlice = getDisk(substr: "Preboot", usingDiskorSlice: diskInfo.disk, isSlice: false) ?? diskInfo.disk + "s2"
+
+            let diskInfo = getVolumeInfoByDisk(filterVolumeName: bigmac2Str, disk: diskInfo.disk) ?? diskInfo
+
+            installBigMacIIApp(bigmac2: diskInfo)
+
+            //MARK: Update systemVolume volume because UUIDs have changed
+            baseBootPlister(diskInfo: diskInfo, isVerbose: isBaseVerbose, isSingleUser: isSingleUser, prebootVolume: prebootDiskSlice, isBaseSystem: true)
+                 
+            installEmojiFont(diskInfo: diskInfo)
+            bigSurInstallerDmgXfer(isBeta: false, BootVolume: diskInfo)
+            createDiskEnded(completed: true)
+        }
+    }
+    
+    
+    //MAIN WORKFLOW STARTS HERE
+    func installMacOSdiskImageX(diskInfo: myVolumeInfo, isVerbose: Bool, isSingleUser: Bool) {
         DispatchQueue.global(qos: .background).async { [self] in
             spinnerAnimation(start: true, hide: false)
             incrementInstallGauge(resetGauge: true, incremment: true, setToFull: false, cylon: true, title: "Starting macOS install DMG process...")

@@ -6,6 +6,17 @@
 //
 import Cocoa
 
+/*
+
+ enum install {
+     case bootIso
+     case bootDmg
+     case installDmg
+     case upgradeDmg
+     case installIso
+ }
+ 
+ */
 
 //MARK: Installer Actions
 extension ViewController {
@@ -14,17 +25,32 @@ extension ViewController {
         verboseUserCheckbox.state == .on ? (isBaseVerbose = true) : (isBaseVerbose = false)
     }
 
+    @IBAction func createDmgInstaller(_ sender: Any) {
+        if cancelTask() { return }
+        globalInstall = install.bootDmg
+        //Erase a Disk first
+        self.performSegue(withIdentifier: "eraseDisk", sender: self)
+    }
     
+    @IBAction func cleanInstallViaDmg(_ sender: Any) {
+        
+        if cancelTask() { return }
+        
+        globalInstall = install.installDmg
+        //Erase a Disk first
+        self.performSegue(withIdentifier: "eraseDisk", sender: self)
+    }
+    
+    
+    @IBAction func upgradeViaDmg(_ sender: Any) {
+        //Future
+    }
+    
+
     @IBAction func baseSingleUserAction(_ sender: Any) {
         singleUserCheckbox.state == .on ? (isBaseSingleUser = true) : (isBaseSingleUser = false)
     }
  
-    @IBAction func diskImageCleanInstall(_ sender: Any) {
-        globalInstalldmg = true
-        if cancelTask() { return }
-        //Erase a Disk first
-        self.performSegue(withIdentifier: "eraseDisk", sender: self)
-    }
     
     @IBAction func downloadMacOSAction(_ sender: Any) {
         if cancelTask() { return }
@@ -42,7 +68,7 @@ extension ViewController {
 
     //MARK: Phase 1.0
     @IBAction func createInstallDisk(_ sender: Any) {
-        globalInstalldmg = false
+        globalInstall = install.bootIso
         if cancelTask() { return }
         //Erase a Disk first
         self.performSegue(withIdentifier: "eraseDisk", sender: self)
