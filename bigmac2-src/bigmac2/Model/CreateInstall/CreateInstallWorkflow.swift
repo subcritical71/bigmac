@@ -85,16 +85,32 @@ extension ViewController {
         
             //MARK: Step 2
             reformatSelectedApfsDisk(diskInfo: diskInfo)
-
-            //MARK: Step 3
             
+            let name = diskInfo.displayName
+            //MARK: Step 3
+            print(name)
+            
+            
+            runCommand(binary: "/sbin/mount", arguments: ["-uw","/dev/\(diskInfo.diskSlice)"])
+            
+            runCommand(binary: "/usr/sbin/diskutil", arguments: ["rename",diskInfo.diskSlice, "macOS"])
             
             installDMGviaASR(diskInfo: diskInfo, baseSys: baseSys, bm2: bm2, dmg: globalDownloadMacOSdmgName)
+            
+            globalVolumeInfo = getVolumeInfoByDisk(filterVolumeName:
+                "macOS", disk: diskInfo.disk) ?? diskInfo
+            
+            runCommand(binary: "/sbin/mount", arguments: ["-uw","/dev/\(globalVolumeInfo.diskSlice)"])
+            
+            runCommand(binary: "/usr/sbin/diskutil", arguments: ["rename",globalVolumeInfo.diskSlice, name])
+            
+            globalVolumeInfo = getVolumeInfoByDisk(filterVolumeName:
+                name, disk: globalVolumeInfo.disk) ?? diskInfo
             
             let prebootDiskSlice = getDisk(substr: "Preboot", usingDiskorSlice: diskInfo.disk, isSlice: false) ?? diskInfo.disk + "s2"
 
             let diskInfo = getVolumeInfoByDisk(filterVolumeName: bigmac2Str, disk: diskInfo.disk) ?? diskInfo
-
+            
             //MARK: Update systemVolume volume because UUIDs have changed
             baseBootPlister(diskInfo: diskInfo, isVerbose: isBaseVerbose, isSingleUser: isSingleUser, prebootVolume: prebootDiskSlice, isBaseSystem: true)
 
