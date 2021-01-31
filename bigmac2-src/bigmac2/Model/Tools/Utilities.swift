@@ -154,29 +154,6 @@ extension ViewController {
         return nil
     }
     
-    func disableSetResXButtonsCheck() {
-        if !fm.fileExists(atPath: setResX) {
-            LowRes_720.isEnabled = false
-            HiRes_720.isEnabled = false
-            LowRes_1080.isEnabled = false
-            HiRes_1080.isEnabled = false
-        }
-    }
-    
-    @IBAction func LoRes_720(_ sender: Any) {
-        runCommand(binary: setResX, arguments: ["-w", "1280", "-h", "720", "-s", "1"])
-    }
-    @IBAction func HiRes_720(_ sender: Any) {
-        runCommand(binary: setResX, arguments: ["-w", "1280", "-h", "720", "-s", "2"])
-    }
-    @IBAction func LoRes_1080(_ sender: Any) {
-        runCommand(binary: setResX, arguments: ["-w", "1920", "-h", "1080", "-s", "1"])
-    }
-    
-    @IBAction func HiRes_1080(_ sender: Any) {
-        runCommand(binary: setResX, arguments: ["-w", "1920", "-h", "1080", "-s", "2"])
-    }
-    
     func checkForBaseOS() -> Bool {
         if fm.fileExists(atPath: baseOS) {
             return true

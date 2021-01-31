@@ -41,8 +41,6 @@ extension ViewController {
         let notifications = NotificationCenter.default
 
         notifications.addObserver(self, selector: #selector(EraseDisk), name: .EraseDisk, object: nil)
-        notifications.addObserver(self, selector: #selector(EraseDmgBootDisk), name: .EraseDmgBootDisk, object: nil)
-        notifications.addObserver(self, selector: #selector(EraseInstallDisk), name: .EraseInstallDisk, object: nil)
         notifications.addObserver(self, selector: #selector(CreateDisk), name: .CreateDisk, object: nil)
         notifications.addObserver(self, selector: #selector(RunAsRootRequest), name: .RunAsRootRequest, object: nil)
         

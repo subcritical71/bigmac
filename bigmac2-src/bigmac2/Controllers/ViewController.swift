@@ -31,7 +31,10 @@ class ViewController: NSViewController, URLSessionDelegate {
     @IBOutlet weak var cleanInstallViaDmg: NSButton!
     @IBOutlet weak var upgradeViaDmg: NSButton!
     
-  
+    @IBAction func donateAction(_ sender: Any) {
+        donate2BigMac()
+    }
+    
     
     //MARK: Preinstall Tab -- Outlets
     @IBOutlet weak var DisableLibraryValidation: NSButton!
@@ -85,32 +88,11 @@ class ViewController: NSViewController, URLSessionDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-                
-        upgradeViaDmg.isEnabled = false
-        
-        let dmg = globalDownloadMacOSdmgName
-        let path = "/Users/shared/\(dmg)"
-        let rootpath = "/\(dmg)"
 
-        if checkIfFileExists(path: path) ||  checkIfFileExists(path: rootpath) {
-            cleanInstallViaDmg.isEnabled = true
-        } else {
-            cleanInstallViaDmg.isEnabled = false
-        }
-
-        disableSetResXButtonsCheck()
         bootedToBaseOS = checkForBaseOS()
-        
-        //MARK: Set Up and AI that knows what tab to do (checks for maybe an unpatch drive or 11.1 presence)
-        //if ( !bootedToBaseOS) {
-           // tabViews.selectTabViewItem(preInstallTab)
-        //}
+    
         refreshPatchDisks()
         
-        
-        //MARK: Download patches
-        //if cancelTask() { return }
-
         bigMacDataPatchDMG()
     }
 }

@@ -93,7 +93,7 @@ extension ViewController : URLSessionDownloadDelegate {
                         globalCompletedTask()
                         _ = mountDiskImage(arg: ["mount", "\(savedURL.path)", "-noverify", "-noautofsck", "-autoopen"])
                     }
-                    3
+                   
                     if filename == bigDataDMG {
                         moveItem(at: location, to: savedURL)
                         globalCompletedTask()
