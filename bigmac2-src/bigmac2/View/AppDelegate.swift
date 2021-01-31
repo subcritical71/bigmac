@@ -26,10 +26,9 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     }
     
     func applicationWillTerminate(_ aNotification: Notification) {
-        // Insert code here to tear down your application
         
         if NSUserName() == root {
-            unmountBigData() //dmg for the app
+            unmountBigData()
         }
         
         func save() {

@@ -133,24 +133,6 @@ class PostInstallViewController : NSViewController {
         let separate3 = NSMutableAttributedString(string: sep3)
         separate3.addAttributes(orange, range: NSRange(location: 0, length: sep3.count))
         creditsTextView.textStorage?.append(separate3)
-        
-        /*   creditsTextView.string =
-         """
-         Credits:
-         ———————————————————————————————
-         • StarplayrX   - Big Mac 2.0
-         • DosDude1     - APFS ROM Patcher
-         • ASentientBot - Hax3
-         • BarryKN      - Hax3 Updates
-         • Czo          - SUVMMFaker
-         • Syncretic    - MouSSE
-         • Syncretic    - Teletrap
-         • JackLuke     - Hax3
-         • CorpNewt     - Hax3
-         ———————————————————————————————
-         
-         """
-         
-         }*/
+
     }
 }

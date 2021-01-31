@@ -15,8 +15,8 @@ extension ViewController {
         let SIP = DisableSIP.state == .on
         let AR = DisableAuthRoot.state == .on
         let GK = DisableGateKeeper.state == .on
-
-
+        
+        
         func macOS(installer: String) {
             if !ranHax3 {
                 ranHax3 = true
@@ -25,7 +25,7 @@ extension ViewController {
             
             let bigMacApp = Bundle.main.bundlePath
             runCommand(binary: "\(bigMacApp)/Contents/Resources/lax" , arguments: [installer])
-             
+            
             DispatchQueue.global(qos: .background).async {
                 for i in 1...6 {
                     sleep(1)
@@ -61,9 +61,9 @@ extension ViewController {
             }
             
             #if arch(x86_64)
-                if !bootArgs.isEmpty {
-                    bootArgs = bootArgs + "arch=x86_64"
-                }
+            if !bootArgs.isEmpty {
+                bootArgs = bootArgs + "arch=x86_64"
+            }
             #endif
             
             runCommand(binary: "/usr/sbin/nvram" , arguments: ["boot-args=\(bootArgs)"])
@@ -90,61 +90,30 @@ extension ViewController {
             }
             
             
-            //If using alternative method
-            //if useDmgInstaller.state == .on {
+            let installAsstBaseOS = "/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
+            let installAsstFullOS = "/Applications/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
+            
+            let fm = FileManager.default
+            if fm.fileExists(atPath: installAsstBaseOS) {
                 
-            //} else {
-                let installAsstBaseOS = "/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
-                let installAsstFullOS = "/Applications/Install macOS Big Sur.app/Contents/MacOS/InstallAssistant"
-
-                let fm = FileManager.default
-                if fm.fileExists(atPath: installAsstBaseOS) {
-                    
-                    macOS(installer: installAsstBaseOS)
-                   
-                } else if fm.fileExists(atPath: installAsstFullOS) {
-                    globalError = "Only clean installs from Mac OS Extended Journaled (JHFS+) volumes are supported from a full version of macOS. To install or upgrade directly to APFS disks, boot from the bigmac2 Installation Disk. If you have a boot screen, reboot using the option key. Note: installing to JHFS+ will be converted to APFS during the clean install."
-                    
-                    performSegue(withIdentifier: "displayErrMsg", sender: self)
-                    
-                    macOS(installer: installAsstFullOS)
-                } else {
-                    globalError = "It does not appear that you have downloaded macOS 11.x Big Sur yet. Please go to the Downloads tab and download Big Sur or obtain a fresh install of Big Sur from Apple."
-                    
-                    performSegue(withIdentifier: "displayErrMsg", sender: self)
-                    preInstaLaunchBtn.isEnabled = true
-                }
-            //}
-        
+                macOS(installer: installAsstBaseOS)
+                
+            } else if fm.fileExists(atPath: installAsstFullOS) {
+                globalError = "Only clean installs from Mac OS Extended Journaled (JHFS+) volumes are supported from a full version of macOS. To install or upgrade directly to APFS disks, boot from the bigmac2 Installation Disk. If you have a boot screen, reboot using the option key. Note: installing to JHFS+ will be converted to APFS during the clean install."
+                
+                performSegue(withIdentifier: "displayErrMsg", sender: self)
+                
+                macOS(installer: installAsstFullOS)
+            } else {
+                globalError = "It does not appear that you have downloaded macOS 11.x Big Sur yet. Please go to the Downloads tab and download Big Sur or obtain a fresh install of Big Sur from Apple."
+                
+                performSegue(withIdentifier: "displayErrMsg", sender: self)
+                preInstaLaunchBtn.isEnabled = true
+            }
+            
         }
         
         preInstallRunner(libVal: libVal, SIP: SIP, AR: AR)
-
-      
+        
     }
 }
-
-
-/*
- 
- #!/bin/sh
-
- if [ ! -d "/usr/local/lib" ]; then
-   echo "Creating directory \"/usr/local/lib\"..."
-   sudo mkdir "/usr/local/lib"
- fi
-
- echo "Downloading \"SUVMMFaker.dylib\"..."
- sudo curl -o "/usr/local/lib/SUVMMFaker.dylib" "http://dosdude1.com/sierra/swupatch/SUVMMFaker.dylib"
- sudo chmod 755 "/usr/local/lib/SUVMMFaker.dylib"
-
- echo "Backing up com.apple.softwareupdated.plist..."
- cp "/System/Library/LaunchDaemons/com.apple.softwareupdated.plist" ~
-
- echo "Downloading \"com.apple.softwareupdated.plist\"..."
- sudo curl -o "/System/Library/LaunchDaemons/com.apple.softwareupdated.plist" "http://dosdude1.com/sierra/swupatch/com.apple.softwareupdated.plist"
-
- echo "Restarting softwareupdated..."
- sudo launchctl unload /System/Library/LaunchDaemons/com.apple.softwareupdated.plist && sudo launchctl load /System/Library/LaunchDaemons/com.apple.softwareupdated.plist
- 
- */

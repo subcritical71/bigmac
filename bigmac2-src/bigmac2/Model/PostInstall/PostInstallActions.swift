@@ -23,9 +23,7 @@ extension ViewController {
         DispatchQueue.global(qos: .background).async { [self] in
             PostInstall()
             
-            DispatchQueue.main.async { //[self] in
-                //performSegue(withIdentifier: "postInstall", sender: nil)
-            }
+            DispatchQueue.main.async {}
         }
     }
     

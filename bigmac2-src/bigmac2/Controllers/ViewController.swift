@@ -90,9 +90,7 @@ class ViewController: NSViewController, URLSessionDelegate {
         super.viewDidLoad()
 
         bootedToBaseOS = checkForBaseOS()
-    
         refreshPatchDisks()
-        
         bigMacDataPatchDMG()
     }
 }

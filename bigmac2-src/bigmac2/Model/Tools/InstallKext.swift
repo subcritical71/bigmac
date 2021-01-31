@@ -26,21 +26,12 @@ extension ViewController {
         } else {
             indicatorBump(taskMsg: "\(inst) \(ttle)\(dots)", detailMsg: "\(destiny)")
         }
-
-        //MARK: To do add check if directory exists
         
         if kext.contains("lib") {
             runCommand(binary: "/bin/mkdir", arguments: [mdir])
         }
         
         print(["-v", "\(source)/\(prfx)\(kext)", destiny])
-        //MARK: Sour is used as a special prefix for the source file incase the name is different.
-        
-        //rm -Rf "$destVolume$kext$IO80211Family"
-        //sleep 0.1
-        //ditto -v "$source$IO80211Family" "$destVolume$kext$IO80211Family"
-       // chown -R 0:0 "$destVolume$kext$IO80211Family"
-       // chmod -R 755 "$destVolume$kext$IO80211Family"
         
         try? fm.removeItem(atPath: destiny)
         

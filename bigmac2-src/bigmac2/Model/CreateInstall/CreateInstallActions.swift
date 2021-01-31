@@ -6,18 +6,6 @@
 //
 import Cocoa
 
-/*
-
- enum install {
-     case bootIso
-     case bootDmg
-     case installDmg
-     case upgradeDmg
-     case installIso
- }
- 
- */
-
 //MARK: Installer Actions
 extension ViewController {
     
@@ -25,27 +13,6 @@ extension ViewController {
         verboseUserCheckbox.state == .on ? (isBaseVerbose = true) : (isBaseVerbose = false)
     }
 
-    @IBAction func createDmgInstaller(_ sender: Any) {
-        if cancelTask() { return }
-        globalInstall = install.bootDmg
-        //Erase a Disk first
-        self.performSegue(withIdentifier: "eraseDisk", sender: self)
-    }
-    
-    @IBAction func cleanInstallViaDmg(_ sender: Any) {
-        
-        if cancelTask() { return }
-        
-        globalInstall = install.installDmg
-        //Erase a Disk first
-        self.performSegue(withIdentifier: "eraseDisk", sender: self)
-    }
-    
-    
-    @IBAction func upgradeViaDmg(_ sender: Any) {
-        //Future
-    }
-    
 
     @IBAction func baseSingleUserAction(_ sender: Any) {
         singleUserCheckbox.state == .on ? (isBaseSingleUser = true) : (isBaseSingleUser = false)
@@ -81,7 +48,6 @@ extension ViewController {
 
         dosDude1inProgressTask(label: "Downloading APFS ROM Patcher", dmg: dosDude1DMG)
     }
-    
 }
 
 

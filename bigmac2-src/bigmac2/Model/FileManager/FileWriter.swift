@@ -17,8 +17,3 @@ func txt2file(text: String, file: String) {
        print(error)
     }
 }
-
-//reading
-//do {
-//    let text2 = try String(contentsOf: fileURL, encoding: .utf8)
-//}

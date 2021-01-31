@@ -115,14 +115,3 @@ extension ViewController {
         }
     }
 }
-
-//Backburner.. easier not ot use this
-
-/* if #available(OSX 10.14, *) {
- let customControlColor = NSColor(named: NSColor.Name("customControlColor"))
- view.wantsRestingTouches = true
- view.wantsLayer = true
- view.layer?.backgroundColor =  customControlColor?.cgColor
- } else {
- // Fallback on earlier versions
- }*/
