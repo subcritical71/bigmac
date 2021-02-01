@@ -5,7 +5,7 @@
 Big Sur macOS 11 Mac Pro patcher (in the works)
 
 ### Release Schedule
-* 🍟 01.31.21 Early Alpha
+* 🍟 01.31.21 alpha 1
 * 🍔 02.28.21 Public Beta
 * 🍺 03.28.21 Release Candidate 1
 
