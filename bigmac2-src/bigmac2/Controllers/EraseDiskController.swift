@@ -19,7 +19,7 @@ class EraseDiskViewController : NSViewController {
     var volumeArray = [myVolumeInfo]()
     
     func refresh() {
-        if let volArr = getVolumeInfo(includeHiddenVolumes: false) {
+        if let volArr = getVolumeInfo(includeHiddenVolumes: false,  includeRootVol: false) {
             volumePopup.removeAllItems()
             
             if volArr.count == 0 || volArr.isEmpty {
@@ -27,8 +27,10 @@ class EraseDiskViewController : NSViewController {
                 okButton.isEnabled = false
             } else {
                 for i in volArr {
-                    volumePopup.addItem(withTitle: i.volumeName)
-                    okButton.isEnabled = true
+                    if i.volumeName != "/" && !i.volumeName.isEmpty {
+                        volumePopup.addItem(withTitle: i.volumeName)
+                        okButton.isEnabled = true
+                    }
                 }
                 
                 volumeArray = volArr

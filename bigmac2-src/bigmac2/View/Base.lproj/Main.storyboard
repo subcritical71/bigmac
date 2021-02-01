@@ -945,7 +945,7 @@ DQ
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <subviews>
                                                         <textField horizontalHuggingPriority="251" verticalHuggingPriority="750" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8r8-CA-8z3">
-                                                            <rect key="frame" x="-2" y="2" width="246" height="42"/>
+                                                            <rect key="frame" x="-2" y="-1" width="246" height="42"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                                             <textFieldCell key="cell" title="APFS native booting is required without a third party boot loader for non Mac Pro 5,1 machines." id="4Fv-gb-UHD">
                                                                 <font key="font" metaFont="smallSystem"/>

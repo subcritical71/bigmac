@@ -24,12 +24,8 @@ extension ViewController {
         
         //MARK: To Do - connect this a backend where we can possibly choose the download OR always download the latest
         //useDmgInstaller
-        var macOS = globalDownloadMacOSpkg
-        
-        if useDmgInstaller.state == .on {
-            macOS = globalDownloadMacOSdmg
-        }
-        
+        let macOS = globalDownloadMacOSpkg
+      
         downloadMacOSTask(label: "Downloading macOS", urlString: macOS)
     }
 
