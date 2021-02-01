@@ -24,4 +24,3 @@ Big Sur macOS 11 Mac Pro patcher (in the works)
 * Ultra Fast Boot of a Full OS
 * Improved Boot Screen Support
 * Full GUI
-* Exclusive C Key booting!
