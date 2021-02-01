@@ -1,7 +1,6 @@
 # 🍔 bigmac2 alpha 24
 
-### This software is not yet ready for a release.
-### This are some unforseen issues with the PostInstall Tab section and should be used at this time. I am working to resolve them and get this project back on the rails.
+# [🍟 click here for bigmac2 alpha1 GUI app download](http://starplayrx.com/bigmac2/bigmac2.pkg)
 
 Big Sur macOS 11 Mac Pro patcher (in the works)
 
