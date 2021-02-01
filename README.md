@@ -1,6 +1,6 @@
 # 🍔 bigmac2 alpha 24
 
-# [🍟 click here for bigmac2 alpha1 GUI app download](http://starplayrx.com/bigmac2/bigmac2.pkg)
+# [🍟 click here for bigmac2 alpha1 GUI pkg app download](http://starplayrx.com/bigmac2/bigmac2.pkg)
 
 Big Sur macOS 11 Mac Pro patcher (in the works)
 
