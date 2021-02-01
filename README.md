@@ -1,4 +1,4 @@
-# 🍔 bigmac2 alpha 24
+# 🍔 bigmac2 alpha 1
 
 # [🍟 click here for bigmac2 alpha1 GUI pkg app download](http://starplayrx.com/bigmac2/bigmac2.pkg)
 
