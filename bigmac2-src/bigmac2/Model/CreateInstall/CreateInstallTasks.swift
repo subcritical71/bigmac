@@ -177,27 +177,7 @@ extension ViewController {
         
     }
     
-    //MARK: Task #7
-    func bigSurInstallerDmgXfer(isBeta: Bool, BootVolume: myVolumeInfo) {
-        incrementInstallGauge(resetGauge: false, incremment: true, setToFull: false, cylon: false, title: "Installing the macOS 11 Dmg...")
-
-        var appName = "Install macOS Big Sur.app"
-        let rootVol = BootVolume.path
-     
-        if isBeta {
-            appName = "Install macOS Big Sur Beta.app" //Not in use
-        }
-        
-        let app = "\(rootVol)/\(appName)/"
-        let fm = FileManager.default
-        
-        try? fm.removeItem(atPath: app)
-
-        //MARK: Copy the big shared support dmg
-        copyFile(atPath: "/Users/shared/\(globalDownloadMacOSdmgName)", toPath: "\(rootVol)/\(globalDownloadMacOSdmgName)")
-        
-        
-    }
+   
     
     //MARK: Task #7
     func bigSurInstallerAppXfer(isBeta: Bool, BootVolume: myVolumeInfo) {

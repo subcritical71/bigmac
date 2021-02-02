@@ -49,9 +49,10 @@ extension ViewController {
         //Remove pre-existing file
         runCommand(binary: "/bin/rm", arguments: ["-Rf","/Users/shared/InstallAssistant.pkg"]) //Future check if it's complete and has right checksum
         runCommand(binary: "/bin/rm", arguments: ["-Rf","/tmp/InstallAssistant.pkg"]) //Future check if it's complete and has right checksum
-        
+        runCommand(binary: "/bin/rm", arguments: ["-Rf","/Applications/Install macOS Big Sur.app"])
+        runCommand(binary: "/bin/rm", arguments: ["-Rf","/Users/shared/InstallAssistant.pkg"])
         DispatchQueue.main.async { [self] in
-            downloadLabel.stringValue = "macOS 11.1"
+            downloadLabel.stringValue = macOSVersion
         }
 
         DispatchQueue.global(qos: .background).async {

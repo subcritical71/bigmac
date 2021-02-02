@@ -10,9 +10,10 @@ var globalVolumeInfo = myVolumeInfo(diskSlice: "", disk: "", displayName: "", vo
 var globalWorkItem : DispatchWorkItem?
 var globalDispatch : DispatchQueue?
 var globalError    = "Unknown Error"
-var globalDownloadMacOSpkg = "http://swcdn.apple.com/content/downloads/00/55/001-86606-A_9SF1TL01U7/5duug9lar1gypwunjfl96dza0upa854qgg/InstallAssistant.pkg"
-var globalDownloadMacOSdmg = "http://starplayrx.com/bigmac2/macOS11_1.dmg"
-var globalDownloadMacOSdmgName = "macOS11_1.dmg"
+var globalDownloadMacOSpkg = "http://swcdn.apple.com/content/downloads/04/34/071-00838-A_16DMRFYPPS/g072hb2wh066rj040ekzry97wx2hggfuse/InstallAssistant.pkg"
+
+var macOSVersion = "macOS 11.2"
+
 var globalInstall = install.bootIso
 
 enum install {
