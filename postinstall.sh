@@ -7,7 +7,7 @@ voice="Samantha"
 rate=25
 
 #Auto Switch to the current directory
-dir=$(dirname "$0")
+dir=$(dirname -- "$0")
 cd "$dir"
 
 IsNotRecovery=$(csrutil disable 2>&1)
