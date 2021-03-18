@@ -7,7 +7,7 @@
 #To do put in color subroutines
 
 #AutoSwitch to current directory'
-dir=$(dirname "$0")
+dir=$(dirname -- "$0")
 cd "$dir"
 
 if [ $UID = 0 ]
