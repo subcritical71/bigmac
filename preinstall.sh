@@ -5,7 +5,7 @@
 #  Created by StarPlayrX on 12.14.2020
 
 #Auto Switch to the current directory
-dir=$(dirname "$0")
+dir=$(dirname -- "$0")
 cd "$dir"
 
 if [ $UID = 0 ]
